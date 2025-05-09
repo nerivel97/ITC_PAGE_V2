@@ -56,13 +56,31 @@ export class EventosService implements IEventoService {
 
   async deleteEvento(id: number): Promise<void> {
     try {
+      console.log(`Intentando eliminar evento con ID: ${id}`);
+      
       const result = await this.eventoRepository.delete(id);
+      
+      console.log(`Resultado de eliminación:`, result);
+      
       if (result.affected === 0) {
         throw new ApiError(404, "Evento no encontrado");
       }
-    } catch (error) {
-      if (error instanceof ApiError) throw error;
-      throw new ApiError(500, "Error al eliminar el evento");
+    } catch (error: unknown) {
+      console.error('Error en deleteEvento:', error);
+      
+      // Solución: Verificar el tipo de error antes de acceder a sus propiedades
+      if (error instanceof Error) {
+        // Para errores de PostgreSQL
+        if ('code' in error && error.code === '23503') {
+          throw new ApiError(400, "No se puede eliminar el evento porque tiene registros relacionados");
+        }
+        
+        // Para otros errores de tipo Error
+        throw new ApiError(500, `Error al eliminar el evento: ${error.message}`);
+      }
+      
+      // Si no es un Error estándar
+      throw new ApiError(500, "Error desconocido al eliminar el evento");
     }
   }
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  Button, 
-  Table, 
-  Space, 
-  Modal, 
-  message, 
-  Tag, 
+import {
+  Button,
+  Table,
+  Space,
+  Modal,
+  message,
+  Tag,
   Card,
   Image,
   Typography,
@@ -36,7 +36,7 @@ const EventosTable: React.FC = () => {
     try {
       const data = await fetchEventos();
       console.log('Datos recibidos del backend:', data);
-      
+
       if (!Array.isArray(data)) {
         throw new Error('Formato de datos inválido');
       }
@@ -66,7 +66,9 @@ const EventosTable: React.FC = () => {
     loadEventos();
   }, []);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = (id: number) => {
+    console.log('Botón eliminar clickeado para ID:', id); // Verifica que se ejecuta
+
     Modal.confirm({
       title: '¿Eliminar evento?',
       content: 'Esta acción no se puede deshacer',
@@ -74,14 +76,19 @@ const EventosTable: React.FC = () => {
       cancelText: 'Cancelar',
       okButtonProps: { danger: true },
       onOk: async () => {
+        console.log('Usuario confirmó eliminación'); // Verifica confirmación
         try {
           await deleteEvento(id);
           message.success('Evento eliminado correctamente');
-          loadEventos();
+          await loadEventos();
         } catch (error) {
-          message.error(error instanceof Error ? error.message : 'Error al eliminar');
+          console.error('Error completo:', error);
+          message.error('Error al eliminar: ' + (error instanceof Error ? error.message : ''));
         }
       },
+      onCancel: () => {
+        console.log('Usuario canceló eliminación');
+      }
     });
   };
 
@@ -156,7 +163,7 @@ const EventosTable: React.FC = () => {
           activo: { color: 'green', text: 'Activo' },
           inactivo: { color: 'red', text: 'Inactivo' },
         };
-        
+
         const status = statusMap[estado.toLowerCase()] || { color: 'gray', text: estado };
         return (
           <Tag color={status.color}>
@@ -199,20 +206,26 @@ const EventosTable: React.FC = () => {
       width: 150,
       fixed: 'right',
       render: (_, record) => (
-        <Space size="small">
-          <Button 
+        <Space size="small" onClick={(e) => e.stopPropagation()}>
+          <Button
             size="small"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setSelectedEvento(record);
               setModalVisible(true);
             }}
           >
             Editar
           </Button>
-          <Button 
+          <Button
+            danger
             size="small"
-            danger 
-            onClick={() => handleDelete(record.id_evento!)}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              handleDelete(record.id_evento!);
+            }}
+            style={{ position: 'relative', zIndex: 1 }}
           >
             Eliminar
           </Button>
@@ -222,12 +235,12 @@ const EventosTable: React.FC = () => {
   ];
 
   return (
-    <Card 
-      title="Administración de Eventos" 
-      bordered={false}
+    <Card
+      title="Administración de Eventos"
+      variant="outlined"
       extra={
-        <Button 
-          type="primary" 
+        <Button
+          type="primary"
           onClick={() => {
             setSelectedEvento(null);
             setModalVisible(true);
@@ -257,8 +270,8 @@ const EventosTable: React.FC = () => {
                 description="No se encontraron eventos"
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
               >
-                <Button 
-                  type="primary" 
+                <Button
+                  type="primary"
                   onClick={() => setModalVisible(true)}
                 >
                   Crear primer evento

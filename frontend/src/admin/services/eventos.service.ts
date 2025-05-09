@@ -242,15 +242,32 @@ export const updateEvento = async (id: number, eventoData: IEventoUpdate): Promi
 
 export const deleteEvento = async (id: number): Promise<void> => {
   try {
-    await apiClient.delete(`/${id}`);
-    console.log(`[deleteEvento] Evento ${id} eliminado exitosamente`);
+    console.log(`[DELETE] Enviando solicitud para eliminar evento ID: ${id}`);
+    const response = await apiClient.delete(`/${id}`);
+    
+    // Verificar tanto 200 (OK) como 204 (No Content) como respuestas exitosas
+    if (response.status >= 200 && response.status < 300) {
+      console.log(`[DELETE] Evento ${id} eliminado exitosamente`);
+      return;
+    }
+    
+    // Si la respuesta no es exitosa
+    throw new Error(
+      response.data?.message || 
+      `Error ${response.status}: ${response.statusText}`
+    );
   } catch (error: any) {
-    console.error(`[deleteEvento Error] ID: ${id}`, {
-      message: error.message,
-      code: error.code,
-      status: error.status
+    console.error(`[DELETE] Error al eliminar evento ${id}:`, {
+      error: error.response?.data || error.message,
+      status: error.response?.status
     });
-    throw new Error(error.message || `Error al eliminar evento ${id}`);
+    
+    // Mejorar el mensaje de error para el usuario
+    const errorMessage = error.response?.data?.message || 
+                        error.message || 
+                        'Error desconocido al eliminar el evento';
+    
+    throw new Error(errorMessage);
   }
 };
 

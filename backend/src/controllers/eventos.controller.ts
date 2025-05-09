@@ -91,6 +91,8 @@ export class EventosController implements IEventoController {
   async delete(req: Request, res: Response): Promise<void> {
     try {
       const id = this.parseId(req.params.id);
+      console.log(`Solicitud para eliminar evento ID: ${id}`); // Log de depuración
+      
       await this.eventosService.deleteEvento(id);
       
       const response: ApiResponse<null> = {
@@ -101,6 +103,11 @@ export class EventosController implements IEventoController {
       
       res.status(200).json(response);
     } catch (error: unknown) {
+      console.error('Error en DELETE /eventos/:id', { 
+        params: req.params,
+        error 
+      }); // Log detallado
+      
       this.handleError(res, error, 'Error al eliminar evento');
     }
   }
