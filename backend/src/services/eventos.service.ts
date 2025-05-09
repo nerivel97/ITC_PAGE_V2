@@ -25,10 +25,23 @@ export class EventosService implements IEventoService {
 
   async createEvento(eventoData: IEventoCreate): Promise<IEvento> {
     try {
-      const evento = this.eventoRepository.create(eventoData);
-      return await this.eventoRepository.save(evento);
+      // Convertir fechas a formato de base de datos si es necesario
+      const eventoToCreate = {
+        ...eventoData,
+        fecha_inicio: eventoData.fecha_inicio, // Ya debería estar en formato YYYY-MM-DD
+        fecha_final: eventoData.fecha_final    // Ya debería estar en formato YYYY-MM-DD
+      };
+  
+      const evento = this.eventoRepository.create(eventoToCreate);
+      const savedEvento = await this.eventoRepository.save(evento);
+      
+      return savedEvento;
     } catch (error) {
-      throw new ApiError(400, "Error al crear el evento");
+      console.error('Error al crear evento:', error);
+      if (error instanceof Error && error.message.includes('violates not-null constraint')) {
+        throw new ApiError(400, 'Faltan campos requeridos');
+      }
+      throw new ApiError(400, 'Error al crear el evento: ' + (error instanceof Error ? error.message : 'Error desconocido'));
     }
   }
 

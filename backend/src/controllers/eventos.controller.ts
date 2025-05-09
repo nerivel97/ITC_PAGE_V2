@@ -120,18 +120,45 @@ export class EventosController implements IEventoController {
     }
 
     const requiredFields: Array<keyof IEventoCreate> = [
+      'nombre_evento',
       'categoria', 
       'descripcion', 
       'fecha_inicio', 
       'fecha_final', 
-      'estado',
-      'nombre_evento',
+      'estado'
     ];
 
+    // Verificar campos requeridos
     for (const field of requiredFields) {
       if (!(field in data)) {
         throw new ApiError(400, `El campo ${field} es requerido`);
       }
+    }
+
+    const eventoData = data as Record<string, any>;
+
+    // Validar formato de fechas
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(eventoData.fecha_inicio) || !dateRegex.test(eventoData.fecha_final)) {
+      throw new ApiError(400, 'Las fechas deben estar en formato YYYY-MM-DD');
+    }
+
+    // Validar que fecha final no sea anterior a fecha inicio
+    if (new Date(eventoData.fecha_final) < new Date(eventoData.fecha_inicio)) {
+      throw new ApiError(400, 'La fecha final no puede ser anterior a la fecha de inicio');
+    }
+
+    // Validar longitud de campos
+    if (eventoData.nombre_evento.length > 100) {
+      throw new ApiError(400, 'El nombre del evento no puede exceder 100 caracteres');
+    }
+
+    if (eventoData.categoria.length > 50) {
+      throw new ApiError(400, 'La categoría no puede exceder 50 caracteres');
+    }
+
+    if (eventoData.estado.length > 20) {
+      throw new ApiError(400, 'El estado no puede exceder 20 caracteres');
     }
 
     return data as IEventoCreate;
@@ -144,6 +171,40 @@ export class EventosController implements IEventoController {
 
     if (Object.keys(data).length === 0) {
       throw new ApiError(400, 'Se requieren datos para actualizar');
+    }
+
+    const eventoData = data as Record<string, any>;
+
+    // Validaciones opcionales para campos actualizados
+    if ('fecha_inicio' in eventoData || 'fecha_final' in eventoData) {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+      
+      if ('fecha_inicio' in eventoData && !dateRegex.test(eventoData.fecha_inicio)) {
+        throw new ApiError(400, 'Formato de fecha inicio inválido (YYYY-MM-DD)');
+      }
+
+      if ('fecha_final' in eventoData && !dateRegex.test(eventoData.fecha_final)) {
+        throw new ApiError(400, 'Formato de fecha final inválido (YYYY-MM-DD)');
+      }
+
+      // Comparar fechas si ambas están presentes
+      if ('fecha_inicio' in eventoData && 'fecha_final' in eventoData) {
+        if (new Date(eventoData.fecha_final) < new Date(eventoData.fecha_inicio)) {
+          throw new ApiError(400, 'La fecha final no puede ser anterior a la fecha de inicio');
+        }
+      }
+    }
+
+    if ('nombre_evento' in eventoData && eventoData.nombre_evento.length > 100) {
+      throw new ApiError(400, 'El nombre del evento no puede exceder 100 caracteres');
+    }
+
+    if ('categoria' in eventoData && eventoData.categoria.length > 50) {
+      throw new ApiError(400, 'La categoría no puede exceder 50 caracteres');
+    }
+
+    if ('estado' in eventoData && eventoData.estado.length > 20) {
+      throw new ApiError(400, 'El estado no puede exceder 20 caracteres');
     }
 
     return data as IEventoUpdate;

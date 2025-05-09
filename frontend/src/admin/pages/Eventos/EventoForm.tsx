@@ -51,19 +51,18 @@ const EventoForm: React.FC<EventoFormProps> = ({
       setLoading(true);
       const values = await form.validateFields();
       
-      console.log("Valores del formulario:", values); // <-- Añade esto
-  
+      // Asegurar formato YYYY-MM-DD para las fechas
       const eventoData: IEventoCreate = {
         nombre_evento: values.nombre_evento,
         categoria: values.categoria,
         descripcion: values.descripcion,
-        fecha_inicio: dayjs(values.fecha_inicio).format('YYYY-MM-DD'),
-        fecha_final: dayjs(values.fecha_final).format('YYYY-MM-DD'),
+        fecha_inicio: dayjs(values.fecha_inicio).format('YYYY-MM-DD'), // Formato explícito
+        fecha_final: dayjs(values.fecha_final).format('YYYY-MM-DD'),   // Formato explícito
         estado: values.estado,
         imagen: values.imagen || null
       };
   
-      console.log("Datos a enviar:", JSON.stringify(eventoData, null, 2)); // <-- Añade esto
+      console.log("Datos a enviar:", eventoData);
   
       if (evento) {
         await updateEvento(evento.id_evento!, eventoData);
@@ -76,7 +75,7 @@ const EventoForm: React.FC<EventoFormProps> = ({
       onSuccess();
     } catch (error) {
       console.error('Error completo:', error);
-      message.error('Error al guardar el evento. Verifica la consola para más detalles.');
+      message.error(error instanceof Error ? error.message : 'Error al guardar el evento');
     } finally {
       setLoading(false);
     }
