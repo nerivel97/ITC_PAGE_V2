@@ -1,0 +1,48 @@
+.barra-accesos {
+    background-color: #4267f5;
+    padding: 2rem 0;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 50px;
+}
+
+.accesos-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.accesos-texto {
+    display: flex;
+    gap: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+}
+
+.accesos-texto a {
+    color: white;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.accesos-texto a:hover {
+    transform: scale(1.1);
+}
+
+.accesos-tucan {
+    position: absolute;
+    right: 3rem;
+    bottom: -2rem;
+}
+
+.accesos-tucan img {
+    height: 250px;
+    object-fit: contain;
+}

@@ -1,0 +1,85 @@
+.bannerContainer {
+    position: relative;
+    width: 98%;
+    max-width: 98%;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  .banner {
+    width: 100%;
+    height: 400px;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+  }
+  
+  .bannerContainer:hover #banner {
+    transform: scale(1.02);
+  }
+  
+  .bannerText {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .bannerText h1 {
+    color: white;
+    font-size: 270%;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    padding: 1.5rem 2.5rem;
+    border-radius: 8px;
+    max-width: 20%;
+    text-align: center;
+  }
+  
+  @media (max-width: 1400px) {
+    .bannerContainer {
+      max-width: 95%;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    #banner {
+      height: 350px;
+    }
+    
+    .bannerText h1 {
+      font-size: 2rem;
+      padding: 1rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    #banner {
+      height: 300px;
+    }
+    
+    .bannerText h1 {
+      font-size: 1.7rem;
+      max-width: 95%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #banner {
+      height: 250px;
+    }
+    
+    .bannerText h1 {
+      font-size: 1.4rem;
+      padding: 0.8rem 1rem;
+    }
+  }

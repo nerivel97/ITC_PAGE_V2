@@ -1,0 +1,44 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import MainLayout from './core/layout/MainLayout';
+import Instituto from './pages/Instituto';
+import Oferta from './pages/Oferta';
+import CarreraDetalle from './pages/Carreras';
+import Infra from './pages/Infra';
+import AdminLayout from './admin/components/AdminLayout/AdminLayout';
+import AdminDashboard from './admin/pages/Dashboard';
+import EventosTable from './admin/pages/Eventos/EventosTable';
+
+import "./App.css"
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        {/* Rutas públicas principales */}
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path='/Instituto' element={<Instituto />} />
+          <Route path='/oferta-educativa' element={<Oferta />} />
+          <Route path="/oferta-educativa/:carreraNombre" element={<CarreraDetalle />} />
+          <Route path='/Infra' element={<Infra />} />
+        </Route>
+
+        {/* Rutas del panel de administración (sin protección) */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="/admin/eventos" element={<EventosTable />} />
+          {/* <Route path="instituto-itc" element={<InstitutoITCAdmin />} /> */}
+          {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />  */}
+          {/* Agrega más rutas del admin aquí */}
+        </Route>
+
+        {/* Ruta para 404 */}
+        <Route path="*" element={<div>Página no encontrada</div>} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;

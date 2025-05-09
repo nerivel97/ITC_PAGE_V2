@@ -1,0 +1,105 @@
+.learningExperience {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 60px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+  }
+  
+  .contentContainer {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .textContent {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .videoContainer {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .videoContainer iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .mainTitle {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .inspirationalQuote {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #34495e;
+    font-style: italic;
+    margin-bottom: 15px;
+    position: relative;
+    padding: 0 40px;
+  }
+  
+  .inspirationalQuote:before,
+  .inspirationalQuote:after {
+    content: '"';
+    font-size: 3rem;
+    color: #3498db;
+    opacity: 0.3;
+    position: absolute;
+  }
+  
+  .inspirationalQuote:before {
+    left: 0;
+    top: -15px;
+  }
+  
+  .inspirationalQuote:after {
+    right: 0;
+    bottom: -30px;
+  }
+  
+  .quoteAuthor {
+    display: block;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    font-style: normal;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .contentContainer {
+      flex-direction: column;
+    }
+    
+    .textContent {
+      padding-right: 0;
+      margin-bottom: 30px;
+    }
+    
+    .mainTitle {
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    .inspirationalQuote {
+      font-size: 1.2rem;
+      padding: 0 30px;
+    }
+    
+    .videoContainer {
+      width: 100%;
+    }
+    
+    .videoContainer iframe {
+      height: 250px;
+    }
+  }

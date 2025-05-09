@@ -1,0 +1,98 @@
+/* Dashboard.module.css */
+
+.dashboardContainer {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboardHeader {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.dashboardHeader h1 {
+  font-size: 2.5rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.dashboardHeader p {
+  font-size: 1.1rem;
+  color: #718096;
+  margin: 0;
+}
+
+.statsSection {
+  margin-bottom: 3rem;
+}
+
+.statsSection h2,
+.quickActions h2 {
+  font-size: 1.5rem;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #edf2f7;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.quickActions {
+  margin-bottom: 3rem;
+}
+
+.actionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Efectos de hover para interactividad */
+.summaryCard:hover {
+  transform: translateY(-5px);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboardContainer {
+    padding: 1.5rem;
+  }
+  
+  .dashboardHeader h1 {
+    font-size: 2rem;
+  }
+  
+  .statsGrid,
+  .actionsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboardHeader h1 {
+    font-size: 1.8rem;
+  }
+  
+  .dashboardHeader p {
+    font-size: 1rem;
+  }
+  
+  .statsSection h2,
+  .quickActions h2 {
+    font-size: 1.3rem;
+  }
+}

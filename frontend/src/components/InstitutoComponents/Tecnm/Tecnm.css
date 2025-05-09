@@ -1,0 +1,56 @@
+.porque-tecnm {
+    width: 100%;
+    background-color: #e9ebf0;
+    /* Color de fondo */
+    padding: 40px 60px;
+    /* Espacio interno (ajustable) */
+    box-sizing: border-box;
+    /* Para incluir padding dentro del ancho */
+}
+
+.porque-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.card-img img {
+    width: 100%;
+    max-width: 350px;
+    /* Controla el tamaño máximo de la imagen */
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.card-texto {
+    flex: 1;
+}
+
+.card-texto h2 {
+    margin-top: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.card-texto p {
+    text-align: justify;
+    margin-bottom: 1em;
+}
+
+.boton-leer-mas {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3465eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.boton-leer-mas:hover {
+    background-color: #274bb8;
+}

@@ -1,0 +1,55 @@
+.valores-iconos {
+    background-color: #eaf3fb;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .valores-iconos h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #123766;
+    letter-spacing: 6px;
+  }
+  
+  .iconos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .icono-valor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .icono-valor img {
+    width: 80px;
+    height: 80px;
+    transition: transform 0.3s;
+  }
+  
+  .icono-valor img:hover {
+    transform: scale(1.1);
+  }
+  
+  .icono-valor span {
+    font-size: 14px;
+    color: #123766;
+    font-weight: 600;
+  }
+  .icono-valor img {
+    width: 80px;
+    height: 80px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* sombra base */
+  }
+  
+  .icono-valor img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.301); /* sombra más intensa al pasar el mouse */
+  }
+  

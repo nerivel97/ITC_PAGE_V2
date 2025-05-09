@@ -1,0 +1,57 @@
+
+.vision-mision {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 40px;
+    background-color: white;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  
+  .bloque {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+  }
+  
+  .bloque .titulo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .bloque .titulo img {
+    width: 50px;
+    height: auto;
+  }
+  
+  .bloque h2 {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .bloque ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .bloque li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  
+  .bloque li img {
+    width: 24px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  
+  .bloque li p {
+    font-size: 18px;
+    text-align: justify; /*Jusitificar pq n React es necesario */
+    line-height: 1.5;
+    color: #333;
+  }

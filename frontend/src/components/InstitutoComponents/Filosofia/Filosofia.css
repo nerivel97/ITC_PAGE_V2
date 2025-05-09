@@ -1,0 +1,64 @@
+.bloque-contenido-filosofia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin: 80px auto;
+    max-width: 1100px;
+    flex-wrap: wrap;
+  }
+  
+  .filosofia-texto {
+    max-width: 700px;
+    text-align: justify;
+  }
+  
+  .filosofia-texto h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  
+  .filosofia-texto p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .circulos-filosofia {
+    position: relative;
+    width: 350px;
+    height: 350px;
+  }
+  
+  .circulo {
+    width: 190px;  /* antes era 150px */
+    height: 190px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Posicionamiento relativo como en la imagen */
+  .imagen1 {
+    top: 0;
+    left: 60px;
+    z-index: 5;
+    background-image: url('../Assets/Fotos/TucanH.png');
+  }
+  
+  .imagen2 {
+    top: 60px;
+    left: 110px;
+    z-index: 2;
+    background-image: url('../Assets/Fotos/Filosofia1.jpeg');
+  }
+  
+  .imagen3 {
+    top: 120px;
+    left: 0px;
+    z-index: 1;
+    background-image: url('../Assets/Fotos/Filosofia3.jpeg');
+  }
+  

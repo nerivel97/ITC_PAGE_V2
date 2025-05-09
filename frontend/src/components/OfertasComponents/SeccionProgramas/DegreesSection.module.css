@@ -1,0 +1,148 @@
+  .sectionTitle {
+    display: block;
+    unicode-bidi: isolate;
+    grid-column: span 1;
+    text-align: center;
+    flex: 1;
+    color: #000000;
+    font-size: 2.5rem;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 50px;
+    padding: 50px;
+    max-width: 100%; /* Ancho máximo para el contenedor */
+    margin: 0 auto;
+    justify-items: center; /* Centra el contenido de cada celda */
+}
+
+  .card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 250px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 32px;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .cardLink {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    color: #000000;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    z-index: 2;
+  }
+  
+  .content .heading {
+    font-weight: 700;
+    font-size: 22px;
+  }
+  
+  .content .para {
+    line-height: 1.2;
+  }
+  
+  .card::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 5px;
+    height: 100%;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .bg-sistemas::before { background: linear-gradient(-45deg, #000000 0%, #eb911e 100% ); }
+  .bg-civil::before { background: linear-gradient(-45deg, #000000 0%, #e7e154 100% ); }
+  .bg-administracion::before { background: linear-gradient(-45deg, #000000 0%, #d48ce9 100% ); }
+  .bg-contaduria::before { background: linear-gradient(-45deg, #000000 0%, #ff9bd9 100% ); }
+  .bg-ing-admin::before { background: linear-gradient(-45deg, #000000 0%, #309cff 100% ); }
+  .bg-gestion::before { background: linear-gradient(-45deg, #000000 0%, #61de52 100% ); }
+  .bg-informatica::before { background: linear-gradient(-45deg, #000000 0%, #27ae60 100% ); }
+  .bg-mecatronica::before { background: linear-gradient(-45deg, #000000 0%, #a7a7a7 100% ); }
+  .bg-electromecanica::before { background: linear-gradient(-45deg, #000000 0%, #ff3030 100% ); }
+  .bg-ambientales::before { background: linear-gradient(-45deg, #000000 0%, #06bd00 100% ); }
+  .bg-negocios::before { background: linear-gradient(-45deg, #000000 0%, #0780ea 100% ); }
+  .bg-doc-ambientales::before { background: linear-gradient(-45deg, #000000 0%, #06bd00 100% ); }
+  .bg-lenguas::before { background: linear-gradient(-45deg, #000000 0%, #cd00a1 100% ); }
+  
+  .card:hover::before {
+    width: 100%;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  .card:hover .content {
+    color: #ffffff;
+  }
+
+  /* Contenedor para las dos secciones en mitades */
+.combinedContainer {
+  display: flex;
+  width: 90%;
+  gap: 20px;
+  padding: 0 50px 50px;
+}
+
+/* Cada mitad de pantalla */
+.halfSection {
+  flex: 1;
+  min-width: 0; /* Evita problemas de desbordamiento */
+}
+
+.descripcion{
+  padding: 50px;
+    margin: auto;
+    max-width: 700px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 200%;
+    font-weight: 700;
+}
+  
+  @media (max-width: 1024px) {
+    .degreesContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .degreesContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+
+@media (max-width: 1024px) {
+  .combinedContainer {
+    flex-direction: column;
+    padding: 0 20px 50px;
+  }
+  
+  .halfSection {
+    width: 100%;
+  }
+}

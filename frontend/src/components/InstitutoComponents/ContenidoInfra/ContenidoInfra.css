@@ -1,0 +1,49 @@
+.contenido {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: justify;
+}
+
+.seccion {
+    margin-bottom: 60px;
+}
+
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.fila-reversa {
+    flex-direction: row-reverse;
+}
+
+.texto {
+    flex: 1 1 50%;
+}
+
+.imagen {
+    flex: 1 1 45%;
+}
+
+.imagen img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.seccion h2 {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.seccion h2::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 4px;
+    background-color: #0078D7;
+    margin-top: 8px;
+}
