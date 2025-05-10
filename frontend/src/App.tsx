@@ -8,6 +8,7 @@ import Infra from './pages/Infra';
 import AdminLayout from './admin/components/AdminLayout/AdminLayout';
 import AdminDashboard from './admin/pages/Dashboard';
 import EventosTable from './admin/pages/Eventos/EventosTable';
+import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
 
 import "./App.css"
 
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="/admin/eventos" element={<EventosTable />} />
+          <Route path="/admin/noticias" element={<NoticiasTable />} />
           {/* <Route path="instituto-itc" element={<InstitutoITCAdmin />} /> */}
           {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />  */}
           {/* Agrega más rutas del admin aquí */}
