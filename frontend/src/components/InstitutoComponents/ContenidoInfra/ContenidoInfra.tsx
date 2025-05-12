@@ -65,7 +65,7 @@ const ContenidoInfra: React.FC = () => {
         <p>La infraestructura de la universidad está en constante renovación para estar a la altura de la excelencia académica de nuestras aulas y las necesidades de aprendizaje de nuestros alumnos.</p>
       </div>
       <div className="imagen" data-aos="fade-up">
-        <iframe width="100%" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp=21.139326~-86.834921&lvl=17.931595&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no"></iframe>
+        <iframe width="100%" height="400" src="https://www.bing.com/maps/embed?h=400&w=500&cp=21.139326~-86.834921&lvl=17.931595&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no"></iframe>
       </div>
     </div>
     </div>
