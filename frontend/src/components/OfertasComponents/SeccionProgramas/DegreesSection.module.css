@@ -71,21 +71,8 @@
     height: 100%;
     z-index: 1;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    background: linear-gradient(-45deg, rgba(0,0,0,0.8) 0%, var(--bg-color) 100%);
   }
-  
-  .bg-sistemas::before { background: linear-gradient(-45deg, #000000 0%, #eb911e 100% ); }
-  .bg-civil::before { background: linear-gradient(-45deg, #000000 0%, #e7e154 100% ); }
-  .bg-administracion::before { background: linear-gradient(-45deg, #000000 0%, #d48ce9 100% ); }
-  .bg-contaduria::before { background: linear-gradient(-45deg, #000000 0%, #ff9bd9 100% ); }
-  .bg-ing-admin::before { background: linear-gradient(-45deg, #000000 0%, #309cff 100% ); }
-  .bg-gestion::before { background: linear-gradient(-45deg, #000000 0%, #61de52 100% ); }
-  .bg-informatica::before { background: linear-gradient(-45deg, #000000 0%, #27ae60 100% ); }
-  .bg-mecatronica::before { background: linear-gradient(-45deg, #000000 0%, #a7a7a7 100% ); }
-  .bg-electromecanica::before { background: linear-gradient(-45deg, #000000 0%, #ff3030 100% ); }
-  .bg-ambientales::before { background: linear-gradient(-45deg, #000000 0%, #06bd00 100% ); }
-  .bg-negocios::before { background: linear-gradient(-45deg, #000000 0%, #0780ea 100% ); }
-  .bg-doc-ambientales::before { background: linear-gradient(-45deg, #000000 0%, #06bd00 100% ); }
-  .bg-lenguas::before { background: linear-gradient(-45deg, #000000 0%, #cd00a1 100% ); }
   
   .card:hover::before {
     width: 100%;

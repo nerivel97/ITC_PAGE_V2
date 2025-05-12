@@ -1,0 +1,440 @@
+/* Carreras.module.css */
+.container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+
+
+.headerBanner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 500px;
+}
+
+.carreraTitle {
+    position: absolute;
+    bottom: 60px;
+    left: 80px;
+    background-color: var(--primary-color, #e7e154);
+    color: white;
+    padding: 25px 35px;
+    border-radius: 10px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+/* Contenedores principales */
+.institucionInfo,
+.acreditacionContent,
+.perfilContent,
+.visionMision,
+.reticulaContainer,
+.downloadButtonContainer,
+.campoLaboral {
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px;
+    width: 100%;
+    background-color: #fcfcfc;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    margin-bottom: 60px;
+}
+
+.campoLaboral {
+    display: flex;
+    gap: 40px;
+}
+
+.sectionTitle {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+    color: #555;
+}
+
+/* Estilos flex */
+.flexContainer {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.flexReverse {
+    flex-direction: row-reverse;
+}
+
+.flexItem2 {
+    flex: 2;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.flexItem1 {
+    flex: 1;
+}
+
+.flexItem1 img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Vision/Mision/Objetivos */
+.visionMisionContainer {
+    display: flex;
+    gap: 40px;
+    text-align: center;
+}
+
+.visionMisionItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.visionMisionItem h3 {
+    font-size: 22px;
+    margin: 20px 0;
+    color: #555;
+}
+
+.visionMisionItem img {
+    width: 60px;
+    height: 60px;
+}
+
+.visionMisionItem p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+.itemRow {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.itemRow img {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+
+
+.campoAreas, .campoFunciones {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.campoLaboral h3 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    width: 100%;
+    text-align: center;
+}
+
+.campoLaboral h3 img {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+}
+
+.areaItem, .funcionItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-left: 0;
+    width: 80%;
+}
+
+.areaItem img, .funcionItem img {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+}
+
+.areaItem p, .funcionItem p {
+    text-align: left;
+}
+
+/* Retícula */
+.semestreContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.semestreHeader {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid var(--primary-color, #e7e154);
+    border-radius: 15px;
+    margin-right: 20px;
+    position: relative;
+}
+
+
+
+.semestreHeader h3 {
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.circulo {
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--primary-color, #e7e154);
+}
+
+.materiasGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    flex: 1;
+}
+
+.materia {
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    background-color: var(--primary-color, #e7e154);
+    color: white;
+}
+
+.materia:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.materia h4 {
+    font-size: 14px;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+    height: 32px;
+}
+
+.materia p {
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+/* Botón de descarga */
+.downloadButton {
+    display: inline-block;
+    background-color: #6c5b7b;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px 40px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 0 auto;
+}
+
+.downloadButton:hover {
+    background-color: #8a7a9e;
+    transform: translateY(-3px);
+}
+
+/* Items con iconos - Versión mejorada */
+.itemRow, 
+.areaItem, 
+.funcionItem {
+    display: flex;
+    align-items: flex-start; /* Alinea al inicio para textos multilínea */
+    margin-bottom: 15px;
+    width: 100%;
+    line-height: 1.4;
+}
+
+.itemRow img,
+.areaItem img,
+.funcionItem img {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    margin-top: 2px; /* Pequeño ajuste para alinear con la primera línea */
+}
+
+.itemRow p,
+.areaItem p,
+.funcionItem p {
+    margin: 0;
+    text-align: left;
+    flex: 1;
+}
+
+/* Estilos responsivos */
+@media screen and (max-width: 768px) {
+    .carreraTitle {
+        bottom: 20px;
+        left: 20px;
+        font-size: 22px;
+        padding: 15px 20px;
+        white-space: normal;
+        max-width: 80%;
+    }
+    
+    .flexContainer {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .flexItem1 {
+        margin-bottom: 20px;
+    }
+    
+    .flexReverse {
+        flex-direction: column;
+    }
+    
+    .visionMisionContainer {
+        flex-direction: column;
+    }
+    
+    .campoLaboral {
+        flex-direction: column;
+    }
+    
+    .campoLaboral::after {
+        display: none;
+    }
+    
+    /* Retícula como slider horizontal */
+    .reticulaContainer {
+        overflow: hidden;
+        padding: 0;
+        margin-bottom: 30px;
+    }
+    
+    .sectionTitle {
+        font-size: 24px;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+    
+    .semestresSlider {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 10px;
+        width: 100%;
+    }
+    
+    .semestreContainer {
+        flex: 0 0 90%;
+        margin-right: 20px;
+        scroll-snap-align: start;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        background-color: #f5f5f5;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 0;
+        flex-direction: column;
+        width: 90%;
+        min-width: 280px;
+    }
+    
+    .semestreHeader {
+        width: auto;
+        margin-right: 0;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        justify-content: center;
+        align-self: center;
+    }
+    
+    .semestreHeader::after {
+        display: none;
+    }
+    
+    .materiasGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .semestreSliderNav {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .sliderDot {
+        width: 10px;
+        height: 10px;
+        background-color: #ddd;
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .sliderDot.active {
+        background-color: var(--primary-color, #2596be);
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .institucionInfo,
+    .acreditacionContent,
+    .perfilContent {
+        padding: 30px;
+    }
+    
+    .materiasGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .carreraTitle {
+        font-size: 26px;
+        left: 40px;
+    }
+}

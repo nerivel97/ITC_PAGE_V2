@@ -10,6 +10,7 @@ import styles from '../components/OfertasComponents/Ofertas.module.css';
 const Ofertas = () => {
   return (
     <div className={styles.ofertasContainer}>
+      <meta name='descripcion' content='Oferta educativa donde los aspirantes, alumnos, profesores y el publico en general podra ver los programas academicos ofrecidos por el TECNM Campus Cancun'/>
       <Breadcrumbs currentPage="Oferta Educativa" />
       <Banner />
       

@@ -7,10 +7,11 @@ const Banner = () => {
       <img
         className={styles.banner}
         src={bannerImage}
-        alt="Banner del Tecnológico Nacional de México"
+        alt="Estudiantes del TecNM Cancún en laboratorios y aulas"
+        title='Banner Oferta Educativa'
       />
       <div className={styles.bannerText}>
-        <h1>Sé parte del Tecnológico Nacional de México</h1>
+        <h1>Transforma Tu Futuro en el TecNM Cancún</h1>
       </div>
     </div>
   );

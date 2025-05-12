@@ -74,6 +74,23 @@
     margin-bottom: 10px;
     line-height: 1.5;
   }
+
+  /* Añade esto al archivo existente */
+
+.faqAnswer a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.faqAnswer a:hover {
+  text-decoration: underline;
+}
+
+.faqQuestion {
+  background-color: #0f156d; /* Cambiado a un azul más oscuro */
+}
+
   
   @media (max-width: 768px) {
     .faqTitle {
