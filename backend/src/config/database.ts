@@ -1,18 +1,18 @@
-import "reflect-metadata";
-import { DataSource } from "typeorm";
-import { Evento } from "../models/Evento";
-import { Noticia } from "../models/Noticia"; // Asegúrate de que la ruta sea correcta
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import { env } from '../lib/env';
+import { isDevelopment } from '../utils/env';
 
 export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT || "5432"),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  synchronize: true, // Cuidado: solo en desarrollo
-  logging: true, // Habilita logging para debug
-  entities: [Evento, Noticia],
+  type: 'postgres',
+  host: env.DB_HOST,
+  port: env.DB_PORT,
+  username: env.DB_USERNAME,
+  password: env.DB_PASSWORD,
+  database: env.DB_DATABASE,
+  synchronize: isDevelopment(), // Cuidado: solo en desarrollo
+  logging: env.DB_LOGGING, // Habilita logging para debug
+  entities: ['../models/**/*.ts'],
   migrations: [],
   subscribers: [],
 });
