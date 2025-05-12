@@ -8,43 +8,42 @@ import {
   message,
 } from 'antd';
 import { 
-  createEvento, 
-  updateEvento,
-} from '../../services/eventos.service';
-import { IEvento, IEventoCreate } from '../../interfaces/evento.interface';
+  createNoticia, 
+  updateNoticia,
+} from '../../services/noticias.service';
+import { INoticia, INoticiaCreate } from '../../interfaces/noticia.interface';
 import dayjs from 'dayjs';
 import styles from './NoticiasForm.module.css';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-interface EventoFormProps {
+interface NoticiaFormProps {
   visible: boolean;
   onCancel: () => void;
   onSuccess: () => void;
-  evento?: IEvento | null;
+  noticia?: INoticia | null;
 }
 
-const NoticiasForm: React.FC<EventoFormProps> = ({ 
+const NoticiasForm: React.FC<NoticiaFormProps> = ({ 
   visible, 
   onCancel, 
   onSuccess, 
-  evento 
+  noticia 
 }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
-    if (visible && evento) {
+    if (visible && noticia) {
       form.setFieldsValue({
-        ...evento,
-        fecha_inicio: dayjs(evento.fecha_inicio),
-        fecha_final: dayjs(evento.fecha_final),
+        ...noticia,
+        fecha_publicacion: dayjs(noticia.fecha_publicacion),
       });
     } else if (visible) {
       form.resetFields();
     }
-  }, [visible, evento, form]);
+  }, [visible, noticia, form]);
 
   const handleSubmit = async () => {
     try {
@@ -52,30 +51,28 @@ const NoticiasForm: React.FC<EventoFormProps> = ({
       const values = await form.validateFields();
       
       // Asegurar formato YYYY-MM-DD para las fechas
-      const eventoData: IEventoCreate = {
-        nombre_evento: values.nombre_evento,
-        categoria: values.categoria,
+      const noticiaData: INoticiaCreate = {
+        nombre_noticia: values.nombre_noticia,
         descripcion: values.descripcion,
-        fecha_inicio: dayjs(values.fecha_inicio).format('YYYY-MM-DD'), // Formato explícito
-        fecha_final: dayjs(values.fecha_final).format('YYYY-MM-DD'),   // Formato explícito
-        estado: values.estado,
+        fecha_publicacion: dayjs(values.fecha_publicacion).format('YYYY-MM-DD'), // Formato explícito
+        autor: values.autor,
         imagen: values.imagen || null
       };
   
-      console.log("Datos a enviar:", eventoData);
+      console.log("Datos a enviar:", noticiaData);
   
-      if (evento) {
-        await updateEvento(evento.id_evento!, eventoData);
-        message.success('Evento actualizado correctamente');
+      if (noticia) {
+        await updateNoticia(noticia.id_noticia!, noticiaData);
+        message.success('noticia actualizado correctamente');
       } else {
-        await createEvento(eventoData);
-        message.success('Evento creado correctamente');
+        await createNoticia(noticiaData);
+        message.success('noticia creado correctamente');
       }
       
       onSuccess();
     } catch (error) {
       console.error('Error completo:', error);
-      message.error(error instanceof Error ? error.message : 'Error al guardar el evento');
+      message.error(error instanceof Error ? error.message : 'Error al guardar el noticia');
     } finally {
       setLoading(false);
     }
@@ -83,13 +80,13 @@ const NoticiasForm: React.FC<EventoFormProps> = ({
 
   return (
     <Modal
-      title={evento ? 'Editar Evento' : 'Crear Nuevo Evento'}
+      title={noticia ? 'Editar noticia' : 'Crear Nuevo noticia'}
       open={visible}
       onOk={handleSubmit}
       onCancel={onCancel}
       confirmLoading={loading}
       width={700}
-      okText={evento ? 'Actualizar' : 'Crear'}
+      okText={noticia ? 'Actualizar' : 'Crear'}
       cancelText="Cancelar"
     >
       <Form
@@ -101,11 +98,11 @@ const NoticiasForm: React.FC<EventoFormProps> = ({
         }}
       >
         <Form.Item
-          name="nombre_evento"
-          label="Nombre del Evento"
+          name="nombre_noticia"
+          label="Nombre del noticia"
           rules={[{ 
             required: true, 
-            message: 'Por favor ingrese el nombre del evento' 
+            message: 'Por favor ingrese el nombre del noticia' 
           }]}
         >
           <Input placeholder="Ej: Conferencia de Tecnología" />
@@ -134,12 +131,12 @@ const NoticiasForm: React.FC<EventoFormProps> = ({
             message: 'Por favor ingrese una descripción' 
           }]}
         >
-          <TextArea rows={4} placeholder="Descripción detallada del evento" />
+          <TextArea rows={4} placeholder="Descripción detallada del noticia" />
         </Form.Item>
 
         <div className={styles.dateRow}>
           <Form.Item
-            name="fecha_inicio"
+            name="fecha_publicacion"
             label="Fecha de Inicio"
             rules={[{ 
               required: true, 

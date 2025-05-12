@@ -13,64 +13,63 @@ import {
   Empty
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import EventoForm from './NoticiasForm';
-import { fetchEventos, deleteEvento } from '../../services/eventos.service';
-import { IEvento } from '../../interfaces/evento.interface';
+import NoticiasForm from './NoticiasForm';
+import { fetchNoticias, deleteNoticia } from '../../services/noticias.service';
+import { INoticia } from '../../interfaces/noticia.interface';
 import styles from './NoticiasTable.module.css';
 
 const { Text } = Typography;
 
 const NoticiasTable: React.FC = () => {
-  const [eventos, setEventos] = useState<IEvento[]>([]);
+  const [Noticias, setNoticias] = useState<INoticia[]>([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedEvento, setSelectedEvento] = useState<IEvento | null>(null);
+  const [selectednoticia, setSelectednoticia] = useState<INoticia | null>(null);
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
     total: 0,
   });
 
-  const loadEventos = async () => {
+  const loadNoticias = async () => {
     setLoading(true);
     try {
-      const data = await fetchEventos();
+      const data = await fetchNoticias();
       console.log('Datos recibidos del backend:', data);
 
       if (!Array.isArray(data)) {
         throw new Error('Formato de datos inválido');
       }
 
-      const formattedData = data.map(evento => ({
-        ...evento,
-        key: evento.id_evento?.toString() || Math.random().toString(),
-        fecha_inicio: evento.fecha_inicio ? new Date(evento.fecha_inicio).toISOString() : '',
-        fecha_final: evento.fecha_final ? new Date(evento.fecha_final).toISOString() : ''
+      const formattedData = data.map(noticia => ({
+        ...noticia,
+        key: noticia.id_noticia?.toString() || Math.random().toString(),
+        fecha_publicacion: noticia.fecha_publicacion ? new Date(noticia.fecha_publicacion).toISOString() : '',
       }));
 
-      setEventos(formattedData);
+      setNoticias(formattedData);
       setPagination(prev => ({
         ...prev,
         total: formattedData.length
       }));
     } catch (error) {
-      console.error('Error al cargar eventos:', error);
-      message.error(error instanceof Error ? error.message : 'Error al cargar eventos');
-      setEventos([]);
+      console.error('Error al cargar Noticias:', error);
+      message.error(error instanceof Error ? error.message : 'Error al cargar Noticias');
+      setNoticias([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadEventos();
+    loadNoticias();
   }, []);
 
   const handleDelete = (id: number) => {
     console.log('Botón eliminar clickeado para ID:', id); // Verifica que se ejecuta
 
     Modal.confirm({
-      title: '¿Eliminar evento?',
+      title: '¿Eliminar noticia?',
       content: 'Esta acción no se puede deshacer',
       okText: 'Eliminar',
       cancelText: 'Cancelar',
@@ -78,9 +77,9 @@ const NoticiasTable: React.FC = () => {
       onOk: async () => {
         console.log('Usuario confirmó eliminación'); // Verifica confirmación
         try {
-          await deleteEvento(id);
-          message.success('Evento eliminado correctamente');
-          await loadEventos();
+          await deleteNoticia(id);
+          message.success('Noticia eliminado correctamente');
+          await loadNoticias();
         } catch (error) {
           console.error('Error completo:', error);
           message.error('Error al eliminar: ' + (error instanceof Error ? error.message : ''));
@@ -92,37 +91,20 @@ const NoticiasTable: React.FC = () => {
     });
   };
 
-  const columns: ColumnsType<IEvento> = [
+  const columns: ColumnsType<INoticia> = [
     {
       title: 'ID',
-      dataIndex: 'id_evento',
-      key: 'id_evento',
+      dataIndex: 'id_noticia',
+      key: 'id_noticia',
       width: 80,
-      sorter: (a, b) => (a.id_evento || 0) - (b.id_evento || 0),
+      sorter: (a, b) => (a.id_noticia || 0) - (b.id_noticia || 0),
     },
     {
       title: 'Nombre',
-      dataIndex: 'nombre_evento',
-      key: 'nombre_evento',
+      dataIndex: 'nombre_noticia',
+      key: 'nombre_noticia',
       width: 200,
       render: (text: string) => <Text strong>{text}</Text>,
-    },
-    {
-      title: 'Categoría',
-      dataIndex: 'categoria',
-      key: 'categoria',
-      width: 150,
-      render: (categoria: string) => (
-        <Tag color="geekblue">
-          {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
-        </Tag>
-      ),
-      filters: [
-        { text: 'Cultural', value: 'cultural' },
-        { text: 'Deportivo', value: 'deportivo' },
-        { text: 'Social', value: 'social' },
-      ],
-      onFilter: (value, record) => record.categoria === value,
     },
     {
       title: 'Descripción',
@@ -143,39 +125,18 @@ const NoticiasTable: React.FC = () => {
         <div className={styles.dateContainer}>
           <div>
             <Text type="secondary">Inicio:</Text>{' '}
-            {record.fecha_inicio ? new Date(record.fecha_inicio).toLocaleDateString('es-ES') : 'N/A'}
-          </div>
-          <div>
-            <Text type="secondary">Fin:</Text>{' '}
-            {record.fecha_final ? new Date(record.fecha_final).toLocaleDateString('es-ES') : 'N/A'}
+            {record.fecha_publicacion ? new Date(record.fecha_publicacion).toLocaleDateString('es-ES') : 'N/A'}
           </div>
         </div>
       ),
-      sorter: (a, b) => new Date(a.fecha_inicio).getTime() - new Date(b.fecha_inicio).getTime(),
+      sorter: (a, b) => new Date(a.fecha_publicacion).getTime() - new Date(b.fecha_publicacion).getTime(),
     },
     {
-      title: 'Estado',
-      dataIndex: 'estado',
-      key: 'estado',
-      width: 120,
-      render: (estado: string) => {
-        const statusMap: Record<string, { color: string; text: string }> = {
-          activo: { color: 'green', text: 'Activo' },
-          inactivo: { color: 'red', text: 'Inactivo' },
-        };
-
-        const status = statusMap[estado.toLowerCase()] || { color: 'gray', text: estado };
-        return (
-          <Tag color={status.color}>
-            {status.text}
-          </Tag>
-        );
-      },
-      filters: [
-        { text: 'Activo', value: 'activo' },
-        { text: 'Inactivo', value: 'inactivo' },
-      ],
-      onFilter: (value, record) => record.estado.toLowerCase() === value.toString().toLowerCase(),
+      title: 'Autor',
+      dataIndex: 'autor',
+      key: 'autor',
+      width: 200,
+      render: (text: string) => <Text strong>{text}</Text>,
     },
     {
       title: 'Imagen',
@@ -211,7 +172,7 @@ const NoticiasTable: React.FC = () => {
             size="small"
             onClick={(e) => {
               e.stopPropagation();
-              setSelectedEvento(record);
+              setSelectednoticia(record);
               setModalVisible(true);
             }}
           >
@@ -223,7 +184,7 @@ const NoticiasTable: React.FC = () => {
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              handleDelete(record.id_evento!);
+              handleDelete(record.id_noticia!);
             }}
             style={{ position: 'relative', zIndex: 1 }}
           >
@@ -242,19 +203,19 @@ const NoticiasTable: React.FC = () => {
         <Button
           type="primary"
           onClick={() => {
-            setSelectedEvento(null);
+            setSelectednoticia(null);
             setModalVisible(true);
           }}
         >
-          Nuevo Evento
+          Nuevo noticia
         </Button>
       }
       className={styles.card}
     >
-      <Spin spinning={loading} tip="Cargando eventos...">
+      <Spin spinning={loading} tip="Cargando Noticias...">
         <Table
           columns={columns}
-          dataSource={eventos}
+          dataSource={Noticias}
           rowKey="key"
           loading={loading}
           scroll={{ x: 1500 }}
@@ -262,19 +223,19 @@ const NoticiasTable: React.FC = () => {
             ...pagination,
             showSizeChanger: true,
             pageSizeOptions: ['10', '20', '50'],
-            showTotal: (total) => `Total ${total} eventos`,
+            showTotal: (total) => `Total ${total} Noticias`,
           }}
           locale={{
             emptyText: (
               <Empty
-                description="No se encontraron eventos"
+                description="No se encontraron Noticias"
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
               >
                 <Button
                   type="primary"
                   onClick={() => setModalVisible(true)}
                 >
-                  Crear primer evento
+                  Crear primer noticia
                 </Button>
               </Empty>
             )
@@ -282,14 +243,14 @@ const NoticiasTable: React.FC = () => {
         />
       </Spin>
 
-      <EventoForm
+      <NoticiasForm
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
         onSuccess={() => {
           setModalVisible(false);
-          loadEventos();
+          loadNoticias();
         }}
-        evento={selectedEvento}
+        noticia={selectednoticia}
       />
     </Card>
   );

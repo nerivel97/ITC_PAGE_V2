@@ -7,3 +7,13 @@ export interface IEventoService {
   updateEvento(id: number, eventoData: IEventoUpdate): Promise<IEvento | null>;
   deleteEvento(id: number): Promise<void>;
 }
+
+import { INoticia, INoticiaCreate, INoticiaUpdate } from './noticia.interface';
+
+export interface INoticiaService {
+  getAllNoticias(): Promise<INoticia[]>;
+  getNoticiaById(id: number): Promise<INoticia | null>;
+  createNoticia(eventoData: INoticiaCreate): Promise<INoticia>;
+  updateNoticia(id: number, eventoData: INoticiaUpdate): Promise<INoticia | null>;
+  deleteNoticia(id: number): Promise<void>;
+}

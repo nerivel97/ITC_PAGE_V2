@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Evento } from "../models/Evento"; // Asegúrate de que la ruta sea correcta
+import { Evento } from "../models/Evento";
+import { Noticia } from "../models/Noticia"; // Asegúrate de que la ruta sea correcta
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_DATABASE,
   synchronize: true, // Cuidado: solo en desarrollo
   logging: true, // Habilita logging para debug
-  entities: [Evento],
+  entities: [Evento, Noticia],
   migrations: [],
   subscribers: [],
 });
