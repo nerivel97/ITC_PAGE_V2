@@ -94,22 +94,31 @@ const Home = () => {
     subtitulo: "Participa en el Innovatec",
     descripcion: "An FDA-approved gene therapy...",
     imagen: img,
+    rutaPrincipal: "/",
     sidebarArticulos: [
       {
         titulo: "Deportes",
         descripcion: "Athletes win record-breaking...",
+        imagen: img,
+        ruta: "/",
       },
       {
         titulo: "Deportes",
         descripcion: "Athletes win record-breaking...",
+        imagen: img,
+        ruta: "/",
       },
       {
         titulo: "Deportes",
         descripcion: "Athletes win record-breaking...",
+        imagen: img,
+        ruta: "/",
       },
       {
         titulo: "Deportes",
         descripcion: "Athletes win record-breaking...",
+        imagen: img,
+        ruta: "/",
       },
       // ... otros artículos
     ],
