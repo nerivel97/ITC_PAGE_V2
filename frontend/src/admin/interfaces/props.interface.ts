@@ -1,6 +1,6 @@
 // src/core/interfaces/props.interface.ts
-import { IEvento, IEventoForm } from './evento.interface';
-import { INoticia, INoticiaForm } from './noticia.interface';
+import { IEvento} from './evento.interface';
+import { INoticia} from './noticia.interface';
 
 export interface EventoCardProps {
   evento: IEvento;
@@ -15,8 +15,8 @@ export interface EventoListProps {
 }
 
 export interface EventoFormProps {
-  initialData?: Partial<IEventoForm>;
-  onSubmit: (data: IEventoForm) => void;
+  initialData?: Partial<IEvento>;
+  onSubmit: (data: IEvento) => void;
   loading?: boolean;
   validationSchema?: any; // Puedes tipar esto con yup o zod
 }
@@ -39,8 +39,8 @@ export interface NoticiaListProps {
 }
 
 export interface NoticiaFormProps {
-  initialData?: Partial<INoticiaForm>;
-  onSubmit: (data: INoticiaForm) => void;
+  initialData?: Partial<INoticia>;
+  onSubmit: (data: INoticia) => void;
   loading?: boolean;
   validationSchema?: any; // Puedes tipar esto con yup o zod
 }

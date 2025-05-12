@@ -1,5 +1,5 @@
 // src/core/interfaces/props.interface.ts
-import { IEvento, IEventoForm } from './evento.interface';
+import { IEvento} from './evento.interface';
 
 export interface EventoCardProps {
   evento: IEvento;
@@ -14,8 +14,8 @@ export interface EventoListProps {
 }
 
 export interface EventoFormProps {
-  initialData?: Partial<IEventoForm>;
-  onSubmit: (data: IEventoForm) => void;
+  initialData?: Partial<IEvento>;
+  onSubmit: (data: IEvento) => void;
   loading?: boolean;
   validationSchema?: any; // Puedes tipar esto con yup o zod
 }
