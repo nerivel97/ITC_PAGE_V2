@@ -1,10 +1,11 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { env } from '../lib/env';
+import { Evento, Noticia } from '../models';
 import { isDevelopment } from '../utils/env';
 
 export const AppDataSource = new DataSource({
-  type: 'postgres',
+  type: 'mysql',
   host: env.DB_HOST,
   port: env.DB_PORT,
   username: env.DB_USERNAME,
@@ -12,7 +13,22 @@ export const AppDataSource = new DataSource({
   database: env.DB_DATABASE,
   synchronize: isDevelopment(), // Cuidado: solo en desarrollo
   logging: env.DB_LOGGING, // Habilita logging para debug
-  entities: ['../models/**/*.ts'],
+  entities: [Evento, Noticia],
   migrations: [],
   subscribers: [],
 });
+
+/**
+ * Conecta a la base de datos utilizando TypeORM.
+ * @returns {Promise<void>} Promesa que se resuelve cuando la conexión se establece.
+ * @throws {Error} Si ocurre un error al conectar a la base de datos.
+ */
+export const connectToDatabase = async (): Promise<void> => {
+  try {
+    await AppDataSource.initialize();
+    console.log('Conexión a la base de datos establecida');
+  } catch (error) {
+    console.error('Error al conectar a la base de datos:');
+    throw error;
+  }
+};

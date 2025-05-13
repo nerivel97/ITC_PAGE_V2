@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { z } from 'zod';
 
 const envSchema = z.object({
@@ -10,7 +9,10 @@ const envSchema = z.object({
   DB_USERNAME: z.string(),
   DB_PASSWORD: z.string(),
   DB_DATABASE: z.string(),
-  DB_LOGGING: z.coerce.boolean().default(true),
+  DB_LOGGING: z
+    .union([z.literal('true'), z.literal('false')])
+    .transform((val) => val === 'true')
+    .default('true'),
   PORT: z.coerce.number().default(3000),
   JWT_SECRET: z.string(),
 });

@@ -12,16 +12,23 @@ import { createNoticiasRouter } from './routes/eventos.routes';
 import { NoticiasController } from './controllers/noticias.controller';
 import { NoticiasService } from './services/eventos.service';
 
-import { AppDataSource } from './config/database';
+import { connectToDatabase } from './config/database';
+import { isDevelopment } from './utils/env';
 
 export default async function initializeApp() {
-    await AppDataSource.initialize();
+    await connectToDatabase();
   
     const app = express();
     
     // Middlewares deben ir antes de las rutas
     app.use(cors({
-      origin: 'http://localhost:5173',
+      origin: () => {
+        if (isDevelopment()) {
+          return '*';
+        }
+
+        return 'http://localhost:5173';
+      },
       credentials: true
     }));
     app.use(express.json());
