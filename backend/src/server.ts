@@ -5,6 +5,7 @@ import { env } from './lib/env';
 initializeApp()
   .then((app) => {
     app.listen(env.PORT, () => {
+      console.log(`Running in ${env.NODE_ENV} mode`);
       console.log(`Server running on http://localhost:${env.PORT}`);
     });
   })
