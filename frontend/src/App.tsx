@@ -9,7 +9,7 @@ import AdminLayout from './admin/components/AdminLayout/AdminLayout';
 import AdminDashboard from './admin/pages/Dashboard';
 import EventosTable from './admin/pages/Eventos/EventosTable';
 import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
-import OfertTable from './admin/pages/OfertaEducativa/OferTable';
+import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
 
 import "./App.css"
 

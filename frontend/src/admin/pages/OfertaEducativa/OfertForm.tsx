@@ -6,7 +6,6 @@ import {
   Select,
   Upload,
   Typography,
-  message
 } from 'antd';
 import { SketchPicker } from 'react-color';
 import { UploadOutlined } from '@ant-design/icons';
