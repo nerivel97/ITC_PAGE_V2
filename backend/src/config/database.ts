@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { env } from '../lib/env';
-import { Evento, Noticia } from '../models';
+import { Career, Evento, Noticia, Reticle, Subject } from '../models';
 import { isDevelopment } from '../utils/env';
 
 export const AppDataSource = new DataSource({
@@ -11,9 +11,10 @@ export const AppDataSource = new DataSource({
   username: env.DB_USERNAME,
   password: env.DB_PASSWORD,
   database: env.DB_DATABASE,
+  timezone: 'Z',
   synchronize: isDevelopment(), // Cuidado: solo en desarrollo
   logging: env.DB_LOGGING, // Habilita logging para debug
-  entities: [Evento, Noticia],
+  entities: [Evento, Noticia, Career, Reticle, Subject],
   migrations: [],
   subscribers: [],
 });
