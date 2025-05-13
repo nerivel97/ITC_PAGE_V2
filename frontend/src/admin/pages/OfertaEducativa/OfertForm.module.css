@@ -1,0 +1,19 @@
+.dateRow {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .dateField {
+    flex: 1;
+  }
+  
+  .uploadBtn {
+    margin-top: 8px;
+  }
+  
+  @media (max-width: 576px) {
+    .dateRow {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
