@@ -1,0 +1,155 @@
+/* Contenedor principal */
+.card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 16px;
+  }
+  
+  /* Encabezado de la tarjeta */
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de fechas */
+  .dateContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+  }
+  
+  .dateContainer div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  /* Estilos para la tabla */
+  .tableContainer {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 6px;
+  }
+  
+  /* Celdas de la tabla */
+  .tableCell {
+    padding: 12px 16px !important;
+    white-space: nowrap;
+  }
+  
+  /* Texto en celdas */
+  .tableCellText {
+    font-size: 13px;
+  }
+  
+  /* Imágenes en celdas */
+  .tableImage {
+    border-radius: 4px;
+    object-fit: cover;
+    background: #f5f5f5;
+  }
+  
+  /* Placeholder para imágenes */
+  .imagePlaceholder {
+    width: 60px;
+    height: 40px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Tags de estado */
+  .statusTag {
+    font-weight: 500;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  
+  /* Contenedor de acciones */
+  .actionsContainer {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* Botones de acción */
+  .actionButton {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+    height: auto !important;
+  }
+  
+  /* Efecto hover para filas */
+  .tableRow:hover td {
+    background: #fafafa !important;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 992px) {
+    .card {
+      margin: 8px;
+      padding: 12px;
+    }
+    
+    .tableCell {
+      padding: 8px 12px !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0;
+      border: 1px solid #f0f0f0;
+    }
+    
+    .tableContainer {
+      border: 1px solid #f0f0f0;
+    }
+    
+    .actionsContainer {
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .actionButton {
+      width: 100%;
+    }
+  }
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .tableContainer {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* Scroll personalizado para la tabla */
+  .tableContainer::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .tableContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  
+  .tableContainer::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+  
+  .tableContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
