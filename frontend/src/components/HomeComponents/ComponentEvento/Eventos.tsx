@@ -94,7 +94,6 @@ const Eventos: React.FC = () => {
 
   return (
     <section className={styles.eventosSection}>
-      <h2 className={styles.sectionTitle}>Próximos Eventos</h2>
       
       <div className={styles.carouselContainer}>
         <button 
