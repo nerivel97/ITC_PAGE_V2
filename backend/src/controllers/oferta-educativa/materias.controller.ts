@@ -4,6 +4,8 @@ import {
   createSubjectSchema,
   updateSubjectSchema,
 } from '../../dtos/oferta-educativa';
+import { ApiResponse } from '../../interfaces/api.interface';
+import { Subject } from '../../models/oferta-educativa';
 import { subjectsService } from '../../services/oferta-educativa';
 
 const createNewSubject = async (req: Request, res: Response) => {
@@ -12,29 +14,39 @@ const createNewSubject = async (req: Request, res: Response) => {
     createSubjectDto,
   );
 
-  res.status(HttpStatusCode.CREATED).json({
-    status: 'success',
+  const response: ApiResponse<Subject> = {
+    success: true,
+    message: 'Materia creada correctamente',
     data: createdSubject,
-  });
+    timestamp: new Date(),
+  };
+
+  res.status(HttpStatusCode.CREATED).json(response);
 };
 
 const getAllSubjects = async (_req: Request, res: Response) => {
   const subjects = await subjectsService.getAllSubjects();
 
-  res.status(HttpStatusCode.OK).json({
-    status: 'success',
+  const response: ApiResponse<Subject[]> = {
+    success: true,
+    message: 'Materias obtenidas correctamente',
     data: subjects,
-  });
+    timestamp: new Date(),
+  };
 };
 
 const getOneSubjectById = async (req: Request, res: Response) => {
   const subjectId = Number(req.params.subjectId);
   const subject = await subjectsService.getOneSubjectById(subjectId);
 
-  res.status(HttpStatusCode.OK).json({
-    status: 'success',
+  const response: ApiResponse<Subject> = {
+    success: true,
+    message: 'Materia obtenida correctamente',
     data: subject,
-  });
+    timestamp: new Date(),
+  };
+
+  res.status(HttpStatusCode.OK).json(response);
 };
 
 const updateOneSubjectById = async (req: Request, res: Response) => {
@@ -46,19 +58,27 @@ const updateOneSubjectById = async (req: Request, res: Response) => {
     updateSubjectDto,
   );
 
-  res.status(HttpStatusCode.OK).json({
-    status: 'success',
+  const response: ApiResponse<Subject> = {
+    success: true,
+    message: 'Materia actualizada correctamente',
     data: updatedSubject,
-  });
+    timestamp: new Date(),
+  };
+
+  res.status(HttpStatusCode.OK).json(response);
 };
 
 const deleteOneSubjectById = async (req: Request, res: Response) => {
   const subjectId = Number(req.params.subjectId);
   await subjectsService.deleteOneSubjectById(subjectId);
 
-  res.status(HttpStatusCode.OK).json({
-    status: 'success',
-  });
+  const response: ApiResponse<void> = {
+    success: true,
+    message: 'Materia eliminada correctamente',
+    timestamp: new Date(),
+  };
+
+  res.status(HttpStatusCode.OK).json(response);
 };
 
 export const subjectsController = {
