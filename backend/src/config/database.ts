@@ -4,7 +4,7 @@ import { env } from '../lib/env';
 import { isDevelopment } from '../utils/env';
 
 export const AppDataSource = new DataSource({
-  type: 'postgres',
+  type: 'mysql',
   host: env.DB_HOST,
   port: env.DB_PORT,
   username: env.DB_USERNAME,
