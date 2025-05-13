@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --watch -r ts-node/register --env-file=.env ./src/server.ts",
     "build": "tsc",
-    "start": "node --env-file-if-exists=.env ./dist/server.js",
+    "start": "NODE_ENV=production node --env-file-if-exists=.env ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
     "mysql2": "^3.14.1",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.22",
@@ -26,6 +27,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.14",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
