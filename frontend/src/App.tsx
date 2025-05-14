@@ -11,6 +11,9 @@ import EventosTable from './admin/pages/Eventos/EventosTable';
 import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
 import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
 import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
+import Page_Eventos from './pages/Page_Eventos';
+import Page_Eventos_c from './components/HomeComponents/ComponentEvento/Page_Eventos_c';
+
 
 import "./App.css"
 
@@ -26,6 +29,10 @@ const App: React.FC = () => {
           <Route path='/oferta-educativa' element={<Oferta />} />
           <Route path="/oferta-educativa/:carreraNombre" element={<CarreraDetalle />} />
           <Route path='/Infraestructura' element={<Infra />} />
+
+          {/* Rutas de eventos */}
+          <Route path='/eventos' element={<Page_Eventos />} />
+          <Route path='/eventos/:id' element={<Page_Eventos_c />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}
@@ -33,7 +40,8 @@ const App: React.FC = () => {
           <Route index element={<AdminDashboard />} />
           <Route path="/admin/eventos" element={<EventosTable />} />
           <Route path="/admin/noticias" element={<NoticiasTable />} />
-          <Route path="/admin/Oferta-Educativa" element={<OfertTable />} />
+          <Route path="/admin/oferta_Educativa" element={<OfertTable />} />
+          <Route path="/admin/home_Gallery" element={<AdminHomeGallery />} />
           {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />s  */}
           {/* Agrega más rutas del admin aquí */}
         </Route>
