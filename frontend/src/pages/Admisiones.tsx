@@ -7,7 +7,9 @@ const Admisiones: React.FC = () => {
     return (
         <div className={styles.pageContainer}>
     
-            <Title />
+            <div>
+                <Title> Oferta Educativa TECNM Campus Cancún 2025 </Title>
+            </div>
 
             <Card imageUrl="/src/assets/Fotos/Admisiones/Escudo.png" 
             title='OFICIO DE CONVOCATORIA CAMPUS CANCUN'
