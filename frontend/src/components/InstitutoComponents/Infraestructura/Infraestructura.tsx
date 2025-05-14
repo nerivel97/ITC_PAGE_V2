@@ -24,7 +24,7 @@ const Infraestructura: React.FC = () => {
                 <img src={entrada} alt="Entrada" />
             </div>
             <button 
-                onClick={() => navigate('/infra')} // Único cambio en el botón
+                onClick={() => navigate('/infraestructura')} // Único cambio en el botón
                 className="btn-infraestructura"
             >
                 Infraestructura

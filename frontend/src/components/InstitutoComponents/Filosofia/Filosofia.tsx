@@ -7,13 +7,10 @@ const Filosofia: React.FC = () => {
             <div className="filosofia-texto">
                 <h2>FILOSOFÍA</h2>
                 <p>
-                    Se establece esta filosofía basándose en el plan nacional del desarrollo que señala en el apartado de “educación superior”,
-                    que está en un medio para acrecentar el capital humano y social de la nación, y la inteligencia individual y colectiva de
-                    los mexicanos, para enriquecer la cultura con las aportaciones de las humanidades, las artes, las ciencias y la tecnología;
-                    y para contribuir al aumento de la competitividad y el empleo seguidos de una economía basada en el conocimiento.<br /><br />
-                    Las instituciones de educación superior realizan funciones de docencia, investigación, y difusión de la cultura según sea su tipología.<br />
-                    Así mismo estamos en vía de lograr un sistema educativo superior de calidad que brinde sólida formación a sus educandos y egresados
-                    que responda a la demanda del país.
+                   Nuestro modelo se basa en: <br /> <br />
+                    Formación integral: Combinamos conocimiento técnico con habilidades blandas. <br /> <br />
+                    Vinculación con el Plan Nacional de Desarrollo: Contribuimos a la competitividad nacional mediante carreras estratégicas. <br /> <br />
+                    Sustentabilidad: Proyectos académicos alineados a los ODS 2030. <br />
                 </p>
             </div>
             <div className="circulos-filosofia">

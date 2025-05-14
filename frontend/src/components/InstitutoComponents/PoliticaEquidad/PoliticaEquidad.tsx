@@ -8,10 +8,10 @@ const PoliticaEquidad: React.FC = () => {
             <div className="equidad-texto">
                 <h2>POLÍTICA DE EQUIDAD DE GÉNERO</h2>
                 <p>
-                    El Instituto Tecnológico de Cancún establece el compromiso de promover un ambiente de respeto,
-                    inclusión y equidad de género, garantizando la igualdad de oportunidades para todas las personas
-                    que integran la comunidad tecnológica, y fomentando acciones que prevengan y eliminen cualquier
-                    forma de discriminación o violencia de género.
+                    Promovemos: <br />
+                    Ambientes libres de discriminación y violencia. <br />
+                    Programas de mentoría para mujeres en STEM. <br />
+                    Conciliación vida académica-familiar. <br />
                 </p>
             </div>
         </div>
