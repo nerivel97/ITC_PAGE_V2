@@ -96,7 +96,7 @@ const NoticiasTable: React.FC = () => {
       title: 'ID',
       dataIndex: 'id_noticia',
       key: 'id_noticia',
-      width: 80,
+      width: 50,
       sorter: (a, b) => (a.id_noticia || 0) - (b.id_noticia || 0),
     },
     {
@@ -110,6 +110,7 @@ const NoticiasTable: React.FC = () => {
       title: 'Descripción',
       dataIndex: 'descripcion',
       key: 'descripcion',
+      width: 200,
       ellipsis: true,
       render: (descripcion: string) => (
         <Text ellipsis={{ tooltip: descripcion }}>
@@ -120,7 +121,7 @@ const NoticiasTable: React.FC = () => {
     {
       title: 'Fechas',
       key: 'fechas',
-      width: 200,
+      width: 100,
       render: (_, record) => (
         <div className={styles.dateContainer}>
           <div>
@@ -135,7 +136,7 @@ const NoticiasTable: React.FC = () => {
       title: 'Autor',
       dataIndex: 'autor',
       key: 'autor',
-      width: 200,
+      width: 100,
       render: (text: string) => <Text strong>{text}</Text>,
     },
     {
@@ -207,7 +208,7 @@ const NoticiasTable: React.FC = () => {
             setModalVisible(true);
           }}
         >
-          Nuevo noticia
+          Nueva noticia
         </Button>
       }
       className={styles.card}

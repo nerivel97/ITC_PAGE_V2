@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import styles from './Eventos.module.css';
 import { fetchEventos } from '../../../admin/services/eventos.service';
 import { IEvento } from '../../../admin/interfaces/evento.interface';
@@ -46,6 +46,13 @@ const Eventos: React.FC = () => {
 
     loadEventos();
   }, []);
+
+  // Navegar al detalle del evento
+  const navigateToEvento = (id_evento: number) => {
+    navigate(`/eventos/${id_evento}`, {
+      state: { fromHome: window.location.pathname === '/' }
+    });
+  };
 
   // Manejo de errores de imagen
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -98,7 +105,7 @@ const Eventos: React.FC = () => {
   }
 
   return (
-    <section className={styles.eventosSection}>
+    <section id="eventos-section" className={styles.eventosSection}>
       <div className={styles.carouselContainer}>
         <button 
           className={styles.navButton} 
@@ -143,7 +150,7 @@ const Eventos: React.FC = () => {
                     </div>
                     <button 
                       className={styles.buttonhover}
-                      onClick={() => navigate(`/eventos/${evento.id_evento}`)}
+                      onClick={() => navigateToEvento(evento.id_evento!)}
                     >
                       Ver más
                     </button>

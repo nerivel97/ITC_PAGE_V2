@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import styles from './Page_Eventos_c.module.css';
 import { getEventoById } from '../../../admin/services/eventos.service';
@@ -8,25 +8,15 @@ import { IEvento } from '../../../admin/interfaces/evento.interface';
 const Page_Eventos_c = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [evento, setEvento] = useState<IEvento | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Formateador de fechas
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    };
-    return new Date(dateString).toLocaleDateString('es-ES', options);
-  };
-
-  // Obtener evento por ID
+  // Scroll al inicio y carga del evento
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     const fetchEvento = async () => {
       try {
         setLoading(true);
@@ -46,6 +36,33 @@ const Page_Eventos_c = () => {
     fetchEvento();
   }, [id]);
 
+  // Función mejorada para volver
+  const handleGoBack = () => {
+    if (location.state?.fromHome) {
+      // Si venimos de Home, regresamos ahí y hacemos scroll
+      navigate('/', { 
+        state: { scrollToEvents: true },
+        replace: true
+      });
+    } else {
+      // Si venimos de la lista de eventos, regresamos ahí
+      navigate('/eventos', { replace: true });
+    }
+  };
+
+  // Formateador de fechas
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    return new Date(dateString).toLocaleDateString('es-ES', options);
+  };
+
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
@@ -62,9 +79,9 @@ const Page_Eventos_c = () => {
         <p>{error}</p>
         <button 
           className={styles.backButton}
-          onClick={() => navigate(-1)}
+          onClick={handleGoBack}
         >
-          <FaArrowLeft /> Volver a eventos
+          <FaArrowLeft /> Volver
         </button>
       </div>
     );
@@ -77,9 +94,9 @@ const Page_Eventos_c = () => {
         <p>El evento solicitado no existe o fue eliminado</p>
         <button 
           className={styles.backButton}
-          onClick={() => navigate(-1)}
+          onClick={handleGoBack}
         >
-          <FaArrowLeft /> Volver a eventos
+          <FaArrowLeft /> Volver
         </button>
       </div>
     );
@@ -87,15 +104,13 @@ const Page_Eventos_c = () => {
 
   return (
     <div className={styles.eventoContainer}>
-      {/* Botón de regreso */}
       <button 
         className={styles.backButton}
-        onClick={() => navigate(-1)}
+        onClick={handleGoBack}
       >
-        <FaArrowLeft /> Volver a eventos
+        <FaArrowLeft /> Volver
       </button>
 
-      {/* Encabezado con imagen */}
       <div className={styles.heroSection}>
         <img 
           src={evento.imagen || '/evento-default.jpg'} 
@@ -114,9 +129,7 @@ const Page_Eventos_c = () => {
         </div>
       </div>
 
-      {/* Contenido principal */}
       <div className={styles.contentContainer}>
-        {/* Sección de información */}
         <div className={styles.infoSection}>
           <div className={styles.infoCard}>
             <h2 className={styles.sectionTitle}>
@@ -139,13 +152,11 @@ const Page_Eventos_c = () => {
               <FaMapMarkerAlt /> Información Adicional
             </h2>
             <p className={styles.locationText}>
-              {/* Aquí puedes agregar más información si necesitas */}
-              Para más detalles sobre este evento, por favor contacta a los organizadores.
+              Para más detalles sobre este evento, contacta a los organizadores.
             </p>
           </div>
         </div>
 
-        {/* Descripción completa */}
         <div className={styles.descriptionSection}>
           <h2 className={styles.sectionTitle}>Descripción del Evento</h2>
           <div className={styles.descriptionContent}>
@@ -153,13 +164,6 @@ const Page_Eventos_c = () => {
               <p key={index}>{paragraph}</p>
             ))}
           </div>
-        </div>
-
-        {/* Acciones */}
-        <div className={styles.actionsSection}>
-          <button className={styles.primaryButton}>
-            Más información
-          </button>
         </div>
       </div>
     </div>
