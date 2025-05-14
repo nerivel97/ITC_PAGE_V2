@@ -26,9 +26,32 @@
 }
 
 .footerSection ul {
-    list-style: disc;
+    list-style: none;
     padding-left: 20px;
     font-size: 14px;
+}
+
+.footerSection ul li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+}
+
+.footerSection ul li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    color: white;
+}
+
+.footerSection ul li a {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.footerSection ul li a:hover {
+    text-decoration: underline;
 }
 
 .publicacionesGrid {

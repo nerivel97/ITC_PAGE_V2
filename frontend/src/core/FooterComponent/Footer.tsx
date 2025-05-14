@@ -12,25 +12,25 @@ const Footer: React.FC = () => {
         <div className={styles.footerSection}>
           <h2>Interés</h2>
           <ul>
-            <li>Presidencia de la República</li>
-            <li>SEP</li>
-            <li>Subsecretaría de Educación Superior</li>
-            <li>Subsecretaría de Educación y Cultura</li>
-            <li>Gobierno del Estado de Quintana Roo</li>
-            <li>Consulta tu CURP</li>
-            <li>TecNM Portal de Autoservicios</li>
+            <li><a href="https://www.presidencia.gob.mx/" target="_blank" rel="noopener noreferrer">Presidencia de la Republica</a></li>
+            <li><a href="https://www.gob.mx/sep" target="_blank" rel="noopener noreferrer">SEP</a></li>
+            <li><a href="https://www.dgesu.ses.sep.gob.mx/" target="_blank" rel="noopener noreferrer">Subsecretaria de Educacion Superior</a></li>
+            <li><a href="https://www.gob.mx/sep/acciones-y-programas/subsecretaria-de-educacion-basica" target="_blank" rel="noopener noreferrer">Subsecretaria de Educacion y Cultura</a></li>
+            <li><a href="https://qroo.gob.mx/" target="_blank" rel="noopener noreferrer">Gobierno del Estado de Quintana Roo</a></li>
+            <li><a href="https://www.gob.mx/curp/" target="_blank" rel="noopener noreferrer">Consulta tu CURP</a></li>
+            <li><a href="https://autoservicios.tecnm.mx/" target="_blank" rel="noopener noreferrer">TecNM Portal de Autoservicios</a></li>
           </ul>
         </div>
 
         <div className={styles.footerSection}>
           <h2>Editorial</h2>
           <ul>
-            <li>CONRICYT</li>
+            <li><a href="https://www.conricyt.mx/" target="_blank" rel="noopener noreferrer">CONRICYT</a></li>
           </ul>
           <h2>Instituciones</h2>
           <ul>
-            <li>CONACYT</li>
-            <li>TecNM</li>
+            <li><a href="https://www.conacyt.gob.mx/" target="_blank" rel="noopener noreferrer">CONACYT</a></li>
+            <li><a href="https://www.tecnm.mx/" target="_blank" rel="noopener noreferrer">TecNM</a></li>
           </ul>
         </div>
 
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             <div className={styles.pubBox}></div>
 
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/TECNMCancunOficial/?locale=es_LA"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.fbCenterIcon}
@@ -57,16 +57,16 @@ const Footer: React.FC = () => {
       <div className={styles.footerSocial}>
         <hr />
         <div className={styles.socialIcons}>
-          <a href="https://facebook.com" target="_blank" rel="noOpener noreferrer">
+          <a href="https://www.facebook.com/TECNMCancunOficial/?locale=es_LA" target="_blank" rel="noOpener noreferrer">
             <img src={facebook} alt="Facebook" />
           </a>
-          <a href="https://youtube.com" target="_blank" rel="noOpener noreferrer">
+          <a href="http://www.youtube.com/@TecNMCancun" target="_blank" rel="noOpener noreferrer">
             <img src={youtube} alt="YouTube" />
           </a>
           <a href="https://instagram.com" target="_blank" rel="noOpener noreferrer">
             <img src={ig} alt="Instagram" />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noOpener noreferrer">
+          <a href="https://x.com/TecNM_MX" target="_blank" rel="noOpener noreferrer">
             <img src={x} alt="Twitter (X)" />
           </a>
         </div>
