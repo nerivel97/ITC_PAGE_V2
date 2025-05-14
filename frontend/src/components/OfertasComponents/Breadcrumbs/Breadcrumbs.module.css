@@ -1,36 +1,74 @@
 .breadcrumbs {
-    padding: 15px 1%;
-  }
-  
-  .breadcrumbs ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
+  padding: 5px 1%; /* Cambiado a porcentaje más flexible */
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  white-space: nowrap; /* Evita saltos de línea */
+}
+
+.breadcrumbs ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex; /* Cambiado a inline-flex para mejor manejo en móviles */
+  align-items: center;
+  flex-wrap: nowrap; /* Evita que los items se envuelvan */
+}
+
+.breadcrumbs li {
+  margin-right: 8px; /* Reducido el espacio entre items */
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem); /* Tamaño de fuente responsivo */
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs li:last-child {
+  color: #979797;
+  margin-right: 0; /* Elimina margen derecho en el último elemento */
+}
+
+.breadcrumbs a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+  padding: 4px 6px; /* Añadido padding para mejor tappable area */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.breadcrumbs a:hover {
+  color: #16a085;
+  background-color: rgba(0, 0, 0, 0.05); /* Fondo sutil al hover */
+}
+
+.breadcrumbs i {
+  font-size: clamp(0.7rem, 2vw, 0.8rem); /* Tamaño responsivo para iconos */
+  color: #777;
+  margin: 0 4px; /* Espaciado reducido */
+}
+
+/* Media Queries para ajustes específicos */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    padding: 12px 3%;
   }
   
   .breadcrumbs li {
-    margin-right: 10px;
-    font-size: 0.9rem;
-  }
-  
-  .breadcrumbs li:last-child {
-    color: #979797;
+    margin-right: 6px;
   }
   
   .breadcrumbs a {
-    color: #3498db;
-    text-decoration: none;
-    transition: color 0.3s;
+    padding: 3px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs {
+    padding: 10px 2%;
   }
   
-  .breadcrumbs a:hover {
-    color: #16a085;
+  .breadcrumbs li {
+    margin-right: 4px;
   }
   
   .breadcrumbs i {
-    font-size: 0.8rem;
-    color: #777;
-    margin: 0 5px;
+    margin: 0 3px;
   }
+}

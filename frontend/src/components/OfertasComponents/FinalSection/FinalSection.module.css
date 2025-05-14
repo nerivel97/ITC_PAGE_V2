@@ -5,6 +5,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 0; /* Añade esto para eliminar padding por defecto */
+  margin: 0; /* Asegura que no haya márgenes */
+  overflow: hidden; /* Previene desbordamientos */
 }
 
 .mascota {
@@ -49,34 +52,91 @@
   object-fit: contain;
 }
   
-  .slider {
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
-    position: relative;
-    z-index: 1;
+.slider {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 0% 100%, transparent); /* Ajusta los porcentajes */
+  position: relative;
+  z-index: 1;
+  margin-left: 0; /* Elimina cualquier margen izquierdo */
+  padding-left: 0; /* Elimina cualquier padding izquierdo */
+}
+  
+.slider .list {
+  display: flex;
+  width: 100%;
+  min-width: calc(200px * 6);
+  position: relative;
+  left: -5%; /* Ajusta este valor según necesites */
+}
+  
+.slider .list .item {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  left: 100%;
+  animation: autoRun 30s linear infinite;
+  transition: filter 0.5s;
+  animation-delay: calc((30s / 6) * (var(--position) - 1) - 30s) !important;
+}
+  
+.slider .list .item img {
+  width: 100%;
+}
+  
+@keyframes autoRun {
+  from {
+    left: 100%;
+  }
+  to {
+    left: calc(200px * -1);
+  }
+}
+  
+.slider:hover .item {
+  animation-play-state: paused !important;
+  filter: grayscale(1);
+}
+  
+.slider .item:hover {
+  filter: grayscale(0);
+}
+  
+.slider[reverse="true"] .item {
+  animation: reversePlay 30s linear infinite;
+}
+  
+@keyframes reversePlay {
+  from {
+    left: calc(200px * -1);
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* Media Queries para Responsive con Animación */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .mascota {
+    width: 250px;
+    height: 350px;
+    left: 70%;
   }
   
-  .slider .list {
-    display: flex;
-    width: 100%;
-    min-width: calc(200px * 6);
-    position: relative;
+  .slider {
+    height: 250px;
   }
   
   .slider .list .item {
-    width: 250px;
-    height: 250px;
-    position: absolute;
-    left: 100%;
-    animation: autoRun 30s linear infinite;
-    transition: filter 0.5s;
-    animation-delay: calc((30s / 6) * (var(--position) - 1) - 30s) !important;
+    width: 200px;
+    height: 200px;
   }
   
-  .slider .list .item img {
-    width: 100%;
+  .card2 p {
+    font-size: 20px;
   }
   
   @keyframes autoRun {
@@ -84,28 +144,90 @@
       left: 100%;
     }
     to {
-      left: calc(200px * -1);
+      left: calc(180px * -1);
     }
   }
-  
-  .slider:hover .item {
-    animation-play-state: paused !important;
-    filter: grayscale(1);
+}
+
+/* Móviles grandes */
+@media (max-width: 768px) {
+  .final {
+    height: 300px;
   }
   
-  .slider .item:hover {
-    filter: grayscale(0);
+  .mascota {
+    width: 180px;
+    height: 230px;
+    left: 75%;
   }
   
-  .slider[reverse="true"] .item {
-    animation: reversePlay 30s linear infinite;
+  .slider {
+    height: 200px;
   }
   
-  @keyframes reversePlay {
+  .slider .list .item {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .card2 {
+    padding: 10px;
+  }
+  
+  .card2 p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .imageContainer {
+    height: 100px;
+  }
+  
+  @keyframes autoRun {
     from {
-      left: calc(200px * -1);
-    }
-    to {
       left: 100%;
     }
+    to {
+      left: calc(140px * -1);
+    }
   }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .final {
+    height: 250px;
+  }
+  
+  .mascota {
+    width: 120px;
+    height: 160px;
+    left: 80%;
+  }
+  
+  .slider {
+    height: 160px;
+  }
+  
+  .slider .list .item {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .card2 p {
+    font-size: 14px;
+  }
+  
+  .imageContainer {
+    height: 80px;
+  }
+  
+  @keyframes autoRun {
+    from {
+      left: 100%;
+    }
+    to {
+      left: calc(110px * -1);
+    }
+  }
+}
