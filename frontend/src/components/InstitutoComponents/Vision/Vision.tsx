@@ -16,15 +16,15 @@ const Vision: React.FC = () => {
                 <ul>
                     <li>
                         <img src={lupa} alt="Lupa" />
-                        <p>Ofrecemos una variedad de programas que se adaptan a tus necesidades tenemos opciones para cada aspirante.</p>
+                        <p>Egresados con altas tasas de empleabilidad (85% en primer año).</p>
                     </li>
                     <li>
                         <img src={lupa} alt="Lupa" />
-                        <p>Ofrecemos una variedad de programas que se adaptan a tus necesidades tenemos opciones para cada aspirante.</p>
+                        <p>Laboratorios equipados con tecnología de vanguardia.</p>
                     </li>
                     <li>
                         <img src={lupa} alt="Lupa" />
-                        <p>Ofrecemos una variedad de programas que se adaptan a tus necesidades tenemos opciones para cada aspirante.</p>
+                        <p>Alianzas internacionales para la movilidad estudiantil y docente.</p>
                     </li>
                 </ul>
             </div>
@@ -36,15 +36,15 @@ const Vision: React.FC = () => {
                 <ul>
                     <li>
                         <img src={Bandera} alt="Bandera" />
-                        <p>Ofrecemos una variedad de programas que se adaptan a tus necesidades tenemos opciones para cada aspirante.</p>
+                        <p>Programas educativos acreditados y alineados a las necesidades del sector productivo.</p>
                     </li>
                     <li>
                         <img src={Bandera} alt="Bandera" />
-                        <p>Ofrecemos una variedad de programas que se adaptan a tus necesidades tenemos opciones para cada aspirante.</p>
+                        <p>Investigación aplicada para solucionar desafíos regionales y globales.</p>
                     </li>
                     <li>
                         <img src={Bandera} alt="Bandera" />
-                        <p>Ofrecemos una variedad de programas que se adaptan a tus necesidades tenemos opciones para cada aspirante.</p>
+                        <p>Vinculación con empresas líderes en turismo, construcción y tecnología.</p>
                     </li>
                 </ul>
             </div>

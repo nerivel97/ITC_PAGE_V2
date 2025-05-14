@@ -25,7 +25,7 @@ const App: React.FC = () => {
           <Route path='/Instituto' element={<Instituto />} />
           <Route path='/oferta-educativa' element={<Oferta />} />
           <Route path="/oferta-educativa/:carreraNombre" element={<CarreraDetalle />} />
-          <Route path='/Infra' element={<Infra />} />
+          <Route path='/Infraestructura' element={<Infra />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}
@@ -34,8 +34,7 @@ const App: React.FC = () => {
           <Route path="/admin/eventos" element={<EventosTable />} />
           <Route path="/admin/noticias" element={<NoticiasTable />} />
           <Route path="/admin/Oferta-Educativa" element={<OfertTable />} />
-          <Route path="/admin/instituto-itc" element={<AdminHomeGallery />} />
-          {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />  */}
+          {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />s  */}
           {/* Agrega más rutas del admin aquí */}
         </Route>
 

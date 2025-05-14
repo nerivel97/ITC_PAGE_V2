@@ -1,75 +1,145 @@
-import React from 'react';
 import './ContenidoInfra.css';
-import escuela from '../../../assets/Fotos/Infraestructura/escuela.png';
-import laboratorio from '../../../assets/Fotos/Infraestructura/laboratorio.jpg';
-import biblioteca from '../../../assets/Fotos/Infraestructura/biblioteca.jpg';
-import deportes from '../../../assets/Fotos/Infraestructura/biblioteca.jpg';
-import aula from '../../../assets/Fotos/Infraestructura/aula.jpg';
 
-const ContenidoInfra: React.FC = () => {
-  return (
-    <div className='contenido'>
-        <div className="seccion fila" data-aos="fade-right">
-      <div className="texto">
-        <h2>Campus Moderno y Funcional</h2>
-        <p>Diseñado para inspirar el aprendizaje, nuestro campus combina aulas climatizadas con tecnología interactiva, espacios verdes para fomentar la convivencia estudiantil y conectividad 100% WiFi en todas las áreas.</p>
-      </div>
-      <div className="imagen" data-aos="zoom-in-up">
-        <img src={escuela} alt="Entrada principal TecNM Cancún - Biblioteca institucional"/>
-      </div>
-    </div>
+import escuela1 from "../../../assets/Fotos/Infraestructura/escuela.png";
+import escuela2 from '../../../Assets/Fotos/Infraestructura/escuela2.png';
+import escuela3 from '../../../Assets/Fotos/Infraestructura/escuela3.png';
 
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
-      <div className="texto">
-        <h2>Laboratorios Especializados</h2>
-        <p>Equipados con tecnología avanzada, nuestros laboratorios incluyen software para diseño 3D, programación y simulación, además de máquinas CNC, robots industriales y kits de electrónica, con certificaciones de Cisco, Autodesk y Siemens.</p>
-      </div>
-      <div className="imagen" data-aos="zoom-in-down">
-        <img src={laboratorio} alt="Estudiantes de ingeniería en laboratorio de computación TecNM"/>
-      </div>
-    </div>
+import laboratorio1 from '../../../Assets/Fotos/Infraestructura/laboratorio.jpg';
+import laboratorio2 from '../../../Assets/Fotos/Infraestructura/laboratorio2.jpg';
+import laboratorio3 from '../../../Assets/Fotos/Infraestructura/laboratorio3.jpg';
 
+import biblioteca1  from '../../../Assets/Fotos/Infraestructura/biblioteca.jpg';
+import biblioteca2  from '../../../Assets/Fotos/Infraestructura/biblioteca2.jpg';
+import biblioteca3  from '../../../Assets/Fotos/Infraestructura/biblioteca3.jpg';
+
+import deportes1    from '../../../Assets/Fotos/Infraestructura/deportes1.jpg';
+import deportes2    from '../../../Assets/Fotos/Infraestructura/deportes2.jpg';
+import deportes3    from '../../../Assets/Fotos/Infraestructura/deportes3.jpg';
+
+import aula1        from '../../../Assets/Fotos/Infraestructura/aula.jpg';
+import aula2        from '../../../Assets/Fotos/Infraestructura/aula2.jpg';
+import aula3        from '../../../Assets/Fotos/Infraestructura/aula3.jpg';
+
+import ImageCarousel from '../ImageCarousel/ImageCarousel';
+
+const ContenidoInfra = () => (
+  <div className="contenido">
+
+    {/* Campus Moderno y Funcional */}
     <div className="seccion fila" data-aos="fade-right">
       <div className="texto">
-        <h2>Biblioteca Digital</h2>
-        <p>Con más de 20,000 recursos académicos a tu alcance, nuestra biblioteca ofrece una colección física y digital, con acceso remoto a bases de datos como IEEE Xplore y Springer, además de salas de estudio colaborativo.</p>
+        <h2>Campus Moderno y Funcional</h2>
+        <p>El Instituto Tecnológico de Cancún cuenta con un campus diseñado para brindar un entorno propicio para el aprendizaje y el desarrollo integral de sus estudiantes. 
+          Ubicado en la Av. Kabah, Km. 3, en Cancún, Quintana Roo,
+           el campus ofrece instalaciones que combinan funcionalidad y comodidad, facilitando las actividades académicas y extracurriculares.</p>
       </div>
       <div className="imagen" data-aos="zoom-in-up">
-        <img src={biblioteca} alt="Biblioteca TecNM Cancún - Espacio de estudio moderno"/>
+        <ImageCarousel
+          images={[
+            { src: escuela1, alt: 'Campus – vista 1' },
+            { src: escuela2, alt: 'Campus – vista 2' },
+            { src: escuela3, alt: 'Campus – vista 3' },
+          ]}
+          interval={7000}
+        />
       </div>
     </div>
 
+    {/* Laboratorios Especializados */}
+    <div className="seccion fila fila-reversa" data-aos="fade-left">
+      <div className="texto">
+        <h2>Laboratorios y Talleres Especializados</h2>
+        <p>Para fortalecer la formación práctica de los estudiantes, el instituto dispone de diversos laboratorios y talleres equipados con tecnología adecuada para las distintas áreas de estudio. 
+          Estos espacios permiten la aplicación de conocimientos teóricos en entornos controlados, promoviendo la adquisición de habilidades técnicas esenciales para el desempeño profesional.</p>
+      </div>
+      <div className="imagen" data-aos="zoom-in-down">
+        <ImageCarousel
+          images={[
+            { src: laboratorio1, alt: 'Laboratorio – vista 1' },
+            { src: laboratorio2, alt: 'Laboratorio – vista 2' },
+            { src: laboratorio3, alt: 'Laboratorio – vista 3' },
+          ]}
+          interval={7000}
+        />
+      </div>
+    </div>
+
+    {/* Biblioteca Digital */}
+    <div className="seccion fila" data-aos="fade-right">
+      <div className="texto">
+        <h2>Biblioteca y Centro de Información</h2>
+        <p>El Centro de Información del Instituto Tecnológico de Cancún proporciona servicios bibliotecarios y de información eficientes, 
+          apoyados por tecnologías modernas, para satisfacer las necesidades de investigación y actualización del conocimiento de la comunidad académica.</p>
+      </div>
+      <div className="imagen" data-aos="zoom-in-up">
+        <ImageCarousel
+          images={[
+            { src: biblioteca1, alt: 'Biblioteca – vista 1' },
+            { src: biblioteca2, alt: 'Biblioteca – vista 2' },
+            { src: biblioteca3, alt: 'Biblioteca – vista 3' },
+          ]}
+          interval={7000}
+        />
+      </div>
+    </div>
+
+    {/* Instalaciones Deportivas */}
     <div className="seccion fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Instalaciones Deportivas</h2>
-        <p>Contamos con canchas de baloncesto, voleibol y fútbol rápido, además de un gimnasio bien equipado para acondicionamiento físico y torneos interuniversitarios.</p>
+        <p>CEl instituto promueve el desarrollo físico y el espíritu deportivo mediante instalaciones adecuadas para la práctica de diversas disciplinas. 
+          Estas instalaciones están disponibles para toda la comunidad estudiantil, fomentando un estilo de vida saludable y el trabajo en equipo.</p>
       </div>
       <div className="imagen" data-aos="zoom-in-down">
-        <img src={deportes} alt="Estudiantes jugando baloncesto TecNM Cancún"/>
+        <ImageCarousel
+          images={[
+            { src: deportes1, alt: 'Deportes – vista 1' },
+            { src: deportes2, alt: 'Deportes – vista 2' },
+            { src: deportes3, alt: 'Deportes – vista 3' },
+          ]}
+          interval={7000}
+        />
       </div>
     </div>
 
+    {/* Aulas Inteligentes */}
     <div className="seccion fila" data-aos="fade-right">
       <div className="texto">
-        <h2>Aulas Inteligentes</h2>
-        <p>Con proyectores 4K, pantallas táctiles, mobiliario ergonómico y plataformas híbridas, nuestras aulas están equipadas con la última tecnología educativa para facilitar un aprendizaje moderno y efectivo.</p>
+        <h2>Modernización de Aulas y Equipamiento</h2>
+        <p>En su compromiso con la excelencia académica, el Instituto Tecnológico de Cancún ha implementado proyectos de modernización que incluyen la renovación de mobiliario y equipamiento en aulas y laboratorios. 
+          Estas mejoras buscan proporcionar a estudiantes y docentes las herramientas necesarias para un aprendizaje efectivo y actualizado.</p>
       </div>
       <div className="imagen" data-aos="zoom-in-up">
-        <img src={aula} alt="Aula equipada con tecnología educativa TecNM"/>
+        <ImageCarousel
+          images={[
+            { src: aula1, alt: 'Aula – vista 1' },
+            { src: aula2, alt: 'Aula – vista 2' },
+            { src: aula3, alt: 'Aula – vista 3' },
+          ]}
+          interval={7000}
+        />
       </div>
     </div>
 
+    {/* Ubicación del Campus */}
     <div className="seccion fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Ubicación del Campus</h2>
         <p>La infraestructura de la universidad está en constante renovación para estar a la altura de la excelencia académica de nuestras aulas y las necesidades de aprendizaje de nuestros alumnos.</p>
       </div>
       <div className="imagen" data-aos="fade-up">
-        <iframe width="100%" height="400" src="https://www.bing.com/maps/embed?h=400&w=500&cp=21.139326~-86.834921&lvl=17.931595&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no"></iframe>
+        <iframe
+          width="100%"
+          height="400"
+          frameBorder="0"
+          src="https://www.bing.com/maps/embed?h=400&w=500&cp=21.139326~-86.834921&lvl=17.931595"
+          scrolling="no"
+          title="Mapa del campus"
+        />
       </div>
     </div>
-    </div>
-  );
-};
+
+  </div>
+);
 
 export default ContenidoInfra;

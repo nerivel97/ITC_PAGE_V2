@@ -8,10 +8,10 @@ const Objetivo: React.FC = () => {
             <div className="objetivo-texto">
                 <h2>OBJETIVO</h2>
                 <p>
-                    Promover el desarrollo integral y armónico del educando en relación con los demás, consigo mismo y con su entorno,
-                    mediante una formación intelectual que lo capacite en el manejo de los métodos y los lenguajes,
-                    sustentados en los principios de identidad nacional, justicia, soberanía y solidaridad, y en la recreación,
-                    el deporte y la cultura, que le permitan una mente y un cuerpo sano.
+                    Desarrollar profesionales con: <br />
+                    Habilidades técnicas validadas por el mercado laboral. <br /> 
+                    Conciencia social y compromiso con su entorno. <br />
+                    Mente y cuerpo sano mediante deporte y cultura. <br />
                 </p>
             </div>
             <div className="objetivo-imagen">
