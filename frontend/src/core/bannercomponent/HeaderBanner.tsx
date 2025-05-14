@@ -1,5 +1,4 @@
 // components/HeaderBanners/HeaderBanners.tsx
-import React from 'react';
 import styles from './HeaderBanners.module.css';
 
 // Importar imágenes locales

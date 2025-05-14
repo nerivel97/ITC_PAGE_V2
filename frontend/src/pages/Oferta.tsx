@@ -5,11 +5,10 @@ import DegreesSection from '../components/OfertasComponents/SeccionProgramas/Deg
 import FAQ from '../components/OfertasComponents/FAQ/FAQ';
 import FinalSection from '../components/OfertasComponents/FinalSection/FinalSection';
 import LearningExperience from '../components/OfertasComponents/SeccionExperiencias/LearningExperience';
-import styles from '../components/OfertasComponents/Ofertas.module.css';
 
 const Ofertas = () => {
   return (
-    <div className={styles.ofertasContainer}>
+    <div>
       <meta name='descripcion' content='Oferta educativa donde los aspirantes, alumnos, profesores y el publico en general podra ver los programas academicos ofrecidos por el TECNM Campus Cancun'/>
       <Breadcrumbs currentPage="Oferta Educativa" />
       <Banner />
