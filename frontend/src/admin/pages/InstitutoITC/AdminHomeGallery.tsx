@@ -14,7 +14,7 @@ interface HomeImage {
 
 const AdminHomeGallery = () => {
   const [images, setImages] = useState<HomeImage[]>([]);
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  /*const [selectedSection, setSelectedSection] = useState<string | null>(null);*/
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showLibraryModal, setShowLibraryModal] = useState<{
     section: string;
