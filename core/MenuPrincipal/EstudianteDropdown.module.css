@@ -1,0 +1,105 @@
+/* EstudianteDropdown.module.css */
+.dropdownContainer {
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    transform: translateX(-50%);
+    background-color: white;
+    width: 1200px;
+    max-width: 90vw;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: block;
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-top: 4px solid #2c98b9;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdownGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.gridItem {
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    position: relative;
+}
+
+.gridItem:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgb(30, 75, 126);
+}
+
+.imageContainer {
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background: #f8f7ff;
+}
+
+.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+
+.gridItem:hover .itemImage {
+    transform: scale(1.08);
+    opacity: 1;
+}
+
+.itemTitle {
+    margin: 0;
+    padding: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2a2a2a;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(to right, #d87111, #d8a929);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Versión móvil centrada */
+.mobileVersion {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    animation: none;
+}
+
+@media (max-width: 768px) {
+    .dropdownContainer {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .dropdownGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .imageContainer {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdownGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .itemTitle {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,204 @@
+.footerInfo {
+    background-color: #0f156d;
+    color: white;
+    padding: 20px 50px;
+    font-family: Arial, sans-serif;
+    text-align: justify;
+}
+
+.footerColumns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footerSection {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px;
+}
+
+.footerSection h2 {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.footerSection ul {
+    list-style: none;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.footerSection ul li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+}
+
+.footerSection ul li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    color: white;
+}
+
+.footerSection ul li a {
+    color: white;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.footerSection ul li a:hover {
+    text-decoration: underline;
+}
+
+.publicacionesGrid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.pubBox {
+    width: 100%;
+    height: 120px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.fbCenterIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    z-index: 10;
+}
+
+.fbCenterIcon img {
+    width: 40px;
+    height: 40px;
+}
+
+.footerSocial {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.footerSocial hr {
+    width: 90%;
+    margin: 0 auto 10px;
+    border: none;
+    border-top: 2px solid white;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.socialIcons a img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.socialIcons a:hover img {
+    transform: scale(1.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Solo cambios para móvil */
+@media (max-width: 768px) {
+    .footerInfo {
+        padding: 20px 25px;
+    }
+    
+    .footerColumns {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footerSection {
+        min-width: 100%;
+        padding: 0;
+    }
+    
+    .footerSection h2 {
+        font-size: 20px;
+    }
+    
+    .publicacionesGrid {
+        width: 100%;
+        max-width: 300px;
+        margin: 15px auto 0;
+    }
+    
+    .pubBox {
+        height: 100px;
+    }
+    
+    .fbCenterIcon img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .footerSocial {
+        margin-top: 25px;
+    }
+    
+    .socialIcons {
+        gap: 20px;
+    }
+    
+    .socialIcons a img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerInfo {
+        padding: 15px 20px;
+    }
+    
+    .footerSection h2 {
+        font-size: 18px;
+    }
+    
+    .footerSection ul {
+        font-size: 13px;
+        padding-left: 15px;
+    }
+    
+    .pubBox {
+        height: 80px;
+    }
+    
+    .fbCenterIcon img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .socialIcons {
+        gap: 15px;
+    }
+    
+    .socialIcons a img {
+        width: 30px;
+        height: 30px;
+    }
+}

@@ -1,0 +1,219 @@
+/* Estilos Base - Todos los dispositivos */
+.header1, .header2 {
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+  
+  /* BANNER 1 (VERDE)  */
+  .header1 {
+    background-color: #0b231e;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0.2rem 1.5rem; 
+    font-weight: bold;
+  }
+  
+  /* BANNER 2 (BLANCO) */
+  .header2 {
+    background-color: #ffffff;
+    padding: 10px 0;
+    justify-content: space-around;
+  }
+  
+  .header1Container, .header2Container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  /* Contenedor de imágenes centradas */
+  .headerImagesWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  /* Logo y Espacios  */
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .logo {
+    height: 40px; 
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  .emptySpace {
+    flex: 1;
+    display: none;
+  }
+  
+  /* Navegación */
+  .navLinks {
+    display: flex;
+    gap: 1rem; 
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .navLink {
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 0.9rem; 
+  
+  padding: 0.15rem 0;
+  }
+  
+  .navLink:hover {
+    color: #2563eb;
+  }
+  
+  /* Logos Institucionales  */
+  .headerImageLink {
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .headerImageLink:hover {
+    opacity: 0.8;
+  }
+  
+  .headerImage {
+    height: 50px;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Media Queries - Escritorio */
+  @media (min-width: 768px) {
+    .header1Container {
+      flex-direction: row;
+      gap: 0.5rem; 
+    }
+    
+    .emptySpace {
+      display: block;
+    }
+    
+    .header2Container {
+      gap: 0.75rem;
+    }
+  }
+  
+  /* Media Queries - Móviles (460px y menos) */
+  @media (max-width: 460px) {
+    .header1 {
+      padding: 0.4rem 1rem; 
+    }
+    
+    .header2 {
+      padding: 10px 0; 
+    }
+    
+    .logo {
+      height: 35px;
+    }
+    
+    .navLinks {
+      gap: 0.75rem;
+    }
+    
+    .navLink {
+      font-size: 0.82rem;
+    }
+    
+    .headerImagesWrapper {
+      gap: 0.5rem;
+      justify-content: space-around;
+    }
+    
+    .headerImage {
+      height: 30px;
+      max-width: 80px;
+    }
+  }
+  
+  /* Media Queries - Pantallas muy pequeñas (<375px) */
+  @media (max-width: 374px) {
+    .header1 {
+      padding: 0.3rem 0.8rem; 
+    }
+    
+    .header2 {
+      padding: 8px 0; 
+    }
+    
+    .logo {
+      height: 32px;
+    }
+    
+    .headerImagesWrapper {
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    
+    .headerImage {
+      height: 25px;
+      max-width: 70px;
+    }
+    
+    .navLink {
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* Ajustes para el menú inferior (sin cambios) */
+  .menu {
+    background-color: #123766;
+  padding : 10px;
+  }
+  
+  .menuContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 0.4rem 0;
+  }
+  
+  .menuItem {
+    color: white;
+    text-decoration: none;
+    padding: 0 0.4rem;
+    white-space: nowrap;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 460px) {
+    .menu {
+      padding: 0.4rem 1rem;
+    }
+    
+    .menuContainer {
+      gap: 0.7rem;
+      padding: 0.3rem 0;
+    }
+    
+    .menuItem {
+      font-size: 0.82rem;
+      padding: 0 0.3rem;
+    }
+  }

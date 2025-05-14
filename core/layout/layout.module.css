@@ -1,0 +1,45 @@
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8fafc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+  
+.menu {
+    background-color: #123766;
+    color: white;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+  
+.menuContainer {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 1px;
+    font-weight: bold;
+}
+  
+.menuItem {
+    color: white;
+    text-decoration: none;
+    padding: 0 0.5rem;
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+  
+.menuItem:hover {
+    text-decoration: underline;
+}
+  
+.mainContent {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+}

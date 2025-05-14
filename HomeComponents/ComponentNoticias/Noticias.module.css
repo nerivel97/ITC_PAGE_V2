@@ -1,0 +1,205 @@
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: transparent;
+}
+
+.sectionTitle {
+    color: #2c3e50;
+    text-align: left;
+    font-size: 2em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.content {
+    display: flex;
+    gap: 2em;
+}
+
+.mainArticle {
+    flex: 3;
+    background-color: #ffffff;
+    padding: 1.5em;
+    border-radius: 0.7em;
+    box-shadow: none;
+    transition: all 0.3s ease;
+    border: none; 
+}
+
+.mainArticle,
+.sidebarArticle {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mainArticle:active,
+.sidebarArticle:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mainArticle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #245e98; 
+}
+
+.sidebar {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.sidebarArticle {
+    background-color: #ffffff;
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: none;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.sidebarArticle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    border-color: #2980b9; 
+}
+
+
+.mainArticle:hover h3,
+.sidebarArticle:hover h4 {
+    color: #245e98;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 15em;
+    border-radius: 0.3em;
+    overflow: hidden;
+    margin-bottom: 1em;
+    transition: all 0.3s ease;
+}
+
+.mainArticle:hover .imagePlaceholder {
+    transform: scale(1.01);
+    box-shadow: none;
+}
+
+.imagePlaceholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.mainArticle:hover .imagePlaceholder img {
+    transform: scale(1.03);
+}
+
+.articleContent h3 {
+    color: #1c5182;
+    margin: 0 0 0.5em 0;
+    font-size: 1.3em;
+    transition: color 0.2s ease;
+}
+
+.articleContent p, 
+.sidebarArticle p {
+    color: #34495e;
+    line-height: 1.6;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.sidebarArticle h4 {
+    color: #2c3e50;
+    margin: 0 0 0.3em 0;
+    font-size: 1.1em;
+    transition: color 0.2s ease;
+}
+
+
+.mainArticle:hover p,
+.sidebarArticle:hover p {
+    color: #2c3e50; 
+}
+
+/* Contenedor principal de la imagen en sidebar */
+.imagePlaceholderSmall {
+    width: 120px;       /* Ancho fijo */
+    height: 90px;       /* Alto fijo (proporción 4:3) */
+    min-width: 120px;   /* Evita que se reduzca demasiado */
+    margin-left: 15px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative; /* Para contener la imagen absolutamente */
+}
+
+.imagePlaceholderSmall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Cubre el espacio manteniendo proporción */
+    transition: transform 0.3s ease;
+}
+
+/* Ajustes para el artículo del sidebar */
+.sidebarArticle {
+    display: flex;
+    align-items: center;  /* Centra verticalmente */
+    margin-bottom: 15px;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.textContent {
+    flex: 1;
+    min-width: 0; /* Permite que el texto se ajuste correctamente */
+}
+
+.sidebarArticle h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebarArticle p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9em;
+    line-height: 1.4;
+    display: -webkit-box;
+    -line-clamp: 2; /* Limita a 2 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Efecto hover para mejor interactividad */
+.sidebarArticle:hover .imagePlaceholderSmall img {
+    transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 1em;
+    }
+    
+    .mainArticle, 
+    .sidebar {
+        flex: none;
+        width: 100%;
+    }
+    
+
+    .mainArticle:hover,
+    .sidebarArticle:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}

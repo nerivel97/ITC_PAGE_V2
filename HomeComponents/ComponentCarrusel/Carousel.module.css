@@ -1,0 +1,68 @@
+/* components/Carousel/Carousel.module.css */
+.carouselContainer {
+    width: 99%;
+    margin: -0.1rem auto;
+    padding: 0;
+    position: relative;
+  }
+  
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    height: 73vh;
+    width: 196v h;
+  }
+  
+  .carouselSlide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  
+  .carouselSlide.active {
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  .carouselSlide.prev {
+    transform: translateX(-100%);
+  }
+  
+  .carouselSlide.next {
+    transform: translateX(100%);
+  }
+  
+  .carouselImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .carouselDots {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .carouselDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #cbd5e1;
+  }
+  
+  .carouselDot.activeDot {
+    background-color: #2563eb;
+  }
