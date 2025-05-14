@@ -62,3 +62,51 @@
     background-image: url('../Assets/Fotos/Filosofia3.jpeg');
   }
   
+  /* Media query para teléfonos */
+@media (max-width: 600px) {
+  .bloque-contenido-filosofia {
+    flex-direction: column;
+    gap: 30px;
+    margin: 40px 20px;
+  }
+
+  .filosofia-texto {
+    max-width: 100%;
+  }
+
+  .filosofia-texto h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .filosofia-texto p {
+    font-size: 16px;
+    text-align: justify;
+  }
+
+  .circulos-filosofia {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+  }
+
+  .circulo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .imagen1 {
+    top: 0;
+    left: 40px;
+  }
+
+  .imagen2 {
+    top: 40px;
+    left: 80px;
+  }
+
+  .imagen3 {
+    top: 80px;
+    left: 0px;
+  }
+}

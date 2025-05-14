@@ -29,3 +29,32 @@
     font-size: 20px;
     line-height: 1.6;
 }
+
+/* Media query para teléfonos */
+@media (max-width: 600px) {
+  .bloque-contenido-equidad {
+    flex-direction: column-reverse;
+    gap: 30px;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .equidad-imagen {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .equidad-texto {
+    max-width: 100%;
+  }
+
+  .equidad-texto h2 {
+    font-size: 22px;
+  }
+
+  .equidad-texto p {
+    font-size: 16px;
+  }
+}

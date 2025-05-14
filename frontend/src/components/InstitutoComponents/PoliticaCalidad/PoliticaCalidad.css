@@ -4,12 +4,12 @@
     justify-content: center;
     margin-top: 60px;
     gap: 40px;
+    flex-wrap: wrap; 
 }
 
 .politica-texto {
     max-width: 800px;
-    text-align: justify; /*React necesita especificar esto */
-
+    text-align: justify;
 }
 
 .politica-texto h2 {
@@ -29,4 +29,32 @@
     object-fit: cover;
     border-radius: 12px;
     background-color: #d9d9d9;
+}
+
+/* Media query para teléfonos */
+@media (max-width: 600px) {
+  .bloque-contenido-politica {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .politica-texto {
+    max-width: 100%;
+  }
+
+  .politica-texto h2 {
+    font-size: 22px;
+  }
+
+  .politica-texto p {
+    font-size: 16px;
+  }
+
+  .politica-imagen img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
 }

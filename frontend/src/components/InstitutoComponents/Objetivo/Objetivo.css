@@ -1,32 +1,61 @@
 .bloque-contenido-objetivo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 80px auto;
-    max-width: 1200px;
-    gap: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 80px auto;
+  max-width: 1200px;
+  gap: 40px;
 }
 
 .objetivo-texto {
-    max-width: 800px;
-    text-align: justify; /*React necesita especificar esto */
+  max-width: 800px;
+  text-align: justify;
 }
 
 .objetivo-texto h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .objetivo-texto p {
-    font-size: 20px;
-    line-height: 1.6;
+  font-size: 20px;
+  line-height: 1.6;
 }
 
 .objetivo-imagen img {
-    width: 400px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 12px;
-    background-color: #d9d9d9;
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  background-color: #d9d9d9;
+}
+
+/* Media query para teléfonos */
+@media (max-width: 600px) {
+  .bloque-contenido-objetivo {
+    flex-direction: column; /* Texto arriba, imagen abajo */
+    gap: 30px;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .objetivo-texto {
+    max-width: 100%;
+  }
+
+  .objetivo-texto h2 {
+    font-size: 22px;
+  }
+
+  .objetivo-texto p {
+    font-size: 16px;
+  }
+
+  .objetivo-imagen img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
 }
