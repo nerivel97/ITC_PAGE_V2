@@ -9,7 +9,6 @@ import Objetivo from '../components/InstitutoComponents/Objetivo/Objetivo';
 import Carrusel from '../components/InstitutoComponents/Carrusel/Carrusel';
 import Mascota from '../components/InstitutoComponents/Mascota/Mascota';
 import Infraestructura from '../components/InstitutoComponents/Infraestructura/Infraestructura';
-import BarraAccesos from '../components/InstitutoComponents/BarraAccesos/BarraAccesos';
 const Instituto: React.FC = () => {
       useEffect(() => {
         // Cambiar el título
@@ -50,7 +49,6 @@ const Instituto: React.FC = () => {
             <Carrusel/>
             <Mascota/>
             <Infraestructura/>
-            <BarraAccesos/>
         </div>
     );
 };

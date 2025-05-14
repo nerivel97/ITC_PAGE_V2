@@ -1,24 +1,24 @@
 import './ContenidoInfra.css';
 
-import escuela1 from "../../../assets/Fotos/Infraestructura/escuela.png";
-import escuela2 from '../../../Assets/Fotos/Infraestructura/escuela2.png';
-import escuela3 from '../../../Assets/Fotos/Infraestructura/escuela3.png';
+import escuela1 from '../../../assets/Fotos/Infraestructura/escuela.png';
+import escuela2 from '../../../assets/Fotos/Infraestructura/escuela.png';
+import escuela3 from '../../../assets/Fotos/Infraestructura/escuela.png';
 
-import laboratorio1 from '../../../Assets/Fotos/Infraestructura/laboratorio.jpg';
-import laboratorio2 from '../../../Assets/Fotos/Infraestructura/laboratorio2.jpg';
-import laboratorio3 from '../../../Assets/Fotos/Infraestructura/laboratorio3.jpg';
+import laboratorio1 from '../../../assets/Fotos/Infraestructura/laboratorio.jpg';
+import laboratorio2 from '../../../assets/Fotos/Infraestructura/laboratorio2.jpg';
+import laboratorio3 from '../../../assets/Fotos/Infraestructura/laboratorio3.jpg';
 
-import biblioteca1  from '../../../Assets/Fotos/Infraestructura/biblioteca.jpg';
-import biblioteca2  from '../../../Assets/Fotos/Infraestructura/biblioteca2.jpg';
-import biblioteca3  from '../../../Assets/Fotos/Infraestructura/biblioteca3.jpg';
+import biblioteca1 from '../../../assets/Fotos/Infraestructura/biblioteca.jpg';
+import biblioteca2 from '../../../assets/Fotos/Infraestructura/biblioteca2.jpg';
+import biblioteca3 from '../../../assets/Fotos/Infraestructura/biblioteca3.jpg';
 
-import deportes1    from '../../../Assets/Fotos/Infraestructura/deportes1.jpg';
-import deportes2    from '../../../Assets/Fotos/Infraestructura/deportes2.jpg';
-import deportes3    from '../../../Assets/Fotos/Infraestructura/deportes3.jpg';
+import deportes1 from '../../../assets/Fotos/Infraestructura/deportes1.jpg';
+import deportes2 from '../../../assets/Fotos/Infraestructura/deportes2.jpg';
+import deportes3 from '../../../assets/Fotos/Infraestructura/deportes3.jpg';
 
-import aula1        from '../../../Assets/Fotos/Infraestructura/aula.jpg';
-import aula2        from '../../../Assets/Fotos/Infraestructura/aula2.jpg';
-import aula3        from '../../../Assets/Fotos/Infraestructura/aula3.jpg';
+import aula1 from '../../../assets/Fotos/Infraestructura/aula.jpg';
+import aula2 from '../../../assets/Fotos/Infraestructura/aula2.jpg';
+import aula3 from '../../../assets/Fotos/Infraestructura/aula3.jpg';
 
 import ImageCarousel from '../ImageCarousel/ImageCarousel';
 

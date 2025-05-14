@@ -10,7 +10,6 @@ import AdminDashboard from './admin/pages/Dashboard';
 import EventosTable from './admin/pages/Eventos/EventosTable';
 import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
 import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
-import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
 
 import "./App.css"
 
