@@ -5,6 +5,7 @@ import Instituto from './pages/Instituto';
 import Oferta from './pages/Oferta';
 import CarreraDetalle from './pages/Carreras';
 import Infra from './pages/Infra';
+import Admisiones from './pages/Admisiones';
 import AdminLayout from './admin/components/AdminLayout/AdminLayout';
 import AdminDashboard from './admin/pages/Dashboard';
 import EventosTable from './admin/pages/Eventos/EventosTable';
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           <Route path='/oferta-educativa' element={<Oferta />} />
           <Route path="/oferta-educativa/:carreraNombre" element={<CarreraDetalle />} />
           <Route path='/Infraestructura' element={<Infra />} />
+          <Route path='/Admisiones' element={<Admisiones />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}
