@@ -6,7 +6,6 @@ interface QuienesSomosProps {
   descripcion?: string;
   botonTexto?: string;
   imagenUrl?: string;
-  orientacion?: 'izquierda' | 'derecha';
 }
 
 const Somos: React.FC<QuienesSomosProps> = ({ 
@@ -14,7 +13,6 @@ const Somos: React.FC<QuienesSomosProps> = ({
   descripcion, 
   botonTexto, 
   imagenUrl, 
-  orientacion = 'izquierda'
 }) => {
   return (
     <div className={styles.somosContainer}>
@@ -23,7 +21,7 @@ const Somos: React.FC<QuienesSomosProps> = ({
       </div>
 
       {(descripcion || botonTexto || imagenUrl) && (
-        <div className={`${styles.mainContent} ${orientacion === 'derecha' ? styles.reverseLayout : ''}`}>
+        <div className={`${styles.mainContent} `}>
           {imagenUrl && (
             <div className={styles.imagenContainer}>
               <img src={imagenUrl} alt="Imagen representativa" className={styles.somosImage} />

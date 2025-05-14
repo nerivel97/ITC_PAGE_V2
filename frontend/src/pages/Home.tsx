@@ -1,6 +1,5 @@
 import styles from '../components/HomeComponents/Home.module.css';
 import Carousel from '../components/HomeComponents/ComponentCarrusel/Carousel';
-import Cards from '../components/HomeComponents/ComponentCard/Cards';
 import Somos from '../components/HomeComponents/SomosComponent/Somos';
 import FlayerOfertas from '../components/HomeComponents/flayercomponent/FlayerOferta';
 import Eventos from '../components/HomeComponents/ComponentEvento/Eventos.tsx';
@@ -12,13 +11,6 @@ import img from '../components/HomeComponents/ComponentEvento/img_evento/img_pru
 import carouselImage1 from '../assets/sliderImage/1.jpeg';
 import carouselImage2 from '../assets/sliderImage/2.jpeg';
 import carouselImage3 from '../assets/sliderImage/3.jpg';
-
-// Importar iconos SVG (asegúrate de tener estos archivos en tu proyecto)
-import carreraIcon from '../components/HomeComponents/ComponentCard/iconosCards/carrera.svg';
-import posgradoIcon from '../components/HomeComponents/ComponentCard/iconosCards/posgrado.svg';
-import actividadIcon from '../components/HomeComponents/ComponentCard/iconosCards/actividad.svg';
-import estudianteIcon from '../components/HomeComponents/ComponentCard/iconosCards/estudiante.svg';
-import egresadoIcon from '../components/HomeComponents/ComponentCard/iconosCards/egresados.svg';
 
 
 const Home = () => {
@@ -40,7 +32,6 @@ const Home = () => {
       'En nuestra institucion creemos que la educacion va mas alla de las aulas. Por eso, ofrecemos un entorno lleno de oportunidades para que desarrolles tus pasiones, conectes con compañeros y vivas experiencia inolvidables.',
     botonTexto: 'Saber mas...',
     imagenUrl: 'https://pbs.twimg.com/media/GYGFMBQXsAAEPRd.jpg',
-    orientacion: 'derecha',
   }
 
   const noticiast = {
@@ -51,43 +42,6 @@ const Home = () => {
     titulo: 'Eventos',
   }
 
-  const cards = [
-    {
-      id: 'carrera',
-      title: 'Carreras',
-      iconSrc: carreraIcon,  // Cambiado de emoji a SVG
-      number: '+12',         // Actualizado según tu imagen
-      description: 'Oferta académica de pregrado'
-    },
-    {
-      id: 'posgrado',
-      title: 'Posgrados',
-      iconSrc: posgradoIcon,
-      number: '+2',
-      description: 'Maestrías y especializaciones'
-    },
-    {
-      id: 'actividad',
-      title: 'Actividades',
-      iconSrc: actividadIcon,
-      number: '+16',
-      description: 'Eventos y actividades culturales'
-    },
-    {
-      id: 'estudiante',
-      title: 'Estudiantes',
-      iconSrc: estudianteIcon,
-      number: '+4000',
-      description: 'Recursos para estudiantes'
-    },
-    {
-      id: 'egresado',
-      title: 'Egresados',
-      iconSrc: egresadoIcon,
-      number: '+900000',
-      description: 'Red de egresados'
-    },
-  ];
 
   const NOTICIAS_DATA = {
     tituloSeccion: "Informativo",
@@ -128,7 +82,7 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <Carousel images={carouselImages} />
-      <Cards cards={cards} />
+
 
       <Somos
         titulo={quienesData.titulo}
@@ -142,7 +96,6 @@ const Home = () => {
         descripcion={vidaEstudiantil.descripcion}
         botonTexto={vidaEstudiantil.botonTexto}
         imagenUrl={vidaEstudiantil.imagenUrl}
-        orientacion={vidaEstudiantil.orientacion}
       />
 
       <Somos
