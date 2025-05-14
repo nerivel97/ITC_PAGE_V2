@@ -13,6 +13,7 @@ import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
 import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
 import Page_Eventos from './pages/Page_Eventos';
 import Page_Eventos_c from './components/HomeComponents/ComponentEvento/Page_Eventos_c';
+import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
 
 
 import "./App.css"
