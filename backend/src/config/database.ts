@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
   synchronize: isDevelopment(), // Cuidado: solo en desarrollo
   logging: env.DB_LOGGING, // Habilita logging para debug
   entities: [Evento, Noticia, Career, Reticle, Subject],
-  migrations: [],
+  migrations: ['../migrations/**/*.ts'],
   subscribers: [],
 });
 
