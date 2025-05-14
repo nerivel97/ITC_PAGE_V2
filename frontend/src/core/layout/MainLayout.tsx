@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import HeaderBanners from '../bannercomponent/HeaderBanner';
 import Footer from '../FooterComponent/Footer';
