@@ -19,7 +19,7 @@ const menuItems = [
   },
   {
     name: "Oferta Educativa",
-    path: "/admin/oferta-educativa",
+    path: "/admin/oferta_educativa",
     icon: <MenuBookIcon />,
   },
   {

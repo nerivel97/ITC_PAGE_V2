@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight, FaSync } from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import styles from './Eventos.module.css';
-import { getEventos } from '../../../core/services/eventos.service';
-import { IEvento } from '../../../core/interfaces/evento.interface';
+import { fetchEventos } from '../../../admin/services/eventos.service';
+import { IEvento } from '../../../admin/interfaces/evento.interface';
 
 const Eventos: React.FC = () => {
   const [eventos, setEventos] = useState<IEvento[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const cardsToShow = 3; // Número de tarjetas visibles
+  const [cardsToShow, setCardsToShow] = useState(3);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   // Formateador de fechas
   const formatDate = (dateString: string) => {
@@ -21,81 +24,118 @@ const Eventos: React.FC = () => {
     return new Date(dateString).toLocaleDateString('es-ES', options);
   };
 
+  // Efecto para responsive
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      if (!carouselRef.current) return;
+      
+      const containerWidth = carouselRef.current.offsetWidth;
+      if (containerWidth < 600) {
+        setCardsToShow(1);
+      } else if (containerWidth < 900) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(3);
+      }
+      // Resetear índice al cambiar el número de cards
+      setCurrentIndex(0);
+    };
+
+    updateCardsToShow();
+    window.addEventListener('resize', updateCardsToShow);
+    return () => window.removeEventListener('resize', updateCardsToShow);
+  }, []);
+
   // Obtener eventos
   useEffect(() => {
-    const fetchEventos = async () => {
+    const loadEventos = async () => {
       try {
-        const eventosData = await getEventos();
+        setLoading(true);
+        const eventosData = await fetchEventos();
         
-        // Filtra solo eventos activos si es necesario
-        const eventosActivos = eventosData.filter(evento => evento.estado === 'Activo');
+        const eventosActivos = eventosData
+          .filter(evento => evento.estado.toLowerCase() === 'activo')
+          .sort((a, b) => new Date(a.fecha_inicio).getTime() - new Date(b.fecha_inicio).getTime());
         
         setEventos(eventosActivos);
         setError(null);
-      } catch (err) {
-        setError('No pudimos cargar los eventos. Por favor verifica tu conexión e intenta nuevamente.');
+      } catch (err: any) {
+        console.error('Error loading events:', err);
+        setError(err.message || 'Error al cargar eventos');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchEventos();
+    loadEventos();
   }, []);
+
+  // Navegar al detalle del evento
+  const navigateToEvento = (id_evento: number) => {
+    navigate(`/eventos/${id_evento}`, {
+      state: { fromHome: window.location.pathname === '/' }
+    });
+  };
+
+  // Manejo de errores de imagen
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    if (!target.src.includes('fallback')) {
+      target.src = '/evento-fallback.jpg';
+    }
+  };
 
   // Navegación del carrusel
   const nextSlide = () => {
-    setCurrentIndex(prev => (prev + 1 <= eventos.length - cardsToShow ? prev + 1 : 0));
+    setCurrentIndex(prev => {
+      const maxIndex = Math.ceil(eventos.length / cardsToShow) - 1;
+      return prev < maxIndex ? prev + 1 : 0;
+    });
   };
 
   const prevSlide = () => {
-    setCurrentIndex(prev => (prev - 1 >= 0 ? prev - 1 : eventos.length - cardsToShow));
+    setCurrentIndex(prev => {
+      const maxIndex = Math.ceil(eventos.length / cardsToShow) - 1;
+      return prev > 0 ? prev - 1 : maxIndex;
+    });
   };
 
-  // Estado de carga mejorado
-  if (loading) return (
-    <div className={styles.loadingContainer}>
-      <div className={styles.spinner}></div>
-      <p>Cargando eventos...</p>
-    </div>
-  );
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <p>Cargando eventos...</p>
+      </div>
+    );
+  }
 
-  // Estado de error mejorado
-  if (error) return (
-    <div className={styles.errorContainer}>
-      <div className={styles.errorContent}>
-        <svg className={styles.errorIllustration} viewBox="0 0 200 200">
-          <circle cx="100" cy="100" r="90" fill="#e5e5fc"/>
-          <path d="M100,30 L105,140 L95,140 Z" fill="#000f92"/>
-          <circle cx="100" cy="170" r="10" fill="#000f92"/>
-        </svg>
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
         <h3 className={styles.errorTitle}>¡Ups! Algo salió mal</h3>
         <p className={styles.errorMessage}>{error}</p>
         <button 
           className={styles.errorButton}
           onClick={() => window.location.reload()}
         >
-          <FaSync className={styles.refreshIcon} /> Reintentar
+          Recargar página
         </button>
       </div>
-    </div>
-  );
+    );
+  }
 
-  // Estado vacío mejorado
-  if (eventos.length === 0) return (
-    <div className={styles.emptyState}>
-      <svg className={styles.emptyIllustration} viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="90" fill="#000f92"/>
-        <path d="M70,70 L130,130 M70,130 L130,70" stroke="#000f92" strokeWidth="3" strokeLinecap="round"/>
-      </svg>
-      <h3>No hay eventos activos</h3>
-      <p>Actualmente no hay eventos programados. Vuelve a revisar más tarde.</p>
-    </div>
-  );
+  if (eventos.length === 0) {
+    return (
+      <div className={styles.emptyState}>
+        <h3>No hay eventos activos</h3>
+        <p>Actualmente no hay eventos programados. Vuelve a revisar más tarde.</p>
+      </div>
+    );
+  }
 
   return (
-    <section className={styles.eventosSection}>
-      
-      <div className={styles.carouselContainer}>
+    <section id="eventos-section" className={styles.eventosSection}>
+      <div className={styles.carouselContainer} ref={carouselRef}>
         <button 
           className={styles.navButton} 
           onClick={prevSlide}
@@ -109,8 +149,8 @@ const Eventos: React.FC = () => {
           <div
             className={styles.carouselCards}
             style={{ 
-              transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
-              width: `${(eventos.length * 100 / cardsToShow)}%`
+              transform: `translateX(calc(-${currentIndex * (100 / cardsToShow)}% - ${currentIndex * 20}px))`,
+              gridTemplateColumns: `repeat(${eventos.length}, calc(${100 / cardsToShow}% - 15px))`
             }}
           >
             {eventos.map((evento) => (
@@ -120,9 +160,7 @@ const Eventos: React.FC = () => {
                     src={evento.imagen || '/evento-placeholder.jpg'} 
                     alt={evento.nombre_evento} 
                     className={styles.imagenEvento}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/evento-fallback.jpg';
-                    }}
+                    onError={handleImageError}
                   />
                 </div>
                 <div className={styles.content}>
@@ -130,7 +168,6 @@ const Eventos: React.FC = () => {
                   <p className={styles.desc}>
                     {evento.descripcion.substring(0, 100)}{evento.descripcion.length > 100 && '...'}
                   </p>
-
                   <div className={styles.detailsFooter}>
                     <div className={styles.fechasContainer}>
                       <span className={styles.fecha}>
@@ -140,7 +177,10 @@ const Eventos: React.FC = () => {
                         <strong>Fin:</strong> {formatDate(evento.fecha_final)}
                       </span>
                     </div>
-                    <button className={styles.buttonhover}>
+                    <button 
+                      className={styles.buttonhover}
+                      onClick={() => navigateToEvento(evento.id_evento!)}
+                    >
                       Ver más
                     </button>
                   </div>
@@ -160,10 +200,9 @@ const Eventos: React.FC = () => {
         </button>
       </div>
 
-      {/* Indicadores de paginación */}
       {eventos.length > cardsToShow && (
         <div className={styles.dotsContainer}>
-          {Array.from({ length: Math.max(eventos.length - cardsToShow + 1, 1) }).map((_, i) => (
+          {Array.from({ length: Math.ceil(eventos.length / cardsToShow) }).map((_, i) => (
             <button
               key={i}
               className={`${styles.dot} ${i === currentIndex ? styles.activeDot : ''}`}

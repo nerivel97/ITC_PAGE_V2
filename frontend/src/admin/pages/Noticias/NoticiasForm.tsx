@@ -3,7 +3,6 @@ import {
   Form, 
   Input, 
   DatePicker, 
-  Select, 
   Modal, 
   message,
 } from 'antd';
@@ -13,10 +12,8 @@ import {
 } from '../../services/noticias.service';
 import { INoticia, INoticiaCreate } from '../../interfaces/noticia.interface';
 import dayjs from 'dayjs';
-import styles from './NoticiasForm.module.css';
 
 const { TextArea } = Input;
-const { Option } = Select;
 
 interface NoticiaFormProps {
   visible: boolean;
@@ -50,11 +47,10 @@ const NoticiasForm: React.FC<NoticiaFormProps> = ({
       setLoading(true);
       const values = await form.validateFields();
       
-      // Asegurar formato YYYY-MM-DD para las fechas
       const noticiaData: INoticiaCreate = {
         nombre_noticia: values.nombre_noticia,
         descripcion: values.descripcion,
-        fecha_publicacion: dayjs(values.fecha_publicacion).format('YYYY-MM-DD'), // Formato explícito
+        fecha_publicacion: dayjs(values.fecha_publicacion).format('YYYY-MM-DD'),
         autor: values.autor,
         imagen: values.imagen || null
       };
@@ -63,16 +59,16 @@ const NoticiasForm: React.FC<NoticiaFormProps> = ({
   
       if (noticia) {
         await updateNoticia(noticia.id_noticia!, noticiaData);
-        message.success('noticia actualizado correctamente');
+        message.success('Noticia actualizada correctamente');
       } else {
         await createNoticia(noticiaData);
-        message.success('noticia creado correctamente');
+        message.success('Noticia creada correctamente');
       }
       
       onSuccess();
     } catch (error) {
       console.error('Error completo:', error);
-      message.error(error instanceof Error ? error.message : 'Error al guardar el noticia');
+      message.error(error instanceof Error ? error.message : 'Error al guardar la noticia');
     } finally {
       setLoading(false);
     }
@@ -80,7 +76,7 @@ const NoticiasForm: React.FC<NoticiaFormProps> = ({
 
   return (
     <Modal
-      title={noticia ? 'Editar noticia' : 'Crear Nuevo noticia'}
+      title={noticia ? 'Editar noticia' : 'Crear nueva noticia'}
       open={visible}
       onOk={handleSubmit}
       onCancel={onCancel}
@@ -93,34 +89,18 @@ const NoticiasForm: React.FC<NoticiaFormProps> = ({
         form={form}
         layout="vertical"
         initialValues={{
-          estado: '',
           imagen: ''
         }}
       >
         <Form.Item
           name="nombre_noticia"
-          label="Nombre del noticia"
+          label="Título de la noticia"
           rules={[{ 
             required: true, 
-            message: 'Por favor ingrese el nombre del noticia' 
+            message: 'Por favor ingrese el título de la noticia' 
           }]}
         >
-          <Input placeholder="Ej: Conferencia de Tecnología" />
-        </Form.Item>
-
-        <Form.Item
-          name="categoria"
-          label="Categoría"
-          rules={[{ 
-            required: true, 
-            message: 'Por favor seleccione una categoría' 
-          }]}
-        >
-          <Select placeholder="Seleccione una categoría">
-            <Option value="Cultural">Cultural</Option>
-            <Option value="Deportivo">Deportivo</Option>
-            <Option value="Social">Social</Option>
-          </Select>
+          <Input placeholder="Ej: Nuevo avance tecnológico" />
         </Form.Item>
 
         <Form.Item
@@ -131,53 +111,32 @@ const NoticiasForm: React.FC<NoticiaFormProps> = ({
             message: 'Por favor ingrese una descripción' 
           }]}
         >
-          <TextArea rows={4} placeholder="Descripción detallada del noticia" />
+          <TextArea rows={4} placeholder="Contenido de la noticia" />
         </Form.Item>
 
-        <div className={styles.dateRow}>
-          <Form.Item
-            name="fecha_publicacion"
-            label="Fecha de Inicio"
-            rules={[{ 
-              required: true, 
-              message: 'Por favor seleccione la fecha de inicio' 
-            }]}
-            className={styles.dateField}
-          >
-            <DatePicker 
-              format="YYYY-MM-DD" 
-              style={{ width: '100%' }} 
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="fecha_final"
-            label="Fecha de Finalización"
-            rules={[{ 
-              required: true, 
-              message: 'Por favor seleccione la fecha de finalización' 
-            }]}
-            className={styles.dateField}
-          >
-            <DatePicker 
-              format="YYYY-MM-DD" 
-              style={{ width: '100%' }} 
-            />
-          </Form.Item>
-        </div>
-
         <Form.Item
-          name="estado"
-          label="Estado"
+          name="fecha_publicacion"
+          label="Fecha de publicación"
           rules={[{ 
-            required: true,
-            message: 'Por favor seleccione una opcion' 
+            required: true, 
+            message: 'Por favor seleccione la fecha de publicación' 
           }]}
         >
-          <Select placeholder="Selecciona una opcion">
-            <Option value="Activo">Activo</Option>
-            <Option value="Inactivo">Inactivo</Option>
-          </Select>
+          <DatePicker 
+            format="YYYY-MM-DD" 
+            style={{ width: '100%' }} 
+          />
+        </Form.Item>
+
+        <Form.Item
+          name="autor"
+          label="Autor"
+          rules={[{ 
+            required: true, 
+            message: 'Por favor ingrese el autor' 
+          }]}
+        >
+          <Input placeholder="Nombre del autor" />
         </Form.Item>
 
         <Form.Item

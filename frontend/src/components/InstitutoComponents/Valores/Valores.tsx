@@ -22,11 +22,11 @@ const Valores: React.FC = () => {
                 </div>
                 <div className="icono-valor">
                     <img src={respeto} alt="Respeto" />
-                    <span>Respeto</span>
+                    <span>Respeto e inclusión</span>
                 </div>
                 <div className="icono-valor">
                     <img src={lealtad} alt="Compromiso institucional" />
-                    <span>Compromiso</span>
+                    <span>Compromiso social</span>
                 </div>
                 <div className="icono-valor">
                     <img src={comunicacion} alt="Comunicación efectiva" />
@@ -34,7 +34,7 @@ const Valores: React.FC = () => {
                 </div>
                 <div className="icono-valor">
                     <img src={superacion} alt="Superacion" />
-                    <span>Superacion</span>
+                    <span>Mejora continua</span>
                 </div>
             </div>
         </div>

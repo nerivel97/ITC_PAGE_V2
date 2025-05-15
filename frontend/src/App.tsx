@@ -5,12 +5,16 @@ import Instituto from "./pages/Instituto";
 import Oferta from "./pages/Oferta";
 import CarreraDetalle from "./pages/Carreras";
 import Infra from "./pages/Infra";
+import Admisiones from "./pages/Admisiones";
 import AdminLayout from "./admin/components/AdminLayout/AdminLayout";
 import AdminDashboard from "./admin/pages/Dashboard";
 import EventosTable from "./admin/pages/Eventos/EventosTable";
 import NoticiasTable from "./admin/pages/Noticias/NoticiasTable";
+import Page_Eventos from "./pages/Page_Eventos";
+import Page_Eventos_c from "./components/HomeComponents/ComponentEvento/Page_Eventos_c";
 import OfertTable from "./admin/pages/OfertaEducativa/OfertTable";
 import AdminHomeGallery from "./admin/pages/InstitutoITC/AdminHomeGallery";
+import AdmisionesTable from "./admin/pages/Admisiones/AdmisionesTable";
 
 import "./App.css";
 import Resultados from "./pages/Resultados";
@@ -29,7 +33,12 @@ const App: React.FC = () => {
             path="/oferta-educativa/:carreraNombre"
             element={<CarreraDetalle />}
           />
-          <Route path="/Infra" element={<Infra />} />
+          <Route path="/Infraestructura" element={<Infra />} />
+          <Route path="/Admisiones" element={<Admisiones />} />
+
+          {/* Rutas de eventos */}
+          <Route path="/eventos" element={<Page_Eventos />} />
+          <Route path="/eventos/:id" element={<Page_Eventos_c />} />
           <Route path="/resultados" element={<Resultados />} />
         </Route>
 
@@ -38,9 +47,10 @@ const App: React.FC = () => {
           <Route index element={<AdminDashboard />} />
           <Route path="/admin/eventos" element={<EventosTable />} />
           <Route path="/admin/noticias" element={<NoticiasTable />} />
-          <Route path="/admin/Oferta-Educativa" element={<OfertTable />} />
-          <Route path="/admin/instituto-itc" element={<AdminHomeGallery />} />
-          {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />  */}
+          <Route path="/admin/oferta_educativa" element={<OfertTable />} />
+          <Route path="/admin/admisiones" element={<AdmisionesTable />} />
+          <Route path="/admin/home_gallery" element={<AdminHomeGallery />} />
+          {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} /> */}
           {/* Agrega más rutas del admin aquí */}
         </Route>
 

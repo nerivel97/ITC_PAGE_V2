@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import HeaderBanners from "../bannercomponent/HeaderBanner";
 import Footer from "../FooterComponent/Footer";
@@ -20,8 +19,8 @@ const MainLayout = () => {
           <a href="/oferta-educativa" className={styles.menuItem}>
             Oferta Educativa
           </a>
-          <a href="/Resultados" className={styles.menuItem}>
-            Resultados
+          <a href="/admisiones" className={styles.menuItem}>
+            Admisiones
           </a>
         </div>
       </nav>

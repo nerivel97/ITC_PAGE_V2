@@ -4,7 +4,7 @@ import { env } from '../lib/env';
 import { Career, Evento, Noticia, Reticle, Subject } from '../models';
 import { isDevelopment } from '../utils/env';
 
-export const AppDataSource = new DataSource({
+const AppDataSource = new DataSource({
   type: 'mysql',
   host: env.DB_HOST,
   port: env.DB_PORT,
@@ -15,9 +15,11 @@ export const AppDataSource = new DataSource({
   synchronize: isDevelopment(), // Cuidado: solo en desarrollo
   logging: env.DB_LOGGING, // Habilita logging para debug
   entities: [Evento, Noticia, Career, Reticle, Subject],
-  migrations: [],
+  migrations: ['../migrations/**/*.ts'],
   subscribers: [],
 });
+
+export default AppDataSource;
 
 /**
  * Conecta a la base de datos utilizando TypeORM.

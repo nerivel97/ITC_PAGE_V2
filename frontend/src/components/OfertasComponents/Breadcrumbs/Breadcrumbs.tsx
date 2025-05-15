@@ -7,7 +7,6 @@ interface BreadcrumbsProps {
   currentPage: string;
 }
 
-// Función para formatear nombres de rutas
 const formatRouteName = (name: string) => {
   const routeNames: Record<string, string> = {
     'oferta-educativa': 'Oferta Educativa',
@@ -22,24 +21,29 @@ const Breadcrumbs = ({ currentPage }: BreadcrumbsProps) => {
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   return (
-    <div className={styles.breadcrumbs}>
+    <nav className={styles.breadcrumbs} aria-label="Migas de pan">
       <ul>
         <li>
-          <Link to="/"><FaHome /></Link>
+          <Link to="/" aria-label="Inicio">
+            <FaHome />
+          </Link>
         </li>
         {pathnames.map((name, index) => {
           const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;
+          const formattedName = formatRouteName(name);
           
           return (
             <React.Fragment key={name}>
-              <li><FaChevronRight /></li>
+              <li aria-hidden="true">
+                <FaChevronRight />
+              </li>
               <li>
                 {isLast ? (
-                  <span>{currentPage}</span>
+                  <span aria-current="page">{currentPage}</span>
                 ) : (
-                  <Link to={routeTo}>
-                    {formatRouteName(name)}
+                  <Link to={routeTo} title={`Ir a ${formattedName}`}>
+                    {formattedName}
                   </Link>
                 )}
               </li>
@@ -47,7 +51,7 @@ const Breadcrumbs = ({ currentPage }: BreadcrumbsProps) => {
           );
         })}
       </ul>
-    </div>
+    </nav>
   );
 };
 
