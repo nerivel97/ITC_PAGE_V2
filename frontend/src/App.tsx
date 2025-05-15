@@ -44,7 +44,7 @@ const App: React.FC = () => {
           <Route path="/admin/noticias" element={<NoticiasTable />} />
           <Route path="/admin/oferta_educativa" element={<OfertTable />} />
           <Route path="/admin/admisiones" element={<AdmisionesTable />} />
-          <Route path="/admin/home_gallery" element={<AdminHomeGallery />} />
+          <Route path="/admin/Home_Page" element={<AdminHomeGallery />} />
           {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />s  */}
           {/* Agrega más rutas del admin aquí */}
         </Route>
