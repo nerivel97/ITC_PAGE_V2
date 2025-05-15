@@ -1,64 +1,17 @@
-// import React from "react";
-// import CareerCard from "../Carreracard/carreracard";
-// import styles from './carreracard.module.css';
-
-// interface Career {
-//   title: string;
-//   imageUrl: string;
-// }
-
-// const careerData: Career[] = [
-//   { title: "Ingeniería Ferroviaria", imageUrl: "/images/ferroviaria.jpg" },
-//   {
-//     title: "Ingeniería en Sistemas Computacionales",
-//     imageUrl: "/images/sistemas.jpg",
-//   },
-//   { title: "Ingeniería en Construcción", imageUrl: "/images/construccion.jpg" },
-//   { title: "Ingeniería Mecatrónica", imageUrl: "/images/mecatronica.jpg" },
-//   {
-//     title: "Ingeniería en Mantenimiento Industrial",
-//     imageUrl: "/images/mantenimiento.jpg",
-//   },
-//   {
-//     title: "Licenciatura en Contaduría Pública",
-//     imageUrl: "/images/contaduria.jpg",
-//   },
-//   { title: "Licenciatura en Turismo", imageUrl: "/images/turismo.jpg" },
-//   {
-//     title: "Ingeniería Industrial y de Gestión",
-//     imageUrl: "/images/industrial.jpg",
-//   },
-//   { title: "Arquitectura", imageUrl: "/images/arquitectura.jpg" },
-//   { title: "Licenciatura en Gastronomía", imageUrl: "/images/gastronomia.jpg" },
-// ];
-
-// const ResultsGrid: React.FC = () => {
-//   return (
-//     <div
-//       style={{
-//         display: "grid",
-//         gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-//         gap: "1.5rem",
-//         padding: "1rem",
-//         justifyItems: "center",
-//       }}
-//     >
-//       {careerData.map((career, index) => (
-//         <CareerCard
-//           key={index}
-//           title={career.title}
-//           imageUrl={career.imageUrl}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default ResultsGrid;
-
 import React from "react";
 import CareerCard from "../Carreracard/carreracard.tsx";
 import styles from "./carreracard.module.css";
+
+// Importa imágenes directamente
+import AdministracionImg from "../../../assets/Fotos/Admisiones/Carreras/Administracion.jpg";
+import ArquitecturaImg from "../../../assets/Fotos/Admisiones/Carreras/Arquitectura.jpg";
+import CivilImg from "../../../assets/Fotos/Admisiones/Carreras/Civil.jpg";
+import ElectromecanicaImg from "../../../assets/Fotos/Admisiones/Carreras/Electromecanica.jpeg";
+import FerroviariaImg from "../../../assets/Fotos/Admisiones/Carreras/Ferroviaria.png";
+import GestionEmpresarialImg from "../../../assets/Fotos/Admisiones/Carreras/Gestion_Empresarial.jpg";
+import MecatronicaImg from "../../../assets/Fotos/Admisiones/Carreras/Mecatronica.jpg";
+import SistemasImg from "../../../assets/Fotos/Admisiones/Carreras/Sistemas.jpg";
+import TurismoImg from "../../../assets/Fotos/Admisiones/Carreras/Turismo.jpg";
 
 interface Career {
   title: string;
@@ -66,28 +19,15 @@ interface Career {
 }
 
 const careerData: Career[] = [
-  { title: "Ingeniería Ferroviaria", imageUrl: "/images/ferroviaria.jpg" },
-  {
-    title: "Ingeniería en Sistemas Computacionales",
-    imageUrl: "/images/sistemas.jpg",
-  },
-  { title: "Ingeniería en Construcción", imageUrl: "/images/construccion.jpg" },
-  { title: "Ingeniería Mecatrónica", imageUrl: "/images/mecatronica.jpg" },
-  {
-    title: "Ingeniería en Mantenimiento Industrial",
-    imageUrl: "/images/mantenimiento.jpg",
-  },
-  {
-    title: "Licenciatura en Contaduría Pública",
-    imageUrl: "/images/contaduria.jpg",
-  },
-  { title: "Licenciatura en Turismo", imageUrl: "/images/turismo.jpg" },
-  {
-    title: "Ingeniería Industrial y de Gestión",
-    imageUrl: "/images/industrial.jpg",
-  },
-  { title: "Arquitectura", imageUrl: "/images/arquitectura.jpg" },
-  { title: "Licenciatura en Gastronomía", imageUrl: "/images/gastronomia.jpg" },
+  { title: "Administración", imageUrl: AdministracionImg },
+  { title: "Arquitectura", imageUrl: ArquitecturaImg },
+  { title: "Civil", imageUrl: CivilImg },
+  { title: "Electromecánica", imageUrl: ElectromecanicaImg },
+  { title: "Ferroviaria", imageUrl: FerroviariaImg },
+  { title: "Gestión Empresarial", imageUrl: GestionEmpresarialImg },
+  { title: "Mecatrónica", imageUrl: MecatronicaImg },
+  { title: "Sistemas", imageUrl: SistemasImg },
+  { title: "Turismo", imageUrl: TurismoImg },
 ];
 
 const ResultsGrid: React.FC = () => {
