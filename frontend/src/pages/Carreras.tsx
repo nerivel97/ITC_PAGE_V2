@@ -88,15 +88,15 @@ const Carreras: React.FC = () => {
           <h2>INFORMACIÓN GENERAL</h2>
           <div className="info-grid">
             <div className="info-item">
-              <span className="bullet-point"></span>
+              <img src="/src/assets/Fotos/tipo.png" alt="Tipo" />
               <p><strong>Tipo:</strong> {carrera.tipo.charAt(0).toUpperCase() + carrera.tipo.slice(1)}</p>
             </div>
             <div className="info-item">
-              <span className="bullet-point"></span>
+              <img src="/src/assets/Fotos/modo.png" alt="Modalidad" />
               <p><strong>Modalidad:</strong> Presencial</p>
             </div>
             <div className="info-item">
-              <span className="bullet-point"></span>
+              <img src="/src/assets/Fotos/duracion.png" alt="Duracion" />
               <p><strong>Duración:</strong> 8 semestres (4 años)</p>
             </div>
           </div>
