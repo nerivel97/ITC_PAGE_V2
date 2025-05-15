@@ -13,6 +13,11 @@ const ContactMailIcon = () => <span>✉️</span>;
 
 const menuItems = [
   {
+    name: "Home",
+    path: "/admin/Home_Page",
+    icon: <SchoolIcon />,
+  },
+  {
     name: "Instituto ITC",
     path: "/admin/instituto-itc",
     icon: <SchoolIcon />,
