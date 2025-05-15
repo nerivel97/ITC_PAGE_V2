@@ -49,7 +49,7 @@ const Dashboard = () => {
             title="Oferta Educativa"
             description="Gestionar carreras y programas"
             icon="📚"
-            onClick={() => navigate('/admin/oferta-educativa')}
+            onClick={() => navigate('/admin/oferta_educativa')}
           />
           {/* Agrega más cards según necesites */}
         </div>
