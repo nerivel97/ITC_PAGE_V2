@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Input,
   Button,
   Select,
-  Upload,
   Typography,
+  Space,
+  List
 } from 'antd';
 import { SketchPicker } from 'react-color';
-import { UploadOutlined } from '@ant-design/icons';
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
-const { TextArea } = Input;
 const { Title } = Typography;
 
 interface OfertFormProps {
@@ -19,28 +19,70 @@ interface OfertFormProps {
   initialValues?: any;
 }
 
+const DynamicListInput = ({ label, name }: { label: string; name: string }) => {
+  const [items, setItems] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const addItem = () => {
+    if (inputValue.trim()) {
+      setItems([...items, inputValue.trim()]);
+      setInputValue('');
+    }
+  };
+
+  const removeItem = (index: number) => {
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
+  };
+
+  return (
+    <>
+      <Form.Item label={label}>
+        <Space.Compact style={{ width: '100%' }}>
+          <Input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder={`Agregar ${label.toLowerCase()}`}
+          />
+          <Button icon={<PlusOutlined />} onClick={addItem} />
+        </Space.Compact>
+        <List
+          bordered
+          dataSource={items}
+          style={{ marginTop: '10px' }}
+          renderItem={(item, index) => (
+            <List.Item
+              actions={[
+                <Button
+                  type="text"
+                  icon={<DeleteOutlined />}
+                  onClick={() => removeItem(index)}
+                />,
+              ]}
+            >
+              {item}
+            </List.Item>
+          )}
+        />
+      </Form.Item>
+      <Form.Item name={name} hidden initialValue={items}>
+        <Input type="hidden" />
+      </Form.Item>
+    </>
+  );
+};
+
 const OfertForm: React.FC<OfertFormProps> = ({ onFinish, initialValues }) => {
   const [form] = Form.useForm();
-  const [color, setColor] = React.useState(initialValues?.color || '#000000');
-
-  const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
-  };
+  const [color, setColor] = useState(initialValues?.color || '#000000');
 
   return (
     <Form
       form={form}
       layout="vertical"
-      onFinish={(values) => {
-        onFinish({
-          ...values,
-          color,
-          bannerCarrera: values.bannerCarrera?.[0]?.originFileObj || null,
-          mascotaCarrera: values.mascotaCarrera?.[0]?.originFileObj || null
-        });
+      onFinish={() => {
+        const values = form.getFieldsValue();
+        onFinish({ ...values, color });
       }}
       initialValues={initialValues}
     >
@@ -61,7 +103,6 @@ const OfertForm: React.FC<OfertFormProps> = ({ onFinish, initialValues }) => {
       >
         <Select placeholder="Selecciona el tipo">
           <Option value="Licenciatura">Licenciatura</Option>
-          <Option value="Ingeniería">Ingeniería</Option>
           <Option value="Maestría">Maestría</Option>
           <Option value="Doctorado">Doctorado</Option>
         </Select>
@@ -79,33 +120,12 @@ const OfertForm: React.FC<OfertFormProps> = ({ onFinish, initialValues }) => {
         name="informacionGeneral"
         rules={[{ required: true, message: 'Campo requerido' }]}
       >
-        <TextArea rows={3} />
+        <Input.TextArea rows={3} />
       </Form.Item>
 
-      <Form.Item
-        label="Objetivos"
-        name="objetivos"
-        rules={[{ required: true, message: 'Campo requerido' }]}
-      >
-        <TextArea rows={3} />
-      </Form.Item>
-
-      <Form.Item
-        label="Misión"
-        name="mision"
-        rules={[{ required: true, message: 'Campo requerido' }]}
-      >
-        <TextArea rows={2} />
-      </Form.Item>
-
-      <Form.Item
-        label="Visión"
-        name="vision"
-        rules={[{ required: true, message: 'Campo requerido' }]}
-      >
-        <TextArea rows={2} />
-      </Form.Item>
-
+      <DynamicListInput label="Objetivos" name="objetivos" />
+      <DynamicListInput label="Misión" name="mision" />
+      <DynamicListInput label="Visión" name="vision" />
       <Form.Item label="Acreditación" name="acreditacion">
         <Input />
       </Form.Item>
@@ -115,7 +135,7 @@ const OfertForm: React.FC<OfertFormProps> = ({ onFinish, initialValues }) => {
         name="perfilIngreso"
         rules={[{ required: true, message: 'Campo requerido' }]}
       >
-        <TextArea rows={3} />
+        <Input.TextArea rows={3} />
       </Form.Item>
 
       <Form.Item
@@ -123,50 +143,23 @@ const OfertForm: React.FC<OfertFormProps> = ({ onFinish, initialValues }) => {
         name="perfilEgreso"
         rules={[{ required: true, message: 'Campo requerido' }]}
       >
-        <TextArea rows={3} />
+        <Input.TextArea rows={3} />
       </Form.Item>
 
-      <Form.Item label="Campo profesional" name="campoProfesional">
-        <TextArea rows={3} />
+      <Form.Item label="URL de la retícula (PDF o imagen)" name="reticula">
+        <Input placeholder="https://..." />
       </Form.Item>
 
-      <Form.Item label="Retícula (PDF o imagen)" name="reticula" valuePropName="fileList" getValueFromEvent={normFile}>
-        <Upload beforeUpload={() => false}>
-          <Button icon={<UploadOutlined />}>Subir archivo</Button>
-        </Upload>
+      <Form.Item label="URL del banner de la carrera" name="bannerCarrera">
+        <Input placeholder="https://..." />
       </Form.Item>
 
-      {/* NUEVO: Banner de la carrera */}
-      <Form.Item
-        label="Imagen del banner de la carrera"
-        name="bannerCarrera"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-      >
-        <Upload
-          accept="image/*"
-          beforeUpload={() => false}
-          maxCount={1}
-        >
-          <Button icon={<UploadOutlined />}>Subir imagen</Button>
-        </Upload>
+      <Form.Item label="URL de la mascota de la carrera" name="mascotaCarrera">
+        <Input placeholder="https://..." />
       </Form.Item>
 
-      {/* NUEVO: Mascota de la carrera */}
-      <Form.Item
-        label="Imagen de la mascota de la carrera"
-        name="mascotaCarrera"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-      >
-        <Upload
-          accept="image/*"
-          beforeUpload={() => false}
-          maxCount={1}
-        >
-          <Button icon={<UploadOutlined />}>Subir imagen</Button>
-        </Upload>
-      </Form.Item>
+      <DynamicListInput label="Campo laboral" name="campoLaboral" />
+      <DynamicListInput label="Funciones profesionales" name="funcionesProfesionales" />
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
