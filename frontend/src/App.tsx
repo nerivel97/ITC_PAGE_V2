@@ -1,18 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import MainLayout from './core/layout/MainLayout';
-import Instituto from './pages/Instituto';
-import Oferta from './pages/Oferta';
-import CarreraDetalle from './pages/Carreras';
-import Infra from './pages/Infra';
-import AdminLayout from './admin/components/AdminLayout/AdminLayout';
-import AdminDashboard from './admin/pages/Dashboard';
-import EventosTable from './admin/pages/Eventos/EventosTable';
-import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
-import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
-import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import MainLayout from "./core/layout/MainLayout";
+import Instituto from "./pages/Instituto";
+import Oferta from "./pages/Oferta";
+import CarreraDetalle from "./pages/Carreras";
+import Infra from "./pages/Infra";
+import AdminLayout from "./admin/components/AdminLayout/AdminLayout";
+import AdminDashboard from "./admin/pages/Dashboard";
+import EventosTable from "./admin/pages/Eventos/EventosTable";
+import NoticiasTable from "./admin/pages/Noticias/NoticiasTable";
+import OfertTable from "./admin/pages/OfertaEducativa/OfertTable";
+import AdminHomeGallery from "./admin/pages/InstitutoITC/AdminHomeGallery";
 
-import "./App.css"
+import "./App.css";
+import Resultados from "./pages/Resultados";
 
 const App: React.FC = () => {
   return (
@@ -22,10 +23,14 @@ const App: React.FC = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path='/Instituto' element={<Instituto />} />
-          <Route path='/oferta-educativa' element={<Oferta />} />
-          <Route path="/oferta-educativa/:carreraNombre" element={<CarreraDetalle />} />
-          <Route path='/Infra' element={<Infra />} />
+          <Route path="/Instituto" element={<Instituto />} />
+          <Route path="/oferta-educativa" element={<Oferta />} />
+          <Route
+            path="/oferta-educativa/:carreraNombre"
+            element={<CarreraDetalle />}
+          />
+          <Route path="/Infra" element={<Infra />} />
+          <Route path="/resultados" element={<Resultados />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}
