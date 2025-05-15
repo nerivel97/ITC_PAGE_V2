@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import styles from './Eventos.module.css';
@@ -10,7 +10,8 @@ const Eventos: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const cardsToShow = 3;
+  const [cardsToShow, setCardsToShow] = useState(3);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   // Formateador de fechas
@@ -22,6 +23,28 @@ const Eventos: React.FC = () => {
     };
     return new Date(dateString).toLocaleDateString('es-ES', options);
   };
+
+  // Efecto para responsive
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      if (!carouselRef.current) return;
+      
+      const containerWidth = carouselRef.current.offsetWidth;
+      if (containerWidth < 600) {
+        setCardsToShow(1);
+      } else if (containerWidth < 900) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(3);
+      }
+      // Resetear índice al cambiar el número de cards
+      setCurrentIndex(0);
+    };
+
+    updateCardsToShow();
+    window.addEventListener('resize', updateCardsToShow);
+    return () => window.removeEventListener('resize', updateCardsToShow);
+  }, []);
 
   // Obtener eventos
   useEffect(() => {
@@ -64,11 +87,17 @@ const Eventos: React.FC = () => {
 
   // Navegación del carrusel
   const nextSlide = () => {
-    setCurrentIndex(prev => (prev + 1 <= eventos.length - cardsToShow ? prev + 1 : 0));
+    setCurrentIndex(prev => {
+      const maxIndex = Math.ceil(eventos.length / cardsToShow) - 1;
+      return prev < maxIndex ? prev + 1 : 0;
+    });
   };
 
   const prevSlide = () => {
-    setCurrentIndex(prev => (prev - 1 >= 0 ? prev - 1 : eventos.length - cardsToShow));
+    setCurrentIndex(prev => {
+      const maxIndex = Math.ceil(eventos.length / cardsToShow) - 1;
+      return prev > 0 ? prev - 1 : maxIndex;
+    });
   };
 
   if (loading) {
@@ -106,7 +135,7 @@ const Eventos: React.FC = () => {
 
   return (
     <section id="eventos-section" className={styles.eventosSection}>
-      <div className={styles.carouselContainer}>
+      <div className={styles.carouselContainer} ref={carouselRef}>
         <button 
           className={styles.navButton} 
           onClick={prevSlide}
@@ -120,8 +149,8 @@ const Eventos: React.FC = () => {
           <div
             className={styles.carouselCards}
             style={{ 
-              transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
-              width: `${(eventos.length * 100 / cardsToShow)}%`
+              transform: `translateX(calc(-${currentIndex * (100 / cardsToShow)}% - ${currentIndex * 20}px))`,
+              gridTemplateColumns: `repeat(${eventos.length}, calc(${100 / cardsToShow}% - 15px))`
             }}
           >
             {eventos.map((evento) => (
@@ -173,7 +202,7 @@ const Eventos: React.FC = () => {
 
       {eventos.length > cardsToShow && (
         <div className={styles.dotsContainer}>
-          {Array.from({ length: Math.max(eventos.length - cardsToShow + 1, 1) }).map((_, i) => (
+          {Array.from({ length: Math.ceil(eventos.length / cardsToShow) }).map((_, i) => (
             <button
               key={i}
               className={`${styles.dot} ${i === currentIndex ? styles.activeDot : ''}`}
