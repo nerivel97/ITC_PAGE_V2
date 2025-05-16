@@ -15,6 +15,7 @@ import Page_Eventos_c from './components/HomeComponents/ComponentEvento/Page_Eve
 import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
 import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
 import AdmisionesTable from './admin/pages/Admisiones/AdmisionesTable';
+import Resultados from './pages/Resultados';
 
 import "./App.css"
 
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           {/* Rutas de eventos */}
           <Route path='/eventos' element={<Page_Eventos />} />
           <Route path='/eventos/:id' element={<Page_Eventos_c />} />
+	  <Route path='/resultados' element={<Resultados />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}
