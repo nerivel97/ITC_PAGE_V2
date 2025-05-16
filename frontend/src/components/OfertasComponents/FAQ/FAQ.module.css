@@ -11,7 +11,7 @@
 
 .faqTitle {
   color: #2c3e50;
-  font-size: 2rem;
+  font-size: 28px;
   text-align: center;
   margin-bottom: 40px;
   font-weight: 600;
@@ -31,7 +31,7 @@
   background-color: #0f156d;
   color: white;
   border: none;
-  font-size: 1.1rem;
+  font-size: 20px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -46,7 +46,7 @@
 
 .faqQuestion::after {
   content: '+';
-  font-size: 1.5rem;
+  font-size: 20px;
 }
 
 .faqQuestion.active::after {
