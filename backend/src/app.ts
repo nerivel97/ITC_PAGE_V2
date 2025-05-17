@@ -1,60 +1,55 @@
-// app.ts
 import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 
-//EVENTOS
-import { EventosController } from './controllers/eventos.controller';
-import { createEventosRouter } from './routes/eventos.routes';
-import { EventosService } from './services/eventos.service';
-
-//NOTICIAS
-import { NoticiasController } from './controllers/noticias.controller';
-import { createNoticiasRouter } from './routes/eventos.routes';
-import { NoticiasService } from './services/eventos.service';
-
-// OFERTA EDUCATIVA
-import {
-  careersRouter,
-  reticlesRouter,
-  subjectsRouter,
-} from './routes/oferta-educativa';
-
+// Configuración base
 import { connectToDatabase } from './config/database';
 import { env } from './lib/env';
 import { errorHandler } from './middlewares/error-handler';
 import { isDevelopment, isProduction } from './utils/env';
 
+// Controladores
+import { EventosController } from './controllers/eventos.controller';
+import { NoticiasController } from './controllers/noticias.controller';
+import { CarreraController } from './controllers/Carrera.controller';
+
+// Servicios
+import { EventosService } from './services/eventos.service';
+import { NoticiasService } from './services/eventos.service'; // Corregido
+import { CarreraService } from './services/Carrera.service';
+
+// Rutas
+import { createEventosRouter } from './routes/eventos.routes';
+import { createNoticiasRouter } from './routes/eventos.routes'; // Ruta corregida
+import carreraRoutes from './routes/carrera.routes';
+
 export default async function initializeApp() {
+  // 1. Conexión a la base de datos primero
   await connectToDatabase();
 
   const app = express();
 
-  // Middlewares deben ir antes de las rutas
+  // Middlewares
   app.use(morgan(isProduction() ? 'combined' : 'dev'));
-  app.use(
-    cors({
-      origin: isDevelopment() ? '*' : env.APP_ORIGIN, // Cambiar esto por el dominio de producción
-      credentials: true,
-    }),
-  );
+  app.use(cors({
+    origin: isDevelopment() ? '*' : env.APP_ORIGIN,
+    credentials: true,
+  }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // Luego las rutas
+  // 2. Inicialización de servicios (después de conectar a BD)
   const eventosService = new EventosService();
-  const eventosController = new EventosController(eventosService);
   const noticiasService = new NoticiasService();
-  const noticiasController = new NoticiasController(noticiasService);
-  app.use('/api/eventos', createEventosRouter(eventosController));
-  app.use('/api/noticias', createNoticiasRouter(noticiasController));
+  const carreraService = new CarreraService();
 
-  // Oferta Educativa
-  app.use('/api/carreras', careersRouter);
-  app.use('/api/reticulas', reticlesRouter);
-  app.use('/api/materias', subjectsRouter);
+  // 3. Configuración de controladores
+  app.use('/api/eventos', createEventosRouter(new EventosController(eventosService)));
+  app.use('/api/noticias', createNoticiasRouter(new NoticiasController(noticiasService)));
+  app.use('/api/carreras', carreraRoutes(new CarreraController(carreraService)));
 
-  app.use(errorHandler); // Manejo de errores personalizado
+  // 4. Manejo de errores
+  app.use(errorHandler);
 
   return app;
 }

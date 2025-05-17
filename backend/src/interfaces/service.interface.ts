@@ -1,4 +1,5 @@
 import { IEvento, IEventoCreate, IEventoUpdate } from './event.interface';
+import { ICarrera, ICarreraCreate, ICarreraUpdate } from './carrera.interface';
 
 export interface IEventoService {
   getAllEventos(): Promise<IEvento[]>;
@@ -16,4 +17,12 @@ export interface INoticiaService {
   createNoticia(eventoData: INoticiaCreate): Promise<INoticia>;
   updateNoticia(id: number, eventoData: INoticiaUpdate): Promise<INoticia | null>;
   deleteNoticia(id: number): Promise<void>;
+}
+
+export interface ICarreraService {
+  getAllCarreras(): Promise<ICarrera[]>;
+  getCarreraById(id: number): Promise<ICarrera | null>;
+  createCarrera(carreraData: ICarreraCreate): Promise<ICarrera>;
+  updateCarrera(id: number, carreraData: ICarreraUpdate): Promise<ICarrera | null>;
+  deleteCarrera(id: number): Promise<void>;
 }

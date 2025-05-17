@@ -1,63 +1,101 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Table,
-  Modal,
-  Space,
-  Tag,
-  Card,
-  Typography,
-  message,
-} from "antd";
-import type { ColumnsType } from "antd/es/table";
-import OfertForm from "./OfertForm";
-import { fetchOfertas, deleteOferta } from "../../services/ofertas.service";
-import { IOferta } from "../../interfaces/oferta.interface";
+import React, { useState, useEffect } from 'react';
+import { Table, Card, Button, Modal, Tag, Typography, Space, message } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import { 
+  fetchOfertas, 
+  deleteOferta,
+  fetchOfertaById,
+  createOferta,
+  updateOferta
+} from '../../services/ofertas.service';
+import OfertForm from './OfertForm';
+import { IOferta, IOfertaFormData } from '../../interfaces/oferta.interface';
+import { transformFormToCreate, transformOfertaToForm } from './oferta.utils';
 
-const { Text } = Typography;
+const { Title } = Typography;
 
 const OfertTable: React.FC = () => {
   const [ofertas, setOfertas] = useState<IOferta[]>([]);
   const [loading, setLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedOferta, setSelectedOferta] = useState<IOferta | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentOferta, setCurrentOferta] = useState<IOferta | null>(null);
+  const [formLoading, setFormLoading] = useState(false);
 
-  const loadOfertas = async () => {
+  const loadData = async () => {
     setLoading(true);
     try {
       const data = await fetchOfertas();
-      setOfertas(
-        data.map((oferta) => ({
-          ...oferta,
-          key: oferta.id?.toString() || Math.random().toString(),
-        }))
-      );
-    } catch (error) {
-      message.error("Error al cargar ofertas");
-      console.error(error);
+      setOfertas(data);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        message.error(error.message || 'Error al cargar carreras');
+      } else {
+        message.error('Error desconocido al cargar carreras');
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    loadOfertas();
-  }, []);
+  const handleEdit = async (id: number) => {
+    setFormLoading(true);
+    try {
+      const oferta = await fetchOfertaById(id);
+      setCurrentOferta(oferta);
+      setModalOpen(true);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        message.error(error.message || 'Error al cargar carrera');
+      } else {
+        message.error('Error desconocido al cargar carrera');
+      }
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  const handleSubmit = async (values: IOfertaFormData) => {
+    try {
+      setFormLoading(true);
+      if (currentOferta?.id) {
+        const updateData = {
+          ...transformFormToCreate(values),
+          id: currentOferta.id
+        };
+        await updateOferta(updateData.id, updateData);
+        message.success('Carrera actualizada correctamente');
+      } else {
+        await createOferta(transformFormToCreate(values));
+        message.success('Carrera creada correctamente');
+      }
+      loadData();
+      setModalOpen(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        message.error(error.message || 'Error al guardar carrera');
+      } else {
+        message.error('Error desconocido al guardar carrera');
+      }
+    } finally {
+      setFormLoading(false);
+    }
+  };
 
   const handleDelete = async (id: number) => {
     Modal.confirm({
-      title: "¿Eliminar oferta?",
-      content: "Esta acción no se puede deshacer",
-      okText: "Eliminar",
-      cancelText: "Cancelar",
-      okButtonProps: { danger: true },
+      title: '¿Eliminar carrera?',
+      content: 'Esta acción no se puede deshacer',
       onOk: async () => {
         try {
           await deleteOferta(id);
-          message.success("Oferta eliminada");
-          loadOfertas();
-        } catch (error) {
-          message.error("Error al eliminar la oferta");
+          message.success('Carrera eliminada');
+          loadData();
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            message.error(error.message || 'Error al eliminar carrera');
+          } else {
+            message.error('Error desconocido al eliminar carrera');
+          }
         }
       },
     });
@@ -65,82 +103,74 @@ const OfertTable: React.FC = () => {
 
   const columns: ColumnsType<IOferta> = [
     {
-      title: "Título",
-      dataIndex: "titulo",
-      key: "titulo",
-      render: (text: string) => <Text strong>{text}</Text>,
-    },
-    {
-      title: "Descripción",
-      dataIndex: "descripcion",
-      key: "descripcion",
-      render: (text: string) => <Text>{text}</Text>,
-    },
-    {
-      title: "Color",
-      dataIndex: "color",
-      key: "color",
-      render: (color: string) => <Tag color={color}>{color}</Tag>,
-    },
-    {
-      title: "Acciones",
-      key: "actions",
-      render: (_, record) => (
+      title: 'Título',
+      dataIndex: 'titulo',
+      render: (text: string, record: IOferta) => (
         <Space>
-          <Button
-            onClick={() => {
-              setSelectedOferta(record);
-              setModalVisible(true);
-            }}
-          >
-            Editar
-          </Button>
-          <Button danger onClick={() => handleDelete(record.id!)}>
-            Eliminar
-          </Button>
+          <Tag color={record.bgColor}>
+            {record.tipo}
+          </Tag>
+          <span>{text}</span>
+        </Space>
+      ),
+    },
+    {
+      title: 'Descripción',
+      dataIndex: 'descripcion',
+      ellipsis: true,
+      render: (text: string) => text || '--',
+    },
+    {
+      title: 'Acciones',
+      key: 'actions',
+      render: (_: unknown, record: IOferta) => (
+        <Space>
+          <Button onClick={() => handleEdit(record.id)}>Editar</Button>
+          <Button danger onClick={() => handleDelete(record.id)}>Eliminar</Button>
         </Space>
       ),
     },
   ];
 
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <Card
-      title="Gestión de Ofertas"
+      title={<Title level={4}>Gestión de Carreras</Title>}
       extra={
-        <Button
-          type="primary"
+        <Button 
+          type="primary" 
           onClick={() => {
-            setSelectedOferta(null);
-            setModalVisible(true);
+            setCurrentOferta(null);
+            setModalOpen(true);
           }}
         >
-          Nueva Oferta
+          Nueva Carrera
         </Button>
       }
     >
       <Table
         columns={columns}
         dataSource={ofertas}
+        rowKey="id"
         loading={loading}
-        rowKey="key"
+        pagination={{ pageSize: 5 }}
       />
 
-      {/* Modal con formulario */}
       <Modal
-        title={selectedOferta ? "Editar Oferta" : "Nueva Oferta"}
-        open={modalVisible}
-        onCancel={() => setModalVisible(false)}
+        title={currentOferta ? `Editar ${currentOferta.titulo}` : 'Nueva Carrera'}
+        open={modalOpen}
+        onCancel={() => setModalOpen(false)}
         footer={null}
-        width={900}
+        width={800}
+        destroyOnClose
       >
         <OfertForm
-          initialValues={selectedOferta}
-          onFinish={(values) => {
-            // Aquí deberías manejar el guardado de los datos
-            console.log(values);
-            setModalVisible(false);
-            loadOfertas();
-          }}
+          initialValues={currentOferta ? transformOfertaToForm(currentOferta) : undefined}
+          onSubmit={handleSubmit}
+          loading={formLoading}
         />
       </Modal>
     </Card>

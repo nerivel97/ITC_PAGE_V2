@@ -1,24 +1,66 @@
-// src/services/ofertas.service.ts
 import axios from 'axios';
-import { IOferta, IOfertaCreate } from '../interfaces/oferta.interface';
+import {
+  IOferta,
+  IOfertaResponse,
+  IOfertasPaginatedResponse,
+  IOfertaCreate,
+  IOfertaUpdate
+} from '../interfaces/oferta.interface';
 
-const endpoint = '/ofertas';
+const API_BASE = 'http://localhost:4000/api/carreras';
+
+const api = axios.create({
+  baseURL: API_BASE,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+});
 
 export const fetchOfertas = async (): Promise<IOferta[]> => {
-  const response = await axios.get(endpoint);
-  return response.data;
+  try {
+    const { data } = await api.get<IOfertasPaginatedResponse>('/');
+    return data.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error al cargar ofertas');
+  }
 };
 
-export const createOferta = async (data: IOfertaCreate): Promise<IOferta> => {
-  const response = await axios.post(endpoint, data);
-  return response.data;
+export const fetchOfertaById = async (id: number): Promise<IOferta> => {
+  try {
+    const { data } = await api.get<IOfertaResponse>(`/${id}`);
+    if (!data.data) throw new Error('Oferta no encontrada');
+    return data.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error al cargar oferta');
+  }
 };
 
-export const updateOferta = async (id: number, data: IOfertaCreate): Promise<IOferta> => {
-  const response = await axios.put(`${endpoint}/${id}`, data);
-  return response.data;
+export const createOferta = async (oferta: IOfertaCreate): Promise<IOferta> => {
+  try {
+    const { data } = await api.post<IOfertaResponse>('/', oferta);
+    if (!data.data) throw new Error('Error al crear oferta');
+    return data.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error al crear oferta');
+  }
+};
+
+export const updateOferta = async (id: number, oferta: IOfertaUpdate): Promise<IOferta> => {
+  try {
+    const { data } = await api.put<IOfertaResponse>(`/${id}`, oferta);
+    if (!data.data) throw new Error('Error al actualizar oferta');
+    return data.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error al actualizar oferta');
+  }
 };
 
 export const deleteOferta = async (id: number): Promise<void> => {
-  await axios.delete(`${endpoint}/${id}`);
+  try {
+    await api.delete(`/${id}`);
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Error al eliminar oferta');
+  }
 };
