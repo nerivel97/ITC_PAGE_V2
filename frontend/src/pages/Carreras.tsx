@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import styles from '../components/OfertasComponents/Carreras.module.css';
 import { carrerasData } from '../data/CarrerasData';
 import Breadcrumbs from '../components/OfertasComponents/Breadcrumbs/Breadcrumbs';
+import { FaDownload } from 'react-icons/fa';
+import '../components/OfertasComponents/Carreras.css';
 
 const Carreras: React.FC = () => {
   const { carreraNombre } = useParams<{ carreraNombre: string }>();
@@ -10,190 +11,253 @@ const Carreras: React.FC = () => {
 
   if (!carrera) {
     return (
-      <div className={styles.container}>
+      <div className="not-found-container">
         <h1>Programa no encontrado</h1>
         <p>La carrera solicitada no existe en nuestros registros.</p>
       </div>
     );
   }
 
-  // Función para dividir texto en párrafos
-  const formatParagraphs = (text: string) => {
-    if (!text) return null;
-    return text.split('\n').map((paragraph, i) => (
-      <p key={i}>{paragraph}</p>
-    ));
+  
+  const parseReticula = (reticulaText: string) => {
+    if (!reticulaText) return [];
+    return reticulaText.split('\n').filter(line => line.trim()).map(line => {
+      const [semestre, ...materias] = line.split(':');
+      return {
+        semestre: semestre.trim(),
+        materias: materias.join(':').split(',').map(m => m.trim()).filter(m => m)
+      };
+    });
   };
 
-  // Función para dividir texto en items de lista
-  const formatListItems = (text: string) => {
-    if (!text) return null;
-    return text.split('\n').map((item, i) => (
-      <div key={i} className={styles.itemRow}>
-        <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
-        <p>{item}</p>
-      </div>
-    ));
-  };
-
-  // Función para dividir texto en items de campo laboral
-  const formatCampoItems = (text: string) => {
-    if (!text) return null;
-    return text.split('\n').map((item, i) => (
-      <div key={i} className={styles.areaItem}>
-        <img src="/Fotos/Carreras/engranaje.png" alt="Ícono" />
-        <p>{item}</p>
-      </div>
-    ));
-  };
-
-  // Función para dividir texto en items de funciones
-  const formatFuncionesItems = (text: string) => {
-    if (!text) return null;
-    return text.split('\n').map((item, i) => (
-      <div key={i} className={styles.funcionItem}>
-        <img src="/Fotos/Carreras/palo.png" alt="Ícono" />
-        <p>{item}</p>
-      </div>
-    ));
-  };
+  const parsedReticula = parseReticula(carrera.reticula);
 
   return (
-    <div className={styles.container} style={{ '--primary-color': carrera.bgColor } as React.CSSProperties}>
+    <div className="carrera-container" style={{ '--primary-color': carrera.bgColor } as React.CSSProperties}>
       <Breadcrumbs currentPage={carrera.title} />
       
-      <div className={styles.headerBanner}>
-        <img src={carrera.imagen_banner} alt={`Banner de ${carrera.title}`} />
-        <div className={styles.carreraTitle}>{carrera.title}</div>
-      </div>
-
-      <div className={styles.institucionInfo}>
-        <div className={styles.flexContainer}>
-          <div className={styles.flexItem1}>
-            <img src={carrera.foto_mascota} alt={`Logo ${carrera.title}`} />
+      {/* Banner */}
+      <div className="banner-container">
+        {carrera.imagen_banner ? (
+          <img 
+            src={carrera.imagen_banner}
+            alt={`Banner de ${carrera.title}`}
+            className="banner-image"
+            onError={(e) => {
+              e.currentTarget.src = '/images/placeholder-banner.png';
+              e.currentTarget.className = 'banner-placeholder';
+            }}
+          />
+        ) : (
+          <div className="banner-placeholder">
+            <p>Esta carrera no tiene imagen de banner</p>
           </div>
-          <div className={styles.flexItem2}>
-            {formatParagraphs(carrera.description)}
-          </div>
+        )}
+        <div className="title-overlay">
+          <h1>{carrera.title}</h1>
+          <p className="tagline">{carrera.description.split('\n')[0]}</p>
         </div>
       </div>
 
-      {(carrera.objetivos || carrera.mision || carrera.vision) && (
-        <div className={styles.visionMision}>
-          <h2 className={styles.sectionTitle}>OBJETIVOS, MISIÓN Y VISIÓN</h2>
-          <div className={styles.visionMisionContainer}>
-            {carrera.objetivos && (
-              <div className={styles.visionMisionItem}>
-                <img src="/Fotos/Carreras/obj.png" alt="Ícono de Objetivos" />
-                <h3>Objetivos</h3>
-                {formatListItems(carrera.objetivos)}
-              </div>
-            )}
-            
-            {carrera.mision && (
-              <div className={styles.visionMisionItem}>
-                <img src="/Fotos/Carreras/mis.png" alt="Ícono de Misión" />
-                <h3>Misión</h3>
-                {formatListItems(carrera.mision)}
-              </div>
-            )}
-            
-            {carrera.vision && (
-              <div className={styles.visionMisionItem}>
-                <img src="/Fotos/Carreras/vis.png" alt="Ícono de Visión" />
-                <h3>Visión</h3>
-                {formatListItems(carrera.vision)}
+      {/* Contenido principal */}
+      <div className="content-wrapper">
+        {/* Información general con logo */}
+        <section className="info-section">
+          <div className="logo-container">
+            {carrera.foto_mascota ? (
+              <img 
+                src={carrera.foto_mascota} 
+                alt={`Logo ${carrera.title}`}
+                className="logo-image"
+              />
+            ) : (
+              <div className="logo-placeholder">
+                <p>No hay logo disponible</p>
               </div>
             )}
           </div>
-        </div>
-      )}
+          <div className="description-container">
+            {carrera.description.split('\n').map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
 
-      {carrera.perfilIngreso && (
-        <div className="perfil-ingreso">
-          <h2 className={styles.sectionTitle}>PERFIL DE INGRESO</h2>
-          <div className={styles.perfilContent}>
-            <div className={styles.flexContainer}>
-              <div className={styles.flexItem2}>
-                {formatParagraphs(carrera.perfilIngreso)}
+        {/* Información general */}
+        <section className="general-info">
+          <h2>INFORMACIÓN GENERAL</h2>
+          <div className="info-grid">
+            <div className="info-item">
+              <img src="/src/assets/Fotos/tipo.png" alt="Tipo" />
+              <p><strong>Tipo:</strong> {carrera.tipo.charAt(0).toUpperCase() + carrera.tipo.slice(1)}</p>
+            </div>
+            <div className="info-item">
+              <img src="/src/assets/Fotos/modo.png" alt="Modalidad" />
+              <p><strong>Modalidad:</strong> Presencial</p>
+            </div>
+            <div className="info-item">
+              <img src="/src/assets/Fotos/duracion.png" alt="Duracion" />
+              <p><strong>Duración:</strong> 8 semestres (4 años)</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Objetivos, Misión y Visión */}
+        <section className="vision-section">
+          <h2>OBJETIVOS, MISIÓN Y VISIÓN</h2>
+          <div className="vision-grid">
+            <div className="vision-card">
+              <div className="vision-icon">
+                <img src="/Fotos/Carreras/obj.png" alt="Objetivos" />
               </div>
-              <div className={styles.flexItem1}>
-                <img src={carrera.foto_ingreso} alt="Perfil de ingreso" />
+              <h3>Objetivos</h3>
+              <div className="vision-content">
+                {carrera.objetivos.split('\n').filter(Boolean).map((item, i) => (
+                  <div key={i} className="vision-item">
+                    <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="vision-card">
+              <div className="vision-icon">
+                <img src="/Fotos/Carreras/mis.png" alt="Misión" />
+              </div>
+              <h3>Misión</h3>
+              <div className="vision-content">
+                {carrera.mision.split('\n').filter(Boolean).map((item, i) => (
+                  <div key={i} className="vision-item">
+                    <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="vision-card">
+              <div className="vision-icon">
+                <img src="/Fotos/Carreras/vis.png" alt="Visión" />
+              </div>
+              <h3>Visión</h3>
+              <div className="vision-content">
+                {carrera.vision.split('\n').filter(Boolean).map((item, i) => (
+                  <div key={i} className="vision-item">
+                    <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
+                    <p>{item}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </section>
 
-      {carrera.perfilEgreso && (
-        <div className="perfil-egreso">
-          <h2 className={styles.sectionTitle}>PERFIL DE EGRESO</h2>
-          <div className={styles.perfilContent}>
-            <div className={`${styles.flexContainer} ${styles.flexReverse}`}>
-              <div className={styles.flexItem2}>
-                {formatParagraphs(carrera.perfilEgreso)}
+        {/* Perfiles */}
+        <div className="profiles-container">
+          <section className="profile-section">
+            <h2>PERFIL DE INGRESO</h2>
+            <div className="profile-content">
+              <div className="profile-text">
+                {carrera.perfilIngreso.split('\n').filter(Boolean).map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
               </div>
-              <div className={styles.flexItem1}>
-                <img src={carrera.foto_egreso} alt="Perfil de egreso" />
+              <div className="profile-image">
+                {carrera.foto_ingreso ? (
+                  <img src={carrera.foto_ingreso} alt="Perfil de ingreso" />
+                ) : (
+                  <div className="image-placeholder">
+                    <p>No hay imagen disponible</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+
+          <section className="profile-section reverse">
+            <h2>PERFIL DE EGRESO</h2>
+            <div className="profile-content">
+              <div className="profile-text">
+                {carrera.perfilEgreso.split('\n').filter(Boolean).map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
+              <div className="profile-image">
+                {carrera.foto_egreso ? (
+                  <img src={carrera.foto_egreso} alt="Perfil de egreso" />
+                ) : (
+                  <div className="image-placeholder">
+                    <p>No hay imagen disponible</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* Campo Laboral */}
+        <section className="work-field">
+          <h2>CAMPO LABORAL</h2>
+          <div className="work-field-grid">
+            <div className="work-area">
+              <h3>
+                <img src="/Fotos/Carreras/campo.png" alt="Campo laboral" />
+                OPORTUNIDADES LABORALES
+              </h3>
+              <div className="work-items">
+                {carrera.campolaboral.split('\n').filter(Boolean).map((item, i) => (
+                  <div key={i} className="work-item">
+                    <img src="/Fotos/Carreras/engranaje.png" alt="Ícono" />
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="work-area">
+              <h3>
+                <img src="/Fotos/Carreras/func.png" alt="Funciones" />
+                FUNCIONES PROFESIONALES
+              </h3>
+              <div className="work-items">
+                {carrera.funcionesprof.split('\n').filter(Boolean).map((item, i) => (
+                  <div key={i} className="work-item">
+                    <img src="/Fotos/Carreras/palo.png" alt="Ícono" />
+                    <p>{item}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </section>
 
-      {(carrera.campolaboral || carrera.funcionesprof) && (
-        <div className={styles.campoLaboral}>
-          {carrera.campolaboral && (
-            <div className={styles.campoAreas}>
-              <h3><img src="/Fotos/Carreras/campo.png" alt="Engranaje" />Campo laboral</h3>
-              {formatCampoItems(carrera.campolaboral)}
-            </div>
-          )}
-          
-          {carrera.funcionesprof && (
-            <div className={styles.campoFunciones}>
-              <h3><img src="/Fotos/Carreras/func.png" alt="Profesional" />Funciones profesionales</h3>
-              {formatFuncionesItems(carrera.funcionesprof)}
-            </div>
-          )}
-        </div>
-      )}
-
-      {carrera.reticula && (
-        <div className={styles.reticulaContainer}>
-          <h2 className={styles.sectionTitle}>RETÍCULA</h2>
-          <div className={styles.semestresSlider}>
-            {/* Aquí iría la lógica para renderizar la retícula */}
-            <div className={styles.semestreContainer}>
-              <div className={styles.semestreHeader}>
-                <span className={styles.circulo}></span>
-                <h3>SEMESTRE 1</h3>
-              </div>
-              <div className={styles.materiasGrid}>
-                {/* Ejemplo de materia - esto debería ser dinámico */}
-                <div className={styles.materia}>
-                  <h4>Materia Ejemplo</h4>
-                  <p>Código: ABC-123</p>
-                  <p>3-2-5</p>
+        {/* Retícula */}
+        <section className="reticula-section">
+          <h2>RETÍCULA</h2>
+          <div className="semestres-container">
+            {parsedReticula.map((semestre, i) => (
+              <div key={i} className="semestre">
+                <div className="semestre-header">
+                  <div className="semestre-circle"></div>
+                  <h3>{semestre.semestre.toUpperCase()}</h3>
+                </div>
+                <div className="materias-grid">
+                  {semestre.materias.map((materia, j) => (
+                    <div key={j} className="materia-card">
+                      <h4>{materia}</h4>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-          
-          <div className={styles.semestreSliderNav}>
-            {/* Navegación de semestres */}
-            <span className={`${styles.sliderDot} ${styles.active}`} data-semester="1"></span>
-            <span className={styles.sliderDot} data-semester="2"></span>
-          </div>
-        </div>
-      )}
-
-      {carrera.reticula && (
-        <div className={styles.downloadButtonContainer}>
-          <a href="#" className={styles.downloadButton}>DESCARGAR RETÍCULA COMPLETA</a>
-        </div>
-      )}
-
+          <button className="download-button">
+            <FaDownload className="icon" />
+            DESCARGAR RETÍCULA COMPLETA
+          </button>
+        </section>
+      </div>
     </div>
   );
 };

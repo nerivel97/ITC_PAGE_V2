@@ -31,9 +31,16 @@
 
 /* Estilos para la tabla */
 .tableContainer {
+  width: 100%;
   overflow-x: auto;
   background: #fff;
   border-radius: 6px;
+  min-width: fit-content; /* Asegura que el contenedor sea al menos tan ancho como su contenido */
+}
+
+.tableWrapper {
+  width: 100%;
+  min-width: 1500px; /* Igual al valor de scroll.x en tu tabla */
 }
 
 /* Celdas de la tabla */

@@ -1,5 +1,5 @@
 .breadcrumbs {
-  padding: 5px 1%; /* Cambiado a porcentaje más flexible */
+  padding: 1px 1px; /* Cambiado a porcentaje más flexible */
   overflow-x: auto; /* Permite scroll horizontal si es necesario */
   white-space: nowrap; /* Evita saltos de línea */
 }

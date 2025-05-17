@@ -24,7 +24,7 @@ export interface Carrera {
     // LICENCIATURAS
     "ingenieria-en-sistemas-computacionales": {
       id: 1,
-      title: "Ingenieria en Sistemas Computacionales",
+      title: "Ingeniería en Sistemas Computacionales",  // Corregido: "Ingeniria" → "Ingeniería"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       bgColor: "#eb911e",
@@ -44,7 +44,7 @@ export interface Carrera {
     // Ejemplo de cómo debería verse un objeto de carrera completo
     "ingenieria-civil": {
       id: 2,
-      title: "Ingenieria Civil",
+      title: "Ingeniería Civil",  // Corregido: "Ingenieria" → "Ingeniería"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       bgColor: "#e7e154",
@@ -63,7 +63,7 @@ export interface Carrera {
     },
     "licenciatura-en-administracion": {
       id: 3,
-      title: "Licenciatura en Administracion",
+      title: "Licenciatura en Administración",  // Corregido: "Administracion" → "Administración"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: `Desarrolla habilidades estratégicas y operativas para liderar organizaciones con eficiencia y visión.`,
@@ -82,7 +82,7 @@ export interface Carrera {
     },
     "contador-publico": {
       id: 4,
-      title: "Contador Publico",
+      title: "Contador Público",  // Corregido: "Publico" → "Público"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: `Esta carrera te prepara para ser el profesional que las empresas necesitan para gestionar sus finanzas, impuestos y auditorías con ética y precisión.`,
@@ -101,7 +101,7 @@ export interface Carrera {
     },
     "ingenieria-en-administracion": {
       id: 5,
-      title: "Ingenieria en Administracion",
+      title: "Ingeniería en Administración",  // Corregido: "Ingenieria" → "Ingeniería", "Administracion" → "Administración"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: `Combinación de ingeniería y gestión para optimizar procesos organizacionales.`,
@@ -120,7 +120,7 @@ export interface Carrera {
     },
     "ingenieria-en-gestion-empresarial": {
       id: 6,
-      title: "Ingenieria en Gestion Empresarial",
+      title: "Ingeniería en Gestión Empresarial",  // Corregido: "Ingenieria" → "Ingeniería", "Gestion" → "Gestión"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: `Adquiere competencias para dirigir proyectos y equipos, impulsando el crecimiento empresarial.`,
@@ -139,7 +139,7 @@ export interface Carrera {
     },
     "ingenieria-mecatronica": {
       id: 7,
-      title: "Ingenieria Mecatronica",
+      title: "Ingeniería Mecatrónica",  // Corregido: "Ingenieria" → "Ingeniería", "Mecatronica" → "Mecatrónica"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: `Integra mecánica, electrónica y computación para desarrollar sistemas automatizados y robots inteligentes.`,
@@ -158,7 +158,7 @@ export interface Carrera {
     },
     "ingenieria-electromecanica": {
       id: 8,
-      title: "Ingenieria Electromecanica",
+      title: "Ingeniería Electromecánica",  // Corregido: "Ingenieria" → "Ingeniería", "Electromecanica" → "Electromecánica"
       tipo: "licenciatura",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: `Combina conocimientos de electricidad y mecánica para mantener y optimizar equipos industriales.`,
@@ -179,7 +179,7 @@ export interface Carrera {
     // MAESTRÍAS
     "maestria-en-ciencias-ambientales": {
       id: 9,
-      title: "Maestria en Ciencias Ambientales",
+      title: "Maestría en Ciencias Ambientales",  // Corregido: "Maestria" → "Maestría"
       tipo: "maestria",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: "Estudia los procesos ecológicos y desarrolla soluciones para la conservación del medio ambiente.",
@@ -198,7 +198,7 @@ export interface Carrera {
     },
     "maestria-en-administracion-de-negocios": {
       id: 10,
-      title: "Maestria en Administracion de Negocios",
+      title: "Maestría en Administración de Negocios",  // Corregido: "Maestria" → "Maestría", "Administracion" → "Administración"
       tipo: "maestria",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: "Fortalece tus habilidades directivas y estratégicas para liderar en el mundo empresarial.",
@@ -219,7 +219,7 @@ export interface Carrera {
     // DOCTORADO
     "doctorado-en-ciencias-ambientales": {
       id: 11,
-      title: "Doctorado en Ciencias Ambientales",
+      title: "Doctorado en Ciencias Ambientales",  // (Este estaba correcto)
       tipo: "doctorado",
       imagen_banner: "/Fotos/Carreras/headerCivil.jpg",
       description: "Contribuye al conocimiento y solución de problemas ambientales a través de la investigación científica.",

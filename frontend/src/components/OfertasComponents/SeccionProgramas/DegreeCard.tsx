@@ -17,7 +17,10 @@ const DegreeCard = ({title, description, bgColor }: DegreeCardProps) => {
   
   const handleClick = () => {
     // Convertir título a formato URL-friendly
-    const carreraUrl = title.toLowerCase()
+    const carreraUrl = title
+      .normalize("NFD")  // Normaliza los caracteres a su forma descompuesta
+      .replace(/[\u0300-\u036f]/g, "")  // Elimina los diacríticos (acentos)
+      .toLowerCase()
       .replace(/\s+/g, '-')          // Reemplaza espacios con guiones
       .replace(/[^\w-]/g, '')        // Elimina caracteres especiales
       .replace(/--+/g, '-')          // Reemplaza múltiples guiones con uno solo
@@ -28,7 +31,7 @@ const DegreeCard = ({title, description, bgColor }: DegreeCardProps) => {
       top: 0,
       behavior: 'smooth'
     });
-  };
+};
 
   return (
     <div 

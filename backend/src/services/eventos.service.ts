@@ -1,12 +1,12 @@
-import { AppDataSource } from "../config/database";
+import AppDataSource from "../config/database";
 
-import { Evento } from "../models/Evento";
-import { IEventoService } from "../interfaces/service.interface";
 import { IEvento, IEventoCreate, IEventoUpdate } from "../interfaces/event.interface";
+import { IEventoService } from "../interfaces/service.interface";
+import { Evento } from "../models/Evento";
 
-import { Noticia } from "../models/Noticia";
-import { INoticiaService } from "../interfaces/service.interface";
 import { INoticia, INoticiaCreate, INoticiaUpdate } from "../interfaces/noticia.interface";
+import { INoticiaService } from "../interfaces/service.interface";
+import { Noticia } from "../models/Noticia";
 
 import { ApiError } from "../utils/apiError";
 

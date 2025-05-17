@@ -14,11 +14,9 @@ const MainLayout = () => {
      
       <main className={styles.mainContent}>
         <Outlet /> {/* Aquí se renderizarán Home, Carrera o Instituto */}
-      
       </main>
-      <Footer/> 
+      <Footer />
     </div>
-    
   );
 };
 

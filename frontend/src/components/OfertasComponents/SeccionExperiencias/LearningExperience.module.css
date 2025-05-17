@@ -31,14 +31,14 @@
   }
   
   .mainTitle {
-    font-size: 2.5rem;
+    font-size: 28px;
     color: #2c3e50;
     margin-bottom: 30px;
     font-weight: 600;
   }
   
   .inspirationalQuote {
-    font-size: 1.5rem;
+    font-size: 20px;
     line-height: 1.6;
     color: #34495e;
     font-style: italic;
@@ -68,7 +68,7 @@
   
   .quoteAuthor {
     display: block;
-    font-size: 1.2rem;
+    font-size: 20px;
     color: #7f8c8d;
     font-style: normal;
     margin-top: 20px;
