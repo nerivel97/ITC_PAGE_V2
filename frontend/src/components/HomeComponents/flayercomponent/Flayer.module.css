@@ -3,7 +3,7 @@
     width: 100%;
     background-color: #3a6dff;
     color: white;
-    padding: 10px;
+    padding: 40px 0;
     font-family: 'Arial', sans-serif;
 }
 
@@ -14,146 +14,114 @@
 }
 
 .title {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: left;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
 }
 
 .description {
-    font-size: 18px;
+    font-size: 1.1rem;
     line-height: 1.6;
-    margin-bottom: 8px;
-}
-
-.secondDescription {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+    max-width: 800px;
 }
 
 .separator {
     height: 2px;
     background-color: rgba(255, 255, 255, 0.3);
-    margin: 30px 0;
-    width: 100%;
+    margin: 2.5rem 0;
 }
 
-.gridLayout {
+/* Grid de 3 columnas */
+.gridContainer {
     display: grid;
-    grid-template-columns: 2fr 3fr; /* Cambiado a proporción 2:1 */
-    gap: 35px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
-.leftColumn {
+.gridCard {
     position: relative;
-    height: 700px; /* Altura aumentada */
-    border-radius: 10px;
+    height: 500px;
+    border-radius: 12px;
     overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rightColumn {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 5px;
-    height: 700px; /* Misma altura que la izquierda */
-}
-
-.rightCard {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    height: calc(100% ); /* Ajuste para el gap */
-}
-
-.image, .rightImage {
+.image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.image:hover, .rightImage:hover {
-    transform: scale(1.03);
+.gridCard:hover .image {
+    transform: scale(1.05);
 }
 
-.label {
+.cardLabel {
     position: absolute;
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: 700;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     width: 100%;
     text-align: center;
+    padding: 0 20px;
 }
 
-.rightLabel {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-    width: 100%;
-    text-align: left;
-    padding-left: 20%;
-}
-
-/* Versión tablet */
-@media (max-width: 1024px) {
-    .leftColumn, .rightColumn {
-        height: 600px;
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .gridContainer {
+        gap: 20px;
     }
     
-    .label, .rightLabel {
-        font-size: 28px;
+    .gridCard {
+        height: 400px;
+    }
+    
+    .cardLabel {
+        font-size: 1.5rem;
+        bottom: 30px;
     }
 }
 
-/* Versión móvil */
-@media (max-width: 768px) {
-    .fullWidthContainer {
-        padding: 30px 0;
-    }
-    
-    .gridLayout {
+@media (max-width: 992px) {
+    .gridContainer {
         grid-template-columns: 1fr;
-        height: auto;
     }
     
-    .leftColumn {
-        height: 400px;
-    }
-    
-    .rightColumn {
-        height: 400px;
-    }
-    
-    .rightCard {
-        height: calc(70% );
+    .gridCard {
+        height: 350px;
     }
     
     .title {
-        font-size: 28px;
+        font-size: 2rem;
     }
     
-    .description,
-    .secondDescription {
-        font-size: 16px;
+    .description {
+        font-size: 1rem;
     }
     
-    .label {
-        font-size: 24px;
-        bottom: 30px;
+    .cardLabel {
+        font-size: 1.4rem;
+        bottom: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gridCard {
+        height: 280px;
     }
     
-    .rightLabel {
-        font-size: 24px;
-        transform: translate(-2 0%, -50%);
+    .cardLabel {
+        font-size: 1.2rem;
+        bottom: 20px;
+    }
+    
+    .fullWidthContainer {
+        padding: 30px 0;
     }
 }

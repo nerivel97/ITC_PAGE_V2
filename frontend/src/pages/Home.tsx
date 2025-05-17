@@ -4,6 +4,7 @@ import Somos from '../components/HomeComponents/SomosComponent/Somos';
 import FlayerOfertas from '../components/HomeComponents/flayercomponent/FlayerOferta';
 import Eventos from '../components/HomeComponents/ComponentEvento/Eventos.tsx';
 import Noticias from '../components/HomeComponents/ComponentNoticias/Noticias.tsx';
+import InvestigacionYDesarrollo from '../components/HomeComponents/Investigacion&Desarrollo/InvestigacionYDesarrollo.tsx';
 
 import img from '../components/HomeComponents/ComponentEvento/img_evento/img_prueba.png';
 
@@ -77,6 +78,23 @@ const Home = () => {
       // ... otros artículos
     ],
   };
+  const cardsDesarrollo = [
+  {
+    image: 'https://cdn.masmovil.es/embed/f942e33f77a798f172fd7fbf1244c4a1600708225/hablar-en-publico.jpg?imagick=1&size=1000',
+    title: 'Calentamiento global',
+       link: 'https://road.cc/content/review/quintana-roo-srfive-2021-281773',
+  },
+  {
+    image: 'https://www.techtitute.com/techtitute/cursos/016284639/recursos/banner/experto-universitario-termodinamica.jpg',
+    title: 'Termodinámica',
+       link: 'https://road.cc/content/review/quintana-roo-srfive-2021-281773',
+  },
+  {
+    image: 'https://www.sepi.esimetic.ipn.mx/assets/files/sepiesimetic/img/servicios/1laerodinamica.jpg',
+    title: 'Aerodinámica',
+    link: 'https://road.cc/content/review/quintana-roo-srfive-2021-281773',
+  }
+];
 
 
   return (
@@ -91,6 +109,15 @@ const Home = () => {
         imagenUrl={quienesData.imagenUrl}
       />
       <FlayerOfertas />
+
+       <InvestigacionYDesarrollo
+      description="Descubre cómo nuestros programas de investigación fomentan el progreso y la competitividad."
+      cards={cardsDesarrollo}
+      
+    />
+
+
+
       <Somos
         titulo={vidaEstudiantil.titulo}
         descripcion={vidaEstudiantil.descripcion}
