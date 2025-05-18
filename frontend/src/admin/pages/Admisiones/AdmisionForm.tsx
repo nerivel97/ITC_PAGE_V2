@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker, Switch, InputNumber, Space, message } from 'antd';
+import { Form, Input, Select, DatePicker, message } from 'antd';
 import dayjs from 'dayjs';
 import { IAdmision } from '../../interfaces/admision.interface';
 import { createAdmision, updateAdmision } from '../../services/admisiones.service';
@@ -11,11 +11,16 @@ interface AdmisionFormProps {
   onCancel: () => void;
 }
 
-const AdmisionForm: React.FC<AdmisionFormProps> = ({ admision, onSuccess, onCancel }) => {
+const AdmisionForm: React.FC<AdmisionFormProps> = ({ admision, onSuccess }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
-  // Lista de carreras para el selector
+  if (loading){
+    console.log("hola");
+    
+  }
+
+  /* Lista de carreras para el selector
   const carreras = [
     'Ingeniería en Sistemas',
     'Ingeniería Civil',
@@ -25,7 +30,7 @@ const AdmisionForm: React.FC<AdmisionFormProps> = ({ admision, onSuccess, onCanc
     'Contabilidad',
     'Arquitectura',
     'Diseño Gráfico'
-  ];
+  ];*/
 
   // Función para manejar el envío del formulario
   const handleSubmit = async (values: any) => {

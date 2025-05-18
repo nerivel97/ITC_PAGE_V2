@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   Button,
   Table,
-  Space,
   Modal,
   message,
   Typography,
@@ -18,7 +17,6 @@ import {
   fetchAdmisiones,
   fetchRequisitos,
   fetchProcesos,
-  deleteAdmision
 } from '../../services/admisiones.service';
 import { IAdmision } from '../../interfaces/admision.interface';
 import { IRequisito } from '../../interfaces/admision.interface';
@@ -65,7 +63,7 @@ const AdmisionesTable: React.FC = () => {
   useEffect(() => {
     loadData();
   }, []);
-
+  /*
   const handleDelete = (id: number) => {
     Modal.confirm({
       title: '¿Eliminar solicitud de admisión?',
@@ -84,7 +82,7 @@ const AdmisionesTable: React.FC = () => {
         }
       }
     });
-  };
+  };*/
 
   const admisionColumns: ColumnsType<IAdmision> = [
     {
@@ -302,6 +300,7 @@ const AdmisionesTable: React.FC = () => {
         )}
         {modalType === 'requisito' && (
           <RequisitoForm
+          admision={null}
             onCancel={() => setModalVisible(false)}
             onSuccess={() => {
               setModalVisible(false);
@@ -311,6 +310,7 @@ const AdmisionesTable: React.FC = () => {
         )}
         {modalType === 'proceso' && (
           <ProcesoForm
+          admision={null}
             onCancel={() => setModalVisible(false)}
             onSuccess={() => {
               setModalVisible(false);

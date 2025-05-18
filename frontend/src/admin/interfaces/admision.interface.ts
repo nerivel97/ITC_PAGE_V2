@@ -4,6 +4,8 @@ export interface IAdmision {
   periodo: string;
   fecha_inicio: string;
   fecha_fin: string;
+  fecha_solicitud: string;
+  
 }
 
 export interface IRequisito {

@@ -1,4 +1,4 @@
-import { IAdmision } from '../interfaces/admision.interface';
+import { IAdmision, IRequisito, IProceso } from '../interfaces/admision.interface';
 
 // Datos de ejemplo para mostrar en el panel
 const mockAdmisiones: IAdmision[] = [
@@ -8,6 +8,7 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Otoño',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: '2024-05-15T10:30:00Z'
   },
   {
     id_admision: 2,
@@ -15,6 +16,8 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Otoño',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: '2024-05-15T10:30:00Z'
+
   },
   {
     id_admision: 3,
@@ -22,6 +25,8 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Primavera',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: '2024-05-15T10:30:00Z'
+
   },
   {
     id_admision: 4,
@@ -29,6 +34,8 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Otoño',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: '2024-05-15T10:30:00Z'
+
   },
   {
     id_admision: 5,
@@ -36,6 +43,8 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Primavera',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: '2024-05-15T10:30:00Z'
+
   },
 ];
 
@@ -43,54 +52,54 @@ const mockRequisitos: IRequisito[] = [
   {
     id_requisito: 1,
     descripcion: 'Descripcion 1',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 2,
     descripcion: 'Descripcion 2',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 3,
     descripcion: 'Descripcion 3',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 4,
     descripcion: 'Descripcion 4',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 5,
     descripcion: 'Descripcion 5',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
 ];
 
 const mockProcesos: IProceso[] = [
   {
-    id_proceso: 1,
-    id_convocatoria: '1',
+    id_admision: 1,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 1',
   },
   {
-    id_requisito: 2,
-    id_convocatoria: '1',
+    id_admision: 2,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 2',
   },
   {
-    id_requisito: 3,
-    id_convocatoria: '1',
+    id_admision: 3,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 3',
   },
   {
-    id_requisito: 4,
-    id_convocatoria: '1',
+    id_admision: 4,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 4',
   },
   {
-    id_requisito: 5,
-    id_convocatoria: '1',
+    id_admision: 5,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 5',
   },
 ];
@@ -160,7 +169,7 @@ export const updateAdmision = async (id: number, admision: Omit<IAdmision, 'id_a
 /**
  * Elimina una admisión por su ID
  */
-export const deleteAdmision = async (id: number): Promise<void> => {
+export const deleteAdmision = async (): Promise<void> => {
   // Simulación de una llamada a API para eliminar un registro
   return new Promise((resolve) => {
     setTimeout(() => {
