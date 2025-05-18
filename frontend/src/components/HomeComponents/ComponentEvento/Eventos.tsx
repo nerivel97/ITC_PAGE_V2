@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaSync,FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import styles from './Eventos.module.css';
 import { fetchEventos } from '../../../admin/services/eventos.service';
 import { IEvento } from '../../../admin/interfaces/evento.interface';
@@ -100,38 +100,46 @@ const Eventos: React.FC = () => {
     });
   };
 
-  if (loading) {
-    return (
+   // Estado de carga mejorado
+    if (loading) return (
       <div className={styles.loadingContainer}>
         <div className={styles.spinner}></div>
         <p>Cargando eventos...</p>
       </div>
     );
-  }
-
-  if (error) {
-    return (
+  
+    // Estado de error mejorado
+    if (error) return (
       <div className={styles.errorContainer}>
-        <h3 className={styles.errorTitle}>¡Ups! Algo salió mal</h3>
-        <p className={styles.errorMessage}>{error}</p>
-        <button 
-          className={styles.errorButton}
-          onClick={() => window.location.reload()}
-        >
-          Recargar página
-        </button>
+        <div className={styles.errorContent}>
+          <svg className={styles.errorIllustration} viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="90" fill="#e5e5fc"/>
+            <path d="M100,30 L105,140 L95,140 Z" fill="#4f72e6"/>
+            <circle cx="100" cy="170" r="10" fill="#4f72e6"/>
+          </svg>
+          <h3 className={styles.errorTitle}>¡Ups! Algo salió mal</h3>
+          <p className={styles.errorMessage}>{error}</p>
+          <button 
+            className={styles.errorButton}
+            onClick={() => window.location.reload()}
+          >
+            <FaSync className={styles.refreshIcon} /> Reintentar
+          </button>
+        </div>
       </div>
     );
-  }
-
-  if (eventos.length === 0) {
-    return (
+  
+    // Estado vacío mejorado
+    if (eventos.length === 0) return (
       <div className={styles.emptyState}>
+        <svg className={styles.emptyIllustration} viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="90" fill="#000f92"/>
+          <path d="M70,70 L130,130 M70,130 L130,70" stroke="#000f92" strokeWidth="3" strokeLinecap="round"/>
+        </svg>
         <h3>No hay eventos activos</h3>
         <p>Actualmente no hay eventos programados. Vuelve a revisar más tarde.</p>
       </div>
     );
-  }
 
   return (
     <section id="eventos-section" className={styles.eventosSection}>

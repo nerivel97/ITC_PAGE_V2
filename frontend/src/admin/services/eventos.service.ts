@@ -58,7 +58,7 @@ apiClient.interceptors.response.use(
     } else if (error.request) {
       // Error sin respuesta del servidor
       return Promise.reject({
-        message: 'No se recibió respuesta del servidor',
+        message: 'Error al cargar los eventos',
         code: 'NETWORK_ERROR',
         status: 0
       });

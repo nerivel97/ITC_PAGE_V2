@@ -319,7 +319,7 @@
   justify-content: center;
   align-items: center;
   min-height: 400px;
-  background-color: #f6f6ff;
+  background-color: #ffffff;
   border-radius: 12px;
   padding: 2rem;
   margin: 2rem auto;
@@ -328,22 +328,33 @@
   border: 1px solid #ebebff;
 }
 
+.errorContent {
+  text-align: center;
+  padding: 2rem;
+}
+
+.errorIllustration {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 1.5rem;
+}
+
 .errorTitle {
-  color: #000f92;
+  color: #4f72e6;
   font-size: 1.8rem;
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
 .errorMessage {
-  color: #00249c;
+  color: #4f72e6;
   font-size: 1.1rem;
   margin-bottom: 2rem;
   line-height: 1.6;
 }
 
 .errorButton {
-  background-color: #000f92;
+  background-color: #4f72e6;
   color: white;
   border: none;
   padding: 0.8rem 2rem;
@@ -360,9 +371,14 @@
 }
 
 .errorButton:hover {
-  background-color: #0420a0;
+  background-color: #4f72e6;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+.refreshIcon {
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
 }
 
 /* Estilos para estado vacío */
@@ -373,6 +389,13 @@
   border-radius: 12px;
   margin: 2rem auto;
   max-width: 600px;
+}
+
+.emptyIllustration {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
 }
 
 .emptyState h3 {

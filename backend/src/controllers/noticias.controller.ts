@@ -184,7 +184,7 @@ export class NoticiasController implements INoticiaController {
       throw new ApiError(400, 'El nombre del noticia no puede exceder 100 caracteres');
     }
 
-    if ('autor' in noticiaData && noticiaData.estado.length > 100) {
+    if ('autor' in noticiaData && noticiaData.autor.length > 100) {
       throw new ApiError(400, 'El nombre del autor no puede exceder 100 caracteres');
     }
 

@@ -6,7 +6,6 @@ import Eventos from '../components/HomeComponents/ComponentEvento/Eventos.tsx';
 import Noticias from '../components/HomeComponents/ComponentNoticias/Noticias.tsx';
 import InvestigacionYDesarrollo from '../components/HomeComponents/Investigacion&Desarrollo/InvestigacionYDesarrollo.tsx';
 import HistoriasQueInspiran from '../components/ComponenteHitoriasQueInspiran/HistoriasQueInspiran.tsx';
-import img from '../components/HomeComponents/ComponentEvento/img_evento/img_prueba.png';
 
 // Importar imágenes del carrusel
 import carouselImage1 from '../assets/sliderImage/1.jpeg';
@@ -43,41 +42,6 @@ const Home = () => {
     titulo: 'Eventos',
   }
 
-
-  const NOTICIAS_DATA = {
-    tituloSeccion: "Informativo",
-    subtitulo: "Participa en el Innovatec",
-    descripcion: "An FDA-approved gene therapy...",
-    imagen: img,
-    rutaPrincipal: "/",
-    sidebarArticulos: [
-      {
-        titulo: "Deportes",
-        descripcion: "Athletes win record-breaking...",
-        imagen: img,
-        ruta: "/",
-      },
-      {
-        titulo: "Deportes",
-        descripcion: "Athletes win record-breaking...",
-        imagen: img,
-        ruta: "/",
-      },
-      {
-        titulo: "Deportes",
-        descripcion: "Athletes win record-breaking...",
-        imagen: img,
-        ruta: "/",
-      },
-      {
-        titulo: "Deportes",
-        descripcion: "Athletes win record-breaking...",
-        imagen: img,
-        ruta: "/",
-      },
-      // ... otros artículos
-    ],
-  };
   const cardsDesarrollo = [
   {
     image: 'https://cdn.masmovil.es/embed/f942e33f77a798f172fd7fbf1244c4a1600708225/hablar-en-publico.jpg?imagick=1&size=1000',
@@ -128,7 +92,7 @@ const Home = () => {
         titulo={noticiast.titulo}
       />
 
-      <Noticias {...NOTICIAS_DATA} />
+      <Noticias />
 
       <Somos
         titulo={eventost.titulo}
