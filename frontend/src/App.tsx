@@ -15,6 +15,7 @@ import Page_Eventos from './pages/Page_Eventos';
 import Page_Eventos_c from './components/HomeComponents/ComponentEvento/Page_Eventos_c';
 import Page_Noticias from './pages/Page_Noticias';
 import Page_Noticias_c from './components/HomeComponents/ComponentNoticias/Page_Noticias_c';
+import QuienesSomosAdmin from './admin/pages/QuienesSomos/QuienesSomos';
 
 import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
 import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
@@ -56,6 +57,8 @@ const App: React.FC = () => {
           <Route path="/admin/oferta_educativa" element={<OfertTable />} />
           <Route path="/admin/admisiones" element={<AdmisionesTable />} />
           <Route path="/admin/Home_Page" element={<AdminHomeGallery />} />
+          <Route path="/admin/QuienesSomos" element={<QuienesSomosAdmin />} />
+
           {/* <Route path="oferta-educativa" element={<OfertaEducativaAdmin />} />s  */}
           {/* Agrega más rutas del admin aquí */}
         </Route>

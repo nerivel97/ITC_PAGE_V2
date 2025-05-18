@@ -10,6 +10,8 @@ const ComputerIcon = () => <span>💻</span>;
 const EventIcon = () => <span>📅</span>;
 const ArticleIcon = () => <span>📰</span>;
 const ContactMailIcon = () => <span>✉️</span>;
+const QuienSomosIcon = () => <span>🔍️</span>;
+
 
 const menuItems = [
   {
@@ -51,6 +53,11 @@ const menuItems = [
     name: "Contacto",
     path: "/admin/contacto",
     icon: <ContactMailIcon />,
+  },
+  {
+    name: "QuienesSomos",
+    path: "/admin/QuienesSomos",
+    icon: <QuienSomosIcon />,
   },
 ];
 
