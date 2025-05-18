@@ -13,7 +13,6 @@ const Page_Eventos_c = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Scroll al inicio y carga del evento
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
@@ -46,11 +45,12 @@ const Page_Eventos_c = () => {
       });
     } else {
       // Si venimos de la lista de eventos, regresamos ahí
-      navigate('/eventos', { replace: true });
+      navigate('/', { 
+        state: { scrollToEvents: true },
+        replace: true });
     }
   };
 
-  // Formateador de fechas
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
       weekday: 'long',
@@ -103,70 +103,86 @@ const Page_Eventos_c = () => {
   }
 
   return (
-    <div className={styles.eventoContainer}>
-      <button 
-        className={styles.backButton}
-        onClick={handleGoBack}
-      >
-        <FaArrowLeft /> Volver
-      </button>
-
-      <div className={styles.heroSection}>
-        <img 
-          src={evento.imagen || '/evento-default.jpg'} 
-          alt={evento.nombre_evento}
-          className={styles.heroImage}
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = '/evento-default.jpg';
-          }}
-        />
-        <div className={styles.heroOverlay}>
-          <h1 className={styles.eventTitle}>{evento.nombre_evento}</h1>
-          <div className={styles.eventMeta}>
-            <span className={styles.eventCategory}>{evento.categoria}</span>
-            <span className={styles.eventStatus}>{evento.estado}</span>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.contentContainer}>
-        <div className={styles.infoSection}>
-          <div className={styles.infoCard}>
-            <h2 className={styles.sectionTitle}>
-              <FaCalendarAlt /> Fechas del Evento
-            </h2>
-            <div className={styles.dateInfo}>
-              <div className={styles.dateItem}>
-                <strong>Inicio:</strong>
-                <span>{formatDate(evento.fecha_inicio)}</span>
-              </div>
-              <div className={styles.dateItem}>
-                <strong>Fin:</strong>
-                <span>{formatDate(evento.fecha_final)}</span>
+    <>
+      {/* Banner */}
+      <div className={styles.bannerContainer}>
+        <div className={styles.eventBanner}>
+          <img 
+            src={evento.imagen || '/evento-default.jpg'} 
+            alt={evento.nombre_evento}
+            className={styles.bannerImage}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/evento-default.jpg';
+            }}
+          />
+          <div className={styles.bannerOverlay}>
+            <div className={styles.bannerContent}>
+              <h1 className={styles.bannerTitle}>{evento.nombre_evento}</h1>
+              <div className={styles.bannerTags}>
+                {evento.categoria && (
+                  <span className={styles.bannerTag}>{evento.categoria}</span>
+                )}
+                {evento.estado && (
+                  <span className={`${styles.bannerTag} ${styles[evento.estado.toLowerCase()]}`}>
+                    {evento.estado}
+                  </span>
+                )}
               </div>
             </div>
           </div>
-
-          <div className={styles.infoCard}>
-            <h2 className={styles.sectionTitle}>
-              <FaMapMarkerAlt /> Información Adicional
-            </h2>
-            <p className={styles.locationText}>
-              Para más detalles sobre este evento, contacta a los organizadores.
-            </p>
-          </div>
         </div>
+      </div>
 
-        <div className={styles.descriptionSection}>
-          <h2 className={styles.sectionTitle}>Descripción del Evento</h2>
-          <div className={styles.descriptionContent}>
-            {evento.descripcion.split('\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+      {/* Contenido */}
+      <div className={styles.contentWrapper}>
+        <div className={styles.eventoContainer}>
+          <button 
+            className={styles.backButton}
+            onClick={handleGoBack}
+          >
+            <FaArrowLeft /> Volver
+          </button>
+
+          <div className={styles.contentContainer}>
+            <div className={styles.infoSection}>
+              <div className={styles.infoCard}>
+                <h2 className={styles.sectionTitle}>
+                  <FaCalendarAlt /> Fechas del Evento
+                </h2>
+                <div className={styles.dateInfo}>
+                  <div className={styles.dateItem}>
+                    <strong>Inicio:</strong>
+                    <span>{formatDate(evento.fecha_inicio)}</span>
+                  </div>
+                  <div className={styles.dateItem}>
+                    <strong>Fin:</strong>
+                    <span>{formatDate(evento.fecha_final)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.infoCard}>
+                <h2 className={styles.sectionTitle}>
+                  <FaMapMarkerAlt /> Información Adicional
+                </h2>
+                <p className={styles.locationText}>
+                  {'Para más detalles sobre este evento, contacta a los organizadores.'}
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.descriptionSection}>
+              <h2 className={styles.sectionTitle}>Descripción del Evento</h2>
+              <div className={styles.descriptionContent}>
+                {evento.descripcion.split('\n').map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
