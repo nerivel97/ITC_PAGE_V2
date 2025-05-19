@@ -45,7 +45,7 @@ const App: React.FC = () => {
           <Route path='/noticias' element={<Page_Noticias />} />
           <Route path='/noticias/:id' element={<Page_Noticias_c />} />
 
-	        <Route path='/resultados' element={<Resultados />} />
+	        <Route path='/Resultados' element={<Resultados />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}

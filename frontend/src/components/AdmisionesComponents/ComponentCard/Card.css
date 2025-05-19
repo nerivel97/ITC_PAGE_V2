@@ -8,12 +8,10 @@
   display: flex;
   align-items: center;
   padding: 24px;
-  background-color: white;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 10px auto;
-  gap: 16px;
+  max-width: 1000px;
+  margin: 60px auto;
+  gap: 32px;
 }
 
 .card-container.reverse {
@@ -21,31 +19,44 @@
 }
 
 .card-logo {
-  width: 96px;
-  height: 96px;
+  width: 144px;
+  height: 144px;
   object-fit: cover;   
   border-radius: 50%;  
 }
 
 .card-content {
-  background-color: #cffafe;
   padding: 16px;
   border-radius: 12px;
   flex: 1;
-  text-align: center;
+  text-align: left;
 }
 
 .card-title {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: bold;
-  color: #1f2937;
+  color: #000000;
   text-transform: uppercase;
   margin-bottom: 8px;
+  position: relative; /* Add this */
+  display: inline-block; /* Add this */
+  padding-bottom: 12px; /* Add space below the text for the line */
+}
+
+.card-title::after {
+  content: "";
+  position: absolute; /* Change from relative to absolute */
+  bottom: 0;
+  left: 0;
+  width: 130px;
+  height: 4px;
+  background-color: #0066cc;
+  display: block; /* Add this */
 }
 
 .card-text {
-  font-size: 0.875rem;
-  color: #374151;
+  font-size: 1rem;
+  color: #000000;
 }
 
 .card-button {
