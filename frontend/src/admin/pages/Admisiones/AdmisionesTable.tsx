@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Button,
   Table,
-  Space,
+  //TODO Space,
   Modal,
   message,
   Typography,
@@ -12,13 +12,13 @@ import {
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import AdmisionForm from './AdmisionForm';
-import RequisitoForm from './AdmisionForm';
-import ProcesoForm from './AdmisionForm';
+//TODO import RequisitoForm from './AdmisionForm';
+//TODO import ProcesoForm from './AdmisionForm';
 import {
   fetchAdmisiones,
-  fetchRequisitos,
-  fetchProcesos,
-  deleteAdmision
+  //fetchRequisitos,
+  //fetchProcesos,
+  //deleteAdmision
 } from '../../services/admisiones.service';
 import { IAdmision } from '../../interfaces/admision.interface';
 import { IRequisito } from '../../interfaces/admision.interface';
@@ -29,8 +29,8 @@ const { Text } = Typography;
 
 const AdmisionesTable: React.FC = () => {
   const [admisiones, setAdmisiones] = useState<IAdmision[]>([]);
-  const [requisitos, setRequisitos] = useState<IRequisito[]>([]);
-  const [procesos, setProcesos] = useState<IProceso[]>([]);
+  //const [requisitos, setRequisitos] = useState<IRequisito[]>([]);
+  //const [procesos, setProcesos] = useState<IProceso[]>([]);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalType, setModalType] = useState<'admision' | 'requisito' | 'proceso'>('admision');
@@ -39,21 +39,21 @@ const AdmisionesTable: React.FC = () => {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [admData, reqData, procData] = await Promise.all([
+      const [admData/*, reqData, procData*/] = await Promise.all([
         fetchAdmisiones(),
-        fetchRequisitos(),
-        fetchProcesos()
+        /* fetchRequisitos(),
+        fetchProcesos() */
       ]);
 
       const formattedAdmisiones = admData.map(admision => ({
         ...admision,
         key: admision.id_admision?.toString() || Math.random().toString(),
-        fecha_solicitud: admision.fecha_solicitud ? new Date(admision.fecha_solicitud).toISOString() : ''
+        //fecha_solicitud: admision.fecha_solicitud ? new Date(admision.fecha_solicitud).toISOString() : ''
       }));
 
       setAdmisiones(formattedAdmisiones);
-      setRequisitos(reqData);
-      setProcesos(procData);
+      //setRequisitos(reqData);
+      //setProcesos(procData);
     } catch (error) {
       console.error(error);
       message.error('Error al cargar los datos');
@@ -66,7 +66,7 @@ const AdmisionesTable: React.FC = () => {
     loadData();
   }, []);
 
-  const handleDelete = (id: number) => {
+  /* TODO const handleDelete = (id: number) => {
     Modal.confirm({
       title: '¿Eliminar solicitud de admisión?',
       content: 'Esta acción no se puede deshacer',
@@ -84,7 +84,7 @@ const AdmisionesTable: React.FC = () => {
         }
       }
     });
-  };
+  }; */
 
   const admisionColumns: ColumnsType<IAdmision> = [
     {
@@ -255,7 +255,7 @@ const AdmisionesTable: React.FC = () => {
       >
         <Table
           columns={requisitosColumns}
-          dataSource={requisitos}
+          //dataSource={requisitos}
           rowKey="id_requisito"
           pagination={{ pageSize: 5 }}
         />
@@ -278,7 +278,7 @@ const AdmisionesTable: React.FC = () => {
       >
         <Table
           columns={procesosColumns}
-          dataSource={procesos}
+          //dataSource={procesos}
           rowKey="id_proceso"
           pagination={{ pageSize: 5 }}
         />
@@ -301,7 +301,8 @@ const AdmisionesTable: React.FC = () => {
           />
         )}
         {modalType === 'requisito' && (
-          <RequisitoForm
+          <AdmisionForm
+            admision={selectedAdmision}
             onCancel={() => setModalVisible(false)}
             onSuccess={() => {
               setModalVisible(false);
@@ -310,7 +311,8 @@ const AdmisionesTable: React.FC = () => {
           />
         )}
         {modalType === 'proceso' && (
-          <ProcesoForm
+          <AdmisionForm
+            admision={selectedAdmision}
             onCancel={() => setModalVisible(false)}
             onSuccess={() => {
               setModalVisible(false);

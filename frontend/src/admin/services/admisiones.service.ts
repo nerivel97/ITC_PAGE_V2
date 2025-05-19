@@ -1,4 +1,4 @@
-import { IAdmision } from '../interfaces/admision.interface';
+import { IAdmision /*, IProceso, IRequisito */ } from '../interfaces/admision.interface';
 
 // Datos de ejemplo para mostrar en el panel
 const mockAdmisiones: IAdmision[] = [
@@ -8,6 +8,7 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Otoño',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: undefined
   },
   {
     id_admision: 2,
@@ -15,6 +16,7 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Otoño',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: undefined
   },
   {
     id_admision: 3,
@@ -22,6 +24,7 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Primavera',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: undefined
   },
   {
     id_admision: 4,
@@ -29,6 +32,7 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Otoño',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: undefined
   },
   {
     id_admision: 5,
@@ -36,10 +40,11 @@ const mockAdmisiones: IAdmision[] = [
     periodo: 'Primavera',
     fecha_inicio: '2024-05-15T10:30:00Z',
     fecha_fin: '2024-05-15T10:30:00Z',
+    fecha_solicitud: undefined
   },
 ];
 
-const mockRequisitos: IRequisito[] = [
+/* const mockRequisitos: IRequisito[] = [
   {
     id_requisito: 1,
     descripcion: 'Descripcion 1',
@@ -93,7 +98,7 @@ const mockProcesos: IProceso[] = [
     id_convocatoria: '1',
     descripcion: 'Descripcion 5',
   },
-];
+]; */
 
 /**
  * Obtiene todas las admisiones
@@ -107,23 +112,23 @@ export const fetchAdmisiones = async (): Promise<IAdmision[]> => {
   });
 };
 
-export const fetchRequisitos = async (): Promise<IRequisito[]> => {
+/* export const fetchRequisitos = async (): Promise<IRequisito[]> => {
   // Simulación de una llamada a API con datos de ejemplo
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockRequisitos);
     }, 1000);
   });
-};
+}; */
 
-export const fetchProcesos = async (): Promise<IProceso[]> => {
+/* export const fetchProcesos = async (): Promise<IProceso[]> => {
   // Simulación de una llamada a API con datos de ejemplo
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockProcesos);
     }, 1000);
   });
-};
+}; */
 
 /**
  * Crea una nueva admisión
@@ -160,11 +165,11 @@ export const updateAdmision = async (id: number, admision: Omit<IAdmision, 'id_a
 /**
  * Elimina una admisión por su ID
  */
-export const deleteAdmision = async (id: number): Promise<void> => {
+/* export const deleteAdmision = async (id: number): Promise<void> => {
   // Simulación de una llamada a API para eliminar un registro
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, 1000);
   });
-}; 
+}; */
