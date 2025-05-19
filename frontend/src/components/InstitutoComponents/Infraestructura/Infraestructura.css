@@ -13,7 +13,7 @@
 }
 
 .infraestructura .descripcion {
-    font-size: 16px;
+    font-size: 20px;
     color: #555;
     max-width: 700px;
     margin: 0 auto 40px;
@@ -43,9 +43,8 @@
 .btn-infraestructura {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #007bff;
-    /* Azul bonito */
-    color: #fff;
+    background-color: #c9def0;
+    color: #000000;
     text-decoration: none;
     border: none;
     border-radius: 8px;
@@ -56,6 +55,6 @@
 }
 
 .btn-infraestructura:hover {
-    background-color: #0056b3;
+    background-color: #93bee4;
     /* Azul más oscuro al pasar el mouse */
 }

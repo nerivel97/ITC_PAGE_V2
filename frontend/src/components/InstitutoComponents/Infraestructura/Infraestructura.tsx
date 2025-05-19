@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Infraestructura.css';
-import lab from'../../../assets/Fotos/Laboratorio.jpeg';
-import cancha from'../../../assets/Fotos/Cancha Deportiva.jpg';
-import cafeteria from'../../../assets/Fotos/Entrada.jpg';
-import auditorio from'../../../assets/Fotos/Auditorio.jpeg';
-import entrada from'../../../assets/Fotos/Entrada.jpg';
-import { useNavigate } from 'react-router-dom'; // Solo este cambio en imports
+import lab from '../../../assets/Fotos/Laboratorio.jpeg';
+import cancha from '../../../assets/Fotos/Cancha Deportiva.jpg';
+import cafeteria from '../../../assets/Fotos/Entrada.jpg';
+import auditorio from '../../../assets/Fotos/Auditorio.jpeg';
+import entrada from '../../../assets/Fotos/Entrada.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const Infraestructura: React.FC = () => {
-    const navigate = useNavigate(); // Añadido aquí
+    const navigate = useNavigate();
+
+    // Aquí forzamos el scroll arriba cuando se muestra esta página
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="infraestructura" data-aos="fade-up">
@@ -23,8 +28,9 @@ const Infraestructura: React.FC = () => {
                 <img src={auditorio} alt="Auditorio" />
                 <img src={entrada} alt="Entrada" />
             </div>
+            <br />
             <button 
-                onClick={() => navigate('/infraestructura')} // Único cambio en el botón
+                onClick={() => navigate('/infraestructura')}
                 className="btn-infraestructura"
             >
                 Infraestructura
@@ -34,3 +40,4 @@ const Infraestructura: React.FC = () => {
 };
 
 export default Infraestructura;
+

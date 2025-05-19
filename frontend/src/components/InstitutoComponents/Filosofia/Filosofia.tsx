@@ -1,5 +1,8 @@
 import React from 'react';
 import './Filosofia.css';
+import graduados from '../../../assets/Fotos/Quienes_somos/graduados.png';
+import estudiantes from '../../../assets/Fotos/Quienes_somos/Estudiantes.png';
+import campana from '../../../assets/Fotos/Quienes_somos/Campana.jpeg';
 
 const Filosofia: React.FC = () => {
     return (
@@ -14,9 +17,18 @@ const Filosofia: React.FC = () => {
                 </p>
             </div>
             <div className="circulos-filosofia">
-                <div className="circulo imagen1"></div>
-                <div className="circulo imagen2"></div>
-                <div className="circulo imagen3"></div>
+               <div
+                    className="circulo"
+                    style={{ backgroundImage: `url(${graduados})`, top: '0', left: '60px', zIndex: 5 }}
+                />
+                <div
+                    className="circulo"
+                    style={{ backgroundImage: `url(${estudiantes})`, top: '60px', left: '110px', zIndex: 2 }}
+                />
+                <div
+                    className="circulo"
+                    style={{ backgroundImage: `url(${campana})`, top: '120px', left: '0px', zIndex: 1 }}
+                />
             </div>
         </div>
     );

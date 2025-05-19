@@ -33,6 +33,7 @@
     border-radius: 10px;
 }
 
+
 .seccion h2 {
     position: relative;
     display: inline-block;
@@ -46,4 +47,5 @@
     height: 4px;
     background-color: #0078D7;
     margin-top: 8px;
+
 }

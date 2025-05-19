@@ -1,8 +1,8 @@
 import './ContenidoInfra.css';
 
 import escuela1 from '../../../assets/Fotos/Infraestructura/escuela.png';
-import escuela2 from '../../../assets/Fotos/Infraestructura/escuela.png';
-import escuela3 from '../../../assets/Fotos/Infraestructura/escuela.png';
+import escuela2 from '../../../assets/Fotos/Infraestructura/escuela2.jpeg';
+import escuela3 from '../../../assets/Fotos/Infraestructura/escuela1.jpeg';
 
 import laboratorio1 from '../../../assets/Fotos/Infraestructura/laboratorio.jpg';
 import laboratorio2 from '../../../assets/Fotos/Infraestructura/laboratorio2.jpg';
@@ -12,8 +12,8 @@ import biblioteca1 from '../../../assets/Fotos/Infraestructura/biblioteca.jpg';
 import biblioteca2 from '../../../assets/Fotos/Infraestructura/biblioteca2.jpg';
 import biblioteca3 from '../../../assets/Fotos/Infraestructura/biblioteca3.jpg';
 
-import deportes1 from '../../../assets/Fotos/Infraestructura/deportes1.jpg';
-import deportes2 from '../../../assets/Fotos/Infraestructura/deportes2.jpg';
+import deportes1 from '../../../assets/Fotos/Infraestructura/deportes1.jpeg';
+import deportes2 from '../../../assets/Fotos/Infraestructura/deportes2.jpeg';
 import deportes3 from '../../../assets/Fotos/Infraestructura/deportes3.jpg';
 
 import aula1 from '../../../assets/Fotos/Infraestructura/aula.jpg';
