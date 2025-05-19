@@ -1,4 +1,5 @@
 export interface IAdmision {
+  fecha_solicitud: any;
   id_admision?: number;
   anio: number;
   periodo: string;

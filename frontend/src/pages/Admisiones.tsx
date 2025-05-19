@@ -2,8 +2,11 @@ import React from 'react';
 import Card from '../components/AdmisionesComponents/ComponentCard/Card';
 import Title from '../components/AdmisionesComponents/ComponentTitle/Title';
 import styles from '../components/AdmisionesComponents/Home.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Admisiones: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div className={styles.pageContainer}>
     
@@ -31,6 +34,12 @@ const Admisiones: React.FC = () => {
             description='Revisa los temas y áreas de conocimiento que serán evaluados en el examen de admisión. Ideal para preparar tu ingreso al TECNM con tiempo y enfoque.'
             reverse={true} />
 
+            <Card imageUrl="/src/assets/Fotos/Admisiones/Libro.png" 
+            title='RESULTADOS'
+            description='Revisa los resultados de los exámenes de admisiones.'
+            buttonText='Ver más'
+            reverse={false}
+            onButtonClick={() => navigate("/Resultados")}  />
         </div>
     );
 };

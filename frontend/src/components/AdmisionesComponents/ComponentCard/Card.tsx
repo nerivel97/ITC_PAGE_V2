@@ -8,6 +8,7 @@ type Props = {
   title?: string;
   description?: string;
   buttonText?: string;
+  onButtonClick?: () => void; // ✅ NUEVA PROP
 };
 
 const ConvocatoriaCard: React.FC<Props> = ({
@@ -16,7 +17,8 @@ const ConvocatoriaCard: React.FC<Props> = ({
   imageUrl = "/default-image.png",
   title = "Título por defecto",
   description = "Descripción por defecto del contenido de la convocatoria.",
-  buttonText = "Ver más",
+  buttonText = "Descargar",
+  onButtonClick, // ✅ USO DE LA NUEVA PROP
 }) => {
   const [imageSrc, setImageSrc] = useState<string>(imageUrl);
 
@@ -34,7 +36,9 @@ const ConvocatoriaCard: React.FC<Props> = ({
       <div className="card-content">
         <h2 className="card-title">{title}</h2>
         <p className="card-text">{description}</p>
-        <button className="card-button">{buttonText}</button>
+        <button className="card-button" onClick={onButtonClick}>
+          {buttonText}
+        </button>
       </div>
       {isAdmin && (
         <div className="admin-controls">
