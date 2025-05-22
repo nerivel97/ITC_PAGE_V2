@@ -1,0 +1,10 @@
+.env*
+!.env*.example
+vendor/
+node_modules/
+.idea/
+.DS_Store
+/public/storage
+/public/hot
+/public/manifest.json
+/public/sw.js
