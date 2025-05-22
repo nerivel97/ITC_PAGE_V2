@@ -5,11 +5,16 @@
     <h1 class="text-2xl font-bold mb-4">Crear carrera</h1>
 
     <div class="max-w-lg mx-auto">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="flex flex-col gap-8">
                 <div class="flex flex-col gap-2">
                     <label for="title" class="font-bold">Título</label>
-                    <input type="text" id="title" name="title" class="border border-gray-300 p-2 rounded-md" required>
+                    <input type="text" id="title" name="title" class="border border-gray-300 p-2 rounded-md" value="<?= $_POST['title'] ?? '' ?>" required>
+                    <div>
+                        <?php if (isset($errors['title'])) : ?>
+                            <p class="text-red-500 text-sm"><?= $errors['title'] ?></p>
+                        <?php endif; ?>
+                    </div>
                 </div> <!-- End title -->
 
                 <div class="flex flex-col gap-2">
@@ -19,16 +24,31 @@
                         <option value="maestria">Maestría</option>
                         <option value="doctorado">Doctorado</option>
                     </select>
+                    <div>
+                        <?php if (isset($errors['tipo'])) : ?>
+                            <p class="text-red-500 text-sm"><?= $errors['tipo'] ?></p>
+                        <?php endif; ?>
+                    </div>
                 </div> <!-- End tipo -->
 
                 <div class="flex flex-col gap-2">
                     <label for="description" class="font-bold">Descripción</label>
-                    <textarea title="Descripción" id="description" name="description" class="border border-gray-300 p-2 rounded-md"></textarea>
+                    <textarea title="Descripción" id="description" name="description" class="border border-gray-300 p-2 rounded-md"><?= $_POST['description'] ?? '' ?></textarea>
+                    <div>
+                        <?php if (isset($errors['description'])) : ?>
+                            <p class="text-red-500 text-sm"><?= $errors['description'] ?></p>
+                        <?php endif; ?>
+                    </div>
                 </div> <!-- End description -->
 
                 <div class="flex flex-col gap-2">
                     <label for="bg_color" class="font-bold">Color de fondo</label>
-                    <input type="color" id="bg_color" name="bg_color" class="border border-gray-300 p-2 rounded-md">
+                    <input type="color" id="bg_color" name="bg_color" class="border border-gray-300 p-2 rounded-md" value="<?= $_POST['bg_color'] ?? '#cdcdcd' ?>" required>
+                    <div>
+                        <?php if (isset($errors['bg_color'])) : ?>
+                            <p class="text-red-500 text-sm"><?= $errors['bg_color'] ?></p>
+                        <?php endif; ?>
+                    </div>
                 </div> <!-- End bg color -->
 
                 <div class="flex flex-col gap-2">
@@ -77,6 +97,7 @@
 </main>
 
 <script>
+    // Preview the image when selected
     $('[type=file]').change(function(event) {
         const target = event.target;
         const file = event.target.files[0];
@@ -90,7 +111,12 @@
         }
 
         reader.readAsDataURL(file);
-    })
+    });
+</script>
+
+<script>
+    // Set the default value for the select element
+    $('select[name="tipo"]').val('<?= $_POST['tipo'] ?? 'licenciatura' ?>');
 </script>
 
 <?php require base_path('views/partials/foot.php') ?>
