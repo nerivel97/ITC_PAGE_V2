@@ -13,4 +13,4 @@ $title = $career['title'];
 
 $heading = $career['title'];
 
-require base_path('views/carrera.view.php');
+require base_path('views/carreras/show.view.php');

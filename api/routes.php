@@ -2,7 +2,7 @@
 
 return [
     '/' => 'index',
-    '/carreras' => 'carreras',
-    '/carrera' => 'carrera',
-    '/carreras/crear' => 'carreras-crear',
+    '/carreras' => 'carreras/index',
+    '/carrera' => 'carreras/show',
+    '/carreras/crear' => 'carreras/create',
 ];

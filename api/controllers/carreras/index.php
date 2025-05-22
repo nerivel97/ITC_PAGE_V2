@@ -9,4 +9,4 @@ $title = 'Carreras';
 
 $careers = $db->query('SELECT * FROM carreras')->findMany();
 
-require base_path('views/carreras.view.php');
+require base_path('views/carreras/index.view.php');

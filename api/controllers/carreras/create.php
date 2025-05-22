@@ -27,4 +27,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $title = 'Crear carrera';
 
-require base_path('views/carreras-crear.view.php');
+require base_path('views/carreras/create.view.php');
