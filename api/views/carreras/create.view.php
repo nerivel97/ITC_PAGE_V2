@@ -89,7 +89,7 @@
 
                 <div class="flex justify-between">
                     <a href="/carreras" class="px-4 py-2 font-bold">Cancelar</a>
-                    <button type="submit" class="bg-blue-500 px-4 py-2 text-white font-bold rounded-md">Guardar carrera</button>
+                    <button type="submit" class="bg-blue-500 px-4 py-2 text-white font-bold rounded-md cursor-pointer">Guardar carrera</button>
                 </div> <!-- End actions -->
             </div> <!-- End from wrapper -->
         </form> <!-- End form -->

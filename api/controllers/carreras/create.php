@@ -1,5 +1,7 @@
 <?php
 
+use Core\Database;
+
 $config = require base_path('config.php');
 extract($config['database']);
 
@@ -25,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$title = 'Crear carrera';
-
-require base_path('views/carreras/create.view.php');
+view('carreras/create', [
+    'title' => 'Crear carrera',
+    'errors' => $errors,
+]);

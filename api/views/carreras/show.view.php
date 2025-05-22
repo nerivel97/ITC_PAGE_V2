@@ -14,11 +14,17 @@
         <?= json_encode($career) ?>
     </pre>
 
-    <script>
-        const career = <?= json_encode($career) ?>;
-        document.querySelector('pre').textContent = JSON.stringify(career, null, 2);
-    </script>
+    <form class="mt-6" method="post">
+        <!-- <input type="hidden" name="_method" value="DELETE"> -->
+        <input type="hidden" name="id" value="<?= $career['id'] ?>">
+        <button type="submit" class="text-red-500 underline cursor-pointer">Eliminar carrera</button>
+    </form>
 
 </main>
+
+<script>
+    const career = <?= json_encode($career) ?>;
+    document.querySelector('pre').textContent = JSON.stringify(career, null, 2);
+</script>
 
 <?php require base_path('views/partials/foot.php') ?>

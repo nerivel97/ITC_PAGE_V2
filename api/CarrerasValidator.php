@@ -1,5 +1,8 @@
 <?php
 
+use Core\StringValidator;
+use Core\UnionLiteralValidator;
+
 class CarrerasValidator {
     public static function validate(mixed $data): array {
         $errors = [];

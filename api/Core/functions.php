@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 function dump(mixed $data): void {
     echo "<pre>";
     var_dump($data);
@@ -17,20 +19,6 @@ function url_is(string $url): bool {
     return $_SERVER['REQUEST_URI'] === $url;
 }
 
-function route_to_controller(string $path, array $routes): void {
-    if (array_key_exists($path, $routes)) {
-        require base_path("controllers/{$routes[$path]}.php");
-    } else {
-        abort();
-    }
-}
-
-function abort(int $code = 404): void {
-    http_response_code($code);
-    require base_path("views/{$code}.php");
-    die();
-}
-
 function authorize(
     bool $condition,
     int $statusCode = Response::FORBIDDEN
@@ -40,8 +28,18 @@ function authorize(
     }
 }
 
+function redirect(string $path): void {
+    header("Location: $path");
+    exit;
+}
+
 function base_path(string $path): string {
-    return __DIR__ . "/$path";
+    return BASE_PATH . "$path";
+}
+
+function view(string $view, array $attributes = []): void {
+    extract($attributes);
+    require base_path("views/{$view}.view.php");
 }
 
 function strip_accents(string $string): string {
