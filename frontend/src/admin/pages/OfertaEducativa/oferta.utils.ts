@@ -31,10 +31,10 @@ export function formDataToCarrera(data: ICarreraFormData): ICarrera {
       })) ?? []),
     ],
 
-    perfil_alumno: [
-      { tipo: 'ingreso', descripcion: data.perfil_ingreso || '' },
-      { tipo: 'egreso', descripcion: data.perfil_egreso || '' },
-    ],
+    perfil_alumno: data.perfil_alumno?.map(perfil => ({
+      tipo: perfil.tipo,
+      descripcion: perfil.descripcion
+    })) ?? [],
 
     campos_laborales: (data.campos_laborales ?? []).map((descripcion, i) => ({
       descripcion,
@@ -76,8 +76,10 @@ export function carreraToFormData(carrera: ICarrera): ICarreraFormData {
       .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
       .map(item => item.contenido) ?? [],
 
-    perfil_ingreso: carrera.perfil_alumno?.find(p => p.tipo === 'ingreso')?.descripcion ?? '',
-    perfil_egreso: carrera.perfil_alumno?.find(p => p.tipo === 'egreso')?.descripcion ?? '',
+    perfil_alumno: carrera.perfil_alumno?.map(perfil => ({
+      tipo: perfil.tipo,
+      descripcion: perfil.descripcion
+    })) ?? [],
 
     campos_laborales: carrera.campos_laborales
       ?.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))

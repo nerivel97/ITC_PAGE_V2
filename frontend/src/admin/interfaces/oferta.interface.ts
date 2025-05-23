@@ -55,9 +55,11 @@ export interface ICarreraFormData {
   visiones?: string[];
   objetivos?: string[];
 
-  perfil_ingreso?: string;
-  perfil_egreso?: string;
-
+  perfil_alumno?: Array<{
+  tipo: TipoPerfilAlumno;
+  descripcion: string;
+  }>;
+  
   campos_laborales?: string[];
   funciones_profesionales?: string[];
 }

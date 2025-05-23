@@ -88,7 +88,7 @@ class CarreraService {
             $carrera->campos_laborales = $this->getCamposLaborales($id);
             $carrera->funciones_profesionales = $this->getFuncionesProfesionales($id);
             $carrera->mision_vision_objetivos = $this->getMisionVisionObjetivo($id);
-            $carrera->perfiles_alumno = $this->getPerfilesAlumno($id);
+            $carrera->perfil_alumno = $this->getPerfilesAlumno($id);
 
             return $carrera;
         } catch (PDOException $e) {
@@ -113,7 +113,7 @@ class CarreraService {
             $carrera->campos_laborales = $this->getCamposLaborales($carrera->id);
             $carrera->funciones_profesionales = $this->getFuncionesProfesionales($carrera->id);
             $carrera->mision_vision_objetivos = $this->getMisionVisionObjetivo($carrera->id);
-            $carrera->perfiles_alumno = $this->getPerfilesAlumno($carrera->id);
+            $carrera->perfil_alumno = $this->getPerfilesAlumno($carrera->id);
 
             return $carrera;
         } catch (PDOException $e) {
@@ -265,13 +265,13 @@ class CarreraService {
         }
 
         // Perfiles alumno
-        if (!empty($carrera->perfiles_alumno)) {
+        if (!empty($carrera->perfil_alumno)) {
             $stmt = $this->db->prepare("
                 INSERT INTO perfil_alumno (carrera_id, tipo, descripcion)
                 VALUES (?, ?, ?)
             ");
             
-            foreach ($carrera->perfiles_alumno as $perfil) {
+            foreach ($carrera->perfil_alumno as $perfil) {
                 $stmt->execute([
                     $carreraId,
                     $perfil['tipo'],

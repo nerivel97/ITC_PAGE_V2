@@ -175,7 +175,7 @@ class CarreraController {
         $carrera->campos_laborales = $data['campos_laborales'] ?? [];
         $carrera->funciones_profesionales = $data['funciones_profesionales'] ?? [];
         $carrera->mision_vision_objetivos = $data['mision_vision_objetivos'] ?? [];
-        $carrera->perfiles_alumno = $data['perfiles_alumno'] ?? [];
+        $carrera->perfil_alumno = $data['perfil_alumno'] ?? [];
     }
 
     private function jsonResponse(Response $response, array $data, int $statusCode): Response {

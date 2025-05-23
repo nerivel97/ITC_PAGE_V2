@@ -7,14 +7,12 @@ import {
   Typography,
   Space,
   Divider,
-  Row,
-  Col,
   Card,
 } from 'antd';
 import { SketchPicker } from 'react-color';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-
 import { ICarreraFormData } from '../../interfaces/oferta.interface';
+import styles from '../OfertaEducativa/OfertForm.module.css';
 
 const { Option } = Select;
 const { Title, Text } = Typography;
@@ -118,52 +116,56 @@ const CarreraForm: React.FC<CarreraFormProps> = ({
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-      initialValues={{
-        misiones: [],
-        visiones: [],
-        objetivos: [],
-        campos_laborales: [],
-        funciones_profesionales: [],
-        bg_color: '#3366ff',
-        ...initialValues,
-      }}
-    >
-      <Title level={3}>{initialValues?.id ? 'Editar Carrera' : 'Nueva Carrera'}</Title>
+    <div className={styles.formContainer}>
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        initialValues={{
+          misiones: [],
+          visiones: [],
+          objetivos: [],
+          campos_laborales: [],
+          funciones_profesionales: [],
+          perfil_alumno: initialValues?.perfil_alumno || [],
+          bg_color: '#3366ff',
+          ...initialValues,
+        }}
+      >
+        <Title level={3} className={styles.formTitle}>
+          {initialValues?.id ? 'Editar Carrera' : 'Nueva Carrera'}
+        </Title>
 
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item
-            label="Nombre de la carrera"
-            name="title"
-            rules={[{ required: true, message: 'El nombre es requerido' }]}
-          >
-            <Input onChange={handleTitleChange} placeholder="Ejemplo: Ingeniería en Sistemas" />
-          </Form.Item>
+        <Form.Item
+          label="Nombre de la carrera"
+          name="title"
+          rules={[{ required: true, message: 'El nombre es requerido' }]}
+        >
+          <Input onChange={handleTitleChange} placeholder="Ejemplo: Ingeniería en Sistemas" />
+        </Form.Item>
 
-          <Form.Item
-            label="URL Slug"
-            name="url_slug"
-            rules={[{ required: true, message: 'El slug es requerido' }]}
-          >
-            <Input placeholder="ingenieria-en-sistemas" />
-          </Form.Item>
+        <Form.Item
+          label="URL Slug"
+          name="url_slug"
+          rules={[{ required: true, message: 'El slug es requerido' }]}
+          className={styles.urlInput}
+        >
+          <Input placeholder="ingenieria-en-sistemas" />
+        </Form.Item>
 
-          <Form.Item label="Tipo de carrera" name="tipo" rules={[{ required: true }]}>
-            <Select placeholder="Selecciona tipo">
-              <Option value="licenciatura">Licenciatura</Option>
-              <Option value="maestria">Maestría</Option>
-              <Option value="doctorado">Doctorado</Option>
-            </Select>
-          </Form.Item>
+        <Form.Item label="Tipo de carrera" name="tipo" rules={[{ required: true }]}>
+          <Select placeholder="Selecciona tipo">
+            <Option value="licenciatura">Licenciatura</Option>
+            <Option value="maestria">Maestría</Option>
+            <Option value="doctorado">Doctorado</Option>
+          </Select>
+        </Form.Item>
 
-          <Form.Item label="Descripción" name="description">
-            <TextArea rows={4} />
-          </Form.Item>
+        <Form.Item label="Descripción" name="description">
+          <TextArea rows={4} />
+        </Form.Item>
 
+        <div className={styles.colorPickerContainer}>
           <Form.Item label="Color de fondo" name="bg_color">
             <SketchPicker
               color={color}
@@ -173,46 +175,81 @@ const CarreraForm: React.FC<CarreraFormProps> = ({
               }}
             />
           </Form.Item>
-        </Col>
+        </div>
 
-        <Col span={12}>
-          <Divider>Misiones</Divider>
-          <DynamicListInput label="" name="misiones" placeholder="Agregar misión y presiona Enter" />
+        <Divider>Misiones</Divider>
+        <DynamicListInput label="" name="misiones" placeholder="Agregar misión y presiona Enter" />
 
-          <Divider>Visiones</Divider>
-          <DynamicListInput label="" name="visiones" placeholder="Agregar visión y presiona Enter" />
+        <Divider>Visiones</Divider>
+        <DynamicListInput label="" name="visiones" placeholder="Agregar visión y presiona Enter" />
 
-          <Divider>Objetivos</Divider>
-          <DynamicListInput label="" name="objetivos" placeholder="Agregar objetivo y presiona Enter" />
+        <Divider>Objetivos</Divider>
+        <DynamicListInput label="" name="objetivos" placeholder="Agregar objetivo y presiona Enter" />
 
-          <Divider>Perfil de Ingreso</Divider>
-          <Form.Item label="" name="perfil_ingreso">
-            <TextArea rows={3} placeholder="Descripción perfil de ingreso" />
+        <Divider>Perfil del Alumno</Divider>
+        <Form.List name="perfil_alumno">
+          {(fields, { add, remove }) => (
+            <>
+              {fields.map(({ key, name, ...restField }) => (
+                <Card key={key} className={styles.listItemCard} style={{ marginBottom: 16 }}>
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'tipo']}
+                    label="Tipo"
+                    rules={[{ required: true }]}
+                  >
+                    <Select>
+                      <Option value="ingreso">Ingreso</Option>
+                      <Option value="egreso">Egreso</Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'descripcion']}
+                    label="Descripción"
+                    rules={[{ required: true }]}
+                  >
+                    <TextArea rows={3} />
+                  </Form.Item>
+                  <Button
+                    danger
+                    icon={<DeleteOutlined />}
+                    onClick={() => remove(name)}
+                  />
+                </Card>
+              ))}
+              <Button
+                type="dashed"
+                onClick={() => add({ tipo: 'ingreso', descripcion: '' })}
+                block
+                icon={<PlusOutlined />}
+                style={{ marginBottom: 24 }}
+              >
+                Agregar Perfil
+              </Button>
+            </>
+          )}
+        </Form.List>
+
+        <Divider>Campos Laborales</Divider>
+        <DynamicListInput label="" name="campos_laborales" placeholder="Agregar campo laboral y presiona Enter" />
+
+        <Divider>Funciones Profesionales</Divider>
+        <DynamicListInput
+          label=""
+          name="funciones_profesionales"
+          placeholder="Agregar función profesional y presiona Enter"
+        />
+
+        <div className={styles.submitButtonContainer}>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" loading={loading} size="large">
+              Guardar
+            </Button>
           </Form.Item>
-
-          <Divider>Perfil de Egreso</Divider>
-          <Form.Item label="" name="perfil_egreso">
-            <TextArea rows={3} placeholder="Descripción perfil de egreso" />
-          </Form.Item>
-
-          <Divider>Campos Laborales</Divider>
-          <DynamicListInput label="" name="campos_laborales" placeholder="Agregar campo laboral y presiona Enter" />
-
-          <Divider>Funciones Profesionales</Divider>
-          <DynamicListInput
-            label=""
-            name="funciones_profesionales"
-            placeholder="Agregar función profesional y presiona Enter"
-          />
-        </Col>
-      </Row>
-
-      <Form.Item>
-        <Button type="primary" htmlType="submit" loading={loading}>
-          Guardar
-        </Button>
-      </Form.Item>
-    </Form>
+        </div>
+      </Form>
+    </div>
   );
 };
 
