@@ -1,7 +1,5 @@
 <?php
 
-use Core\Response;
-
 function dump(mixed $data): void {
     echo "<pre>";
     var_dump($data);
@@ -17,15 +15,6 @@ function dd(mixed $data): void {
 
 function url_is(string $url): bool {
     return $_SERVER['REQUEST_URI'] === $url;
-}
-
-function authorize(
-    bool $condition,
-    int $statusCode = Response::FORBIDDEN
-): void {
-    if (!$condition) {
-        abort($statusCode);
-    }
 }
 
 function redirect(string $path): void {

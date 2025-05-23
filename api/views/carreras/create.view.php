@@ -5,7 +5,7 @@
     <h1 class="text-2xl font-bold mb-4">Crear carrera</h1>
 
     <div class="max-w-lg mx-auto">
-        <form method="post" enctype="multipart/form-data">
+        <form action="/carreras" method="post" enctype="multipart/form-data">
             <div class="flex flex-col gap-8">
                 <div class="flex flex-col gap-2">
                     <label for="title" class="font-bold">Título</label>
