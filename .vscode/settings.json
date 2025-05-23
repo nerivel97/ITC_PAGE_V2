@@ -1,0 +1,11 @@
+{
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
+  "php-cs-fixer.executablePath": "${workspaceFolder}/api/vendor/bin/php-cs-fixer",
+  "php-cs-fixer.executablePathWindows": "${workspaceFolder}/api/vendor/bin/php-cs-fixer.bat",
+  "php-cs-fixer.formatHtml": false,
+  "php-cs-fixer.onsave": true,
+  "php-cs-fixer.rules": "@PSR12",
+  "php-cs-fixer.documentFormattingProvider": true
+}
