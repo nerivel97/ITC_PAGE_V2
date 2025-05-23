@@ -87,7 +87,7 @@ class CarreraService {
             // Obtener relaciones
             $carrera->campos_laborales = $this->getCamposLaborales($id);
             $carrera->funciones_profesionales = $this->getFuncionesProfesionales($id);
-            $carrera->misiones_visiones_objetivos = $this->getMisionVisionObjetivo($id);
+            $carrera->mision_vision_objetivos = $this->getMisionVisionObjetivo($id);
             $carrera->perfiles_alumno = $this->getPerfilesAlumno($id);
 
             return $carrera;
@@ -113,7 +113,7 @@ class CarreraService {
             $carrera->campos_laborales = $this->getCamposLaborales($carrera->id);
             $carrera->funciones_profesionales = $this->getFuncionesProfesionales($carrera->id);
             $carrera->mision_vision_objetivos = $this->getMisionVisionObjetivo($carrera->id);
-            $carrera->perfil_alumno = $this->getPerfilesAlumno($carrera->id);
+            $carrera->perfiles_alumno = $this->getPerfilesAlumno($carrera->id);
 
             return $carrera;
         } catch (PDOException $e) {
@@ -247,14 +247,14 @@ class CarreraService {
             }
         }
 
-        // Misiones/Visiones/Objetivos
-        if (!empty($carrera->misiones_visiones_objetivos)) {
+        // Mision/Vision/Objetivos
+        if (!empty($carrera->mision_vision_objetivos)) {
             $stmt = $this->db->prepare("
                 INSERT INTO mision_vision_objetivos (carrera_id, tipo, contenido, orden)
                 VALUES (?, ?, ?, ?)
             ");
             
-            foreach ($carrera->misiones_visiones_objetivos as $mvo) {
+            foreach ($carrera->mision_vision_objetivos as $mvo) {
                 $stmt->execute([
                     $carreraId,
                     $mvo['tipo'],

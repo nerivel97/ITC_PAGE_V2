@@ -20,6 +20,6 @@ class Carrera {
     // Relaciones
     public $campos_laborales = [];
     public $funciones_profesionales = [];
-    public $misiones_visiones_objetivos = [];
-    public $perfiles_alumno = [];
+    public $mision_vision_objetivos = [];
+    public $perfil_alumno = [];
 }

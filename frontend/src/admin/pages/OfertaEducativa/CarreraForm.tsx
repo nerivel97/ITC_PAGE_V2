@@ -13,6 +13,7 @@ import {
 } from 'antd';
 import { SketchPicker } from 'react-color';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+
 import { ICarreraFormData } from '../../interfaces/oferta.interface';
 
 const { Option } = Select;
@@ -85,7 +86,7 @@ const CarreraForm: React.FC<CarreraFormProps> = ({
   initialValues,
   loading = false,
 }) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<ICarreraFormData>();
   const [color, setColor] = useState('#3366ff');
 
   useEffect(() => {
@@ -140,104 +141,71 @@ const CarreraForm: React.FC<CarreraFormProps> = ({
             name="title"
             rules={[{ required: true, message: 'El nombre es requerido' }]}
           >
-            <Input onChange={handleTitleChange} />
+            <Input onChange={handleTitleChange} placeholder="Ejemplo: Ingeniería en Sistemas" />
           </Form.Item>
-        </Col>
 
-        <Col span={12}>
-          <Form.Item label="Tipo" name="tipo" rules={[{ required: true, message: 'El tipo es requerido' }]}>
-            <Select>
+          <Form.Item
+            label="URL Slug"
+            name="url_slug"
+            rules={[{ required: true, message: 'El slug es requerido' }]}
+          >
+            <Input placeholder="ingenieria-en-sistemas" />
+          </Form.Item>
+
+          <Form.Item label="Tipo de carrera" name="tipo" rules={[{ required: true }]}>
+            <Select placeholder="Selecciona tipo">
               <Option value="licenciatura">Licenciatura</Option>
               <Option value="maestria">Maestría</Option>
               <Option value="doctorado">Doctorado</Option>
             </Select>
           </Form.Item>
+
+          <Form.Item label="Descripción" name="description">
+            <TextArea rows={4} />
+          </Form.Item>
+
+          <Form.Item label="Color de fondo" name="bg_color">
+            <SketchPicker
+              color={color}
+              onChangeComplete={color => {
+                setColor(color.hex);
+                form.setFieldsValue({ bg_color: color.hex });
+              }}
+            />
+          </Form.Item>
+        </Col>
+
+        <Col span={12}>
+          <Divider>Misiones</Divider>
+          <DynamicListInput label="" name="misiones" placeholder="Agregar misión y presiona Enter" />
+
+          <Divider>Visiones</Divider>
+          <DynamicListInput label="" name="visiones" placeholder="Agregar visión y presiona Enter" />
+
+          <Divider>Objetivos</Divider>
+          <DynamicListInput label="" name="objetivos" placeholder="Agregar objetivo y presiona Enter" />
+
+          <Divider>Perfil de Ingreso</Divider>
+          <Form.Item label="" name="perfil_ingreso">
+            <TextArea rows={3} placeholder="Descripción perfil de ingreso" />
+          </Form.Item>
+
+          <Divider>Perfil de Egreso</Divider>
+          <Form.Item label="" name="perfil_egreso">
+            <TextArea rows={3} placeholder="Descripción perfil de egreso" />
+          </Form.Item>
+
+          <Divider>Campos Laborales</Divider>
+          <DynamicListInput label="" name="campos_laborales" placeholder="Agregar campo laboral y presiona Enter" />
+
+          <Divider>Funciones Profesionales</Divider>
+          <DynamicListInput
+            label=""
+            name="funciones_profesionales"
+            placeholder="Agregar función profesional y presiona Enter"
+          />
         </Col>
       </Row>
-
-      <Form.Item
-        label="URL Slug"
-        name="url_slug"
-        rules={[{ required: true, message: 'El slug es requerido' }]}
-      >
-        <Input placeholder="Se genera automáticamente" readOnly />
-      </Form.Item>
-
-      <Form.Item label="Color representativo" name="bg_color">
-        <SketchPicker
-          color={color}
-          onChangeComplete={col => {
-            setColor(col.hex);
-            form.setFieldsValue({ bg_color: col.hex });
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item
-        label="Descripción"
-        name="description"
-        rules={[{ required: true, message: 'La descripción es requerida' }]}
-      >
-        <TextArea rows={4} />
-      </Form.Item>
-
-      <Divider orientation="left">Imágenes (URLs)</Divider>
-
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item label="Banner" name="imagen_banner">
-            <Input placeholder="https://ejemplo.com/banner.jpg" />
-          </Form.Item>
-        </Col>
-
-        <Col span={12}>
-          <Form.Item label="Foto mascota" name="foto_mascota">
-            <Input placeholder="https://ejemplo.com/mascota.jpg" />
-          </Form.Item>
-        </Col>
-      </Row>
-
-      <Row gutter={16}>
-        <Col span={12}>
-          <Form.Item label="Foto perfil ingreso" name="foto_ingreso">
-            <Input placeholder="https://ejemplo.com/ingreso.jpg" />
-          </Form.Item>
-        </Col>
-
-        <Col span={12}>
-          <Form.Item label="Foto perfil egreso" name="foto_egreso">
-            <Input placeholder="https://ejemplo.com/egreso.jpg" />
-          </Form.Item>
-        </Col>
-      </Row>
-
-      <Divider orientation="left">Misiones, Visiones y Objetivos</Divider>
-
-      <DynamicListInput label="Misiones" name="misiones" placeholder="Agregar misión" />
-      <DynamicListInput label="Visiones" name="visiones" placeholder="Agregar visión" />
-      <DynamicListInput label="Objetivos" name="objetivos" placeholder="Agregar objetivo" />
-
-      <Divider orientation="left">Perfil de alumno</Divider>
-
-      <Form.Item label="Perfil de ingreso" name="perfil_ingreso">
-        <TextArea rows={2} />
-      </Form.Item>
-
-      <Form.Item label="Perfil de egreso" name="perfil_egreso">
-        <TextArea rows={2} />
-      </Form.Item>
-
-      <Divider orientation="left">Campos laborales</Divider>
-
-      <DynamicListInput label="Campos laborales" name="campos_laborales" placeholder="Agregar campo laboral" />
-
-      <Divider orientation="left">Funciones profesionales</Divider>
-
-      <DynamicListInput
-        label="Funciones profesionales"
-        name="funciones_profesionales"
-        placeholder="Agregar función profesional"
-      />
 
       <Form.Item>
         <Button type="primary" htmlType="submit" loading={loading}>

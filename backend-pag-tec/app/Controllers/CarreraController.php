@@ -61,11 +61,22 @@ class CarreraController {
             $slug = filter_var($args['slug'], FILTER_SANITIZE_STRING);
             $carrera = $this->carreraService->getCarreraBySlug($slug);
             
-            return $carrera 
-                ? $this->jsonResponse($response, $carrera)
-                : $this->errorResponse($response, 'Carrera no encontrada', 404);
+        if (!$carrera) {
+                return $this->jsonResponse($response, [
+                    'success' => false,
+                    'message' => 'Carrera no encontrada'
+                ], 404);
+            }
+            
+            return $this->jsonResponse($response, [
+                'success' => true,
+                'data' => $carrera
+            ], 200);
         } catch (Exception $e) {
-            return $this->errorResponse($response, $e->getMessage(), 500);
+            return $this->jsonResponse($response, [
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -163,7 +174,7 @@ class CarreraController {
         // Asignar relaciones si existen
         $carrera->campos_laborales = $data['campos_laborales'] ?? [];
         $carrera->funciones_profesionales = $data['funciones_profesionales'] ?? [];
-        $carrera->misiones_visiones_objetivos = $data['misiones_visiones_objetivos'] ?? [];
+        $carrera->mision_vision_objetivos = $data['mision_vision_objetivos'] ?? [];
         $carrera->perfiles_alumno = $data['perfiles_alumno'] ?? [];
     }
 

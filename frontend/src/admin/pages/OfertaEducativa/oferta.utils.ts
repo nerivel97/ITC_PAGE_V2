@@ -1,49 +1,54 @@
 import { ICarrera, ICarreraFormData } from '../../interfaces/oferta.interface';
 
-export const transformFormToCreate = (formData: ICarreraFormData): any => {
+export function formDataToCarrera(data: ICarreraFormData): ICarrera {
   return {
-    url_slug: formData.url_slug,
-    title: formData.title,
-    tipo: formData.tipo,
-    description: formData.description,
-    bg_color: formData.bg_color,
-    imagen_banner: formData.imagen_banner,
-    foto_mascota: formData.foto_mascota,
-    foto_ingreso: formData.foto_ingreso,
-    foto_egreso: formData.foto_egreso,
-    campos_laborales: (formData.campos_laborales || []).map((descripcion, i) => ({
-      descripcion,
-      orden: i + 1
-    })),
-    funciones_profesionales: (formData.funciones_profesionales || []).map((descripcion, i) => ({
-      descripcion,
-      orden: i + 1
-    })),
-    mision_vision_objetivos: [
-      ...(formData.misiones?.map((contenido, i) => ({
-        tipo: 'mision',
-        contenido,
-        orden: i + 1
-      })) || []),
-      ...(formData.visiones?.map((contenido, i) => ({
-        tipo: 'vision',
-        contenido,
-        orden: i + 1
-      })) || []),
-      ...(formData.objetivos?.map((contenido, i) => ({
-        tipo: 'objetivo',
-        contenido,
-        orden: i + 1
-      })) || [])
-    ],
-    perfil_alumno: [
-      { tipo: 'ingreso', descripcion: formData.perfil_ingreso || '' },
-      { tipo: 'egreso', descripcion: formData.perfil_egreso || '' }
-    ].filter(p => p.descripcion)
-  };
-};
+    id: data.id ?? 0,
+    title: data.title,
+    url_slug: data.url_slug,
+    tipo: data.tipo,
+    description: data.description,
+    bg_color: data.bg_color,
+    imagen_banner: data.imagen_banner,
+    foto_mascota: data.foto_mascota,
+    foto_ingreso: data.foto_ingreso,
+    foto_egreso: data.foto_egreso,
 
-export const transformCarreraToForm = (carrera: ICarrera): ICarreraFormData => {
+    mision_vision_objetivos: [
+      ...(data.misiones?.map((contenido, i) => ({
+        tipo: 'mision' as const,
+        contenido,
+        orden: i + 1,
+      })) ?? []),
+      ...(data.visiones?.map((contenido, i) => ({
+        tipo: 'vision' as const,
+        contenido,
+        orden: i + 1,
+      })) ?? []),
+      ...(data.objetivos?.map((contenido, i) => ({
+        tipo: 'objetivo' as const,
+        contenido,
+        orden: i + 1,
+      })) ?? []),
+    ],
+
+    perfil_alumno: [
+      { tipo: 'ingreso', descripcion: data.perfil_ingreso || '' },
+      { tipo: 'egreso', descripcion: data.perfil_egreso || '' },
+    ],
+
+    campos_laborales: (data.campos_laborales ?? []).map((descripcion, i) => ({
+      descripcion,
+      orden: i + 1,
+    })),
+
+    funciones_profesionales: (data.funciones_profesionales ?? []).map((descripcion, i) => ({
+      descripcion,
+      orden: i + 1,
+    })),
+  };
+}
+
+export function carreraToFormData(carrera: ICarrera): ICarreraFormData {
   return {
     id: carrera.id,
     title: carrera.title,
@@ -55,18 +60,31 @@ export const transformCarreraToForm = (carrera: ICarrera): ICarreraFormData => {
     foto_mascota: carrera.foto_mascota,
     foto_ingreso: carrera.foto_ingreso,
     foto_egreso: carrera.foto_egreso,
+
     misiones: carrera.mision_vision_objetivos
-      ?.filter(m => m.tipo === 'mision')
-      .map(m => m.contenido),
+      ?.filter(item => item.tipo === 'mision')
+      .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
+      .map(item => item.contenido) ?? [],
+
     visiones: carrera.mision_vision_objetivos
-      ?.filter(m => m.tipo === 'vision')
-      .map(m => m.contenido),
+      ?.filter(item => item.tipo === 'vision')
+      .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
+      .map(item => item.contenido) ?? [],
+
     objetivos: carrera.mision_vision_objetivos
-      ?.filter(m => m.tipo === 'objetivo')
-      .map(m => m.contenido),
-    perfil_ingreso: carrera.perfil_alumno?.find(p => p.tipo === 'ingreso')?.descripcion,
-    perfil_egreso: carrera.perfil_alumno?.find(p => p.tipo === 'egreso')?.descripcion,
-    campos_laborales: carrera.campos_laborales?.map(c => c.descripcion),
-    funciones_profesionales: carrera.funciones_profesionales?.map(f => f.descripcion)
+      ?.filter(item => item.tipo === 'objetivo')
+      .sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
+      .map(item => item.contenido) ?? [],
+
+    perfil_ingreso: carrera.perfil_alumno?.find(p => p.tipo === 'ingreso')?.descripcion ?? '',
+    perfil_egreso: carrera.perfil_alumno?.find(p => p.tipo === 'egreso')?.descripcion ?? '',
+
+    campos_laborales: carrera.campos_laborales
+      ?.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
+      .map(item => item.descripcion) ?? [],
+
+    funciones_profesionales: carrera.funciones_profesionales
+      ?.sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0))
+      .map(item => item.descripcion) ?? [],
   };
-};
+}

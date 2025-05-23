@@ -10,7 +10,7 @@ import {
 } from '../../services/ofertas.service';
 import CarreraForm from '../OfertaEducativa/CarreraForm';
 import { ICarrera, ICarreraFormData } from '../../interfaces/oferta.interface';
-import { transformFormToCreate, transformCarreraToForm } from './oferta.utils';
+import { carreraToFormData, formDataToCarrera } from './oferta.utils';
 
 const { Title } = Typography;
 
@@ -18,7 +18,13 @@ const CarreraTable: React.FC = () => {
   const [carreras, setCarreras] = useState<ICarrera[]>([]);
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+
+  // Estado para la carrera completa (backend)
   const [currentCarrera, setCurrentCarrera] = useState<ICarrera | null>(null);
+
+  // Estado para los valores iniciales del formulario (form)
+  const [formInitialValues, setFormInitialValues] = useState<ICarreraFormData | undefined>(undefined);
+
   const [formLoading, setFormLoading] = useState(false);
 
   const loadData = async () => {
@@ -38,6 +44,7 @@ const CarreraTable: React.FC = () => {
     try {
       const carrera = await fetchCarreraById(id);
       setCurrentCarrera(carrera);
+      setFormInitialValues(carreraToFormData(carrera)); // Convertimos para el formulario
       setModalOpen(true);
     } catch (error: unknown) {
       message.error(error instanceof Error ? error.message : 'Error desconocido');
@@ -49,18 +56,22 @@ const CarreraTable: React.FC = () => {
   const handleSubmit = async (values: ICarreraFormData) => {
     try {
       setFormLoading(true);
-      const transformedData = transformFormToCreate(values);
-      
+
+      // Convertimos los datos del formulario a ICarrera para enviar al backend
+      const carreraDataToSend = formDataToCarrera(values);
+
       if (currentCarrera?.id) {
-        await updateCarrera(currentCarrera.id, transformedData);
+        await updateCarrera(currentCarrera.id, carreraDataToSend);
         message.success('Carrera actualizada correctamente');
       } else {
-        await createCarrera(transformedData);
+        await createCarrera(carreraDataToSend);
         message.success('Carrera creada correctamente');
       }
-      
+
       loadData();
       setModalOpen(false);
+      setCurrentCarrera(null);
+      setFormInitialValues(undefined);
     } catch (error: unknown) {
       message.error(error instanceof Error ? error.message : 'Error desconocido');
     } finally {
@@ -123,10 +134,11 @@ const CarreraTable: React.FC = () => {
     <Card
       title={<Title level={4}>Gestión de Carreras</Title>}
       extra={
-        <Button 
-          type="primary" 
+        <Button
+          type="primary"
           onClick={() => {
             setCurrentCarrera(null);
+            setFormInitialValues(undefined);
             setModalOpen(true);
           }}
         >
@@ -151,7 +163,7 @@ const CarreraTable: React.FC = () => {
         destroyOnClose
       >
         <CarreraForm
-          initialValues={currentCarrera ? transformCarreraToForm(currentCarrera) : undefined}
+          initialValues={formInitialValues}
           onSubmit={handleSubmit}
           loading={formLoading}
         />
