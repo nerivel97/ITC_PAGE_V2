@@ -1,109 +1,72 @@
-import { 
-  IOferta, 
-  IOfertaFormData,
-  IMisionVisionObjetivo,
-  IPerfilAlumno,
-  ICampoLaboral,
-  IFuncionProfesional
-} from '../../interfaces/oferta.interface';
+import { ICarrera, ICarreraFormData } from '../../interfaces/oferta.interface';
 
-export const transformFormToCreate = (data: IOfertaFormData) => {
-  const result: IOfertaCreate = {
-    titulo: data.titulo,
-    urlSlug: data.urlSlug,
-    tipo: data.tipo,
-    descripcion: data.descripcion,
-    bgColor: data.bgColor,
-    imagenBanner: data.imagenBanner,
-    fotoMascota: data.fotoMascota,
-    fotoIngreso: data.fotoIngreso,
-    fotoEgreso: data.fotoEgreso,
-    misionesVisionesObjetivos: [
-      ...(data.misiones?.map((contenido: string, i: number) => ({
-        tipo: 'mision' as const,
+export const transformFormToCreate = (formData: ICarreraFormData): any => {
+  return {
+    url_slug: formData.url_slug,
+    title: formData.title,
+    tipo: formData.tipo,
+    description: formData.description,
+    bg_color: formData.bg_color,
+    imagen_banner: formData.imagen_banner,
+    foto_mascota: formData.foto_mascota,
+    foto_ingreso: formData.foto_ingreso,
+    foto_egreso: formData.foto_egreso,
+    campos_laborales: (formData.campos_laborales || []).map((descripcion, i) => ({
+      descripcion,
+      orden: i + 1
+    })),
+    funciones_profesionales: (formData.funciones_profesionales || []).map((descripcion, i) => ({
+      descripcion,
+      orden: i + 1
+    })),
+    mision_vision_objetivos: [
+      ...(formData.misiones?.map((contenido, i) => ({
+        tipo: 'mision',
         contenido,
         orden: i + 1
       })) || []),
-      ...(data.visiones?.map((contenido: string, i: number) => ({
-        tipo: 'vision' as const,
+      ...(formData.visiones?.map((contenido, i) => ({
+        tipo: 'vision',
         contenido,
         orden: i + 1
       })) || []),
-      ...(data.objetivos?.map((contenido: string, i: number) => ({
-        tipo: 'objetivo' as const,
+      ...(formData.objetivos?.map((contenido, i) => ({
+        tipo: 'objetivo',
         contenido,
         orden: i + 1
       })) || [])
     ],
-    perfilesAlumno: [
-      { tipo: 'ingreso' as const, descripcion: data.perfilIngreso || '' },
-      { tipo: 'egreso' as const, descripcion: data.perfilEgreso || '' }
-    ].filter((p: { descripcion: string }) => p.descripcion),
-    camposLaborales: (data.camposLaborales || []).map((descripcion: string, i: number) => ({
-      descripcion,
-      orden: i + 1
-    })),
-    funcionesProfesionales: (data.funcionesProfesionales || []).map((descripcion: string, i: number) => ({
-      descripcion,
-      orden: i + 1
-    })),
-    duracion: data.duracion,
-    creditos: data.creditos,
-    modalidad: data.modalidad
+    perfil_alumno: [
+      { tipo: 'ingreso', descripcion: formData.perfil_ingreso || '' },
+      { tipo: 'egreso', descripcion: formData.perfil_egreso || '' }
+    ].filter(p => p.descripcion)
   };
-  return result;
 };
 
-export const transformOfertaToForm = (oferta: IOferta): IOfertaFormData => {
+export const transformCarreraToForm = (carrera: ICarrera): ICarreraFormData => {
   return {
-    id: oferta.id,
-    titulo: oferta.titulo,
-    urlSlug: oferta.urlSlug,
-    tipo: oferta.tipo,
-    descripcion: oferta.descripcion,
-    bgColor: oferta.bgColor,
-    imagenBanner: oferta.imagenBanner ?? undefined,
-    fotoMascota: oferta.fotoMascota ?? undefined,
-    fotoIngreso: oferta.fotoIngreso ?? undefined,
-    fotoEgreso: oferta.fotoEgreso ?? undefined,
-    misiones: oferta.misionesVisionesObjetivos
-      .filter((m: IMisionVisionObjetivo) => m.tipo === 'mision')
-      .map((m: IMisionVisionObjetivo) => m.contenido),
-    visiones: oferta.misionesVisionesObjetivos
-      .filter((m: IMisionVisionObjetivo) => m.tipo === 'vision')
-      .map((m: IMisionVisionObjetivo) => m.contenido),
-    objetivos: oferta.misionesVisionesObjetivos
-      .filter((m: IMisionVisionObjetivo) => m.tipo === 'objetivo')
-      .map((m: IMisionVisionObjetivo) => m.contenido),
-    perfilIngreso: oferta.perfilesAlumno.find((p: IPerfilAlumno) => p.tipo === 'ingreso')?.descripcion || '',
-    perfilEgreso: oferta.perfilesAlumno.find((p: IPerfilAlumno) => p.tipo === 'egreso')?.descripcion || '',
-    camposLaborales: oferta.camposLaborales.map((c: ICampoLaboral) => c.descripcion),
-    funcionesProfesionales: oferta.funcionesProfesionales.map((f: IFuncionProfesional) => f.descripcion),
-    duracion: oferta.duracion,
-    creditos: oferta.creditos,
-    modalidad: oferta.modalidad
+    id: carrera.id,
+    title: carrera.title,
+    url_slug: carrera.url_slug,
+    tipo: carrera.tipo,
+    description: carrera.description,
+    bg_color: carrera.bg_color,
+    imagen_banner: carrera.imagen_banner,
+    foto_mascota: carrera.foto_mascota,
+    foto_ingreso: carrera.foto_ingreso,
+    foto_egreso: carrera.foto_egreso,
+    misiones: carrera.mision_vision_objetivos
+      ?.filter(m => m.tipo === 'mision')
+      .map(m => m.contenido),
+    visiones: carrera.mision_vision_objetivos
+      ?.filter(m => m.tipo === 'vision')
+      .map(m => m.contenido),
+    objetivos: carrera.mision_vision_objetivos
+      ?.filter(m => m.tipo === 'objetivo')
+      .map(m => m.contenido),
+    perfil_ingreso: carrera.perfil_alumno?.find(p => p.tipo === 'ingreso')?.descripcion,
+    perfil_egreso: carrera.perfil_alumno?.find(p => p.tipo === 'egreso')?.descripcion,
+    campos_laborales: carrera.campos_laborales?.map(c => c.descripcion),
+    funciones_profesionales: carrera.funciones_profesionales?.map(f => f.descripcion)
   };
 };
-
-interface IOfertaCreate {
-  titulo: string;
-  urlSlug: string;
-  tipo: 'licenciatura' | 'maestria' | 'doctorado';
-  descripcion: string;
-  bgColor: string;
-  imagenBanner?: string | null;
-  fotoMascota?: string | null;
-  fotoIngreso?: string | null;
-  fotoEgreso?: string | null;
-  misionesVisionesObjetivos: Array<{
-    tipo: 'mision' | 'vision' | 'objetivo';
-    contenido: string;
-    orden: number;
-  }>;
-  perfilesAlumno: Array<{ tipo: 'ingreso' | 'egreso'; descripcion: string }>;
-  camposLaborales: Array<{ descripcion: string; orden: number }>;
-  funcionesProfesionales: Array<{ descripcion: string; orden: number }>;
-  duracion?: string;
-  creditos?: number;
-  modalidad?: string;
-}

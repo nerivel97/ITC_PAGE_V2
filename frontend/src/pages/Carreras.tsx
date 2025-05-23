@@ -1,39 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { carrerasData } from '../data/CarrerasData';
 import Breadcrumbs from '../components/OfertasComponents/Breadcrumbs/Breadcrumbs';
-import { FaDownload } from 'react-icons/fa';
+import { ICarrera } from '../admin/interfaces/oferta.interface';
+import { message } from 'antd';
 import '../components/OfertasComponents/Carreras.css';
 
 const Carreras: React.FC = () => {
-  const { carreraNombre } = useParams<{ carreraNombre: string }>();
-  const carrera = carreraNombre ? carrerasData[carreraNombre] : null;
+  const { carreraSlug } = useParams<{ carreraSlug: string }>(); // Cambiado de carreraNombre a carreraSlug
+  const [carrera, setCarrera] = useState<ICarrera | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCarrera = async () => {
+      try {
+        setLoading(true);
+        // Cambiar la URL para buscar por url_slug en lugar de ID
+        const response = await fetch(`http://localhost:8000/api/carreras/slug/${carreraSlug}`);
+        
+        if (!response.ok) {
+          throw new Error('Carrera no encontrada');
+        }
+
+        const data = await response.json();
+        
+        if (!data.success || !data.data) {
+          throw new Error(data.message || 'Error al cargar la carrera');
+        }
+
+        setCarrera(data.data);
+      } catch (error) {
+        if (error instanceof Error) {
+          message.error(error.message);
+        } else {
+          message.error('Error desconocido al cargar la carrera');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCarrera();
+  }, [carreraSlug]); // Cambiado de carreraNombre a carreraSlug
+
+
+  if (loading) {
+    return <div className="carrera-container">Cargando información de la carrera...</div>;
+  }
 
   if (!carrera) {
     return (
-      <div className="not-found-container">
+      <div className="notFoundContainer">
         <h1>Programa no encontrado</h1>
         <p>La carrera solicitada no existe en nuestros registros.</p>
       </div>
     );
   }
 
+  // Transformar datos del backend al formato esperado por el frontend
   
-  const parseReticula = (reticulaText: string) => {
-    if (!reticulaText) return [];
-    return reticulaText.split('\n').filter(line => line.trim()).map(line => {
-      const [semestre, ...materias] = line.split(':');
-      return {
-        semestre: semestre.trim(),
-        materias: materias.join(':').split(',').map(m => m.trim()).filter(m => m)
-      };
-    });
-  };
-
-  const parsedReticula = parseReticula(carrera.reticula);
+  // Obtener misiones, visiones y objetivos desde el backend
+  const misiones = carrera.mision_vision_objetivos?.filter(m => m.tipo === 'mision').map(m => m.contenido).join('\n') || '';
+  const visiones = carrera.mision_vision_objetivos?.filter(m => m.tipo === 'vision').map(m => m.contenido).join('\n') || '';
+  const objetivos = carrera.mision_vision_objetivos?.filter(m => m.tipo === 'objetivo').map(m => m.contenido).join('\n') || '';
+  
+  // Obtener perfiles de alumno
+  const perfilIngreso = carrera.perfil_alumno?.find(p => p.tipo === 'ingreso')?.descripcion || '';
+  const perfilEgreso = carrera.perfil_alumno?.find(p => p.tipo === 'egreso')?.descripcion || '';
+  
+  // Obtener campos laborales y funciones profesionales
+  const camposLaborales = carrera.campos_laborales?.map(c => c.descripcion).join('\n') || '';
+  const funcionesProfesionales = carrera.funciones_profesionales?.map(f => f.descripcion).join('\n') || '';
 
   return (
-    <div className="carrera-container" style={{ '--primary-color': carrera.bgColor } as React.CSSProperties}>
+    <div className="carrera-container" style={{ '--primary-color': carrera.bg_color } as React.CSSProperties}>
       <Breadcrumbs currentPage={carrera.title} />
       
       {/* Banner */}
@@ -55,7 +94,7 @@ const Carreras: React.FC = () => {
         )}
         <div className="title-overlay">
           <h1>{carrera.title}</h1>
-          <p className="tagline">{carrera.description.split('\n')[0]}</p>
+          <p className="tagline">{carrera.description?.split('\n')[0]}</p>
         </div>
       </div>
 
@@ -77,7 +116,7 @@ const Carreras: React.FC = () => {
             )}
           </div>
           <div className="description-container">
-            {carrera.description.split('\n').map((paragraph, i) => (
+            {carrera.description?.split('\n').map((paragraph, i) => (
               <p key={i}>{paragraph}</p>
             ))}
           </div>
@@ -112,7 +151,7 @@ const Carreras: React.FC = () => {
               </div>
               <h3>Objetivos</h3>
               <div className="vision-content">
-                {carrera.objetivos.split('\n').filter(Boolean).map((item, i) => (
+                {objetivos.split('\n').filter(Boolean).map((item, i) => (
                   <div key={i} className="vision-item">
                     <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
                     <p>{item}</p>
@@ -127,7 +166,7 @@ const Carreras: React.FC = () => {
               </div>
               <h3>Misión</h3>
               <div className="vision-content">
-                {carrera.mision.split('\n').filter(Boolean).map((item, i) => (
+                {misiones.split('\n').filter(Boolean).map((item, i) => (
                   <div key={i} className="vision-item">
                     <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
                     <p>{item}</p>
@@ -142,7 +181,7 @@ const Carreras: React.FC = () => {
               </div>
               <h3>Visión</h3>
               <div className="vision-content">
-                {carrera.vision.split('\n').filter(Boolean).map((item, i) => (
+                {visiones.split('\n').filter(Boolean).map((item, i) => (
                   <div key={i} className="vision-item">
                     <img src="/Fotos/Carreras/bandera.png" alt="Ícono" />
                     <p>{item}</p>
@@ -159,7 +198,7 @@ const Carreras: React.FC = () => {
             <h2>PERFIL DE INGRESO</h2>
             <div className="profile-content">
               <div className="profile-text">
-                {carrera.perfilIngreso.split('\n').filter(Boolean).map((paragraph, i) => (
+                {perfilIngreso.split('\n').filter(Boolean).map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
               </div>
@@ -179,7 +218,7 @@ const Carreras: React.FC = () => {
             <h2>PERFIL DE EGRESO</h2>
             <div className="profile-content">
               <div className="profile-text">
-                {carrera.perfilEgreso.split('\n').filter(Boolean).map((paragraph, i) => (
+                {perfilEgreso.split('\n').filter(Boolean).map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
               </div>
@@ -206,7 +245,7 @@ const Carreras: React.FC = () => {
                 OPORTUNIDADES LABORALES
               </h3>
               <div className="work-items">
-                {carrera.campolaboral.split('\n').filter(Boolean).map((item, i) => (
+                {camposLaborales.split('\n').filter(Boolean).map((item, i) => (
                   <div key={i} className="work-item">
                     <img src="/Fotos/Carreras/engranaje.png" alt="Ícono" />
                     <p>{item}</p>
@@ -221,7 +260,7 @@ const Carreras: React.FC = () => {
                 FUNCIONES PROFESIONALES
               </h3>
               <div className="work-items">
-                {carrera.funcionesprof.split('\n').filter(Boolean).map((item, i) => (
+                {funcionesProfesionales.split('\n').filter(Boolean).map((item, i) => (
                   <div key={i} className="work-item">
                     <img src="/Fotos/Carreras/palo.png" alt="Ícono" />
                     <p>{item}</p>
@@ -230,32 +269,6 @@ const Carreras: React.FC = () => {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Retícula */}
-        <section className="reticula-section">
-          <h2>RETÍCULA</h2>
-          <div className="semestres-container">
-            {parsedReticula.map((semestre, i) => (
-              <div key={i} className="semestre">
-                <div className="semestre-header">
-                  <div className="semestre-circle"></div>
-                  <h3>{semestre.semestre.toUpperCase()}</h3>
-                </div>
-                <div className="materias-grid">
-                  {semestre.materias.map((materia, j) => (
-                    <div key={j} className="materia-card">
-                      <h4>{materia}</h4>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <button className="download-button">
-            <FaDownload className="icon" />
-            DESCARGAR RETÍCULA COMPLETA
-          </button>
         </section>
       </div>
     </div>

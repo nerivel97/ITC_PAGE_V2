@@ -1,13 +1,12 @@
 import axios from 'axios';
 import {
-  IOferta,
-  IOfertaResponse,
-  IOfertasPaginatedResponse,
-  IOfertaCreate,
-  IOfertaUpdate
+  ICarrera,
+  ICarreraResponse,
+  ICarrerasPaginatedResponse,
+  ICarreraFormData
 } from '../interfaces/oferta.interface';
 
-const API_BASE = 'http://localhost:4000/api/carreras';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api/carreras';
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -18,49 +17,52 @@ const api = axios.create({
   }
 });
 
-export const fetchOfertas = async (): Promise<IOferta[]> => {
+export const fetchCarreras = async (): Promise<ICarrera[]> => {
   try {
-    const { data } = await api.get<IOfertasPaginatedResponse>('/');
+    const { data } = await api.get<ICarrerasPaginatedResponse>('/');
+    if (!data.success) throw new Error(data.message);
     return data.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al cargar ofertas');
+    throw new Error(error.response?.data?.message || 'Error al cargar carreras');
   }
 };
 
-export const fetchOfertaById = async (id: number): Promise<IOferta> => {
+export const fetchCarreraById = async (id: number): Promise<ICarrera> => {
   try {
-    const { data } = await api.get<IOfertaResponse>(`/${id}`);
-    if (!data.data) throw new Error('Oferta no encontrada');
+    const { data } = await api.get<ICarreraResponse>(`/${id}`);
+    if (!data.success || !data.data) throw new Error(data.message || 'Carrera no encontrada');
     return data.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al cargar oferta');
+    throw new Error(error.response?.data?.message || 'Error al cargar carrera');
   }
 };
 
-export const createOferta = async (oferta: IOfertaCreate): Promise<IOferta> => {
+
+export const createCarrera = async (carreraData: ICarreraFormData): Promise<ICarrera> => {
   try {
-    const { data } = await api.post<IOfertaResponse>('/', oferta);
-    if (!data.data) throw new Error('Error al crear oferta');
+    const { data } = await api.post<ICarreraResponse>('/', carreraData);
+    if (!data.success) throw new Error(data.message);
     return data.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al crear oferta');
+    throw new Error(error.response?.data?.message || 'Error al crear carrera');
   }
 };
 
-export const updateOferta = async (id: number, oferta: IOfertaUpdate): Promise<IOferta> => {
+export const updateCarrera = async (id: number, carreraData: ICarreraFormData): Promise<ICarrera> => {
   try {
-    const { data } = await api.put<IOfertaResponse>(`/${id}`, oferta);
-    if (!data.data) throw new Error('Error al actualizar oferta');
+    const { data } = await api.put<ICarreraResponse>(`/${id}`, carreraData);
+    if (!data.success) throw new Error(data.message);
     return data.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al actualizar oferta');
+    throw new Error(error.response?.data?.message || 'Error al actualizar carrera');
   }
 };
 
-export const deleteOferta = async (id: number): Promise<void> => {
+export const deleteCarrera = async (id: number): Promise<void> => {
   try {
-    await api.delete(`/${id}`);
+    const { data } = await api.delete<{ success: boolean; message?: string }>(`/${id}`);
+    if (!data.success) throw new Error(data.message);
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al eliminar oferta');
+    throw new Error(error.response?.data?.message || 'Error al eliminar carrera');
   }
 };

@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import MainLayout from './core/layout/MainLayout';
 import Instituto from './pages/Instituto';
-import Oferta from './pages/Oferta';
-import CarreraDetalle from './pages/Carreras';
+import Ofertas from './pages/Oferta';
+import Carreras from './pages/Carreras';
 import Infra from './pages/Infra';
 import Admisiones from './pages/Admisiones';
 import AdminLayout from './admin/components/AdminLayout/AdminLayout';
@@ -12,7 +12,7 @@ import EventosTable from './admin/pages/Eventos/EventosTable';
 import NoticiasTable from './admin/pages/Noticias/NoticiasTable';
 import Page_Eventos from './pages/Page_Eventos';
 import Page_Eventos_c from './components/HomeComponents/ComponentEvento/Page_Eventos_c';
-import OfertTable from './admin/pages/OfertaEducativa/OfertTable';
+import OfertTable from './admin/pages/OfertaEducativa/CarreraTable';
 import AdminHomeGallery from './admin/pages/InstitutoITC/AdminHomeGallery';
 import AdmisionesTable from './admin/pages/Admisiones/AdmisionesTable';
 import Resultados from './pages/Resultados';
@@ -28,8 +28,8 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path='/Instituto' element={<Instituto />} />
-          <Route path='/oferta-educativa' element={<Oferta />} />
-          <Route path="/oferta-educativa/:carreraNombre" element={<CarreraDetalle />} />
+          <Route path='/oferta-educativa' element={<Ofertas />} />
+          <Route path="/oferta-educativa/:carreraSlug" element={<Carreras />} />
           <Route path='/Infraestructura' element={<Infra />} />
           <Route path='/Admisiones' element={<Admisiones />} />
 
