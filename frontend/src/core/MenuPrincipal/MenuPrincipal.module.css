@@ -9,7 +9,7 @@
 }
 
 .menuContainer {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   position: relative;
   display: flex;
@@ -109,7 +109,7 @@
     font-size: 0.1rem;
     cursor: pointer;
     z-index: 1002;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     padding: 5px;
     display: none;
