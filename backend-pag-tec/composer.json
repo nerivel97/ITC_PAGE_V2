@@ -1,0 +1,25 @@
+{
+    "name": "pag-tec/backend",
+    "description": "Backend para PAG-TEC en PHP 7.4",
+    "type": "project",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "slim/slim": "4.*",
+        "slim/psr7": "^1.7",
+        "vlucas/phpdotenv": "^5.6",
+        "firebase/php-jwt": "^5.5",
+        "doctrine/dbal": "^2.13",
+        "php-di/php-di": "^7.0"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "config": {
+        "platform-check": false
+    }
+}
