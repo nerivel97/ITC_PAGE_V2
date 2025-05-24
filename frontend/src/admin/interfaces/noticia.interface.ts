@@ -6,6 +6,22 @@ export interface INoticia {
     autor: string;
     imagen?: string;
   }
+
+  export interface INoticiaCreate {
+  nombre_noticia: string;
+  descripcion: string;
+  fecha_publicacion: string;
+  autor: string;
+  imagen?: string;
+}
+
+export interface INoticiaUpdate {
+  nombre_noticia?: string;
+  descripcion?: string;
+  fecha_publicacion?: string;
+  autor?: string;
+  imagen?: string;
+}
   
   export interface ApiResponse<T> {
   success: boolean;

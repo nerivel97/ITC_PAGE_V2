@@ -1,9 +1,30 @@
 // src/admin/services/Noticias.service.ts
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { ApiResponse } from '../interfaces/api.interface';
 import { INoticia, INoticiaCreate, INoticiaUpdate } from '../interfaces/noticia.interface';
 
 const API_URL = 'http://localhost:8000/api/noticias';
+
+interface ServerError {
+  message?: string;
+  code?: string;
+  status?: number;
+  data?: unknown;
+}
+
+interface NetworkError {
+  message: string;
+  code: 'NETWORK_ERROR';
+  status: 0;
+}
+
+interface RequestError {
+  message: string;
+  code: 'REQUEST_ERROR';
+  status: -1;
+}
+
+type ApiError = ServerError | NetworkError | RequestError;
 
 // Configuración global de axios con interceptores
 const apiClient = axios.create({
@@ -26,7 +47,11 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     console.error('[Request Error]', error);
-    return Promise.reject(error);
+    return Promise.reject({
+      message: error.message || 'Error en la configuración de la solicitud',
+      code: 'REQUEST_ERROR',
+      status: -1
+    } as RequestError);
   }
 );
 
@@ -36,7 +61,7 @@ apiClient.interceptors.response.use(
     console.log(`[Response] ${response.status} ${response.config.url}`, response.data);
     return response;
   },
-  (error) => {
+  (error: AxiosError) => {
     const errorDetails = {
       message: error.message,
       config: error.config,
@@ -48,11 +73,11 @@ apiClient.interceptors.response.use(
     
     if (error.response) {
       // Error con respuesta del servidor
-      const serverError = {
-        message: error.response.data?.message || 'Error del servidor',
+      const serverError: ServerError = {
+        message: (error.response.data as { message?: string })?.message || 'Error del servidor',
         status: error.response.status,
         data: error.response.data,
-        code: error.response.data?.code || 'SERVER_ERROR'
+        code: (error.response.data as { code?: string })?.code || 'SERVER_ERROR'
       };
       return Promise.reject(serverError);
     } else if (error.request) {
@@ -61,60 +86,17 @@ apiClient.interceptors.response.use(
         message: 'No se recibió respuesta del servidor',
         code: 'NETWORK_ERROR',
         status: 0
-      });
+      } as NetworkError);
     } else {
       // Error en la configuración de la solicitud
       return Promise.reject({
         message: error.message || 'Error en la configuración de la solicitud',
         code: 'REQUEST_ERROR',
         status: -1
-      });
+      } as RequestError);
     }
   }
 );
-
-/**
- * Valida los datos del Noticia antes de enviarlos al servidor
- */
-const validateNoticiaData = (data: INoticiaCreate): void => {
-  const requiredFields: (keyof INoticiaCreate)[] = [
-    'nombre_noticia',
-    'descripcion',
-    'fecha_publicacion',
-    'autor'
-  ];
-
-  const missingFields = requiredFields.filter(field => {
-    const value = data[field];
-    return value === undefined || value === null || value === '';
-  });
-
-  if (missingFields.length > 0) {
-    throw new Error(`Campos requeridos faltantes: ${missingFields.join(', ')}`);
-  }
-
-  // Validación de longitud de campos
-  if (data.nombre_noticia.length > 100) {
-    throw new Error('El nombre del Noticia no puede exceder los 100 caracteres');
-  }
-
-  if (data.autor.length > 100) {
-    throw new Error('El nombre del autor no puede exceder los 100 caracteres');
-  }
-};
-
-/**
- * Normaliza los datos del Noticia para el envío al servidor
- */
-const normalizeNoticiaData = (data: INoticiaCreate): INoticiaCreate => {
-  return {
-    ...data,
-    nombre_noticia: data.nombre_noticia.trim(),
-    descripcion: data.descripcion.trim(),
-    autor: data.autor.trim(),
-    imagen: data.imagen?.trim()
-  };
-};
 
 export const fetchNoticias = async (): Promise<INoticia[]> => {
   try {
@@ -124,17 +106,18 @@ export const fetchNoticias = async (): Promise<INoticia[]> => {
       throw new Error('La respuesta no contiene datos');
     }
     
-    return data.data.map(Noticia => ({
-      ...Noticia,
-      fecha_publicacion: new Date(Noticia.fecha_publicacion).toISOString(),
+    return data.data.map(noticia => ({
+      ...noticia,
+      fecha_publicacion: new Date(noticia.fecha_publicacion).toISOString(),
     }));
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as ApiError;
     console.error('[fetchNoticias Error]', {
-      message: error.message,
-      code: error.code,
-      status: error.status
+      message: err.message,
+      code: err.code,
+      status: err.status
     });
-    throw new Error(error.message || 'Error al obtener Noticias');
+    throw new Error(err.message || 'Error al obtener Noticias');
   }
 };
 
@@ -143,30 +126,31 @@ export const getNoticiaById = async (id: number): Promise<INoticia> => {
     const { data } = await apiClient.get<ApiResponse<INoticia>>(`/${id}`);
     
     if (!data.data) {
-      throw new Error('Noticia no encontrado');
+      throw new Error('Noticia no encontrada');
     }
     
     return {
       ...data.data,
       fecha_publicacion: new Date(data.data.fecha_publicacion).toISOString(),
     };
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as ApiError;
     console.error(`[getNoticiaById Error] ID: ${id}`, {
-      message: error.message,
-      code: error.code,
-      status: error.status
+      message: err.message,
+      code: err.code,
+      status: err.status
     });
-    throw new Error(error.message || `Error al obtener Noticia ${id}`);
+    throw new Error(err.message || `Error al obtener Noticia ${id}`);
   }
 };
 
-export const createNoticia = async (NoticiaData: INoticiaCreate): Promise<INoticia> => {
+export const createNoticia = async (noticiaData: INoticiaCreate): Promise<INoticia> => {
   try {
-    const response = await apiClient.post<ApiResponse<INoticia>>('/', NoticiaData, {
+    const response = await apiClient.post<ApiResponse<INoticia>>('/', noticiaData, {
       headers: {
         'Content-Type': 'application/json'
       },
-      transformRequest: [(data) => JSON.stringify(data)] // Asegurar serialización correcta
+      transformRequest: [(data) => JSON.stringify(data)]
     });
     
     if (!response.data?.data) {
@@ -174,17 +158,17 @@ export const createNoticia = async (NoticiaData: INoticiaCreate): Promise<INotic
     }
 
     return response.data.data;
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.message || 
-                        error.message || 
+  } catch (error) {
+    const err = error as ApiError;
+    const errorMessage = 'message' in err ? err.message : 
                         'Error al crear noticia';
     throw new Error(errorMessage);
   }
 };
 
-export const updateNoticia = async (id: number, NoticiaData: INoticiaUpdate): Promise<INoticia> => {
+export const updateNoticia = async (id: number, noticiaData: INoticiaUpdate): Promise<INoticia> => {
   try {
-    const response = await apiClient.put<ApiResponse<INoticia>>(`/${id}`, NoticiaData, {
+    const response = await apiClient.put<ApiResponse<INoticia>>(`/${id}`, noticiaData, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -196,9 +180,9 @@ export const updateNoticia = async (id: number, NoticiaData: INoticiaUpdate): Pr
     }
     
     return response.data.data;
-  } catch (error: any) {
-    const errorMessage = error.response?.data?.message || 
-                        error.message || 
+  } catch (error) {
+    const err = error as ApiError;
+    const errorMessage = 'message' in err ? err.message : 
                         `Error al actualizar noticia ${id}`;
     throw new Error(errorMessage);
   }
@@ -209,27 +193,24 @@ export const deleteNoticia = async (id: number): Promise<void> => {
     console.log(`[DELETE] Enviando solicitud para eliminar Noticia ID: ${id}`);
     const response = await apiClient.delete(`/${id}`);
     
-    // Verificar tanto 200 (OK) como 204 (No Content) como respuestas exitosas
     if (response.status >= 200 && response.status < 300) {
-      console.log(`[DELETE] Noticia ${id} eliminado exitosamente`);
+      console.log(`[DELETE] Noticia ${id} eliminada exitosamente`);
       return;
     }
     
-    // Si la respuesta no es exitosa
     throw new Error(
-      response.data?.message || 
+      (response.data as { message?: string })?.message || 
       `Error ${response.status}: ${response.statusText}`
     );
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as ApiError;
     console.error(`[DELETE] Error al eliminar Noticia ${id}:`, {
-      error: error.response?.data || error.message,
-      status: error.response?.status
+      error: 'data' in err ? err.data : err.message,
+      status: 'status' in err ? err.status : undefined
     });
     
-    // Mejorar el mensaje de error para el usuario
-    const errorMessage = error.response?.data?.message || 
-                        error.message || 
-                        'Error desconocido al eliminar el Noticia';
+    const errorMessage = 'message' in err ? err.message : 
+                        'Error desconocido al eliminar la Noticia';
     
     throw new Error(errorMessage);
   }
@@ -255,28 +236,29 @@ export const uploadNoticiaImage = async (file: File): Promise<string> => {
     }
     
     return data.data.url;
-  } catch (error: any) {
-    console.error('[uploadEventImage Error]', {
-      message: error.message,
-      code: error.code,
-      status: error.status
+  } catch (error) {
+    const err = error as ApiError;
+    console.error('[uploadNoticiaImage Error]', {
+      message: err.message,
+      code: err.code,
+      status: err.status
     });
-    throw new Error(error.message || 'Error al subir imagen');
+    throw new Error(err.message || 'Error al subir imagen');
   }
 };
 
-// Funciones adicionales
 export const searchNoticias = async (query: string): Promise<INoticia[]> => {
   try {
     const { data } = await apiClient.get<ApiResponse<INoticia[]>>(`/search?q=${encodeURIComponent(query)}`);
     return data.data || [];
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as ApiError;
     console.error('[searchNoticias Error]', {
-      message: error.message,
+      message: err.message,
       query,
-      code: error.code
+      code: err.code
     });
-    throw new Error(error.message || 'Error al buscar Noticias');
+    throw new Error(err.message || 'Error al buscar Noticias');
   }
 };
 
@@ -284,12 +266,13 @@ export const getNoticiasByStatus = async (status: string): Promise<INoticia[]> =
   try {
     const { data } = await apiClient.get<ApiResponse<INoticia[]>>(`/status/${encodeURIComponent(status)}`);
     return data.data || [];
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as ApiError;
     console.error('[getNoticiasByStatus Error]', {
-      message: error.message,
+      message: err.message,
       status,
-      code: error.code
+      code: err.code
     });
-    throw new Error(error.message || 'Error al obtener Noticias por estado');
+    throw new Error(err.message || 'Error al obtener Noticias por estado');
   }
 };

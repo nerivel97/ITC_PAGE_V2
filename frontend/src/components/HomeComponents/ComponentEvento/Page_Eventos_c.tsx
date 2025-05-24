@@ -4,6 +4,7 @@ import { FaArrowLeft, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import styles from './Page_Eventos_c.module.css';
 import { getEventoById } from '../../../admin/services/eventos.service';
 import { IEvento } from '../../../admin/interfaces/evento.interface';
+import { AxiosError } from 'axios';
 
 const Page_Eventos_c = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,26 +16,33 @@ const Page_Eventos_c = () => {
 
   // Scroll al inicio y carga del evento
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    const fetchEvento = async () => {
-      try {
-        setLoading(true);
-        if (!id) throw new Error('ID de evento no proporcionado');
-        
-        const eventoData = await getEventoById(parseInt(id));
-        setEvento(eventoData);
-        setError(null);
-      } catch (err: any) {
-        console.error('Error al cargar el evento:', err);
-        setError(err.message || 'Error al cargar los detalles del evento');
-      } finally {
-        setLoading(false);
-      }
-    };
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    fetchEvento();
-  }, [id]);
+  const fetchEvento = async () => {
+    try {
+      setLoading(true);
+      if (!id) throw new Error('ID de evento no proporcionado');
+
+      const eventoData = await getEventoById(parseInt(id));
+      setEvento(eventoData);
+      setError(null);
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      console.error('Error al cargar el evento:', {
+        message: error.message,
+        response: error.response
+      });
+
+      const mensaje = error.response?.data?.message || error.message || 'Error al cargar los detalles del evento';
+      setError(mensaje);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchEvento();
+}, [id]);
+
 
   // Función mejorada para volver
   const handleGoBack = () => {

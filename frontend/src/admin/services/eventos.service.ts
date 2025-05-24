@@ -1,11 +1,20 @@
-// src/admin/services/eventos.service.ts
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ApiResponse } from '../interfaces/api.interface';
 import { IEvento, IEventoCreate, IEventoUpdate } from '../interfaces/evento.interface';
 
 const API_URL = 'http://localhost:8000/api/eventos/';
 
-// Configuración global de axios con interceptores
+interface ServerError {
+  message?: string;
+  errors?: Record<string, string[]>;
+  [key: string]: unknown;
+}
+
+interface ValidationError {
+  field: string;
+  message: string;
+}
+
 const apiClient = axios.create({
   baseURL: API_URL,
   timeout: 10000,
@@ -15,7 +24,6 @@ const apiClient = axios.create({
   }
 });
 
-// Interceptor de solicitudes
 apiClient.interceptors.request.use(
   (config) => {
     console.log(`[Request] ${config.method?.toUpperCase()} ${config.url}`, {
@@ -30,63 +38,62 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Interceptor de respuestas
 apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    const errorData = error.response?.data || {};
-    const errorMessage = errorData.message || error.message;
-    
-    if (errorData.errors) {
-      // Manejo de errores de validación del backend
-      const validationErrors = Object.values(errorData.errors).flat();
-      error.message = validationErrors.join('\n');
+  (response: AxiosResponse) => response,
+  (error: AxiosError<ServerError>) => {
+    if (error.response?.data?.errors) {
+      const validationErrors = Object.entries(error.response.data.errors)
+        .map(([field, messages]) => ({
+          field,
+          message: messages.join(', ')
+        }));
+      error.message = validationErrors.map(e => `${e.field}: ${e.message}`).join('\n');
     }
-    
     return Promise.reject(error);
   }
 );
 
-/**
- * Valida los datos del evento antes de enviarlos al servidor
- */
-const validateEventoData = (data: IEventoCreate): void => {
+const validateEventoData = (data: IEventoCreate): ValidationError[] => {
+  const errors: ValidationError[] = [];
   const requiredFields: (keyof IEventoCreate)[] = [
-    'nombre_evento',
-    'categoria',
-    'descripcion',
-    'fecha_inicio',
-    'fecha_final',
-    'estado'
+    'nombre_evento', 'categoria', 'descripcion', 
+    'fecha_inicio', 'fecha_final', 'estado'
   ];
 
-  const missingFields = requiredFields.filter(field => {
-    const value = data[field];
-    return value === undefined || value === null || value === '';
+  requiredFields.forEach(field => {
+    if (!data[field]) {
+      errors.push({
+        field,
+        message: 'Este campo es requerido'
+      });
+    }
   });
 
-  if (missingFields.length > 0) {
-    throw new Error(`Campos requeridos faltantes: ${missingFields.join(', ')}`);
+  if (data.fecha_final && data.fecha_inicio && 
+      new Date(data.fecha_final) < new Date(data.fecha_inicio)) {
+    errors.push({
+      field: 'fecha_final',
+      message: 'La fecha final no puede ser anterior a la fecha de inicio'
+    });
   }
 
-  // Validación de fechas
-  if (new Date(data.fecha_final) < new Date(data.fecha_inicio)) {
-    throw new Error('La fecha final no puede ser anterior a la fecha de inicio');
+  if (data.nombre_evento && data.nombre_evento.length > 100) {
+    errors.push({
+      field: 'nombre_evento',
+      message: 'No puede exceder los 100 caracteres'
+    });
   }
 
-  // Validación de longitud de campos
-  if (data.nombre_evento.length > 100) {
-    throw new Error('El nombre del evento no puede exceder los 100 caracteres');
+  if (data.categoria && data.categoria.length > 50) {
+    errors.push({
+      field: 'categoria',
+      message: 'No puede exceder los 50 caracteres'
+    });
   }
 
-  if (data.categoria.length > 50) {
-    throw new Error('La categoría no puede exceder los 50 caracteres');
-  }
+  return errors;
 };
 
-/**
- * Normaliza los datos del evento para el envío al servidor
- */
 const normalizeEventoData = (data: IEventoCreate): IEventoCreate => {
   return {
     ...data,
@@ -101,64 +108,26 @@ const normalizeEventoData = (data: IEventoCreate): IEventoCreate => {
 export const fetchEventos = async (): Promise<IEvento[]> => {
   try {
     const { data } = await apiClient.get<ApiResponse<IEvento[]>>('/');
-    
-    if (!data.data) {
-      throw new Error('La respuesta no contiene datos');
-    }
+    if (!data.data) throw new Error('La respuesta no contiene datos');
     
     return data.data.map(evento => ({
       ...evento,
-      fecha_inicio: new Date(evento.fecha_inicio).toISOString(),
-      fecha_final: new Date(evento.fecha_final).toISOString()
+      fecha_inicio: evento.fecha_inicio,
+      fecha_final: evento.fecha_final
     }));
-  } catch (error: any) {
-    console.error('[fetchEventos Error]', {
-      message: error.message,
-      code: error.code,
-      status: error.status
-    });
-    throw new Error(error.message || 'Error al obtener eventos');
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
+    console.error('[fetchEventos Error]', err.message);
+    throw new Error(err.message || 'Error al obtener eventos');
   }
 };
 
 export const getEventoById = async (id: number): Promise<IEvento> => {
   try {
-    const { data } = await apiClient.get<ApiResponse<IEvento>>(`/${id}`);
-    
-    if (!data.data) {
+    const response = await apiClient.get<ApiResponse<IEvento>>(`/${id}`);
+
+    if (!response.data.data) {
       throw new Error('Evento no encontrado');
-    }
-    
-    return {
-      ...data.data,
-      fecha_inicio: new Date(data.data.fecha_inicio).toISOString(),
-      fecha_final: new Date(data.data.fecha_final).toISOString()
-    };
-  } catch (error: any) {
-    console.error(`[getEventoById Error] ID: ${id}`, {
-      message: error.message,
-      code: error.code,
-      status: error.status
-    });
-    throw new Error(error.message || `Error al obtener evento ${id}`);
-  }
-};
-
-export const createEvento = async (eventoData: IEventoCreate): Promise<IEvento> => {
-  try {
-    // 1. Validación
-    validateEventoData(eventoData);
-    
-    // 2. Normalización
-    const normalizedData = normalizeEventoData(eventoData);
-    
-    console.log('[createEvento] Datos normalizados:', normalizedData);
-
-    // 3. Envío al servidor
-    const response = await apiClient.post<ApiResponse<IEvento>>('/', normalizedData);
-    
-    if (!response.data?.data) {
-      throw new Error('Respuesta inválida del servidor');
     }
 
     return {
@@ -166,140 +135,137 @@ export const createEvento = async (eventoData: IEventoCreate): Promise<IEvento> 
       fecha_inicio: new Date(response.data.data.fecha_inicio).toISOString(),
       fecha_final: new Date(response.data.data.fecha_final).toISOString()
     };
-  } catch (error: any) {
-    console.error('[createEvento Error]', {
-      message: error.message,
-      code: error.code,
-      status: error.status,
-      inputData: eventoData,
-      stack: error.stack
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
+    console.error(`[getEventoById Error] ID: ${id}`, {
+      message: err.message,
+      response: err.response
     });
+
+    throw new Error(err.response?.data?.message || err.message || `Error al obtener evento ${id}`);
+  }
+};
+
+
+export const createEvento = async (eventoData: IEventoCreate): Promise<IEvento> => {
+  const validationErrors = validateEventoData(eventoData);
+  if (validationErrors.length > 0) {
+    throw new Error(validationErrors.map(e => `${e.field}: ${e.message}`).join('\n'));
+  }
+
+  const normalizedData = normalizeEventoData(eventoData);
+  
+  try {
+    const response = await apiClient.post<ApiResponse<IEvento>>('/', normalizedData);
+    if (!response.data?.data) throw new Error('Respuesta inválida del servidor');
     
-    throw new Error(
-      error.response?.data?.message || 
-      error.message || 
-      'Error al crear evento'
-    );
+    return response.data.data;
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
+    console.error('[createEvento Error]', err.message);
+    throw new Error(err.message || 'Error al crear evento');
   }
 };
 
 export const updateEvento = async (id: number, eventoData: IEventoUpdate): Promise<IEvento> => {
   try {
-    console.log(`[updateEvento] Actualizando evento ${id}`, eventoData);
-    
-    // Validación mínima para actualización
     if (!eventoData.nombre_evento && !eventoData.categoria) {
       throw new Error('Se requiere al menos un campo para actualizar');
     }
 
-    const { data } = await apiClient.put<ApiResponse<IEvento>>(`/${id}`, eventoData);
-    
-    if (!data.data) {
-      throw new Error('No se recibieron datos del evento actualizado');
-    }
-    
+    const response = await apiClient.put<ApiResponse<IEvento>>(`/${id}`, eventoData);
+
+    if (!response.data?.data) throw new Error('Respuesta inválida del servidor');
+
     return {
-      ...data.data,
-      fecha_inicio: new Date(data.data.fecha_inicio).toISOString(),
-      fecha_final: new Date(data.data.fecha_final).toISOString()
+      ...response.data.data,
+      fecha_inicio: new Date(response.data.data.fecha_inicio).toISOString(),
+      fecha_final: new Date(response.data.data.fecha_final).toISOString()
     };
-  } catch (error: any) {
-    console.error(`[updateEvento Error] ID: ${id}`, {
-      message: error.message,
-      code: error.code,
-      status: error.status,
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
+    console.error('[updateEvento Error]', err.message, {
+      response: err.response,
       inputData: eventoData
     });
-    throw new Error(error.message || `Error al actualizar evento ${id}`);
+
+    throw new Error(err.response?.data?.message || err.message || 'Error al actualizar evento');
   }
 };
 
+
 export const deleteEvento = async (id: number): Promise<void> => {
   try {
-    console.log(`[DELETE] Enviando solicitud para eliminar evento ID: ${id}`);
     const response = await apiClient.delete(`/${id}`);
-    
-    // Verificar tanto 200 (OK) como 204 (No Content) como respuestas exitosas
-    if (response.status >= 200 && response.status < 300) {
-      console.log(`[DELETE] Evento ${id} eliminado exitosamente`);
-      return;
+
+    if (response.status < 200 || response.status >= 300) {
+      throw new Error(response.data?.message || `Error ${response.status}: ${response.statusText}`);
     }
-    
-    // Si la respuesta no es exitosa
-    throw new Error(
-      response.data?.message || 
-      `Error ${response.status}: ${response.statusText}`
-    );
-  } catch (error: any) {
-    console.error(`[DELETE] Error al eliminar evento ${id}:`, {
-      error: error.response?.data || error.message,
-      status: error.response?.status
+
+    console.log(`[DELETE] Evento ${id} eliminado exitosamente`);
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
+    console.error('[deleteEvento Error]', {
+      response: err.response,
+      message: err.message
     });
-    
-    // Mejorar el mensaje de error para el usuario
-    const errorMessage = error.response?.data?.message || 
-                        error.message || 
-                        'Error desconocido al eliminar el evento';
-    
-    throw new Error(errorMessage);
+
+    throw new Error(err.response?.data?.message || err.message || 'Error al eliminar evento');
   }
 };
+
 
 export const uploadEventImage = async (file: File): Promise<string> => {
   try {
     const formData = new FormData();
     formData.append('image', file);
-    
-    const { data } = await apiClient.post<ApiResponse<{ url: string }>>(
-      '/upload', 
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-    );
-    
-    if (!data.data?.url) {
-      throw new Error('No se recibió URL de la imagen');
-    }
-    
-    return data.data.url;
-  } catch (error: any) {
-    console.error('[uploadEventImage Error]', {
-      message: error.message,
-      code: error.code,
-      status: error.status
+
+    const { data } = await apiClient.post<ApiResponse<{ url: string }>>('/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
     });
-    throw new Error(error.message || 'Error al subir imagen');
+
+    if (!data.data?.url) throw new Error('No se recibió URL de la imagen');
+
+    return data.data.url;
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
+    console.error('[uploadEventImage Error]', err.message);
+
+    throw new Error(err.response?.data?.message || err.message || 'Error al subir imagen');
   }
 };
+
 
 // Funciones adicionales
 export const searchEventos = async (query: string): Promise<IEvento[]> => {
   try {
-    const { data } = await apiClient.get<ApiResponse<IEvento[]>>(`/search?q=${encodeURIComponent(query)}`);
-    return data.data || [];
-  } catch (error: any) {
+    const response = await apiClient.get<ApiResponse<IEvento[]>>(`/search?q=${encodeURIComponent(query)}`);
+    return response.data.data || [];
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
     console.error('[searchEventos Error]', {
-      message: error.message,
+      message: err.message,
       query,
-      code: error.code
+      response: err.response
     });
-    throw new Error(error.message || 'Error al buscar eventos');
+
+    throw new Error(err.response?.data?.message || err.message || 'Error al buscar eventos');
   }
 };
 
+
 export const getEventosByStatus = async (status: string): Promise<IEvento[]> => {
   try {
-    const { data } = await apiClient.get<ApiResponse<IEvento[]>>(`/status/${encodeURIComponent(status)}`);
-    return data.data || [];
-  } catch (error: any) {
+    const response = await apiClient.get<ApiResponse<IEvento[]>>(`/status/${encodeURIComponent(status)}`);
+    return response.data.data || [];
+  } catch (error) {
+    const err = error as AxiosError<ServerError>;
     console.error('[getEventosByStatus Error]', {
-      message: error.message,
+      message: err.message,
       status,
-      code: error.code
+      response: err.response
     });
-    throw new Error(error.message || 'Error al obtener eventos por estado');
+
+    throw new Error(err.response?.data?.message || err.message || 'Error al obtener eventos por estado');
   }
 };
