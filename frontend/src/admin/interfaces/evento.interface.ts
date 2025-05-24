@@ -9,10 +9,9 @@ export interface IEvento {
   imagen?: string;
 }
 
-export interface IEventoCreate extends Omit<IEvento, 'id_evento'> {
-  // Puedes agregar validaciones específicas del frontend si es necesario
-}
-
-export interface IEventoUpdate extends Partial<IEventoCreate> {
-  // Campos opcionales para actualización
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  errors?: Record<string, string[]>;
 }

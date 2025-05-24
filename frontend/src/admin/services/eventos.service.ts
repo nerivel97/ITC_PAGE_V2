@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ApiResponse } from '../interfaces/api.interface';
 import { IEvento, IEventoCreate, IEventoUpdate } from '../interfaces/evento.interface';
 
-const API_URL = 'http://localhost:4000/api/eventos';
+const API_URL = 'http://localhost:8000/api/eventos/';
 
 // Configuración global de axios con interceptores
 const apiClient = axios.create({
@@ -32,44 +32,18 @@ apiClient.interceptors.request.use(
 
 // Interceptor de respuestas
 apiClient.interceptors.response.use(
-  (response) => {
-    console.log(`[Response] ${response.status} ${response.config.url}`, response.data);
-    return response;
-  },
+  (response) => response,
   (error) => {
-    const errorDetails = {
-      message: error.message,
-      config: error.config,
-      response: error.response?.data,
-      status: error.response?.status
-    };
+    const errorData = error.response?.data || {};
+    const errorMessage = errorData.message || error.message;
     
-    console.error('[Response Error]', errorDetails);
-    
-    if (error.response) {
-      // Error con respuesta del servidor
-      const serverError = {
-        message: error.response.data?.message || 'Error del servidor',
-        status: error.response.status,
-        data: error.response.data,
-        code: error.response.data?.code || 'SERVER_ERROR'
-      };
-      return Promise.reject(serverError);
-    } else if (error.request) {
-      // Error sin respuesta del servidor
-      return Promise.reject({
-        message: 'No se recibió respuesta del servidor',
-        code: 'NETWORK_ERROR',
-        status: 0
-      });
-    } else {
-      // Error en la configuración de la solicitud
-      return Promise.reject({
-        message: error.message || 'Error en la configuración de la solicitud',
-        code: 'REQUEST_ERROR',
-        status: -1
-      });
+    if (errorData.errors) {
+      // Manejo de errores de validación del backend
+      const validationErrors = Object.values(errorData.errors).flat();
+      error.message = validationErrors.join('\n');
     }
+    
+    return Promise.reject(error);
   }
 );
 

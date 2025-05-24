@@ -36,11 +36,18 @@ $container->set('CarreraService', function (Container $c) {
     return new \App\Services\CarreraService($c->get('db'));
 });
 
+$container->set('EventoService', function($container) {
+    return new \App\Services\EventoService($container->get('db'));
+});
+
 // Configurar CarreraController
 $container->set('CarreraController', function (Container $c) {
     return new \App\Controllers\CarreraController($c->get('CarreraService'));
 });
 
+$container->set('EventosController', function($container) {
+    return new \App\Controllers\EventosController($container->get('EventoService'));
+});
 // Crear aplicación con el contenedor
 AppFactory::setContainer($container);
 $app = AppFactory::create();
@@ -66,5 +73,5 @@ $app->add(function (Request $request, $handler): Response {
 
 // Cargar rutas
 require __DIR__ . '/../routes/Carreras_api.php';
-
+require __DIR__ . '/../routes/eventos_api.php';
 $app->run();
