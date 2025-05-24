@@ -1,0 +1,282 @@
+/* Estilos generales */
+.contentWrapper {
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.noticiaContainer {
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Banner */
+.bannerContainer {
+  max-width: 99%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.newsBanner {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay con información */
+.bannerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(39, 39, 39, 0.9) 0%, rgba(255, 255, 255, 0) 50%);
+  display: flex;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.bannerContent {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.bannerTitle {
+  color: white;
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  line-height: 1.3;
+  text-align: left;
+}
+
+.bannerTags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bannerTag {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Estilos para diferentes estados */
+.bannerTag.activo {
+  background-color: rgba(46, 204, 113, 0.8);
+}
+
+/* Botón de regreso */
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #2c3e50;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+  background-color: #f0f0f0;
+}
+
+/* Contenedor principal */
+.contentContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .contentContainer {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Sección de información */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoCard {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #004c87;
+}
+
+.dateInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dateItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateItem strong {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.dateItem span {
+  color: #555;
+}
+
+.locationText {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Descripción */
+.descriptionSection {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eaeaea;
+}
+
+.descriptionContent {
+  line-height: 1.8;
+  color: #444;
+}
+
+.descriptionContent p {
+  margin-bottom: 20px;
+}
+
+/* Estados de carga */
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.errorContainer h3,
+.emptyContainer h3 {
+  color: #d9534f;
+  margin-bottom: 15px;
+}
+
+.errorButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #004c87;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.errorButton:hover {
+  background: #003366;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #004c87;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .newsBanner {
+    height: 250px;
+  }
+  
+  .bannerTitle {
+    font-size: 1.5rem;
+  }
+  
+  .bannerTag {
+    font-size: 0.8rem;
+    padding: 4px 12px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsBanner {
+    height: 200px;
+  }
+  
+  .bannerTitle {
+    font-size: 1.3rem;
+  }
+  
+  .bannerOverlay {
+    padding: 15px;
+  }
+  
+  .contentWrapper {
+    padding: 15px;
+  }
+  
+  .infoCard,
+  .descriptionSection {
+    padding: 15px;
+  }
+}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ApiResponse } from '../interfaces/api.interface';
 import { INoticia, INoticiaCreate, INoticiaUpdate } from '../interfaces/noticia.interface';
 
-const API_URL = 'http://localhost:4000/api/noticias';
+const API_URL = 'http://localhost:8000/api/noticias';
 
 // Configuración global de axios con interceptores
 const apiClient = axios.create({
