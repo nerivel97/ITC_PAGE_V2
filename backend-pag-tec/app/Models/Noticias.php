@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Noticia {
+class Noticias {
     public $id_noticia;
     public $nombre_noticia;
     public $descripcion;

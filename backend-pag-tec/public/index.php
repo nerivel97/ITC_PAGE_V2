@@ -18,43 +18,45 @@ $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
 $container = new Container();
 
 // Configurar base de datos en el contenedor
-$container->set('db', function () {
-    $dsn = sprintf(
-        'mysql:host=%s;dbname=%s;charset=utf8mb4',
-        $_ENV['DB_HOST'],
-        $_ENV['DB_NAME']
-    );
-    
-    $pdo = new PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS']);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $pdo;
+$container->set(PDO::class, function () {
+    $host = $_ENV['DB_HOST'];
+    $db = $_ENV['DB_NAME'];
+    $user = $_ENV['DB_USER'];
+    $pass = $_ENV['DB_PASS'];
+    $charset = 'utf8mb4';
+
+    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+    return new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]);
 });
 
 // Configurar CarreraService
 $container->set('CarreraService', function (Container $c) {
-    return new \App\Services\CarreraService($c->get('db'));
+    return new \App\Services\CarreraService($c->get(PDO::class));
 });
 
-$container->set('EventoService', function($container) {
-    return new \App\Services\EventoService($container->get('db'));
+$container->set('EventoService', function(Container $c) {
+    return new \App\Services\EventoService($c->get(PDO::class));
 });
 
-$container->set('NoticiaService', function($container) {
-    return new \App\Services\NoticiaService($container->get('db'));
+$container->set('NoticiaService', function(Container $c) {
+    return new \App\Services\NoticiaService($c->get(PDO::class));
 });
 
 // Configurar CarreraController
 $container->set('CarreraController', function (Container $c) {
-    return new \App\Controllers\CarreraController($c->get('CarreraService'));
+    return new \App\Controllers\CarreraController($c->get(\App\Services\CarreraService::class));
 });
 
-$container->set('EventosController', function($container) {
-    return new \App\Controllers\EventosController($container->get('EventoService'));
+$container->set('EventosController', function(Container $c) {
+    return new \App\Controllers\EventosController($c->get(\App\Services\EventoService::class));
 });
 
-$container->set('NoticiasController', function($container) {
-    return new \App\Controllers\NoticiasController($container->get('NoticiaService'));
+$container->set('NoticiasController', function(Container $c) {
+    return new \App\Controllers\NoticiasController($c->get(\App\Services\NoticiaService::class));
 });
 // Crear aplicación con el contenedor
 AppFactory::setContainer($container);
