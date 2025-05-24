@@ -162,69 +162,45 @@ export const getNoticiaById = async (id: number): Promise<INoticia> => {
 
 export const createNoticia = async (NoticiaData: INoticiaCreate): Promise<INoticia> => {
   try {
-    // 1. Validación
-    validateNoticiaData(NoticiaData);
-    
-    // 2. Normalización
-    const normalizedData = normalizeNoticiaData(NoticiaData);
-    
-    console.log('[createNoticia] Datos normalizados:', normalizedData);
-
-    // 3. Envío al servidor
-    const response = await apiClient.post<ApiResponse<INoticia>>('/', normalizedData);
+    const response = await apiClient.post<ApiResponse<INoticia>>('/', NoticiaData, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      transformRequest: [(data) => JSON.stringify(data)] // Asegurar serialización correcta
+    });
     
     if (!response.data?.data) {
       throw new Error('Respuesta inválida del servidor');
     }
 
-    return {
-      ...response.data.data,
-      fecha_publicacion: new Date(response.data.data.fecha_publicacion).toISOString(),
-    };
+    return response.data.data;
   } catch (error: any) {
-    console.error('[createNoticia Error]', {
-      message: error.message,
-      code: error.code,
-      status: error.status,
-      inputData: NoticiaData,
-      stack: error.stack
-    });
-    
-    throw new Error(
-      error.response?.data?.message || 
-      error.message || 
-      'Error al crear Noticia'
-    );
+    const errorMessage = error.response?.data?.message || 
+                        error.message || 
+                        'Error al crear noticia';
+    throw new Error(errorMessage);
   }
 };
 
 export const updateNoticia = async (id: number, NoticiaData: INoticiaUpdate): Promise<INoticia> => {
   try {
-    console.log(`[updateNoticia] Actualizando Noticia ${id}`, NoticiaData);
-    
-    // Validación mínima para actualización
-    if (!NoticiaData.nombre_noticia && !NoticiaData.autor) {
-      throw new Error('Se requiere al menos un campo para actualizar');
-    }
-
-    const { data } = await apiClient.put<ApiResponse<INoticia>>(`/${id}`, NoticiaData);
-    
-    if (!data.data) {
-      throw new Error('No se recibieron datos del Noticia actualizado');
-    }
-    
-    return {
-      ...data.data,
-      fecha_publicacion: new Date(data.data.fecha_publicacion).toISOString(),
-    };
-  } catch (error: any) {
-    console.error(`[updateNoticia Error] ID: ${id}`, {
-      message: error.message,
-      code: error.code,
-      status: error.status,
-      inputData: NoticiaData
+    const response = await apiClient.put<ApiResponse<INoticia>>(`/${id}`, NoticiaData, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      transformRequest: [(data) => JSON.stringify(data)]
     });
-    throw new Error(error.message || `Error al actualizar Noticia ${id}`);
+    
+    if (!response.data?.data) {
+      throw new Error('No se recibieron datos de la noticia actualizada');
+    }
+    
+    return response.data.data;
+  } catch (error: any) {
+    const errorMessage = error.response?.data?.message || 
+                        error.message || 
+                        `Error al actualizar noticia ${id}`;
+    throw new Error(errorMessage);
   }
 };
 

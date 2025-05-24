@@ -43,36 +43,52 @@ const NoticiasForm: React.FC<NoticiaFormProps> = ({
   }, [visible, noticia, form]);
 
   const handleSubmit = async () => {
-    try {
-      setLoading(true);
-      const values = await form.validateFields();
-      
-      const noticiaData: INoticiaCreate = {
-        nombre_noticia: values.nombre_noticia,
-        descripcion: values.descripcion,
-        fecha_publicacion: dayjs(values.fecha_publicacion).format('YYYY-MM-DD'),
-        autor: values.autor,
-        imagen: values.imagen || null
-      };
-  
-      console.log("Datos a enviar:", noticiaData);
-  
-      if (noticia) {
-        await updateNoticia(noticia.id_noticia!, noticiaData);
-        message.success('Noticia actualizada correctamente');
-      } else {
-        await createNoticia(noticiaData);
-        message.success('Noticia creada correctamente');
-      }
-      
-      onSuccess();
-    } catch (error) {
-      console.error('Error completo:', error);
-      message.error(error instanceof Error ? error.message : 'Error al guardar la noticia');
-    } finally {
-      setLoading(false);
+  try {
+    setLoading(true);
+    const values = await form.validateFields();
+    
+    const noticiaData = {
+      nombre_noticia: values.nombre_noticia,
+      descripcion: values.descripcion,
+      fecha_publicacion: dayjs(values.fecha_publicacion).format('YYYY-MM-DD'),
+      autor: values.autor,
+      imagen: values.imagen || null
+    };
+
+    console.log("Datos a enviar:", noticiaData);
+
+    let result;
+    if (noticia) {
+      console.log("Actualizando noticia ID:", noticia.id_noticia);
+      result = await updateNoticia(noticia.id_noticia!, noticiaData);
+      message.success('Noticia actualizada correctamente');
+    } else {
+      console.log("Creando nueva noticia");
+      result = await createNoticia(noticiaData);
+      message.success('Noticia creada correctamente');
     }
-  };
+    
+    console.log("Resultado:", result);
+    onSuccess();
+  } catch (error: any) {
+    console.error('Error completo:', {
+      message: error.message,
+      response: error.response?.data,
+      stack: error.stack
+    });
+    
+    let errorMessage = 'Error al guardar la noticia';
+    if (error.response?.data?.message) {
+      errorMessage = error.response.data.message;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    message.error(errorMessage);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <Modal

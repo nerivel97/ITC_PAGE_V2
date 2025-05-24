@@ -55,14 +55,27 @@ class NoticiasController {
 
     public function create(Request $request, Response $response) {
     try {
-        $data = $request->getParsedBody();
+        // Verifica el contenido crudo del request
+        $rawBody = (string)$request->getBody();
+        error_log('Raw body recibido: ' . $rawBody);
         
-        // Validación básica
-        if (empty($data['nombre_noticia']) || empty($data['descripcion']) || 
-            empty($data['fecha_publicacion']) || empty($data['autor'])) {
-            throw new Exception('Todos los campos son requeridos');
+        // Obtiene los datos parseados
+        $data = $request->getParsedBody();
+        error_log('Datos parseados: ' . print_r($data, true));
+        
+        if (empty($data)) {
+            throw new Exception('El cuerpo de la solicitud está vacío o no es JSON válido');
         }
 
+        // Validación mejorada
+        $required = ['nombre_noticia', 'descripcion', 'fecha_publicacion', 'autor'];
+        foreach ($required as $field) {
+            if (empty($data[$field])) {
+                throw new Exception("El campo $field es requerido");
+            }
+        }
+
+        // Crear objeto Noticia
         $noticia = new Noticia();
         $noticia->nombre_noticia = $data['nombre_noticia'];
         $noticia->descripcion = $data['descripcion'];
@@ -70,16 +83,27 @@ class NoticiasController {
         $noticia->autor = $data['autor'];
         $noticia->imagen = $data['imagen'] ?? null;
 
+        error_log('Objeto Noticia creado: ' . print_r($noticia, true));
+
+        // Insertar en BD
         $nuevaNoticia = $this->noticiaService->createNoticia($noticia);
         
+        error_log('Noticia creada exitosamente: ' . $nuevaNoticia->id_noticia);
+
         return $this->jsonResponse($response, [
             'success' => true,
             'data' => $nuevaNoticia
         ], 201);
+
     } catch (Exception $e) {
+        error_log('ERROR EN CREATE: ' . $e->getMessage());
+        error_log('Stack trace: ' . $e->getTraceAsString());
+        
         return $this->jsonResponse($response, [
             'success' => false,
-            'message' => $e->getMessage()
+            'message' => $e->getMessage(),
+            'received_data' => $request->getParsedBody(),
+            'raw_body' => (string)$request->getBody()
         ], 400);
     }
 }
@@ -89,12 +113,10 @@ public function update(Request $request, Response $response, array $args) {
         $id = (int)$args['id'];
         $data = $request->getParsedBody();
         
-        if (empty($data)) {
-            throw new Exception('No se recibieron datos para actualizar');
-        }
-
+        // Debug: Verifica los datos recibidos
+        error_log('Datos recibidos en UPDATE: ' . print_r($data, true));
+        
         $noticia = new Noticia();
-        // Asignar solo los campos recibidos
         if (isset($data['nombre_noticia'])) $noticia->nombre_noticia = $data['nombre_noticia'];
         if (isset($data['descripcion'])) $noticia->descripcion = $data['descripcion'];
         if (isset($data['fecha_publicacion'])) $noticia->fecha_publicacion = $data['fecha_publicacion'];
@@ -108,12 +130,14 @@ public function update(Request $request, Response $response, array $args) {
             'data' => $noticiaActualizada
         ], 200);
     } catch (Exception $e) {
+        error_log('Error en UPDATE: ' . $e->getMessage());
         return $this->jsonResponse($response, [
             'success' => false,
             'message' => $e->getMessage()
         ], 400);
     }
 }
+
 
     public function delete(Request $request, Response $response, array $args) {
         try {

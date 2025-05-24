@@ -14,28 +14,32 @@ class NoticiaService {
 
     // CREATE
     public function createNoticia(Noticia $noticia) {
-        try {
-            $stmt = $this->db->prepare("
-                INSERT INTO noticias (
-                    nombre_noticia, descripcion, fecha_publicacion, 
-                    autor, imagen
-                ) VALUES (?, ?, ?, ?, ?)
-            ");
-            
-            $stmt->execute([
-                $noticia->nombre_noticia,
-                $noticia->descripcion,
-                $noticia->fecha_publicacion,
-                $noticia->autor,
-                $noticia->imagen
-            ]);
+    try {
+        $sql = "INSERT INTO noticias (
+            nombre_noticia, descripcion, fecha_publicacion, 
+            autor, imagen
+        ) VALUES (:nombre, :descripcion, :fecha, :autor, :imagen)";
 
-            $noticiaId = $this->db->lastInsertId();
-            return $this->getNoticiaById($noticiaId);
-        } catch (PDOException $e) {
-            throw new \Exception("Error al crear noticia: " . $e->getMessage());
+        $stmt = $this->db->prepare($sql);
+        
+        $stmt->bindParam(':nombre', $noticia->nombre_noticia, PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $noticia->descripcion, PDO::PARAM_STR);
+        $stmt->bindParam(':fecha', $noticia->fecha_publicacion, PDO::PARAM_STR);
+        $stmt->bindParam(':autor', $noticia->autor, PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $noticia->imagen, PDO::PARAM_STR);
+        
+        if (!$stmt->execute()) {
+            $errorInfo = $stmt->errorInfo();
+            throw new \Exception("Error al ejecutar consulta: " . $errorInfo[2]);
         }
+
+        return $this->getNoticiaById($this->db->lastInsertId());
+
+    } catch (PDOException $e) {
+        error_log("Error PDO: " . $e->getMessage());
+        throw new \Exception("Error de base de datos: " . $e->getMessage());
     }
+}
 
     // READ
     public function getAllNoticias() {
@@ -71,32 +75,52 @@ class NoticiaService {
 
     // UPDATE
     public function updateNoticia($id, Noticia $noticia) {
-        try {
-            $stmt = $this->db->prepare("
-                UPDATE noticias SET
-                    nombre_noticia = ?,
-                    descripcion = ?,
-                    fecha_publicacion = ?,
-                    autor = ?,
-                    imagen = ?
-                WHERE id_noticia = ?
-            ");
-            
-            $stmt->execute([
-                $noticia->nombre_noticia,
-                $noticia->descripcion,
-                $noticia->fecha_publicacion,
-                $noticia->autor,
-                $noticia->imagen,
-                $id
-            ]);
-
-            return $this->getNoticiaById($id);
-        } catch (PDOException $e) {
-            throw new \Exception("Error al actualizar noticia: " . $e->getMessage());
+    try {
+        // Construir la consulta dinámicamente basada en los campos proporcionados
+        $updates = [];
+        $params = [];
+        
+        if (!empty($noticia->nombre_noticia)) {
+            $updates[] = "nombre_noticia = ?";
+            $params[] = $noticia->nombre_noticia;
         }
-    }
+        
+        if (!empty($noticia->descripcion)) {
+            $updates[] = "descripcion = ?";
+            $params[] = $noticia->descripcion;
+        }
+        
+        if (!empty($noticia->fecha_publicacion)) {
+            $updates[] = "fecha_publicacion = ?";
+            $params[] = $noticia->fecha_publicacion;
+        }
+        
+        if (!empty($noticia->autor)) {
+            $updates[] = "autor = ?";
+            $params[] = $noticia->autor;
+        }
+        
+        if (isset($noticia->imagen)) {
+            $updates[] = "imagen = ?";
+            $params[] = $noticia->imagen;
+        }
+        
+        if (empty($updates)) {
+            throw new \Exception("No se proporcionaron datos para actualizar");
+        }
+        
+        $params[] = $id;
+        
+        $sql = "UPDATE noticias SET " . implode(', ', $updates) . " WHERE id_noticia = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
 
+        return $this->getNoticiaById($id);
+    } catch (PDOException $e) {
+        error_log('Error en updateNoticia: ' . $e->getMessage());
+        throw new \Exception("Error al actualizar noticia: " . $e->getMessage());
+    }
+}
     // DELETE
     public function deleteNoticia($id) {
         try {
