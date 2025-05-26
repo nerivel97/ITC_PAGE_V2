@@ -44,3 +44,22 @@
     margin-bottom: 16px;
   }
 }
+
+/* Agrega esto al final del archivo */
+.ant-row {
+  margin-bottom: 16px;
+}
+
+.ant-col {
+  padding: 0 8px;
+}
+
+@media (max-width: 768px) {
+  .ant-col {
+    padding: 0;
+  }
+  
+  .ant-col-12 {
+    width: 100%;
+  }
+}

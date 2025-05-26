@@ -7,6 +7,8 @@ import {
   Typography,
   Space,
   Divider,
+  Row,
+  Col,
   Card,
 } from 'antd';
 import { SketchPicker } from 'react-color';
@@ -165,17 +167,36 @@ const CarreraForm: React.FC<CarreraFormProps> = ({
           <TextArea rows={4} />
         </Form.Item>
 
-        <div className={styles.colorPickerContainer}>
-          <Form.Item label="Color de fondo" name="bg_color">
-            <SketchPicker
-              color={color}
-              onChangeComplete={color => {
-                setColor(color.hex);
-                form.setFieldsValue({ bg_color: color.hex });
-              }}
-            />
-          </Form.Item>
-        </div>
+        <Row gutter={16}>
+          <Col span={12}>
+            <div className={styles.colorPickerContainer}>
+              <Form.Item label="Color de fondo" name="bg_color">
+                <SketchPicker
+                  color={color}
+                  onChangeComplete={color => {
+                    setColor(color.hex);
+                    form.setFieldsValue({ bg_color: color.hex });
+                  }}
+                />
+              </Form.Item>
+            </div>
+          </Col>
+          <Col span={12}>
+            <Form.Item label="Imagen Banner" name="imagen_banner">
+              <Input placeholder="URL de la imagen banner" />
+            </Form.Item>
+            <Form.Item label="Foto Mascota" name="foto_mascota">
+              <Input placeholder="URL de la foto mascota" />
+            </Form.Item>
+            <Form.Item label="Foto Ingreso" name="foto_ingreso">
+              <Input placeholder="URL de la foto ingreso" />
+            </Form.Item>
+            <Form.Item label="Foto Egreso" name="foto_egreso">
+              <Input placeholder="URL de la foto egreso" />
+            </Form.Item>
+          </Col>
+        </Row>
+
 
         <Divider>Misiones</Divider>
         <DynamicListInput label="" name="misiones" placeholder="Agregar misión y presiona Enter" />
