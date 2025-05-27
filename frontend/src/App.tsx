@@ -22,6 +22,8 @@ import AdmisionesTable from "./admin/pages/Admisiones/AdmisionesTable";
 import Resultados from "./pages/Resultados";
 import Preguntas_frecuentes from "./pages/Preguntas_frecuentes";
 
+import Residencia from "./pages/Residencia";
+
 import "./App.css";
 
 const App: React.FC = () => {
@@ -44,6 +46,7 @@ const App: React.FC = () => {
             path="/Preguntas_frecuentes"
             element={<Preguntas_frecuentes />}
           />
+          <Route path="/residencia-profesional" element={<Residencia />} />
 
           {/* Rutas de carreras */}
 
