@@ -1,0 +1,64 @@
+.residenciaInformation {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  line-height: 1.6;
+}
+
+.residenciaInformation__information {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.residenciaInformation__informationBold {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.residenciaInformation__informationBold::after {
+  content: ':';
+}
+
+.residenciaInformation__keypoints {
+  display: flex;
+  flex-direction: column;
+}
+
+.residenciaInformation__keypointsHeading {
+  font-weight: bold;
+}
+
+.residenciaInformation__keypointsTableList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style-type: none;
+  padding: 0;
+}
+
+.residenciaInformation__keypointsTableRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.residenciaInformation__keypointsTableRow:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+
+.residenciaInformation__keypointsTableRowKey {
+  font-weight: bold;
+  padding-left: 2rem;
+  padding-block: 0.5rem;
+}
+
+.residenciaInformation__keypointsTableRowValue {
+  padding-right: 2rem;
+  padding-block: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .residenciaInformation {
+    padding-inline: 1rem;
+  }
+}
