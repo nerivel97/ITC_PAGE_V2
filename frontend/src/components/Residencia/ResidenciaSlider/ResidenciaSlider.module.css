@@ -23,6 +23,7 @@ img {
   padding-inline: 64px;
   padding-block: 32px;
   white-space: nowrap;
+  background-color: white;
 }
 
 .slider::before,
@@ -37,12 +38,12 @@ img {
 
 .slider::before {
   left: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0), #f8fafc);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), white 90%);
 }
 
 .slider::after {
   right: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), #f8fafc);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 90%);
 }
 
 .slider:hover .slider__track {
