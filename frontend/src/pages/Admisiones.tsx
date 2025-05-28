@@ -2,7 +2,6 @@ import React from 'react';
 import Card from '../components/AdmisionesComponents/ComponentCard/Card';
 import Title from '../components/AdmisionesComponents/ComponentTitle/Title';
 import styles from '../components/AdmisionesComponents/Home.module.css';
-import { useNavigate } from 'react-router-dom';
 
 const Admisiones: React.FC = () => {
     return (
