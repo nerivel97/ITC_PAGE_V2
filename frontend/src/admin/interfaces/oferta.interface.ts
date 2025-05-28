@@ -63,15 +63,3 @@ export interface ICarreraFormData {
   campos_laborales?: string[];
   funciones_profesionales?: string[];
 }
-
-export interface ICarreraResponse {
-  success: boolean;
-  data: ICarrera;
-  message?: string;
-}
-
-export interface ICarrerasPaginatedResponse {
-  success: boolean;
-  data: ICarrera[];
-  message?: string;
-}

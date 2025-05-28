@@ -15,7 +15,7 @@ const Carreras: React.FC = () => {
       try {
         setLoading(true);
         // Cambiar la URL para buscar por url_slug en lugar de ID
-        const response = await fetch(`http://localhost:8000/api/carreras/slug/${carreraSlug}`);
+        const response = await fetch(`http://localhost:8000/api/carreras?slug=${carreraSlug}`);
         
         if (!response.ok) {
           throw new Error('Carrera no encontrada');

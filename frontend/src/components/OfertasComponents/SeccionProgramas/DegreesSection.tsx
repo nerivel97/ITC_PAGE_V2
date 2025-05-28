@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './DegreesSection.module.css';
 import DegreeCard from './DegreeCard';
-import { ICarrera, ICarrerasPaginatedResponse } from '../../../admin/interfaces/oferta.interface';
+import { ICarrera } from '../../../admin/interfaces/oferta.interface';
 import { message } from 'antd';
 
 const DegreesSection = () => {
@@ -10,40 +10,39 @@ const DegreesSection = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCarreras = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  const fetchCarreras = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-        const response = await fetch('http://localhost:8000/api/carreras/');
-        if (!response.ok) {
-          throw new Error('Error al cargar las carreras');
-        }
-        
-        const data: ICarrerasPaginatedResponse = await response.json();
-        
-        if (!data.success) {
-          throw new Error(data.message || 'Error al obtener carreras');
-        }
-
-        setCarreras(data.data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          console.error(err.message);
-          setError(err.message);
-          message.error(err.message);
-        } else {
-          const errorMessage = 'Error desconocido al cargar carreras';
-          setError(errorMessage);
-          message.error(errorMessage);
-        }
-      } finally {
-        setLoading(false);
+      const response = await fetch('http://localhost:8000/api/carreras');
+      if (!response.ok) {
+        throw new Error('Error al cargar las carreras');
       }
-    };
 
-    fetchCarreras();
-  }, []);
+      const json = await response.json();
+      if (!json.success) {
+        throw new Error(json.message || 'Error desconocido al cargar carreras');
+      }
+
+      setCarreras(json.data);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err.message);
+        setError(err.message);
+        message.error(err.message);
+      } else {
+        const errorMessage = 'Error desconocido al cargar carreras';
+        setError(errorMessage);
+        message.error(errorMessage);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCarreras();
+}, []);
 
 
   // Filtrar por tipo

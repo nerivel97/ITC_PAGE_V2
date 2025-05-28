@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /api/
+
+# Permitir acceso directo a archivos y carpetas existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigir todo lo demás a index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
