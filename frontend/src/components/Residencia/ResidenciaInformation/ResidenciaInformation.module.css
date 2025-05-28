@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
+  max-width: 57rem; /* 912px */
+  margin: auto;
   line-height: 1.6;
 }
 

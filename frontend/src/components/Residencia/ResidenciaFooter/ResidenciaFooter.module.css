@@ -1,6 +1,10 @@
 .doubts {
   display: flex;
   gap: 4rem; /* 64px */
+  width: 100%;
+  max-width: 57rem; /* 912px */
+  margin: auto;
+  line-height: 1.6;
 }
 
 .contact {
