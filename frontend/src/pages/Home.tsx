@@ -31,7 +31,7 @@ const Home = () => {
     descripcion:
       'En nuestra institucion creemos que la educacion va mas alla de las aulas. Por eso, ofrecemos un entorno lleno de oportunidades para que desarrolles tus pasiones, conectes con compañeros y vivas experiencia inolvidables.',
     botonTexto: 'Saber mas...',
-    imagenUrl: 'https://pbs.twimg.com/media/GYGFMBQXsAAEPRd.jpg',
+    imagenUrl: 'https://scontent.fcjs3-1.fna.fbcdn.net/v/t39.30808-6/500043459_1002702155363543_8319557795984797660_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=f727a1&_nc_ohc=RmLXC48Ydr4Q7kNvwEt2gLe&_nc_oc=Adm31h745kJnoOSPBfYZmhPXaunFQL82wir6AiD8JM3YL723VRqqo0VaU0cYsEklg9c&_nc_zt=23&_nc_ht=scontent.fcjs3-1.fna&_nc_gid=-7PByWRtRCoFRY_GS_LU3A&oh=00_AfJQ9cSSvGTqK0UIkAVxtzAXCdLW0LRaGO8XPkcIKKyisA&oe=683C3B82',
   }
 
   const noticiast = {

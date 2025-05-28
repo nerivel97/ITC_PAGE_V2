@@ -1,0 +1,69 @@
+.doubts {
+  display: flex;
+  gap: 4rem; /* 64px */
+  width: 100%;
+  max-width: 57rem; /* 912px */
+  margin: auto;
+  line-height: 1.6;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 100%;
+  gap: 1.5rem; /* 24x */
+}
+
+.contact__text {
+  margin: 0;
+  font-size: 2rem; /* 32px */
+  font-weight: Bold;
+  /* text-align: center; */
+}
+
+.contact__email {
+  margin: 0;
+  width: fit-content;
+  padding: 0.5rem 1rem; /* 8x 16x */
+  background-color: #2a2aa5;
+  color: white;
+  font-size: 1rem; /* 16px */
+}
+
+.contact__email:hover {
+  background-color: #1a1a8a;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 100%;
+  gap: 1.5rem; /* 24x */
+}
+
+.schedule__text {
+  margin: 0;
+  font-size: 2rem; /* 32px */
+  font-weight: Bold;
+}
+
+.schedule__time {
+  margin: 0;
+  font-size: 1rem; /* 16px */
+  padding: 0.5rem 1rem; /* 8x 16x */
+}
+
+@media (max-width: 768px) {
+  .doubts {
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 1rem;
+  }
+
+  .contact,
+  .schedule {
+    gap: 0.5rem; /* 8x */
+  }
+}

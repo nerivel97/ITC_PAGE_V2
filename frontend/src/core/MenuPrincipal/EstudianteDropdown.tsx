@@ -29,7 +29,7 @@ const EstudianteDropdown: React.FC<DropdownProps> = ({ isMobile, onCloseDropdown
     { title: "Seguro Facultativo", imageSrc: SeguroFacultativo, path: "/oferta" },
     { title: "Calendario Escolar", imageSrc: Calendario, path: "/calendario" },
     { title: "Servicio Social", imageSrc: ServicioSocial, path: "/servicio-social" },
-    { title: "Residencia Profesional", imageSrc: Residencia, path: "/oferta-educativa" },
+    { title: "Residencia Profesional", imageSrc: Residencia, path: "/residencia-profesional" },
     { title: "Titulación", imageSrc: Titulacion, path: "/oferta-educativa" },
     { title: "Actividades Extraescolares", imageSrc: Extraescolares, path: "/extraescolares" },
   ];

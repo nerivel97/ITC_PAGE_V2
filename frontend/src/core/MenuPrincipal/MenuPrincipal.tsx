@@ -1,14 +1,22 @@
 // MenuPrincipal.tsx
-import React, { useState, useEffect } from 'react';
-import styles from './MenuPrincipal.module.css';
-import { FaHome, FaGraduationCap, FaUniversity, FaLaptopCode, FaEnvelopeOpenText, FaAngleDoubleDown, FaUserGraduate, FaArrowLeft } from 'react-icons/fa';
-import RegulationDropdown from './RegulationDropdown';
-import PlatformsDropdown from './PlatformsDropdown';
-import EstudianteDropdown from './EstudianteDropdown';
-import HamburgerIcon from './HamburgerIcon';
+import React, { useState, useEffect } from "react";
+import styles from "./MenuPrincipal.module.css";
+import {
+  FaHome,
+  FaGraduationCap,
+  FaUniversity,
+  FaLaptopCode,
+  FaEnvelopeOpenText,
+  FaAngleDoubleDown,
+  FaUserGraduate,
+  FaArrowLeft,
+} from "react-icons/fa";
+import RegulationDropdown from "./RegulationDropdown";
+import PlatformsDropdown from "./PlatformsDropdown";
+import EstudianteDropdown from "./EstudianteDropdown";
+import HamburgerIcon from "./HamburgerIcon";
 
 const MenuPrincipal: React.FC = () => {
-  
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,8 +27,8 @@ const MenuPrincipal: React.FC = () => {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleMouseEnter = (dropdownName: string) => {
@@ -58,7 +66,7 @@ const MenuPrincipal: React.FC = () => {
           </div>
         )}
 
-        <ul className={`${styles.menu} ${menuOpen ? styles.menuOpen : ''}`}>
+        <ul className={`${styles.menu} ${menuOpen ? styles.menuOpen : ""}`}>
           {/* Flecha de retroceso para móvil */}
           {isMobile && activeDropdown && (
             <div className={styles.backArrow} onClick={handleBack}>
@@ -72,28 +80,32 @@ const MenuPrincipal: React.FC = () => {
             </a>
           </li>
 
-          <li 
-            onMouseEnter={() => handleMouseEnter('regulations')}
+          <li
+            onMouseEnter={() => handleMouseEnter("regulations")}
             onMouseLeave={handleMouseLeave}
-            onClick={() => isMobile && setActiveDropdown(
-              activeDropdown === 'regulations' ? null : 'regulations'
-            )}
+            onClick={() =>
+              isMobile &&
+              setActiveDropdown(
+                activeDropdown === "regulations" ? null : "regulations"
+              )
+            }
           >
             <a href="#">
               <FaUniversity /> <span>Instituto</span>
             </a>
-            {activeDropdown === 'regulations' && (
-              <RegulationDropdown 
+            {activeDropdown === "regulations" && (
+              <RegulationDropdown
                 isMobile={isMobile}
                 onCloseDropdown={closeAll}
               />
             )}
           </li>
-          
+
           <li onClick={closeAll}>
             <a href="/Admisiones">
-              <FaAngleDoubleDown /><span>Admisiones</span>
-            </a>  
+              <FaAngleDoubleDown />
+              <span>Admisiones</span>
+            </a>
           </li>
           <li onClick={closeAll}>
             <a href="/oferta-educativa">
@@ -101,40 +113,50 @@ const MenuPrincipal: React.FC = () => {
             </a>
           </li>
 
-          <li 
-            onMouseEnter={() => handleMouseEnter('students')}
+          <li
+            onMouseEnter={() => handleMouseEnter("students")}
             onMouseLeave={handleMouseLeave}
-            onClick={() => isMobile && setActiveDropdown(
-              activeDropdown === 'students' ? null : 'students'
-            )}
+            onClick={() =>
+              isMobile &&
+              setActiveDropdown(
+                activeDropdown === "students" ? null : "students"
+              )
+            }
           >
             <a href="#">
-              <FaUserGraduate /><span>Estudiantes</span>
+              <FaUserGraduate />
+              <span>Estudiantes</span>
             </a>
-            {activeDropdown === 'students' && (
-              <EstudianteDropdown 
+            {activeDropdown === "students" && (
+              <EstudianteDropdown
                 isMobile={isMobile}
                 onCloseDropdown={closeAll}
               />
             )}
           </li>
-          
-          <li 
-            onMouseEnter={() => handleMouseEnter('platforms')}
+
+          <li
+            onMouseEnter={() => handleMouseEnter("platforms")}
             onMouseLeave={handleMouseLeave}
-            onClick={() => isMobile && setActiveDropdown(
-              activeDropdown === 'platforms' ? null : 'platforms'
-            )}
+            onClick={() =>
+              isMobile &&
+              setActiveDropdown(
+                activeDropdown === "platforms" ? null : "platforms"
+              )
+            }
           >
             <a href="#">
               <FaLaptopCode /> <span>Plataformas Digitales</span>
             </a>
-            {activeDropdown === 'platforms' && (
-              <PlatformsDropdown 
-                isMobile={isMobile}
-                
-              />
+            {activeDropdown === "platforms" && (
+              <PlatformsDropdown isMobile={isMobile} />
             )}
+          </li>
+
+          <li onClick={closeAll}>
+            <a href="/Preguntas_frecuentes">
+              <FaEnvelopeOpenText /> <span>Preguntas Frecuentes</span>
+            </a>
           </li>
 
           <li onClick={closeAll}>

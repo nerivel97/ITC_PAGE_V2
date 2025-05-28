@@ -1,0 +1,14 @@
+.residencia {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem; /* 64px */
+  line-height: 1.6;
+}
+
+.residencia__title {
+  font-size: 2.5rem; /* 40px */
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 0;
+}
