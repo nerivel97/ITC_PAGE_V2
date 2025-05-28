@@ -3,3 +3,4 @@ export * from './ResidenciaBanner/ResidenciaBanner';
 export * from './ResidenciaFooter/ResidenciaFooter';
 export * from './ResidenciaInformation/ResidenciaInformation';
 export * from './ResidenciaRequirements/ResidenciaRequirements';
+export * from './ResidenciaSlider/ResidenciaSlider';
