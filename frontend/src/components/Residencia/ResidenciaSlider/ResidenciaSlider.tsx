@@ -1,9 +1,9 @@
 // spell-checker:disable
-import airsaLogo from '../assets/images/residencia/airsa_mep_logo.png';
-import amicLogo from '../assets/images/residencia/asociación_mexicana_de_la_industria_de_la_construcción_logo.png';
-import cecyteLogo from '../assets/images/residencia/colegio_de_estudios_científicos_y_tecnológicos_de_quintana_roo_logo.png';
-import juarezLogo from '../assets/images/residencia/juarez_asociados_consultores_logo.png';
-import secontrolLogo from '../assets/images/residencia/secontrol_automatización_logo.png';
+import airsaLogo from '../../../assets/images/residencia/airsa_mep_logo.png';
+import amicLogo from '../../../assets/images/residencia/asociación_mexicana_de_la_industria_de_la_construcción_logo.png';
+import cecyteLogo from '../../../assets/images/residencia/colegio_de_estudios_científicos_y_tecnológicos_de_quintana_roo_logo.png';
+import juarezLogo from '../../../assets/images/residencia/juarez_asociados_consultores_logo.png';
+import secontrolLogo from '../../../assets/images/residencia/secontrol_automatización_logo.png';
 // spell-checker:enable
 
 import styles from './ResidenciaSlider.module.css';
