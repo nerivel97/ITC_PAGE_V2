@@ -5,8 +5,6 @@ import styles from '../components/AdmisionesComponents/Home.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const Admisiones: React.FC = () => {
-    const navigate = useNavigate();
-
     return (
         <div className={styles.pageContainer}>
     
