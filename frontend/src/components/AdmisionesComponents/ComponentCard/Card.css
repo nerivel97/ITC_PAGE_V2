@@ -50,7 +50,7 @@
   left: 0;
   width: 130px;
   height: 4px;
-  background-color: #0066cc;
+  background-color: #123766;
   display: block; /* Add this */
 }
 
@@ -62,7 +62,7 @@
 .card-button {
   margin-top: 12px;
   padding: 6px 16px;
-  background-color: #06b6d4;
+  background-color: #123766;
   color: white;
   border: none;
   border-radius: 9999px;
@@ -72,7 +72,7 @@
 }
 
 .card-button:hover {
-  background-color: #0891b2;
+  background-color: #2563eb;
 }
 
 .admin-controls {
