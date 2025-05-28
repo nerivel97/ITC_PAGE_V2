@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import styles from '../components/Residencia/Residencia.module.css';
 
 import {
@@ -51,6 +52,14 @@ export default function Residencia() {
 
   return (
     <div className={styles.residencia}>
+      <Helmet>
+        <title>Residencia Profesional</title>
+        <meta
+          name='description'
+          content='Información sobre la Residencia Profesional en el Instituto Tecnológico de Cancún.'
+        />
+      </Helmet>
+
       <ResidenciaBanner />
 
       <ResidenciaInformation />
