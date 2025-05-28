@@ -24,6 +24,7 @@ import Resultados from "./pages/Resultados";
 import Preguntas_frecuentes from "./pages/Preguntas_frecuentes";
 
 import Residencia from "./pages/Residencia";
+import Calendario from "./pages/Calendario";
 
 import "./App.css";
 
@@ -51,6 +52,9 @@ const App: React.FC = () => {
           <Route path="/residencia-profesional" element={<Residencia />} />
 
           {/* Rutas de carreras */}
+
+          {/*Ruta para el calendario*/}
+          <Route path="/calendario" element={<Calendario />}/>
 
           {/* Rutas de eventos */}
           <Route path="/eventos" element={<Page_Eventos />} />
