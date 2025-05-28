@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import MainLayout from "./core/layout/MainLayout";
 import Instituto from "./pages/Instituto";
+import InstitutoDirectorio from "./pages/InstitutoDirectorio";
 import Oferta from "./pages/Oferta";
 import CarreraDetalle from "./pages/Carreras";
 import Infra from "./pages/Infra";
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/Instituto" element={<Instituto />} />
+          <Route path="/Instituto-directorio" element={<InstitutoDirectorio />} />
           <Route path="/oferta-educativa" element={<Oferta />} />
           <Route
             path="/oferta-educativa/:carreraNombre"

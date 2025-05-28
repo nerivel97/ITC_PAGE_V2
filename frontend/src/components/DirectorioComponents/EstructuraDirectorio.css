@@ -1,0 +1,109 @@
+.directorio-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.directorio-tec {
+  flex: 3;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Work Sans', sans-serif;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.seccion {
+  margin-bottom: 2.5rem;
+}
+
+.seccion-titulo {
+  background-color: #003366;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.seccion-titulo:hover {
+  background-color: #002244;
+}
+
+.contenido-acordeon {
+  margin-top: 0.5rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tarjeta {
+  background-color: #a6a4e7;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tarjeta-info {
+  flex: 1;
+}
+
+.tarjeta-info p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.tarjeta-info .etiqueta {
+  font-weight: 600;
+  color: #003366;
+  margin-right: 4px;
+}
+
+.extension {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+.telefono-tucan img {
+  height: auto;
+  width: 100%;
+  max-width: 120px;
+  object-fit: contain;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+  margin-bottom: 0.5rem;
+}
+
+.telefono-tucan img {
+  height: 100px;
+  margin-bottom: 0.5rem;
+}
