@@ -14,24 +14,25 @@ const Admisiones: React.FC = () => {
                 <Title> Oferta Educativa TECNM Campus Cancún 2025 </Title>
             </div>
 
+            <Card imageUrl="/src/assets/Fotos/Admisiones/Libro.png" 
+            title='GUÍA PARA EL EXAMEN DE SELECCIÓN'
+            description='Presenta la oferta educativa a distancia en sedes como Puerto Morelos y Chunhuhub. Contiene requisitos, fechas, examen en línea y detalles para solicitar beca.'
+            buttonText = 'Descargar PDF'
+            pdfUrl = '/Documentos/Guia-Examen-Seleccion-2025.pdf'
+            reverse={true} />
+
             <Card imageUrl="/src/assets/Fotos/Admisiones/Escudo.png" 
-            title='OFICIO DE CONVOCATORIA CAMPUS CANCUN'
-            description='Consulta el documento oficial con las fechas, requisitos y lineamientos para el proceso de admisión al campus Cancún del TECNM en 2025.'
+            title='2DA CONVOCATORIA CAMPUS CANCÚN 2025'
+            description='Incluye requisitos, fechas, carreras disponibles y pasos para ingresar en modalidad presencial al semestre agosto - diciembre 2025. También detalla pagos e inscripción.'
+            buttonText = 'Descargar PDF'
+            pdfUrl = '/Documentos/2da-Convocatoria-Campus-Cancun-2025.pdf'
             reverse={false} />
 
             <Card imageUrl="/src/assets/Fotos/Admisiones/Red.png" 
-            title='OFICIO DE CONVOCATORIA DISTANCIA'
-            description='Accede a la convocatoria para modalidades a distancia en extensiones como Puerto Morelos, Chunhuhub, Pantera e Ignacio Zaragoza. Incluye sedes, procesos y requisitos específicos.'
-            reverse={true} />
-
-            <Card imageUrl="/src/assets/Fotos/Admisiones/Birrete.png" 
-            title='OFICIO DE CONVOCATORIA DISTANCIA'
-            description='Explora las licenciaturas e ingenierías disponibles en el campus Cancún. Conoce los perfiles de ingreso, duración y objetivos de cada programa académico.'
-            reverse={false} />
-            
-            <Card imageUrl="/src/assets/Fotos/Admisiones/Libro.png" 
-            title='GUÍA DE ESTUDIOS'
-            description='Revisa los temas y áreas de conocimiento que serán evaluados en el examen de admisión. Ideal para preparar tu ingreso al TECNM con tiempo y enfoque.'
+            title='CONVOCATORIA EDUCACIÓN A DISTANCIA 2025'
+            description='Presenta la oferta educativa a distancia en sedes como Puerto Morelos y Chunhuhub. Contiene requisitos, fechas, examen en línea y detalles para solicitar beca.'
+            buttonText = 'Descargar PDF'
+            pdfUrl = '/Documentos/Convocatoria-Educacion-A-Distancia.pdf'
             reverse={true} />
 
             <Card imageUrl="/src/assets/Fotos/Admisiones/Libro.png" 
@@ -39,7 +40,7 @@ const Admisiones: React.FC = () => {
             description='Revisa los resultados de los exámenes de admisiones.'
             buttonText='Ver más'
             reverse={false}
-            onButtonClick={() => navigate("/Resultados")}  />
+            linkUrl = '/Resultados' />
         </div>
     );
 };
