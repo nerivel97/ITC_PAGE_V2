@@ -1,10 +1,8 @@
-// spell-checker:disable
 import airsaLogo from '../../../assets/images/residencia/airsa_mep_logo.png';
 import amicLogo from '../../../assets/images/residencia/asociación_mexicana_de_la_industria_de_la_construcción_logo.png';
 import cecyteLogo from '../../../assets/images/residencia/colegio_de_estudios_científicos_y_tecnológicos_de_quintana_roo_logo.png';
 import juarezLogo from '../../../assets/images/residencia/juarez_asociados_consultores_logo.png';
 import secontrolLogo from '../../../assets/images/residencia/secontrol_automatización_logo.png';
-// spell-checker:enable
 
 import styles from './ResidenciaSlider.module.css';
 
@@ -15,7 +13,6 @@ interface ResidenciaSliderImage {
 }
 
 export function ResidenciaSlider() {
-  // spell-checker:disable
   const images: ResidenciaSliderImage[] = [
     {
       url: amicLogo,
@@ -44,7 +41,6 @@ export function ResidenciaSlider() {
       alt: 'Es una empresa experta en Aires acondicionados, fundada en el año de 1970, con domilicio en la ciudad de Mérida, Yuc. ha logrado consolidarse y mantenerse como líder en e  ramo de instalacion, venta y reparacion  de Aires acondicioado y ventilacion, siendo reconocida su penetración y prestigio en la región Sureste de la República Mexicana.',
     },
   ];
-  // spell-checker:enable
 
   return (
     <div className={styles.slider}>

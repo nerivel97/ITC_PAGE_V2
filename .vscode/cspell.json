@@ -1,0 +1,5 @@
+{
+  "version": "0.2",
+  "ignoreWords": ["airsa", "amic", "cecyte", "juarez", "secontrol"],
+  "ignorePaths": ["package.json", "package-lock.json"]
+}
