@@ -1,6 +1,5 @@
-import React from "react";
 import styles from './style.module.css';
-import nasaIMG from './imagenesHQI/nasa.png';
+import nasaIMG from './imagenesHQI/NASA.png';
 import carreraIMG from './imagenesHQI/carrera.png';
 import andresIMG from './imagenesHQI/andres.png';
 import programaIMG from './imagenesHQI/programa.png';
