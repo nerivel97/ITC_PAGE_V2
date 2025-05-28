@@ -1,0 +1,54 @@
+.mini-carousel {
+  position: relative;
+  width: 100%;
+  height: 350px; /* Ajusta según tu diseño */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-carousel-image {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.mini-carousel-image {
+  border-radius: 10px;
+  display: none;           /* Oculto por defecto */
+  width: 100%;             /* Ancho completo del contenedor */
+  height: auto;            /* Mantiene aspecto */
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+
+.mini-carousel-image.active {
+    border-radius: 10px;
+  display: block;          /* Sólo el activo se muestra */
+  opacity: 1;
+}
+
+.mini-carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.mini-dot {
+  width: 10px;
+  height: 10px;
+  background: #bbb;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.mini-dot.active {
+  background: #123766;
+}

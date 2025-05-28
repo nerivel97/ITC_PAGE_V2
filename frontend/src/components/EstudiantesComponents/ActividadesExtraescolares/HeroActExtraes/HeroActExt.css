@@ -1,0 +1,47 @@
+.banner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-video {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.banner-texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 0 1rem; /* Añade padding para evitar que el texto toque los bordes en pantallas pequeñas */
+}
+
+.banner-texto h1 {
+    font-size: 4rem;
+    text-align: center;
+}
+
+/*RESPONSIVE */
+@media (max-width: 768px) {
+    .banner-video {
+        height: 250px; 
+    }
+
+    .banner-texto h1 {
+        font-size: 2.5rem; 
+    }
+}
+
+@media (max-width: 480px) {
+    .banner-video {
+        height: 200px;
+    }
+
+    .banner-texto h1 {
+        font-size: 1.8rem;
+    }
+}
