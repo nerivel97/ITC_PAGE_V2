@@ -1,6 +1,6 @@
 import React from 'react';
 import './PoliticaCalidad.css';
-import Tucan from '../../../assets/Fotos/Tucan.png';
+import Tucan from '../../../assets/Fotos/POLÍTICA DE CALIDAD DEL TECNM.jpg';
 
 const PoliticaCalidad: React.FC = () => {
     return (

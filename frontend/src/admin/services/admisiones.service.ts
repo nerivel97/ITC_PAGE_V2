@@ -48,54 +48,54 @@ const mockAdmisiones: IAdmision[] = [
   {
     id_requisito: 1,
     descripcion: 'Descripcion 1',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 2,
     descripcion: 'Descripcion 2',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 3,
     descripcion: 'Descripcion 3',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 4,
     descripcion: 'Descripcion 4',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
   {
     id_requisito: 5,
     descripcion: 'Descripcion 5',
-    id_convocatoria: '1',
+    id_convocatoria: 1,
   },
 ];
 
 const mockProcesos: IProceso[] = [
   {
-    id_proceso: 1,
-    id_convocatoria: '1',
+    id_admision: 1,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 1',
   },
   {
-    id_requisito: 2,
-    id_convocatoria: '1',
+    id_admision: 2,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 2',
   },
   {
-    id_requisito: 3,
-    id_convocatoria: '1',
+    id_admision: 3,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 3',
   },
   {
-    id_requisito: 4,
-    id_convocatoria: '1',
+    id_admision: 4,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 4',
   },
   {
-    id_requisito: 5,
-    id_convocatoria: '1',
+    id_admision: 5,
+    id_convocatoria: 1,
     descripcion: 'Descripcion 5',
   },
 ]; */

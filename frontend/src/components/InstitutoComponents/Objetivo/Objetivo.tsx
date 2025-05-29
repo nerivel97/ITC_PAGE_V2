@@ -1,6 +1,6 @@
 import React from 'react';
 import './Objetivo.css';
-import imagen from '../../../assets/Fotos/Filosofia3.jpeg';
+import imagen from '../../../assets/Fotos/Objetivos del tecnologico de cancun.jpg';
 
 const Objetivo: React.FC = () => {
     return (

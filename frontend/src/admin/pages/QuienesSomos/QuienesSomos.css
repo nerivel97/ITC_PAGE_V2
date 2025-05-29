@@ -1,0 +1,168 @@
+:root {
+  --tecnm-azul-oscuro: #003366;
+  --tecnm-azul-medio: #005baa;
+  --tecnm-azul-claro: #0072ce;
+  --blanco: #ffffff;
+  --gris-suave: #f4f4f4;
+}
+
+.admin-panel {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--blanco);
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--tecnm-azul-oscuro);
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: var(--tecnm-azul-medio);
+}
+
+.section-selector {
+  margin-bottom: 1.5rem;
+}
+
+.section-selector label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-selector select {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.image-upload-section {
+  margin-bottom: 1.5rem;
+}
+
+.preview-container {
+  margin: 1rem 0;
+  background-color: var(--gris-suave);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.image-preview {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.image-text {
+  margin: 0.5rem 0;
+  background-color: #e6f0ff;
+  border-left: 4px solid var(--tecnm-azul-medio);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-style: italic;
+  color: #333;
+}
+
+.text-section {
+  margin-bottom: 1.5rem;
+}
+
+.text-section label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.text-section input,
+.text-section textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.save-button {
+  background-color: var(--tecnm-azul-claro);
+  color: var(--blanco);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-button:hover {
+  background-color: var(--tecnm-azul-medio);
+}
+
+.delete-button {
+  background-color: #d9534f;
+  color: var(--blanco);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+}
+
+hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.global-preview h3 {
+  margin-bottom: 1rem;
+  color: var(--tecnm-azul-oscuro);
+}
+
+.global-section {
+  margin-bottom: 2rem;
+}
+
+.global-section h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--tecnm-azul-medio);
+}
+
+.global-section h5 {
+  margin: 0.5rem 0 0.25rem;
+  color: var(--tecnm-azul-claro);
+}
+
+.no-image {
+  color: #888;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .admin-panel {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .save-button,
+  .delete-button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}

@@ -1,0 +1,73 @@
+/* Estilos para el contenedor principal del carrusel */
+.mini-carousel {
+  position: relative;
+  width: 100%; /* O un ancho específico para el layout general de esta sección */
+  /*
+    !!! IMPORTANTE: AJUSTA LA ALTURA DEL CARRUSEL !!!
+    Debe ser la altura de tu imagen (ej. 300px) más espacio para los puntos.
+  */
+  height: 340px; /* EJEMPLO: 300px para la imagen + 40px para puntos/espacio */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos para cada imagen dentro del carrusel */
+.mini-carousel-image {
+  border-radius: 10px; /* Tu redondeo de 10px */
+
+  /*
+    !!! TAMAÑO PREDETERMINADO CON PROPORCIÓN 2048:1365 (3:2) !!!
+    Estos son ejemplos. Ajusta el 'width' al que necesites en tu diseño,
+    y el 'height' se calculará para mantener la proporción ~3:2.
+    O define ambos si ya tienes los valores exactos para tu layout.
+  */
+  width: 450px;   /* <<< EJEMPLO DE ANCHO - ¡CAMBIA ESTE VALOR! */
+  height: 300px;  /* <<< EJEMPLO DE ALTO (450px * 1365/2048 ≈ 300px) - ¡CAMBIA ESTE VALOR! */
+  /* Otros ejemplos manteniendo proporción 3:2:
+     width: 400px; height: 267px;
+     width: 500px; height: 333px;
+  */
+
+  object-fit: cover; /* ESTO CAUSARÁ EL RECORTE DE IMÁGENES MÁS ANCHAS DE 3:2 */
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: none;
+}
+
+.mini-carousel-image.active {
+  opacity: 1;
+  display: block;
+}
+
+/* ... (los estilos de .mini-carousel-dots y .mini-dot permanecen igual) ... */
+.mini-carousel-dots {
+  position: absolute;
+  bottom: 10px; /* Ajusta según la nueva altura del carrusel */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.mini-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mini-dot.active {
+  background-color: #123766;
+}

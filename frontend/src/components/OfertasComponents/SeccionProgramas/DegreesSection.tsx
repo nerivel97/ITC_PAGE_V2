@@ -1,44 +1,54 @@
 import { useEffect, useState } from 'react';
 import styles from './DegreesSection.module.css';
 import DegreeCard from './DegreeCard';
-import { IOferta} from '../../../admin/interfaces/oferta.interface';
+import { ICarrera } from '../../../admin/interfaces/oferta.interface';
+import { message } from 'antd';
 
 const DegreesSection = () => {
-  const [ofertas, setOfertas] = useState<IOferta[]>([]);
+  const [carreras, setCarreras] = useState<ICarrera[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchOfertas = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  const fetchCarreras = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-        const response = await fetch('http://localhost:4000/api/carreras');
-        if (!response.ok) {
-          throw new Error('Error al cargar las carreras');
-        }
-        const data: { data: IOferta[] } = await response.json();
-        setOfertas(data.data);
-      } catch (err: unknown) {
-          if (err instanceof Error) {
-            console.error(err.message);
-            setError(err.message);
-          } else {
-            setError('Error desconocido');
-          }
-        } finally {
-          setLoading(false);
-        }
-      };
+      const response = await fetch('http://itc11.itcun.info/api/carreras');
+      if (!response.ok) {
+        throw new Error('Error al cargar las carreras');
+      }
 
-      fetchOfertas();
-    }, []);
+      const json = await response.json();
+      if (!json.success) {
+        throw new Error(json.message || 'Error desconocido al cargar carreras');
+      }
+
+      setCarreras(json.data);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err.message);
+        setError(err.message);
+        message.error(err.message);
+      } else {
+        const errorMessage = 'Error desconocido al cargar carreras';
+        setError(errorMessage);
+        message.error(errorMessage);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCarreras();
+}, []);
+
 
   // Filtrar por tipo
-  const licenciaturas = ofertas.filter((o) => o.tipo === 'licenciatura');
-  const maestrias = ofertas.filter((o) => o.tipo === 'maestria');
-  const doctorados = ofertas.filter((o) => o.tipo === 'doctorado');
+  const licenciaturas = carreras.filter((c) => c.tipo === 'licenciatura');
+  const maestrias = carreras.filter((c) => c.tipo === 'maestria');
+  const doctorados = carreras.filter((c) => c.tipo === 'doctorado');
 
   if (loading) return <p>Cargando programas...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -54,12 +64,13 @@ const DegreesSection = () => {
       <section className={styles.degreesContainer}>
         <h2 className={styles.sectionTitle}>Licenciaturas</h2>
         <div className={styles.cardsContainer}>
-          {licenciaturas.map(({ id, titulo, descripcion, bgColor }) => (
+          {licenciaturas.map(({title, description, bg_color, url_slug }) => (
             <DegreeCard 
-              key={id}
-              title={titulo}
-              description={descripcion}
-              bgColor={bgColor}
+              key={url_slug}
+              title={title}
+              description={description || ''}
+              bgColor={bg_color || '#3366ff'}
+              url_slug={url_slug}
             />
           ))}
         </div>
@@ -70,12 +81,13 @@ const DegreesSection = () => {
         <div className={styles.halfSection}>
           <h2 className={styles.sectionTitle}>Maestrías</h2>
           <div className={styles.cardsContainer}>
-            {maestrias.map(({ id, titulo, descripcion, bgColor }) => (
+            {maestrias.map(({title, description, bg_color, url_slug }) => (
               <DegreeCard 
-                key={id}
-                title={titulo}
-                description={descripcion}
-                bgColor={bgColor}
+                key={url_slug}
+                title={title}
+                description={description || ''}
+                bgColor={bg_color || '#3366ff'}
+                url_slug={url_slug}
               />
             ))}
           </div>
@@ -84,12 +96,13 @@ const DegreesSection = () => {
         <div className={styles.halfSection}>
           <h2 className={styles.sectionTitle}>Doctorados</h2>
           <div className={styles.cardsContainer}>
-            {doctorados.map(({ id, titulo, descripcion, bgColor }) => (
+            {doctorados.map(({title, description, bg_color, url_slug }) => (
               <DegreeCard 
-                key={id}
-                title={titulo}
-                description={descripcion}
-                bgColor={bgColor}
+                key={url_slug}
+                title={title}
+                description={description || ''}
+                bgColor={bg_color || '#3366ff'}
+                url_slug={url_slug}
               />
             ))}
           </div>

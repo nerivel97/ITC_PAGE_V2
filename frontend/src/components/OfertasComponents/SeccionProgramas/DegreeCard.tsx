@@ -5,39 +5,34 @@ interface DegreeCardProps {
   title: string;
   description: string;
   bgColor: string;
+  url_slug: string;
 }
 
-const DegreeCard = ({title, description, bgColor }: DegreeCardProps) => {
+const DegreeCard = ({ title, description, bgColor, url_slug }: DegreeCardProps) => {
   const navigate = useNavigate();
 
   const truncateDescription = (text: string, maxLength: number = 100) => {
+    if (!text) return 'Descripción no disponible';
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   };
   
   const handleClick = () => {
-    // Convertir título a formato URL-friendly
-    const carreraUrl = title
-      .normalize("NFD")  // Normaliza los caracteres a su forma descompuesta
-      .replace(/[\u0300-\u036f]/g, "")  // Elimina los diacríticos (acentos)
-      .toLowerCase()
-      .replace(/\s+/g, '-')          // Reemplaza espacios con guiones
-      .replace(/[^\w-]/g, '')        // Elimina caracteres especiales
-      .replace(/--+/g, '-')          // Reemplaza múltiples guiones con uno solo
-      .replace(/^-+|-+$/g, '');      // Elimina guiones al inicio/final
-    
-    navigate(`/oferta-educativa/${carreraUrl}`);
+    navigate(`/oferta-educativa/${url_slug}`);
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-};
+  };
 
   return (
     <div 
       className={styles.card}
       onClick={handleClick}
-      style={{ cursor: 'pointer', '--bg-color': bgColor } as React.CSSProperties}
+      style={{ 
+        cursor: 'pointer', 
+        '--bg-color': bgColor 
+      } as React.CSSProperties}
     >
       <div className={styles.content}>
         <p className={styles.heading}>{title}</p>

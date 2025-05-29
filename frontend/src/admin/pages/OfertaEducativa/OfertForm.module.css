@@ -3,69 +3,32 @@
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .formTitle {
   margin-bottom: 24px;
   color: #1890ff;
+  text-align: center;
 }
 
-.itemsContainer {
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  padding: 8px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.item:last-child {
-  border-bottom: none;
-}
-
-.submitButton {
-  margin-top: 32px;
-  text-align: right;
-}
-
-/* Añade estos estilos a tu archivo existente */
-.color-picker-container {
-  margin-bottom: 24px;
-}
-
-.url-input {
+.urlInput {
   margin-bottom: 16px;
 }
 
-.dynamic-list-container {
-  margin-bottom: 24px;
+.colorPickerContainer {
+  margin: 24px 0;
 }
 
-.list-item-card {
-  margin-top: 8px;
+.listItemCard {
+  margin: 16px 0;
   background: #fafafa;
 }
 
-.submit-button-container {
+.submitButtonContainer {
   margin-top: 32px;
-  text-align: right;
-}
-
-@media (max-width: 768px) {
-  .ant-form-item {
-    margin-bottom: 16px;
-  }
-  
-  .ant-col {
-    margin-bottom: 8px;
-  }
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -75,5 +38,28 @@
   
   .formTitle {
     font-size: 20px;
+  }
+  
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+}
+
+/* Agrega esto al final del archivo */
+.ant-row {
+  margin-bottom: 16px;
+}
+
+.ant-col {
+  padding: 0 8px;
+}
+
+@media (max-width: 768px) {
+  .ant-col {
+    padding: 0;
+  }
+  
+  .ant-col-12 {
+    width: 100%;
   }
 }

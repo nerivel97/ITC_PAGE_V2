@@ -10,6 +10,7 @@ import ServicioSocial from './EstudiantesDropdown/servicioSocial.jfif';
 import Residencia from './EstudiantesDropdown/residencia.webp';
 import Titulacion from './EstudiantesDropdown/titulacion.webp';
 import Extraescolares from './EstudiantesDropdown/actividades.jpg';
+import Concursos from './IMGMenuPrincipal/concursos-tecnm.jpg';
 
 interface DropdownItem {
   title: string;
@@ -32,7 +33,9 @@ const EstudianteDropdown: React.FC<DropdownProps> = ({ isMobile, onCloseDropdown
     { title: "Residencia Profesional", imageSrc: Residencia, path: "/residencia-profesional" },
     { title: "Titulación", imageSrc: Titulacion, path: "/oferta-educativa" },
     { title: "Actividades Extraescolares", imageSrc: Extraescolares, path: "/extraescolares" },
+     { title: "Concursos", imageSrc: Concursos , path: "/concursos" },
   ];
+  
 
   const handleClick = (path: string) => {
     navigate(path);

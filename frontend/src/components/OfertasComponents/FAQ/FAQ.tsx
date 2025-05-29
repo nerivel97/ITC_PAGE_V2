@@ -9,45 +9,29 @@ interface FAQItem {
 
 const FAQ = () => {
   const faqItems: FAQItem[] = [
-    {
+     {
       id: 1,
-      question: "Proceso de admisión 2024",
-      answer: `<ul>
-        <li><strong>Registro en línea:</strong> Del 5 al 30 de mayo en <a href="/admisiones" target="_blank">portal oficial</a></li>
-        <li><strong>Examen de admisión:</strong> 15 junio (90% peso) + promedio bachillerato (10%)</li>
-        <li><strong>Resultados:</strong> 5 julio vía SMS y portal</li>
-        <li><strong>Inscripción:</strong> 22-26 julio (documentación digital)</li>
-      </ul>`
+      question: "¿Cuál es el horario de clases?",
+      answer: "El horario puede ser matutino o vespertino, dependiendo de la carrera y semestre."
     },
+
     {
       id: 2,
-      question: "Becas disponibles",
-      answer: `<ul>
-        <li><strong>Pronabes:</strong> Hasta 100% de colegiatura</li>
-        <li><strong>Transporte:</strong> $1,200 mensuales para residentes en >30km</li>
-        <li><strong>Excelencia académica:</strong> 50% descuento con promedio ≥9.0</li>
-      </ul>`
+      question: "¿El instituto ofrece actividades extracurriculares?",
+      answer: "Sí, hay talleres de música, danza, deportes, clubes estudiantiles, concursos y más."
     },
+
     {
       id: 3,
-      question: "Calendario académico 2024",
-      answer: `<ul>
-        <li><strong>Inicio de clases:</strong> 5 de agosto</li>
-        <li><strong>Primer parcial:</strong> 16-20 septiembre</li>
-        <li><strong>Segundo parcial:</strong> 4-8 noviembre</li>
-        <li><strong>Exámenes finales:</strong> 9-13 diciembre</li>
-      </ul>`
+      question: "¿Cómo funciona el servicio social?",
+      answer: "Se realiza después de cubrir el 70% de créditos y tiene una duración de 480 horas en instituciones públicas o sociales."
     },
+
     {
       id: 4,
-      question: "Instalaciones y servicios",
-      answer: `<ul>
-        <li><strong>Horario:</strong> 7:00 a 21:00 hrs de lunes a viernes</li>
-        <li><strong>Biblioteca:</strong> Abierta hasta las 20:00 hrs</li>
-        <li><strong>Laboratorios:</strong> Acceso con credencial estudiantil</li>
-        <li><strong>Deportes:</strong> Talleres extracurriculares disponibles</li>
-      </ul>`
-    }
+      question: "¿Qué necesito para titularme?",
+      answer: "Haber aprobado todas las materias, realizar servicio social, residencia profesional, ingles y cumplir con algún proceso de titulación como tesis, informe técnico o promedio general."
+    },
   ];
 
   return (

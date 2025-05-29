@@ -20,7 +20,7 @@
   }
   
   .filosofia-texto p {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
   }
   
@@ -40,27 +40,7 @@
     background-position: center;
   }
   
-  /* Posicionamiento relativo como en la imagen */
-  .imagen1 {
-    top: 0;
-    left: 60px;
-    z-index: 5;
-    background-image: url('../Assets/Fotos/TucanH.png');
-  }
-  
-  .imagen2 {
-    top: 60px;
-    left: 110px;
-    z-index: 2;
-    background-image: url('../Assets/Fotos/Filosofia1.jpeg');
-  }
-  
-  .imagen3 {
-    top: 120px;
-    left: 0px;
-    z-index: 1;
-    background-image: url('../Assets/Fotos/Filosofia3.jpeg');
-  }
+
   
   /* Media query para teléfonos */
 @media (max-width: 600px) {

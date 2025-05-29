@@ -1,0 +1,10 @@
+Todo esta correctamente para ejecutar el backend con PHP
+si no tienes PHP lo puedes ejecutarcon Xampp
+1.Entra en la ruta de backend ejemplo:"C:\Users\usuario\Escritorio\ITC_PAGE_V2\backend-pag-tec>"
+2.Ya que estas en la terminal en la ruta del backend puedes usar el siguiente comando para ejecutar el backend:
+
+C:\xampp\php\php.exe -S localhost:8000 -t public
+
+Y  listo estas ejecutando el backend.
+
+no olvides poner tu archivo .env en el backend!

@@ -5,6 +5,8 @@ import Tecnm from '../components/InstitutoComponents/Tecnm/Tecnm';
 
 const Infra: React.FC = () => {
   useEffect(() => {
+
+    window.scrollTo(0, 0);
     // Cambiar el título
     document.title = "Infraestructura Educativa | Campus y Laboratorios TecNM Cancún";
 

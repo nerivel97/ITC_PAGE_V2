@@ -17,7 +17,6 @@ const Tecnm: React.FC = () => {
                     <p>
                         Ser parte del TecNM Cancún te brinda la oportunidad de desarrollar tu talento en un entorno dinámico, con actividades culturales, deportivas y tecnológicas. Nuestro compromiso es impulsar tu crecimiento profesional con educación de calidad y conexión directa con el sector productivo. ¡Tu éxito comienza aquí! 🚀
                     </p>
-                    <a href="#" className="boton-leer-mas">LEER MÁS</a>
                 </div>
             </div>
         </div>

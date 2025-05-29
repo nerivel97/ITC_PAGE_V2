@@ -9,10 +9,29 @@ export interface IEvento {
   imagen?: string;
 }
 
-export interface IEventoCreate extends Omit<IEvento, 'id_evento'> {
-  // Puedes agregar validaciones específicas del frontend si es necesario
+export interface IEventoCreate {
+  nombre_evento: string;
+  categoria: string;
+  descripcion: string;
+  fecha_inicio: string;  // Frontend siempre usa strings
+  fecha_final: string;   // Frontend siempre usa strings
+  estado: string;
+  imagen?: string;
 }
 
-export interface IEventoUpdate extends Partial<IEventoCreate> {
-  // Campos opcionales para actualización
+export interface IEventoUpdate {
+  nombre_evento: string;
+  categoria: string;
+  descripcion: string;
+  fecha_inicio: string;  // Frontend siempre usa strings
+  fecha_final: string;   // Frontend siempre usa strings
+  estado: string;
+  imagen?: string;
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  errors?: Record<string, string[]>;
 }

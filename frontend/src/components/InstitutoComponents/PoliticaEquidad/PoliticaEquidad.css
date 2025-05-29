@@ -5,56 +5,74 @@
     margin: 80px auto;
     max-width: 1200px;
     gap: 40px;
+    flex-wrap: wrap; /* Añadido para mejor manejo en diferentes anchos de pantalla */
 }
 
 .equidad-imagen {
-    width: 400px;
-    height: 300px;
-    background-image: url('../../../assets/Fotos/Filosofia3.jpeg');
-    border-radius: 12px;
+    /* El div actúa como contenedor. Sus dimensiones se adaptarán a la imagen
+       o pueden ser fijas si se prefiere controlar el espacio exacto.
+       Para seguir el patrón de Mascota, no se le dan W/H aquí, sino a la img. */
+}
+
+.equidad-imagen img {
+    width: 400px;        /* Ancho de la imagen */
+    height: 300px;       /* Alto de la imagen */
+    object-fit: cover;   /* Cómo se ajusta la imagen al espacio */
+    border-radius: 12px; /* Redondeo de esquinas */
+    display: block;      /* Buena práctica para imágenes */
 }
 
 .equidad-texto {
-    max-width: 800px;
-    text-align: justify; /*React necesita especificar esto */
+    max-width: 600px; /* Ajustado para coincidir con el max-width de .mascota-texto */
+    text-align: justify;
 }
 
 .equidad-texto h2 {
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Ajustado para coincidir con .mascota-texto h2 */
+    font-family: Arial, sans-serif; /* Para coincidir con .mascota-texto */
 }
 
 .equidad-texto p {
     font-size: 20px;
     line-height: 1.6;
+    font-family: Arial, sans-serif; /* Para coincidir con .mascota-texto */
 }
 
 /* Media query para teléfonos */
 @media (max-width: 600px) {
-  .bloque-contenido-equidad {
-    flex-direction: column-reverse;
-    gap: 30px;
-    padding: 0 20px;
-    text-align: center;
-  }
+    .bloque-contenido-equidad {
+        flex-direction: column-reverse; /* Se mantiene el orden original para este componente */
+        gap: 30px;
+        padding: 0 20px;
+        text-align: center; /* El contenedor principal centra el texto de sus hijos */
+    }
 
-  .equidad-imagen {
-    width: 100%;
-    max-width: 300px;
-    height: 200px;
-    margin: 0 auto;
-  }
+    .equidad-imagen {
+        width: auto; /* El div se ajusta */
+        max-width: 100%;
+        margin: 0 auto; /* Centra el div de la imagen */
+    }
 
-  .equidad-texto {
-    max-width: 100%;
-  }
+    .equidad-imagen img {
+        width: 100%;         /* La imagen ocupa el ancho disponible de su contenedor */
+        max-width: 300px;    /* Un máximo, como en Mascota.css responsive */
+        height: auto;        /* Mantiene la proporción de la imagen */
+        /* margin: 0 auto; no es necesario si el div .equidad-imagen ya está centrado y la imagen es width 100% */
+    }
 
-  .equidad-texto h2 {
-    font-size: 22px;
-  }
+    .equidad-texto {
+        max-width: 100%; /* El texto ocupa el ancho completo */
+    }
 
-  .equidad-texto p {
-    font-size: 16px;
-  }
+    .equidad-texto h2 {
+        font-size: 22px;
+        /* text-align: center; es heredado del contenedor .bloque-contenido-equidad */
+    }
+
+    .equidad-texto p {
+        font-size: 16px;
+        text-align: justify; /* Se mantiene justificado como en Mascota (asumiendo que en Mascota también) o puedes cambiarlo a center si prefieres */
+    }
 }

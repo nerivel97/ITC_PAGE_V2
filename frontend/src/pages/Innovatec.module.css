@@ -1,0 +1,406 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: white;
+  border-radius: 8px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.sectionTitle {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.sectionLema {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+.mainEvent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 992px) {
+  .mainEvent {
+    flex-direction: row;
+  }
+}
+
+.imageContainer {
+  flex: 1;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.eventBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
+}
+
+.badgeProximo {
+  background-color: #3498db;
+}
+
+.badgeEnCurso {
+  background-color: #2ecc71;
+}
+
+.badgeFinalizado {
+  background-color: #e74c3c;
+}
+
+.eventInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.infoIcon {
+  font-size: 1.5rem;
+  color: #3498db;
+}
+
+.infoItem h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.infoItem p {
+  margin: 0;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.eventDescription {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.eventDescription h2 {
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+.eventDescription p {
+  line-height: 1.6;
+  color: #34495e;
+}
+
+.agendaSection {
+  margin-top: 3rem;
+}
+
+.agendaTitle {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.agendaSubtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+}
+
+.agendaContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .agendaContent {
+    flex-direction: row;
+  }
+}
+
+.agendaSidebar {
+  flex: 1;
+}
+
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sidebarHeader h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.carouselControls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.controlButton {
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.controlButton:hover {
+  background: #2980b9;
+}
+
+.controlButton:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.carouselContainer {
+  height: 600px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.carouselContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebarArticle {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background: white;
+}
+
+.sidebarArticle:hover {
+  transform: translateY(-3px);
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarImageContainer {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.sidebarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.sidebarArticle:hover .sidebarImage {
+  transform: scale(1.05);
+}
+
+.textContent {
+  padding: 1rem;
+}
+
+.activityMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.activityTime {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.activityCategory {
+  color: #7f8c8d;
+}
+
+.activityTitle {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+.activityBadge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.activityDetail {
+  flex: 2;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.activityDetail h3 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+.detailMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  color: #7f8c8d;
+}
+
+.detailMeta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.detailDescription {
+  line-height: 1.6;
+  color: #34495e;
+  margin-bottom: 2rem;
+}
+
+.activitySchedule {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.activitySchedule li {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.activitySchedule li:last-child {
+  border-bottom: none;
+}
+
+.scheduleTime {
+  font-weight: bold;
+  color: #3498db;
+  min-width: 80px;
+}
+
+.speaker {
+  margin: 0.3rem 0 0 0;
+  color: #7f8c8d;
+  font-style: italic;
+}
+
+.registerButton {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.registerButton:hover {
+  background: #219653;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .sectionLema {
+    font-size: 1.2rem;
+  }
+  
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .activityDetail {
+    padding: 1rem;
+  }
+  
+  .activityDetail h3 {
+    font-size: 1.5rem;
+  }
+}

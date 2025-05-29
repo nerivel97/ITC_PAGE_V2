@@ -35,17 +35,17 @@ const EventosTable: React.FC = () => {
     setLoading(true);
     try {
       const data = await fetchEventos();
-      console.log('Datos recibidos del backend:', data);
-
+      
+      // Verificar estructura de respuesta del backend
       if (!Array.isArray(data)) {
         throw new Error('Formato de datos inválido');
       }
 
       const formattedData = data.map(evento => ({
         ...evento,
-        key: evento.id_evento?.toString() || Math.random().toString(),
-        fecha_inicio: evento.fecha_inicio ? new Date(evento.fecha_inicio).toISOString() : '',
-        fecha_final: evento.fecha_final ? new Date(evento.fecha_final).toISOString() : ''
+        key: evento.id_evento?.toString(),
+        fecha_inicio: evento.fecha_inicio, // Ya viene en formato string
+        fecha_final: evento.fecha_final    // Ya viene en formato string
       }));
 
       setEventos(formattedData);
@@ -61,7 +61,6 @@ const EventosTable: React.FC = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     loadEventos();
   }, []);
