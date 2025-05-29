@@ -6,14 +6,21 @@ interface QuienesSomosProps {
   descripcion?: string;
   botonTexto?: string;
   imagenUrl?: string;
+   botonUrl?: string; // New prop for button URL
 }
 
 const Somos: React.FC<QuienesSomosProps> = ({ 
   titulo, 
   descripcion, 
   botonTexto, 
-  imagenUrl, 
+  imagenUrl,
+  botonUrl 
 }) => {
+  const handleButtonClick = () => {
+    if (botonUrl) {
+      window.open(botonUrl, '_blank'); // 
+    }};
+    
   return (
     <div className={styles.somosContainer}>
       <div className={styles.tituloContainer}>
@@ -31,7 +38,7 @@ const Somos: React.FC<QuienesSomosProps> = ({
           {(descripcion || botonTexto) && (
             <div className={styles.textoContainer}>
               {descripcion && <p className={styles.somosText}>{descripcion}</p>}
-              {botonTexto && <button className={styles.somosButton}>{botonTexto}</button>}
+              {botonTexto && <button className={styles.somosButton}onClick={handleButtonClick}>{botonTexto}</button>}
             </div>
           )}
         </div>
