@@ -2,13 +2,16 @@
   display: flex;
   gap: 2rem;
   align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .directorio-tec {
   flex: 3;
   padding: 2rem;
   max-width: 1000px;
-  margin: auto;
+  width: 100%;
   font-family: 'Work Sans', sans-serif;
 }
 
@@ -16,6 +19,7 @@ h2 {
   font-size: 2.2rem;
   margin-bottom: 2rem;
   font-weight: bold;
+  text-align: center;
 }
 
 .seccion {
@@ -69,10 +73,12 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .tarjeta-info {
   flex: 1;
+  min-width: 200px;
 }
 
 .tarjeta-info p {
@@ -92,18 +98,54 @@ h2 {
   font-size: 1rem;
   color: #333;
   white-space: nowrap;
+  margin-left: 1rem;
+}
+
+.telefono-tucan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 220px;
+  width: 100%;
+  margin: auto;
 }
 
 .telefono-tucan img {
-  height: auto;
   width: 100%;
   max-width: 120px;
+  height: auto;
   object-fit: contain;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
   margin-bottom: 0.5rem;
 }
 
-.telefono-tucan img {
-  height: 100px;
-  margin-bottom: 0.5rem;
+.telefono-tucan strong {
+  font-size: 1.1rem;
+  color: #003366;
+  margin-bottom: 0.2rem;
+}
+
+.telefono-tucan p {
+  font-size: 0.95rem;
+  margin: 0.2rem 0;
+}
+
+/* 📱 Responsividad para móviles */
+@media (max-width: 768px) {
+  .directorio-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .tarjeta-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .extension {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
 }

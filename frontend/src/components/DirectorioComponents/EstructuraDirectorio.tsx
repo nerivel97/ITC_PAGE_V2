@@ -50,12 +50,16 @@ const EstructuraDirectorio = () => {
       </div>
 
       <div className="telefono-tucan">
-        <img src={tucanImg} alt="Tucán" />
+        <img
+          src={tucanImg}
+          alt="Tucán con Mensaje"
+          title="Tucán institucional invitando a comunicarse con el TECNM-Cancún"
+        />
         <div>
-          <strong>No dudes en llamarnos</strong>
+          <strong>¡Estamos a solo una llamada de distancia!</strong>
           <p>Teléfonos:</p>
-          <p>1. 998-8807432</p>
-          <p>2. 998-8480960</p>
+          <p>998-8807432</p>
+          <p>998-8480960</p>
         </div>
       </div>
     </div>
