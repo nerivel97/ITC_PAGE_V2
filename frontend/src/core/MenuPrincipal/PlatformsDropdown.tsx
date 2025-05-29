@@ -2,7 +2,8 @@ import React from 'react';
 import styles from './PlatformsDropdown.module.css';
 import { FaArrowRight, FaChalkboardTeacher, FaTasks, FaUserTie, FaCheckCircle } from 'react-icons/fa';
 import ElibroImage from './IMGMenuPrincipal/elibro.png';
-
+import SIE from './IMGMenuPrincipal/sie.jpg';
+import Mooc from './IMGMenuPrincipal/Moodle.png';
 // Definición de interfaces
 interface TeacherItem {
   name: string;
@@ -38,7 +39,7 @@ const PlatformsDropdown: React.FC<PlatformsDropdownProps> = ({ isMobile }) => {
       title: "Biblioteca Digital",
       description: "Consulta libros e investigaciones en nuestra biblioteca móvil.",
       linkText: "Acceder",
-      imageSrc: ElibroImage,
+      imageSrc: SIE,
       altText: "Biblioteca Digital",
       link: "https://www.elibro.com/"
     },
@@ -46,7 +47,7 @@ const PlatformsDropdown: React.FC<PlatformsDropdownProps> = ({ isMobile }) => {
       title: "Ekaanbal",
       description: "Plataforma para la administración de materias y recursos educativos.",
       linkText: "Acceder",
-      imageSrc: ElibroImage,
+      imageSrc: Mooc,
       altText: "Ekaanbal",
       link: "https://ekaanbal.cancun.tecnm.mx/"
     }
