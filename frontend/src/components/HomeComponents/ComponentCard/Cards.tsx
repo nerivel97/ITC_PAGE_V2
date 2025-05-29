@@ -41,7 +41,9 @@ const Cards: React.FC<CardsProps> = ({ cards }) => {
             <div key={card.id} className={styles.card}>
               <div className={styles.cardInner}>
                 <div className={styles.cardImageContainer}>
-                  <img src={imageMap[card.id as CardKey]} alt={card.title} className={styles.cardImage} />
+                  <img src={imageMap[card.id as CardKey]} 
+                  alt={card.title} 
+                  className={styles.cardImage} />
                   <div className={styles.imageOverlay}></div>
                 </div>
                 <div className={styles.cardContent}>

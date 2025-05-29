@@ -9,9 +9,9 @@ import headerImage3 from './logos/logotec.jpg';
 
 const HeaderBanners = () => {
   const headerImages = [
-    { id: 1, image: headerImage1, link: '#', alt: 'Imagen 1' },
-    { id: 2, image: headerImage2, link: '#', alt: 'Imagen 2' },
-    { id: 3, image: headerImage3, link: '#', alt: 'Imagen 3' },
+    { id: 1, image: headerImage1, link: '#', alt: 'Gobierno' },
+    { id: 2, image: headerImage2, link: '#', alt: 'Educacion' },
+    { id: 3, image: headerImage3, link: '#', alt: 'Logo TECNM' },
   ];
 
   return (
@@ -20,7 +20,10 @@ const HeaderBanners = () => {
       <header className={styles.header1}>
         <div className={styles.header1Container}>
           <div className={styles.logoContainer}>
-            <img src={logo} alt="Logo" className={styles.logo} />
+            <img src={logo} 
+            alt="Gobierno"
+            title="GOBMX"
+             className={styles.logo} />
           </div>
           
           <div className={styles.emptySpace}></div>
@@ -45,7 +48,9 @@ const HeaderBanners = () => {
               >
                 <img 
                   src={image.image} 
-                  alt={image.alt} 
+                  alt={image.alt}
+                  title="Logos GobMX/TECNM"
+                   
                   className={styles.headerImage}
                 />
               </a>

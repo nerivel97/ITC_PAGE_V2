@@ -49,16 +49,20 @@ const Footer: React.FC = () => {
         <hr />
         <div className={styles.socialIcons}>
           <a href="https://www.facebook.com/TECNMCancunOficial/?locale=es_LA" target="_blank" rel="noOpener noreferrer">
-            <img src={facebook} alt="Facebook" />
+            <img src={facebook} alt="Facebook"
+            title="Facebook ITC" />
           </a>
           <a href="http://www.youtube.com/@TecNMCancun" target="_blank" rel="noOpener noreferrer">
-            <img src={youtube} alt="YouTube" />
+            <img src={youtube} alt="YouTube"
+           title="Youtube ITC" />
           </a>
           <a href="https://www.instagram.com/tecnm_cancun/" target="_blank" rel="noOpener noreferrer">
-            <img src={ig} alt="Instagram" />
+            <img src={ig} alt="Instagram"
+            title="Instagram ITC" />
           </a>
           <a href="https://x.com/TecNM_MX" target="_blank" rel="noOpener noreferrer">
-            <img src={x} alt="Twitter (X)" />
+            <img src={x} alt="Twitter (X)"
+            title="Twitter (X)" />
           </a>
         </div>
       </div>

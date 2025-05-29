@@ -26,7 +26,10 @@ const Somos: React.FC<QuienesSomosProps> = ({
         <div className={`${styles.mainContent} `}>
           {imagenUrl && (
             <div className={styles.imagenContainer}>
-              <img src={imagenUrl} alt="Imagen representativa" className={styles.somosImage} />
+              <img src={imagenUrl} 
+              alt="Tucan TECNM"
+              title="Tucan sociedad de alumnos TECNM" 
+              className={styles.somosImage} />
             </div>
           )}
 

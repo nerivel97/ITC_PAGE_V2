@@ -46,7 +46,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             >
               <img 
                 src={image.image} 
-                alt={image.alt} 
+                alt="TECNM"
+                title="Imagenes ITC"
                 className={styles.carouselImage}
               />
             </div>

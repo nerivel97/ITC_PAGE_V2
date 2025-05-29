@@ -20,19 +20,25 @@ const FlayerOfertas: React.FC = () => {
         <div className={styles.gridContainer}>
           {/* Licenciatura */}
           <a href="/oferta-educativa" className={styles.gridCard}>
-            <img src={licenciaturaImg} alt="Licenciatura" className={styles.image} />
+            <img src={licenciaturaImg} alt="Licenciatura" 
+            title="Licenciatura ITC"
+            className={styles.image} />
             <div className={styles.cardLabel}>Licenciatura</div>
           </a>
           
           {/* Maestría */}
           <a href="/oferta-educativa" className={styles.gridCard}>
-            <img src={maestriaImg} alt="Maestría" className={styles.image} />
+            <img src={maestriaImg} alt="Maestría" 
+            title="Maestria ITC"
+            className={styles.image} />
             <div className={styles.cardLabel}>Maestría</div>
           </a>
           
           {/* Doctorado */}
           <a href="/oferta-educativa" className={styles.gridCard}>
-            <img src={doctoradoImg} alt="Doctorado" className={styles.image} />
+            <img src={doctoradoImg} alt="Doctorado"
+            title="Doctorado ITC"
+            className={styles.image} />
             <div className={styles.cardLabel}>Doctorado</div>
           </a>
         </div>
