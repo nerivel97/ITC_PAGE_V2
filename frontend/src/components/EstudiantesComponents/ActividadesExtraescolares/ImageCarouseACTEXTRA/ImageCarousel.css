@@ -1,54 +1,73 @@
+/* Estilos para el contenedor principal del carrusel */
 .mini-carousel {
   position: relative;
-  width: 100%;
-  height: 350px; /* Ajusta según tu diseño */
+  width: 100%; /* O un ancho específico para el layout general de esta sección */
+  /*
+    !!! IMPORTANTE: AJUSTA LA ALTURA DEL CARRUSEL !!!
+    Debe ser la altura de tu imagen (ej. 300px) más espacio para los puntos.
+  */
+  height: 340px; /* EJEMPLO: 300px para la imagen + 40px para puntos/espacio */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Estilos para cada imagen dentro del carrusel */
 .mini-carousel-image {
-  max-height: 100%;
-  width: auto;
-  object-fit: contain;
-}
+  border-radius: 10px; /* Tu redondeo de 10px */
 
-.mini-carousel-image {
-  border-radius: 10px;
-  display: none;           /* Oculto por defecto */
-  width: 100%;             /* Ancho completo del contenedor */
-  height: auto;            /* Mantiene aspecto */
-  transition: opacity 0.5s ease-in-out;
+  /*
+    !!! TAMAÑO PREDETERMINADO CON PROPORCIÓN 2048:1365 (3:2) !!!
+    Estos son ejemplos. Ajusta el 'width' al que necesites en tu diseño,
+    y el 'height' se calculará para mantener la proporción ~3:2.
+    O define ambos si ya tienes los valores exactos para tu layout.
+  */
+  width: 450px;   /* <<< EJEMPLO DE ANCHO - ¡CAMBIA ESTE VALOR! */
+  height: 300px;  /* <<< EJEMPLO DE ALTO (450px * 1365/2048 ≈ 300px) - ¡CAMBIA ESTE VALOR! */
+  /* Otros ejemplos manteniendo proporción 3:2:
+     width: 400px; height: 267px;
+     width: 500px; height: 333px;
+  */
+
+  object-fit: cover; /* ESTO CAUSARÁ EL RECORTE DE IMÁGENES MÁS ANCHAS DE 3:2 */
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  display: none;
 }
 
 .mini-carousel-image.active {
-    border-radius: 10px;
-  display: block;          /* Sólo el activo se muestra */
   opacity: 1;
+  display: block;
 }
 
+/* ... (los estilos de .mini-carousel-dots y .mini-dot permanecen igual) ... */
 .mini-carousel-dots {
   position: absolute;
-  bottom: 8px;
+  bottom: 10px; /* Ajusta según la nueva altura del carrusel */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 6px;
+  gap: 8px;
   z-index: 10;
 }
 
 .mini-dot {
   width: 10px;
   height: 10px;
-  background: #bbb;
-  border: none;
+  background-color: #ccc;
   border-radius: 50%;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .mini-dot.active {
-  background: #123766;
+  background-color: #123766;
 }
