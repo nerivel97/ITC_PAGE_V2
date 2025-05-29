@@ -3,6 +3,7 @@ import styles from '../components/Residencia/Residencia.module.css';
 
 import {
   ResidenciaBanner,
+  ResidenciaDocumentation,
   ResidenciaFooter,
   ResidenciaInformation,
   ResidenciaRequirements,
@@ -29,6 +30,8 @@ export default function Residencia() {
       <ResidenciaRequirements />
 
       <ResidenciaFooter />
+
+      <ResidenciaDocumentation />
 
       <br />
     </div>
