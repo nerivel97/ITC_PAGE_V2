@@ -24,6 +24,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 
   return (
     <div className={styles.carouselContainer}>
+      <h1 className={styles.mainTitle}>Instituto Tecnológico de Cancún transformando el futuro</h1>
       <div className={styles.carousel}>
         {images.map((image, index) => {
           let slideClass = '';
