@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --watch -r ts-node/register --env-file=.env ./src/server.ts",
     "build": "tsc",
-    "start": "NODE_ENV=production node --env-file-if-exists=.env ./dist/server.js",
+    "start": "cross-env NODE_ENV=production node --env-file-if-exists=.env ./dist/server.js",
     "typeorm": "typeorm-ts-node-commonjs",
     "migrate:create": "npm run typeorm -- migration:create",
     "migrate:run": "npm run typeorm -- migration:run -d ./src/config/database.ts",
@@ -34,6 +34,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.14",
+    "cross-env": "^7.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
