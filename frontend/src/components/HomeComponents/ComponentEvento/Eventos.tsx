@@ -37,7 +37,6 @@ const Eventos: React.FC = () => {
       } else {
         setCardsToShow(3);
       }
-      // Resetear índice al cambiar el número de cards
       setCurrentIndex(0);
     };
 
@@ -61,7 +60,7 @@ const Eventos: React.FC = () => {
         setError(null);
       } catch (err: any) {
         console.error('Error loading events:', err);
-        setError(err.message || 'Error al cargar eventos');
+        setError('Error al cargar eventos');
       } finally {
         setLoading(false);
       }
@@ -133,7 +132,7 @@ const Eventos: React.FC = () => {
   if (eventos.length === 0) return (
     <div className={styles.emptyState}>
       <svg className={styles.emptyIllustration} viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="90" fill="#000f92"/>
+        <circle cx="100" cy="100" r="90" fill="#ffffff"/>
         <path d="M70,70 L130,130 M70,130 L130,70" stroke="#000f92" strokeWidth="3" strokeLinecap="round"/>
       </svg>
       <h3>No hay eventos activos</h3>
@@ -149,8 +148,14 @@ const Eventos: React.FC = () => {
             <div
               className={styles.carouselCards}
               style={{ 
-                transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
-                gridTemplateColumns: `repeat(${eventos.length}, calc(${100 / cardsToShow}% - ${(cardsToShow - 1) * 10 / cardsToShow}px))`
+                transform: cardsToShow === 1 
+                  ? `translateX(-${currentIndex * 100}%)`
+                  : `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
+                gridTemplateColumns: `repeat(${eventos.length}, ${
+                  cardsToShow === 1 ? '100%' : 
+                  cardsToShow === 2 ? 'calc(50% - 10px)' : 
+                  'calc(33.333% - 13.333px)'
+                })`
               }}
             >
               {eventos.map((evento) => (
