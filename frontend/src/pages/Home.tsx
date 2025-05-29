@@ -11,6 +11,8 @@ import HistoriasQueInspiran from '../components/ComponenteHitoriasQueInspiran/Hi
 import carouselImage1 from '../assets/sliderImage/1.jpeg';
 import carouselImage2 from '../assets/sliderImage/2.jpeg';
 import carouselImage3 from '../assets/sliderImage/3.jpg';
+import tucanImage from '../components/HomeComponents/ImagenesHome/Tucan-Sociedad-de-Alumnos-ITC.jpg';
+import vidaImage from '../components/HomeComponents/ImagenesHome/InovaTEC.jpg';
 
 
 const Home = () => {
@@ -24,14 +26,14 @@ const Home = () => {
     descripcion:
       'El tucán fue adoptado como mascota de este Instituto desde el año de 1990 y fue seleccionado por ser parte importante dentro de la fauna del Estado de Q. Roo. Los tucanes son aves de pelo y pico de colores muy llamativos por su brillantez y colorido. Llegan a medir hasta 60 cm. Su pico es largo, macizo con dientecillos como sierra, llega a medir la tercera parte de su tamaño y es muy ligero por las numerosas cámaras que tiene por lo que no le dificulta el vuelo. Su lengua es muy larga (llega a medir hasta 14 cm), angosta, aplanada y termina en punta. Tiene alas pequeñas, cortas y redondeadas. La cola es cuadrada en unas especies y llama la atención la facilidad con que la mueve hacia arriba y abajo. Los ojos están rodeados por una piel que a veces es de colores vivos.',
     botonTexto: 'Saber mas...',
-    imagenUrl: 'https://scontent.fcjs3-1.fna.fbcdn.net/v/t39.30808-6/482988051_952590563708036_6923907347411025079_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=f727a1&_nc_ohc=19toeF11_vQQ7kNvwFdHeHB&_nc_oc=AdmhoTM66tqdp32igjHD-cs_UPW2lnzwPReUzj0N76MSiI83J4IbAT9r7NaZ8fiDklE&_nc_zt=23&_nc_ht=scontent.fcjs3-1.fna&_nc_gid=RniduXLwkIZX50WFs7GIlQ&oh=00_AfKrwKq72USbY7RcVZF8j7yORMJu-AuHlHNjThQmB0i9bw&oe=682AF212',
+    imagenUrl: tucanImage,
   };
   const vidaEstudiantil = {
     titulo: 'Vida estudiantil',
     descripcion:
       'En nuestra institucion creemos que la educacion va mas alla de las aulas. Por eso, ofrecemos un entorno lleno de oportunidades para que desarrolles tus pasiones, conectes con compañeros y vivas experiencia inolvidables.',
     botonTexto: 'Saber mas...',
-    imagenUrl: 'https://scontent.fcjs3-1.fna.fbcdn.net/v/t39.30808-6/500043459_1002702155363543_8319557795984797660_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=f727a1&_nc_ohc=RmLXC48Ydr4Q7kNvwEt2gLe&_nc_oc=Adm31h745kJnoOSPBfYZmhPXaunFQL82wir6AiD8JM3YL723VRqqo0VaU0cYsEklg9c&_nc_zt=23&_nc_ht=scontent.fcjs3-1.fna&_nc_gid=-7PByWRtRCoFRY_GS_LU3A&oh=00_AfJQ9cSSvGTqK0UIkAVxtzAXCdLW0LRaGO8XPkcIKKyisA&oe=683C3B82',
+    imagenUrl: vidaImage,
   }
 
   const noticiast = {
