@@ -8,7 +8,7 @@ const FlayerOfertas: React.FC = () => {
   return (
     <div className={styles.fullWidthContainer}>
       <div className={styles.contentWrapper}>
-        <h1 className={styles.title}>Oferta educativa</h1>
+        <h2 className={styles.title}>Oferta educativa</h2>
         <p className={styles.description}>
           Tu futuro comienza aquí. Descubre nuestras carreras y encuentra tu pasión.
           <br />

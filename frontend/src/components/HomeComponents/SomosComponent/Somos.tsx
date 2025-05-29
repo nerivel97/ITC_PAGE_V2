@@ -17,7 +17,7 @@ const Somos: React.FC<QuienesSomosProps> = ({
   return (
     <div className={styles.somosContainer}>
       <div className={styles.tituloContainer}>
-        <h2 className={styles.somosTitle}>{titulo}</h2>
+        <h1 className={styles.somosTitle}>{titulo}</h1>
       </div>
 
       {(descripcion || botonTexto || imagenUrl) && (
