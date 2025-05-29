@@ -1,3 +1,25 @@
+.contenedor-principal {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.titulo {
+  color: #003366;
+  text-align: start;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.subtitulo {
+  color: #555;
+  text-align: start;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+/* Los estilos existentes se mantienen igual */
 .contenedor-acordeon {
   max-width: 1000px;
   margin: 20px auto;
@@ -49,6 +71,14 @@
 
 /* Responsive */
 @media (max-width: 600px) {
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  .subtitulo {
+    font-size: 1rem;
+  }
+
   .boton-pregunta {
     font-size: 0.95rem;
   }
