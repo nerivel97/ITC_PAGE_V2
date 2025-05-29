@@ -1,13 +1,7 @@
 import axios from 'axios';
-import {
-  IOferta,
-  IOfertaResponse,
-  IOfertasPaginatedResponse,
-  IOfertaCreate,
-  IOfertaUpdate
-} from '../interfaces/oferta.interface';
+import { ICarrera } from '../interfaces/oferta.interface';
 
-const API_BASE = 'http://localhost:4000/api/carreras';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://itc11.itcun.info/api/carreras';
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -18,49 +12,91 @@ const api = axios.create({
   }
 });
 
-export const fetchOfertas = async (): Promise<IOferta[]> => {
+interface ApiOptions {
+  headers?: Record<string, string>;
+  params?: Record<string, any>;
+}
+
+const handleApiError = (error: any): never => {
+  const message = error.response?.data?.message || 
+                 error.message || 
+                 'Error en la comunicación con el servidor';
+  throw new Error(message);
+};
+
+export const fetchCarreras = async (options?: ApiOptions): Promise<ICarrera[]> => {
   try {
-    const { data } = await api.get<IOfertasPaginatedResponse>('/');
-    return data.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al cargar ofertas');
+    const response = await api.get('', options);
+    if (!response.data.success) {
+      throw new Error('Error al cargar carreras');
+    }
+    return response.data.data; // <-- Aquí extraemos el array correcto
+  } catch (error) {
+    return handleApiError(error);
   }
 };
 
-export const fetchOfertaById = async (id: number): Promise<IOferta> => {
+
+export const fetchCarreraById = async (id: number, options?: ApiOptions): Promise<ICarrera> => {
   try {
-    const { data } = await api.get<IOfertaResponse>(`/${id}`);
-    if (!data.data) throw new Error('Oferta no encontrada');
-    return data.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al cargar oferta');
+    const response = await api.get('', {
+      ...options,
+      params: { ...options?.params, id }
+    });
+    if (!response.data.success) {
+      throw new Error('Carrera no encontrada');
+    }
+    return response.data.data;
+  } catch (error) {
+    return handleApiError(error);
   }
 };
 
-export const createOferta = async (oferta: IOfertaCreate): Promise<IOferta> => {
+
+export const fetchCarreraBySlug = async (slug: string, options?: ApiOptions): Promise<ICarrera> => {
   try {
-    const { data } = await api.post<IOfertaResponse>('/', oferta);
-    if (!data.data) throw new Error('Error al crear oferta');
-    return data.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al crear oferta');
+    const { data } = await api.get<ICarrera>('', {
+      ...options,
+      params: { ...options?.params, slug }
+    });
+    return data;
+  } catch (error) {
+    return handleApiError(error);
   }
 };
 
-export const updateOferta = async (id: number, oferta: IOfertaUpdate): Promise<IOferta> => {
+
+export const createCarrera = async (carreraData: Partial<ICarrera>, options?: ApiOptions): Promise<ICarrera> => {
   try {
-    const { data } = await api.put<IOfertaResponse>(`/${id}`, oferta);
-    if (!data.data) throw new Error('Error al actualizar oferta');
-    return data.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al actualizar oferta');
+    const response = await api.post('', carreraData, options);
+    if (!response.data.success) {
+      throw new Error('Error al crear carrera');
+    }
+    return response.data.data;
+  } catch (error) {
+    return handleApiError(error);
   }
 };
 
-export const deleteOferta = async (id: number): Promise<void> => {
+export const updateCarrera = async (id: number, carreraData: Partial<ICarrera>, options?: ApiOptions): Promise<ICarrera> => {
   try {
-    await api.delete(`/${id}`);
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Error al eliminar oferta');
+    const { data } = await api.put<ICarrera>('', carreraData, {
+      ...options,
+      params: { ...options?.params, id }
+    });
+    return data;
+  } catch (error) {
+    return handleApiError(error);
+  }
+};
+
+export const deleteCarrera = async (id: number, options?: ApiOptions): Promise<void> => {
+  try {
+    await api.delete('', {
+      ...options,
+      params: { ...options?.params, id }
+    });
+  } catch (error) {
+    handleApiError(error);
   }
 };

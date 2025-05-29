@@ -3,8 +3,8 @@ import Home from "./pages/Home";
 import MainLayout from "./core/layout/MainLayout";
 import Instituto from "./pages/Instituto";
 import InstitutoDirectorio from "./pages/InstitutoDirectorio";
-import Oferta from "./pages/Oferta";
-import CarreraDetalle from "./pages/Carreras";
+import Ofertas from './pages/Oferta';
+import Carreras from './pages/Carreras';
 import Infra from "./pages/Infra";
 import Admisiones from "./pages/Admisiones";
 import AdminLayout from "./admin/components/AdminLayout/AdminLayout";
@@ -18,7 +18,7 @@ import Page_Eventos_c from "./components/HomeComponents/ComponentEvento/Page_Eve
 import Page_Noticias from "./pages/Page_Noticias";
 import Page_Noticias_c from "./components/HomeComponents/ComponentNoticias/Page_Noticias_c";
 
-import OfertTable from "./admin/pages/OfertaEducativa/OfertTable";
+import OfertTable from './admin/pages/OfertaEducativa/CarreraTable';
 import AdminHomeGallery from "./admin/pages/InstitutoITC/AdminHomeGallery";
 import AdmisionesTable from "./admin/pages/Admisiones/AdmisionesTable";
 import Resultados from "./pages/Resultados";
@@ -36,32 +36,26 @@ const App: React.FC = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/Instituto" element={<Instituto />} />
+          <Route path='/Instituto' element={<Instituto />} />
           <Route path="/Instituto-directorio" element={<InstitutoDirectorio />} />
-          <Route path="/oferta-educativa" element={<Oferta />} />
-          <Route
-            path="/oferta-educativa/:carreraNombre"
-            element={<CarreraDetalle />}
-          />
-          <Route path="/Infraestructura" element={<Infra />} />
-          <Route path="/Admisiones" element={<Admisiones />} />
+          <Route path='/oferta-educativa' element={<Ofertas />} />
+          <Route path="/oferta-educativa/:carreraSlug" element={<Carreras />} />
+          <Route path='/Infraestructura' element={<Infra />} />
+          <Route path='/Admisiones' element={<Admisiones />} />
           <Route
             path="/Preguntas_frecuentes"
             element={<Preguntas_frecuentes />}
           />
           <Route path="/residencia-profesional" element={<Residencia />} />
 
-          {/* Rutas de carreras */}
-
           {/* Rutas de eventos */}
-          <Route path="/eventos" element={<Page_Eventos />} />
-          <Route path="/eventos/:id" element={<Page_Eventos_c />} />
+          <Route path='/eventos' element={<Page_Eventos />} />
+          <Route path='/eventos/:id' element={<Page_Eventos_c />} />
 
           {/* Rutas de Noticias */}
-          <Route path="/noticias" element={<Page_Noticias />} />
-          <Route path="/noticias/:id" element={<Page_Noticias_c />} />
-
-          <Route path="/Resultados" element={<Resultados />} />
+          <Route path='/noticias' element={<Page_Noticias />} />
+          <Route path='/noticias/:id' element={<Page_Noticias_c />} />
+	  <Route path='/resultados' element={<Resultados />} />
         </Route>
 
         {/* Rutas del panel de administración (sin protección) */}

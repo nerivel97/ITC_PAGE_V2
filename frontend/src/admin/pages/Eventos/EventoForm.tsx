@@ -12,7 +12,7 @@ import {
   updateEvento,
 } from '../../services/eventos.service';
 import { IEvento, IEventoCreate } from '../../interfaces/evento.interface';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import styles from './EventoForm.module.css';
 
 const { TextArea } = Input;
@@ -25,13 +25,23 @@ interface EventoFormProps {
   evento?: IEvento | null;
 }
 
+interface FormValues {
+  nombre_evento: string;
+  categoria: string;
+  descripcion: string;
+  fecha_inicio: Dayjs;
+  fecha_final: Dayjs;
+  estado: string;
+  imagen?: string;
+}
+
 const EventoForm: React.FC<EventoFormProps> = ({ 
   visible, 
   onCancel, 
   onSuccess, 
   evento 
 }) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<FormValues>();
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
@@ -51,21 +61,18 @@ const EventoForm: React.FC<EventoFormProps> = ({
       setLoading(true);
       const values = await form.validateFields();
       
-      // Asegurar formato YYYY-MM-DD para las fechas
       const eventoData: IEventoCreate = {
         nombre_evento: values.nombre_evento,
         categoria: values.categoria,
         descripcion: values.descripcion,
-        fecha_inicio: dayjs(values.fecha_inicio).format('YYYY-MM-DD'), // Formato explícito
-        fecha_final: dayjs(values.fecha_final).format('YYYY-MM-DD'),   // Formato explícito
+        fecha_inicio: values.fecha_inicio.format('YYYY-MM-DD'),
+        fecha_final: values.fecha_final.format('YYYY-MM-DD'),
         estado: values.estado,
-        imagen: values.imagen || null
+        imagen: values.imagen
       };
-  
-      console.log("Datos a enviar:", eventoData);
-  
-      if (evento) {
-        await updateEvento(evento.id_evento!, eventoData);
+
+      if (evento?.id_evento) {
+        await updateEvento(evento.id_evento, eventoData);
         message.success('Evento actualizado correctamente');
       } else {
         await createEvento(eventoData);
@@ -73,9 +80,13 @@ const EventoForm: React.FC<EventoFormProps> = ({
       }
       
       onSuccess();
-    } catch (error) {
-      console.error('Error completo:', error);
-      message.error(error instanceof Error ? error.message : 'Error al guardar el evento');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        message.error(error.message);
+      } else {
+        message.error('Ocurrió un error desconocido');
+      }
+      console.error('Error:', error);
     } finally {
       setLoading(false);
     }
@@ -91,22 +102,23 @@ const EventoForm: React.FC<EventoFormProps> = ({
       width={700}
       okText={evento ? 'Actualizar' : 'Crear'}
       cancelText="Cancelar"
+      destroyOnClose
     >
-      <Form
+      <Form<FormValues>
         form={form}
         layout="vertical"
         initialValues={{
-          estado: '',
+          estado: 'Activo',
           imagen: ''
         }}
       >
         <Form.Item
           name="nombre_evento"
           label="Nombre del Evento"
-          rules={[{ 
-            required: true, 
-            message: 'Por favor ingrese el nombre del evento' 
-          }]}
+          rules={[
+            { required: true, message: 'Por favor ingrese el nombre del evento' },
+            { max: 100, message: 'Máximo 100 caracteres' }
+          ]}
         >
           <Input placeholder="Ej: Conferencia de Tecnología" />
         </Form.Item>
@@ -114,10 +126,7 @@ const EventoForm: React.FC<EventoFormProps> = ({
         <Form.Item
           name="categoria"
           label="Categoría"
-          rules={[{ 
-            required: true, 
-            message: 'Por favor seleccione una categoría' 
-          }]}
+          rules={[{ required: true, message: 'Por favor seleccione una categoría' }]}
         >
           <Select placeholder="Seleccione una categoría">
             <Option value="Cultural">Cultural</Option>
@@ -129,10 +138,10 @@ const EventoForm: React.FC<EventoFormProps> = ({
         <Form.Item
           name="descripcion"
           label="Descripción"
-          rules={[{ 
-            required: true, 
-            message: 'Por favor ingrese una descripción' 
-          }]}
+          rules={[
+            { required: true, message: 'Por favor ingrese una descripción' },
+            { min: 20, message: 'Mínimo 20 caracteres' }
+          ]}
         >
           <TextArea rows={4} placeholder="Descripción detallada del evento" />
         </Form.Item>
@@ -141,30 +150,39 @@ const EventoForm: React.FC<EventoFormProps> = ({
           <Form.Item
             name="fecha_inicio"
             label="Fecha de Inicio"
-            rules={[{ 
-              required: true, 
-              message: 'Por favor seleccione la fecha de inicio' 
-            }]}
+            rules={[{ required: true, message: 'Por favor seleccione la fecha de inicio' }]}
             className={styles.dateField}
           >
             <DatePicker 
               format="YYYY-MM-DD" 
-              style={{ width: '100%' }} 
+              style={{ width: '100%' }}
+              disabledDate={(current) => current && current < dayjs().startOf('day')}
             />
           </Form.Item>
 
           <Form.Item
             name="fecha_final"
             label="Fecha de Finalización"
-            rules={[{ 
-              required: true, 
-              message: 'Por favor seleccione la fecha de finalización' 
-            }]}
+            dependencies={['fecha_inicio']}
+            rules={[
+              { required: true, message: 'Por favor seleccione la fecha de finalización' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || !getFieldValue('fecha_inicio') || 
+                      value.isAfter(getFieldValue('fecha_inicio')) || 
+                      value.isSame(getFieldValue('fecha_inicio'))) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('La fecha final debe ser posterior a la de inicio');
+                },
+              }),
+            ]}
             className={styles.dateField}
           >
             <DatePicker 
               format="YYYY-MM-DD" 
-              style={{ width: '100%' }} 
+              style={{ width: '100%' }}
+              disabledDate={(current) => current && current < dayjs().startOf('day')}
             />
           </Form.Item>
         </div>
@@ -172,12 +190,9 @@ const EventoForm: React.FC<EventoFormProps> = ({
         <Form.Item
           name="estado"
           label="Estado"
-          rules={[{ 
-            required: true,
-            message: 'Por favor seleccione una opcion' 
-          }]}
+          rules={[{ required: true, message: 'Por favor seleccione el estado' }]}
         >
-          <Select placeholder="Selecciona una opcion">
+          <Select>
             <Option value="Activo">Activo</Option>
             <Option value="Inactivo">Inactivo</Option>
           </Select>
@@ -186,6 +201,7 @@ const EventoForm: React.FC<EventoFormProps> = ({
         <Form.Item
           name="imagen"
           label="URL de la Imagen"
+          rules={[{ type: 'url', message: 'Ingrese una URL válida' }]}
         >
           <Input placeholder="https://ejemplo.com/imagen.jpg" />
         </Form.Item>

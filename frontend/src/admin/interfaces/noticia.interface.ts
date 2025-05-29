@@ -6,11 +6,26 @@ export interface INoticia {
     autor: string;
     imagen?: string;
   }
+
+  export interface INoticiaCreate {
+  nombre_noticia: string;
+  descripcion: string;
+  fecha_publicacion: string;
+  autor: string;
+  imagen?: string;
+}
+
+export interface INoticiaUpdate {
+  nombre_noticia?: string;
+  descripcion?: string;
+  fecha_publicacion?: string;
+  autor?: string;
+  imagen?: string;
+}
   
-  export interface INoticiaCreate extends Omit<INoticia, 'id_noticia'> {
-    // Puedes agregar validaciones específicas del frontend si es necesario
-  }
-  
-  export interface INoticiaUpdate extends Partial<INoticiaCreate> {
-    // Campos opcionales para actualización
-  }
+  export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  errors?: Record<string, string[]>;
+}
