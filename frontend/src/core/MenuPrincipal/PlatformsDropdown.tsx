@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './PlatformsDropdown.module.css';
 import { FaArrowRight, FaChalkboardTeacher, FaTasks, FaUserTie, FaCheckCircle } from 'react-icons/fa';
 import ElibroImage from './IMGMenuPrincipal/elibro.png';
+import SIE from './IMGMenuPrincipal/sie.jpg';
+import Moodle from './IMGMenuPrincipal/Moodle.png';
+
 
 // Definición de interfaces
 interface TeacherItem {
@@ -30,7 +33,7 @@ const PlatformsDropdown: React.FC<PlatformsDropdownProps> = ({ isMobile }) => {
       title: "SIE",
       description: "Consulta Horarios, Pagos, Información académica y carga de materias.",
       linkText: "Acceder",
-      imageSrc: ElibroImage,
+      imageSrc: SIE,
       altText: "SIE",
       link: "http://sie.cancun.tecnm.mx/cgi-bin/sie.pl?Opc=PINDEXESTUDIANTE&psie=intertec&dummy=0"
     },
@@ -46,7 +49,7 @@ const PlatformsDropdown: React.FC<PlatformsDropdownProps> = ({ isMobile }) => {
       title: "Ekaanbal",
       description: "Plataforma para la administración de materias y recursos educativos.",
       linkText: "Acceder",
-      imageSrc: ElibroImage,
+      imageSrc: Moodle,
       altText: "Ekaanbal",
       link: "https://ekaanbal.cancun.tecnm.mx/"
     }

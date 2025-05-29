@@ -4,7 +4,7 @@ import styles from './InvestigacionYDesarrollo.module.css';
 export interface CardData {
   image: string;
   title: string;
-  link: string; // Nueva propiedad para el enlace
+ 
 }
 
 export interface InvestigacionYDesarrolloProps {
@@ -21,7 +21,7 @@ const InvestigacionYDesarrollo: React.FC<InvestigacionYDesarrolloProps> = ({ des
       <div className={styles.cardsGrid}>
         {cards.map((card, idx) => (
           <a 
-            href={card.link} 
+           
             className={styles.cardLink} 
             key={idx}
             target="_blank" 

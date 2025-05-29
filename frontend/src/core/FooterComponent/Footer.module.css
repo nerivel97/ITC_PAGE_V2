@@ -1,9 +1,19 @@
 .footerInfo {
     background-color: #0f156d;
-    color: white;
+        color: white;
     padding: 20px 50px;
     font-family: Arial, sans-serif;
     text-align: justify;
+}
+  
+
+
+.sectionTitle {
+    color: white;
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 24px;
 }
 
 .footerColumns {
@@ -16,13 +26,6 @@
     flex: 1;
     min-width: 250px;
     padding: 10px;
-}
-
-.footerSection h2 {
-    border-bottom: 2px solid white;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    font-size: 24px;
 }
 
 .footerSection ul {
@@ -137,7 +140,7 @@ img {
         padding: 0;
     }
     
-    .footerSection h2 {
+    .sectionTitle {
         font-size: 20px;
     }
     
@@ -175,7 +178,7 @@ img {
         padding: 15px 20px;
     }
     
-    .footerSection h2 {
+    .sectionTitle {
         font-size: 18px;
     }
     
@@ -201,4 +204,6 @@ img {
         width: 30px;
         height: 30px;
     }
+
+  
 }
