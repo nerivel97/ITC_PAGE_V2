@@ -10,6 +10,7 @@ import {
   FaAngleDoubleDown,
   FaUserGraduate,
   FaArrowLeft,
+  FaQuestion,
 } from "react-icons/fa";
 import RegulationDropdown from "./RegulationDropdown";
 import PlatformsDropdown from "./PlatformsDropdown";
@@ -155,7 +156,7 @@ const MenuPrincipal: React.FC = () => {
 
           <li onClick={closeAll}>
             <a href="/Preguntas_frecuentes">
-              <FaEnvelopeOpenText /> <span>Preguntas Frecuentes</span>
+              <FaQuestion /> <span>Preguntas Frecuentes</span>
             </a>
           </li>
 
