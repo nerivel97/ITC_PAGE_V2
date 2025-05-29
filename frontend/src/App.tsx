@@ -27,6 +27,10 @@ import Preguntas_frecuentes from "./pages/Preguntas_frecuentes";
 import Residencia from "./pages/Residencia";
 import ActExtra from "./pages/ActividadesExtra";
 
+import Innovatec from './pages/innovatec';
+import Concursorobotica from './pages/Concursorobotica';
+import Concursos from './pages/Concursos';
+
 import "./App.css";
 
 const App: React.FC = () => {
@@ -48,6 +52,10 @@ const App: React.FC = () => {
             path="/Preguntas_frecuentes"
             element={<Preguntas_frecuentes />}
           />
+          <Route path='/Concursos' element={<Concursos />} />
+          <Route path='/innovatec' element={<Innovatec/>} />
+          <Route path='/concursorobotica' element={<Concursorobotica/>} />
+          
           <Route path="/residencia-profesional" element={<Residencia />} />
 
           {/* Rutas de eventos */}
