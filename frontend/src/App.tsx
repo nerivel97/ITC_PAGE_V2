@@ -25,6 +25,7 @@ import Resultados from "./pages/Resultados";
 import Preguntas_frecuentes from "./pages/Preguntas_frecuentes";
 
 import Residencia from "./pages/Residencia";
+import ActExtra from "./pages/ActividadesExtra";
 
 import "./App.css";
 
@@ -41,6 +42,7 @@ const App: React.FC = () => {
           <Route path='/oferta-educativa' element={<Ofertas />} />
           <Route path="/oferta-educativa/:carreraSlug" element={<Carreras />} />
           <Route path='/Infraestructura' element={<Infra />} />
+          <Route path='/extraescolares' element={<ActExtra />} />
           <Route path='/Admisiones' element={<Admisiones />} />
           <Route
             path="/Preguntas_frecuentes"
