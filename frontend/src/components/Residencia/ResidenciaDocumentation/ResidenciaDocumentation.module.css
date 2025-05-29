@@ -1,0 +1,15 @@
+.documentation {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* 32px */
+  width: 100%;
+  max-width: 57rem; /* 912px */
+  margin: auto;
+  line-height: 1.6;
+}
+
+.documentation__heading {
+  font-size: 2rem; /* 32px */
+  text-align: center;
+  font-weight: bold;
+}

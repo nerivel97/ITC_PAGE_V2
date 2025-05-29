@@ -80,21 +80,30 @@ const Barrapreguntas = () => {
   };
 
   return (
-    <div className={styles["contenedor-acordeon"]}>
-      {preguntas.map((item, index) => (
-        <div key={index} className={styles["item-acordeon"]}>
-          <button
-            className={styles["boton-pregunta"]}
-            onClick={() => alternar(index)}
-          >
-            {item.pregunta}
-            <span className={styles.icono}>{activo === index ? "▲" : "▼"}</span>
-          </button>
-          {activo === index && item.respuesta && (
-            <div className={styles.respuesta}>{item.respuesta}</div>
-          )}
-        </div>
-      ))}
+    <div className={styles["contenedor-principal"]}>
+      <h2 className={styles.titulo}>Preguntas frecuentes</h2>
+      <h3 className={styles.subtitulo}>
+        Encuentra respuestas rápidas a las dudas más comunes
+      </h3>
+
+      <div className={styles["contenedor-acordeon"]}>
+        {preguntas.map((item, index) => (
+          <div key={index} className={styles["item-acordeon"]}>
+            <button
+              className={styles["boton-pregunta"]}
+              onClick={() => alternar(index)}
+            >
+              {item.pregunta}
+              <span className={styles.icono}>
+                {activo === index ? "▲" : "▼"}
+              </span>
+            </button>
+            {activo === index && item.respuesta && (
+              <div className={styles.respuesta}>{item.respuesta}</div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

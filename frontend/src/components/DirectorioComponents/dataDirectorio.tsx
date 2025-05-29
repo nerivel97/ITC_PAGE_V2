@@ -179,7 +179,7 @@ export const secciones: SeccionDirectorio[] = [
         cargo: 'Centro de Lenguas Extranjeras',
         nombre: 'Centro de Lenguas Extranjeras',
         correo: 'cle@cancun.tecnm.mx',
-        extension: 'Whatsapp (998) 344 9979'
+        extension: '(998) 344 9979'
       }
     ]
   }
