@@ -1,8 +1,8 @@
 import React from "react";
 import styles from './Flayer.module.css';
-import licenciaturaImg from "./FlayerImage/licenciatura.png";
-import maestriaImg from "./FlayerImage/maestrias.jpg";
-import doctoradoImg from "./FlayerImage/doctorado.png";
+import licenciaturaImg from "./FlayerImage/LicT.jpg";
+import maestriaImg from "./FlayerImage/MasT.jpg";
+import doctoradoImg from "./FlayerImage/DocT.jpg";
 
 const FlayerOfertas: React.FC = () => {
   return (
