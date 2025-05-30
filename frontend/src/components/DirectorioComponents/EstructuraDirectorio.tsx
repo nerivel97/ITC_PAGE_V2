@@ -16,13 +16,29 @@ const EstructuraDirectorio = () => {
 
   return (
     <div className="directorio-layout">
+      {/* Tucán en esquina superior derecha */}
+      <div className="telefono-tucan">
+        <img
+          src={tucanImg}
+          alt="Tucán con Mensaje"
+          title="Tucán institucional invitando a comunicarse con el TECNM-Cancún"
+        />
+        <div>
+          <strong>¡Estamos a solo una llamada de distancia!</strong>
+          <p>Teléfonos:</p>
+          <p>998-8807432</p>
+          <p>998-8480960</p>
+        </div>
+      </div>
+
+      {/* Directorio */}
       <div className="directorio-tec">
         <h2>Directorio TEC</h2>
 
         {secciones.map((seccion, idx) => (
           <div key={idx} className="seccion">
             <button className="seccion-titulo" onClick={() => toggleSeccion(seccion.titulo)}>
-              {seccion.titulo} {seccionesAbiertas.includes(seccion.titulo) ? '▲' : '▼'}
+              {seccion.titulo} <span className="icono">{seccionesAbiertas.includes(seccion.titulo) ? '▲' : '▼'}</span>
             </button>
 
             {seccionesAbiertas.includes(seccion.titulo) && (
@@ -47,20 +63,6 @@ const EstructuraDirectorio = () => {
             )}
           </div>
         ))}
-      </div>
-
-      <div className="telefono-tucan">
-        <img
-          src={tucanImg}
-          alt="Tucán con Mensaje"
-          title="Tucán institucional invitando a comunicarse con el TECNM-Cancún"
-        />
-        <div>
-          <strong>¡Estamos a solo una llamada de distancia!</strong>
-          <p>Teléfonos:</p>
-          <p>998-8807432</p>
-          <p>998-8480960</p>
-        </div>
       </div>
     </div>
   );
