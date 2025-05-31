@@ -9,6 +9,7 @@ import Infra from "./pages/Infra";
 import Admisiones from "./pages/Admisiones";
 import AdminLayout from "./admin/components/AdminLayout/AdminLayout";
 import AdminDashboard from "./admin/pages/Dashboard";
+import Titulacion from "./pages/Titulaciones";
 
 import EventosTable from "./admin/pages/Eventos/EventosTable";
 import NoticiasTable from "./admin/pages/Noticias/NoticiasTable";
@@ -50,6 +51,8 @@ const App: React.FC = () => {
             element={<Preguntas_frecuentes />}
           />
           <Route path="/residencia-profesional" element={<Residencia />} />
+
+          <Route path="/titulacion" element={<Titulacion />} />
 
           {/* Rutas de carreras */}
 
