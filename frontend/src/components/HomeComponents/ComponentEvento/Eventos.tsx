@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaSync,FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaSync } from 'react-icons/fa';
 import styles from './Eventos.module.css';
 import { fetchEventos } from '../../../admin/services/eventos.service';
 import { IEvento } from '../../../admin/interfaces/evento.interface';
@@ -30,14 +30,13 @@ const Eventos: React.FC = () => {
       if (!carouselRef.current) return;
       
       const containerWidth = carouselRef.current.offsetWidth;
-      if (containerWidth < 600) {
+      if (containerWidth < 768) {
         setCardsToShow(1);
-      } else if (containerWidth < 900) {
+      } else if (containerWidth < 1024) {
         setCardsToShow(2);
       } else {
         setCardsToShow(3);
       }
-      // Resetear índice al cambiar el número de cards
       setCurrentIndex(0);
     };
 
@@ -61,7 +60,7 @@ const Eventos: React.FC = () => {
         setError(null);
       } catch (err: any) {
         console.error('Error loading events:', err);
-        setError(err.message || 'Error al cargar eventos');
+        setError('Error al cargar eventos');
       } finally {
         setLoading(false);
       }
@@ -100,126 +99,138 @@ const Eventos: React.FC = () => {
     });
   };
 
-   // Estado de carga mejorado
-    if (loading) return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.spinner}></div>
-        <p>Cargando eventos...</p>
-      </div>
-    );
-  
-    // Estado de error mejorado
-    if (error) return (
-      <div className={styles.errorContainer}>
-        <div className={styles.errorContent}>
-          <svg className={styles.errorIllustration} viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="90" fill="#e5e5fc"/>
-            <path d="M100,30 L105,140 L95,140 Z" fill="#4f72e6"/>
-            <circle cx="100" cy="170" r="10" fill="#4f72e6"/>
-          </svg>
-          <h3 className={styles.errorTitle}>¡Ups! Algo salió mal</h3>
-          <p className={styles.errorMessage}>{error}</p>
-          <button 
-            className={styles.errorButton}
-            onClick={() => window.location.reload()}
-          >
-            <FaSync className={styles.refreshIcon} /> Reintentar
-          </button>
-        </div>
-      </div>
-    );
-  
-    // Estado vacío mejorado
-    if (eventos.length === 0) return (
-      <div className={styles.emptyState}>
-        <svg className={styles.emptyIllustration} viewBox="0 0 200 200">
-          <circle cx="100" cy="100" r="90" fill="#000f92"/>
-          <path d="M70,70 L130,130 M70,130 L130,70" stroke="#000f92" strokeWidth="3" strokeLinecap="round"/>
+  // Estado de carga mejorado
+  if (loading) return (
+    <div className={styles.loadingContainer}>
+      <div className={styles.spinner}></div>
+      <p>Cargando eventos...</p>
+    </div>
+  );
+
+  // Estado de error mejorado
+  if (error) return (
+    <div className={styles.errorContainer}>
+      <div className={styles.errorContent}>
+        <svg className={styles.errorIllustration} viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="90" fill="#e5e5fc"/>
+          <path d="M100,30 L105,140 L95,140 Z" fill="#4f72e6"/>
+          <circle cx="100" cy="170" r="10" fill="#4f72e6"/>
         </svg>
-        <h3>No hay eventos activos</h3>
-        <p>Actualmente no hay eventos programados. Vuelve a revisar más tarde.</p>
+        <h3 className={styles.errorTitle}>¡Ups! Algo salió mal</h3>
+        <p className={styles.errorMessage}>{error}</p>
+        <button 
+          className={styles.errorButton}
+          onClick={() => window.location.reload()}
+        >
+          <FaSync className={styles.refreshIcon} /> Reintentar
+        </button>
       </div>
-    );
+    </div>
+  );
+
+  // Estado vacío mejorado
+  if (eventos.length === 0) return (
+    <div className={styles.emptyState}>
+      <svg className={styles.emptyIllustration} viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="90" fill="#ffffff"/>
+        <path d="M70,70 L130,130 M70,130 L130,70" stroke="#000f92" strokeWidth="3" strokeLinecap="round"/>
+      </svg>
+      <h3>No hay eventos activos</h3>
+      <p>Actualmente no hay eventos programados. Vuelve a revisar más tarde.</p>
+    </div>
+  );
 
   return (
     <section id="eventos-section" className={styles.eventosSection}>
-      <div className={styles.carouselContainer} ref={carouselRef}>
-        <button 
-          className={styles.navButton} 
-          onClick={prevSlide}
-          aria-label="Eventos anteriores"
-          disabled={eventos.length <= cardsToShow}
-        >
-          <FaChevronLeft className={styles.navIcon} />
-        </button>
-
-        <div className={styles.carouselTrack}>
-          <div
-            className={styles.carouselCards}
-            style={{ 
-              transform: `translateX(calc(-${currentIndex * (100 / cardsToShow)}% - ${currentIndex * 20}px))`,
-              gridTemplateColumns: `repeat(${eventos.length}, calc(${100 / cardsToShow}% - 15px))`
-            }}
-          >
-            {eventos.map((evento) => (
-              <div key={evento.id_evento} className={styles.card}>
-                <div className={styles.imagePlaceholder}>
-                  <img 
-                    src={evento.imagen || '/evento-placeholder.jpg'} 
-                    alt={evento.nombre_evento} 
-                    className={styles.imagenEvento}
-                    onError={handleImageError}
-                  />
-                </div>
-                <div className={styles.content}>
-                  <h3 className={styles.title}>{evento.nombre_evento}</h3>
-                  <p className={styles.desc}>
-                    {evento.descripcion.substring(0, 100)}{evento.descripcion.length > 100 && '...'}
-                  </p>
-                  <div className={styles.detailsFooter}>
-                    <div className={styles.fechasContainer}>
-                      <span className={styles.fecha}>
-                        <strong>Inicio:</strong> {formatDate(evento.fecha_inicio)}
-                      </span>
-                      <span className={styles.fecha}>
-                        <strong>Fin:</strong> {formatDate(evento.fecha_final)}
-                      </span>
+      <div className={styles.carouselWrapper}>
+        <div className={styles.carouselContainer} ref={carouselRef}>
+          <div className={styles.carouselTrack}>
+            <div
+              className={styles.carouselCards}
+              style={{ 
+                transform: cardsToShow === 1 
+                  ? `translateX(-${currentIndex * 100}%)`
+                  : `translateX(-${currentIndex * (100 / cardsToShow)}%)`,
+                gridTemplateColumns: `repeat(${eventos.length}, ${
+                  cardsToShow === 1 ? '100%' : 
+                  cardsToShow === 2 ? 'calc(50% - 10px)' : 
+                  'calc(33.333% - 13.333px)'
+                })`
+              }}
+            >
+              {eventos.map((evento) => (
+                <div key={evento.id_evento} className={styles.card}>
+                  <div className={styles.imagePlaceholder}>
+                    <img 
+                      src={evento.imagen || '/evento-placeholder.jpg'} 
+                      alt={evento.nombre_evento} 
+                      className={styles.imagenEvento}
+                      onError={handleImageError}
+                    />
+                  </div>
+                  <div className={styles.content}>
+                    <h3 className={styles.title}>{evento.nombre_evento}</h3>
+                    <p className={styles.desc}>
+                      {evento.descripcion.substring(0, 100)}{evento.descripcion.length > 100 && '...'}
+                    </p>
+                    <div className={styles.detailsFooter}>
+                      <div className={styles.fechasContainer}>
+                        <span className={styles.fecha}>
+                          <strong>Inicio:</strong> {formatDate(evento.fecha_inicio)}
+                        </span>
+                        <span className={styles.fecha}>
+                          <strong>Fin:</strong> {formatDate(evento.fecha_final)}
+                        </span>
+                      </div>
+                      <button 
+                        className={styles.buttonhover}
+                        onClick={() => navigateToEvento(evento.id_evento!)}
+                      >
+                        Ver más
+                      </button>
                     </div>
-                    <button 
-                      className={styles.buttonhover}
-                      onClick={() => navigateToEvento(evento.id_evento!)}
-                    >
-                      Ver más
-                    </button>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        <button 
-          className={styles.navButton} 
-          onClick={nextSlide}
-          aria-label="Siguientes eventos"
-          disabled={eventos.length <= cardsToShow}
-        >
-          <FaChevronRight className={styles.navIcon} />
-        </button>
-      </div>
+        <div className={styles.navigationControls}>
+          <button 
+            className={styles.navButton} 
+            onClick={prevSlide}
+            aria-label="Eventos anteriores"
+            disabled={eventos.length <= cardsToShow}
+          >
+            <FaChevronLeft className={styles.navIcon} />
+            <span className={styles.navText}>Anterior</span>
+          </button>
 
-      {eventos.length > cardsToShow && (
-        <div className={styles.dotsContainer}>
-          {Array.from({ length: Math.ceil(eventos.length / cardsToShow) }).map((_, i) => (
-            <button
-              key={i}
-              className={`${styles.dot} ${i === currentIndex ? styles.activeDot : ''}`}
-              onClick={() => setCurrentIndex(i)}
-              aria-label={`Ir al slide ${i + 1}`}
-            />
-          ))}
+          {eventos.length > cardsToShow && (
+            <div className={styles.dotsContainer}>
+              {Array.from({ length: Math.ceil(eventos.length / cardsToShow) }).map((_, i) => (
+                <button
+                  key={i}
+                  className={`${styles.dot} ${i === currentIndex ? styles.activeDot : ''}`}
+                  onClick={() => setCurrentIndex(i)}
+                  aria-label={`Ir al slide ${i + 1}`}
+                />
+              ))}
+            </div>
+          )}
+
+          <button 
+            className={styles.navButton} 
+            onClick={nextSlide}
+            aria-label="Siguientes eventos"
+            disabled={eventos.length <= cardsToShow}
+          >
+            <span className={styles.navText}>Siguiente</span>
+            <FaChevronRight className={styles.navIcon} />
+          </button>
         </div>
-      )}
+      </div>
     </section>
   );
 };

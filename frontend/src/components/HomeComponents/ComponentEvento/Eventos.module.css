@@ -1,40 +1,54 @@
 /* Estilos base del carrusel */
 .eventosSection {
-  padding: 3rem 0;
+  padding: 3rem 1rem;
   background-color: #f8f9fa;
   width: 100%;
   overflow: hidden;
 }
 
-.carouselContainer {
-  position: relative;
+.carouselWrapper {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.navigationControls {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 0 50px;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .navButton {
   background: #133b6e;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  border-radius: 30px;
+  padding: 0.75rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  z-index: 10;
-  flex-shrink: 0;
+  gap: 0.5rem;
+  min-width: 120px;
 }
 
 .navButton:hover:not(:disabled) {
   background: #0d2a4a;
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 .navButton:disabled {
@@ -43,17 +57,21 @@
 }
 
 .navIcon {
-  font-size: 1.3rem;
+  font-size: 1rem;
+}
+
+.navText {
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .carouselTrack {
   overflow: hidden;
   width: 100%;
-  margin: 0 20px;
 }
 
 .carouselCards {
-  display: flex;
+  display: grid;
   transition: transform 0.5s ease-in-out;
   will-change: transform;
   gap: 20px;
@@ -61,8 +79,6 @@
 
 /* Estilos de las cartas */
 .card {
-  flex: 0 0 calc(33.333% - 14px);
-  min-width: 300px;
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -70,7 +86,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: 100%;
+  min-height: 450px;
   transition: all 0.3s ease;
 }
 
@@ -201,13 +218,14 @@
 .dotsContainer {
   display: flex;
   justify-content: center;
-  margin-top: 2.5rem;
+  align-items: center;
   gap: 12px;
+  margin: 0 1rem;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #ddd;
   border: none;
@@ -222,60 +240,50 @@
 
 .activeDot {
   background-color: #133b6e;
-  transform: scale(1.4);
+  transform: scale(1.2);
 }
 
 /* Media Queries para responsividad */
 @media (max-width: 1199px) {
-  .carouselContainer {
-    padding: 0 30px;
-  }
-  
   .card {
-    flex: 0 0 calc(50% - 10px);
-    min-width: 280px;
-    height: 420px;
-  }
-}
-
-@media (max-width: 767px) {
-  .carouselContainer {
-    padding: 0 15px;
-  }
-  
-  .carouselCards {
-    gap: 15px;
-  }
-  
-  .card {
-    flex: 0 0 100%;
-    min-width: 280px;
-    height: 400px;
-    margin: 0 auto;
-  }
-  
-  .navButton {
-    width: 40px;
-    height: 40px;
+    min-height: 420px;
   }
   
   .imagePlaceholder {
     height: 180px;
   }
+}
+
+@media (max-width: 1023px) {
+  .carouselCards {
+    gap: 15px;
+  }
+  
+  .card {
+    min-height: 400px;
+  }
   
   .content {
     padding: 1.2rem;
   }
+  
+  .navigationControls {
+    gap: 1rem;
+  }
+  
+  .navButton {
+    padding: 0.6rem 1.2rem;
+    min-width: 110px;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   .eventosSection {
-    padding: 2rem 0;
+    padding: 2rem 0.5rem;
   }
   
   .card {
-    height: 380px;
-    min-width: 260px;
+    min-height: 380px;
   }
   
   .title {
@@ -284,6 +292,41 @@
   
   .desc {
     font-size: 0.9rem;
+  }
+  
+  .navigationControls {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .navButton {
+    padding: 0.5rem 1rem;
+    min-width: auto;
+  }
+  
+  .navText {
+    display: none;
+  }
+  
+  .dotsContainer {
+    margin: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    min-height: 360px;
+  }
+  
+  .imagePlaceholder {
+    height: 160px;
+  }
+  
+  .buttonhover {
+    min-width: 80px;
+    padding: 0 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
