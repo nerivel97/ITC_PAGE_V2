@@ -6,6 +6,20 @@
     position: relative;
   }
   
+  .mainTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #1a365d;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem;
+    background: linear-gradient(to right, #2563eb, #1e40af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+  
   .carousel {
     position: relative;
     overflow: hidden;

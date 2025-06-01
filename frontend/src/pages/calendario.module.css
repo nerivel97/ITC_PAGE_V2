@@ -1,0 +1,21 @@
+.contenedor {
+  text-align: center;
+  padding: 2rem;
+}
+
+.titulo {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.imagen {
+  width: 60%; /* ajusta este valor según tu necesidad */
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.boton {
+  margin-top: 1rem;
+}

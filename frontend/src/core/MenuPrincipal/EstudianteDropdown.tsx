@@ -31,7 +31,7 @@ const EstudianteDropdown: React.FC<DropdownProps> = ({ isMobile, onCloseDropdown
     { title: "Calendario Escolar", imageSrc: Calendario, path: "/calendario" },
     { title: "Servicio Social", imageSrc: ServicioSocial, path: "/servicio-social" },
     { title: "Residencia Profesional", imageSrc: Residencia, path: "/residencia-profesional" },
-    { title: "Titulación", imageSrc: Titulacion, path: "/oferta-educativa" },
+    { title: "Titulación", imageSrc: Titulacion, path: "/titulacion" },
     { title: "Actividades Extraescolares", imageSrc: Extraescolares, path: "/extraescolares" },
      { title: "Concursos", imageSrc: Concursos , path: "/concursos" },
   ];

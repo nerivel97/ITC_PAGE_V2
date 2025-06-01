@@ -6,13 +6,15 @@ interface QuienesSomosProps {
   descripcion?: string;
   botonTexto?: string;
   imagenUrl?: string;
+  onButtonClick?: () => void; // Nueva prop para manejar el clic del botón
 }
 
 const Somos: React.FC<QuienesSomosProps> = ({ 
   titulo, 
   descripcion, 
   botonTexto, 
-  imagenUrl, 
+  imagenUrl,
+  onButtonClick // Añadimos la nueva prop
 }) => {
   return (
     <div className={styles.somosContainer}>
@@ -24,14 +26,24 @@ const Somos: React.FC<QuienesSomosProps> = ({
         <div className={`${styles.mainContent} `}>
           {imagenUrl && (
             <div className={styles.imagenContainer}>
-              <img src={imagenUrl} alt="Imagen representativa" className={styles.somosImage} />
+              <img src={imagenUrl} 
+              alt="Tucan TECNM"
+              title="Tucan sociedad de alumnos TECNM" 
+              className={styles.somosImage} />
             </div>
           )}
 
           {(descripcion || botonTexto) && (
             <div className={styles.textoContainer}>
               {descripcion && <p className={styles.somosText}>{descripcion}</p>}
-              {botonTexto && <button className={styles.somosButton}>{botonTexto}</button>}
+              {botonTexto && (
+                <button 
+                  className={styles.somosButton}
+                  onClick={onButtonClick} // Usamos la nueva prop aquí
+                >
+                  {botonTexto}
+                </button>
+              )}
             </div>
           )}
         </div>

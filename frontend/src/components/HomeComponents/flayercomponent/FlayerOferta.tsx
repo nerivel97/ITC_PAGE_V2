@@ -1,14 +1,14 @@
 import React from "react";
 import styles from './Flayer.module.css';
-import licenciaturaImg from "./FlayerImage/licenciatura.png";
-import maestriaImg from "./FlayerImage/maestrias.jpg";
-import doctoradoImg from "./FlayerImage/doctorado.png";
+import licenciaturaImg from "./FlayerImage/LicT.jpg";
+import maestriaImg from "./FlayerImage/MasT.jpg";
+import doctoradoImg from "./FlayerImage/DocT.jpg";
 
 const FlayerOfertas: React.FC = () => {
   return (
     <div className={styles.fullWidthContainer}>
       <div className={styles.contentWrapper}>
-        <h1 className={styles.title}>Oferta educativa</h1>
+        <h2 className={styles.title}>Oferta educativa</h2>
         <p className={styles.description}>
           Tu futuro comienza aquí. Descubre nuestras carreras y encuentra tu pasión.
           <br />
@@ -19,20 +19,26 @@ const FlayerOfertas: React.FC = () => {
         
         <div className={styles.gridContainer}>
           {/* Licenciatura */}
-          <a href="/licenciatura" className={styles.gridCard}>
-            <img src={licenciaturaImg} alt="Licenciatura" className={styles.image} />
+          <a href="/oferta-educativa" className={styles.gridCard}>
+            <img src={licenciaturaImg} alt="Licenciatura" 
+            title="Licenciatura ITC"
+            className={styles.image} />
             <div className={styles.cardLabel}>Licenciatura</div>
           </a>
           
           {/* Maestría */}
-          <a href="/maestria" className={styles.gridCard}>
-            <img src={maestriaImg} alt="Maestría" className={styles.image} />
+          <a href="/oferta-educativa" className={styles.gridCard}>
+            <img src={maestriaImg} alt="Maestría" 
+            title="Maestria ITC"
+            className={styles.image} />
             <div className={styles.cardLabel}>Maestría</div>
           </a>
           
           {/* Doctorado */}
-          <a href="/doctorado" className={styles.gridCard}>
-            <img src={doctoradoImg} alt="Doctorado" className={styles.image} />
+          <a href="/oferta-educativa" className={styles.gridCard}>
+            <img src={doctoradoImg} alt="Doctorado"
+            title="Doctorado ITC"
+            className={styles.image} />
             <div className={styles.cardLabel}>Doctorado</div>
           </a>
         </div>

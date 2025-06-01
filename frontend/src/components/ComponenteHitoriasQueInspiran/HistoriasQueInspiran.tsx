@@ -54,7 +54,7 @@ export default function HistoriasQueInspiran() {
           >
             <img src={logro.imagen} 
             alt={logro.descripcion} 
-            title={logro.descripcion}
+            title={logro.titulo}
             className={styles.imagenajustada} />
             
             <div className={styles.overlay}>

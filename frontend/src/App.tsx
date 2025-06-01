@@ -10,6 +10,7 @@ import Admisiones from "./pages/Admisiones";
 import AdminLayout from "./admin/components/AdminLayout/AdminLayout";
 import AdminDashboard from "./admin/pages/Dashboard";
 import QuienesSomosAdmin from "./admin/pages/QuienesSomos/QuienesSomos";
+import Titulacion from "./pages/Titulaciones";
 
 import EventosTable from "./admin/pages/Eventos/EventosTable";
 import NoticiasTable from "./admin/pages/Noticias/NoticiasTable";
@@ -30,6 +31,7 @@ import ActExtra from "./pages/ActividadesExtra";
 import Innovatec from './pages/innovatec';
 import Concursorobotica from './pages/Concursorobotica';
 import Concursos from './pages/Concursos';
+import Calendario from "./pages/Calendario";
 
 import "./App.css";
 
@@ -57,6 +59,13 @@ const App: React.FC = () => {
           <Route path='/concursorobotica' element={<Concursorobotica/>} />
           
           <Route path="/residencia-profesional" element={<Residencia />} />
+
+          <Route path="/titulacion" element={<Titulacion />} />
+
+          {/* Rutas de carreras */}
+
+          {/*Ruta para el calendario*/}
+          <Route path="/calendario" element={<Calendario />}/>
 
           {/* Rutas de eventos */}
           <Route path='/eventos' element={<Page_Eventos />} />

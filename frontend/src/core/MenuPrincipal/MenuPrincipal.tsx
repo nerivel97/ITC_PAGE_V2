@@ -101,18 +101,18 @@ const MenuPrincipal: React.FC = () => {
               />
             )}
           </li>
-
+             <li onClick={closeAll}>
+            <a href="/oferta-educativa">
+              <FaGraduationCap /> <span>Ofertas Educativas</span>
+            </a>
+          </li>
           <li onClick={closeAll}>
             <a href="/Admisiones">
               <FaAngleDoubleDown />
               <span>Admisiones</span>
             </a>
           </li>
-          <li onClick={closeAll}>
-            <a href="/oferta-educativa">
-              <FaGraduationCap /> <span>Ofertas Educativas</span>
-            </a>
-          </li>
+      
 
           <li
             onMouseEnter={() => handleMouseEnter("students")}

@@ -1,74 +1,118 @@
+/* Contenedor general del directorio */
 .directorio-layout {
+  position: relative; /* necesario para posicionar el tucán */
   display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.directorio-tec {
-  flex: 3;
-  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
   max-width: 1000px;
-  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
   font-family: 'Work Sans', sans-serif;
+  gap: 1.5rem;
 }
 
-h2 {
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  font-weight: bold;
+/* Imagen e información del tucán en esquina */
+.telefono-tucan {
+  position: absolute;
+  top: 1rem;
+  right: -200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  max-width: 200px;
+  width: 100%;
+  z-index: 10;
 }
 
+.telefono-tucan img {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+  margin-bottom: 0.3rem;
+}
+
+.telefono-tucan strong {
+  font-size: 1rem;
+  color: #003366;
+  margin-bottom: 0.2rem;
+}
+
+.telefono-tucan p {
+  font-size: 1rem;
+  margin: 0.2rem 0;
+}
+
+/* Contenedor del listado */
+.directorio-tec {
+  width: 100%;
+}
+
+/* Título principal */
+.directorio-tec h2 {
+  color: #003366;
+  text-align: start;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Sección */
 .seccion {
-  margin-bottom: 2.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #003366;
 }
 
+/* Botón del acordeón */
 .seccion-titulo {
-  background-color: #003366;
+  width: 100%;
+  background-color: #033760;
   color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  text-align: left;
+  padding: 1rem;
   font-weight: bold;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
   border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
-  width: 100%;
-  text-align: left;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 .seccion-titulo:hover {
   background-color: #002244;
 }
 
+.icono {
+  font-size: 1.2rem;
+}
+
+/* Contenido del acordeón */
 .contenido-acordeon {
-  margin-top: 0.5rem;
+  background-color: #e6ecf5;
+  color: #222;
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 500;
   animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Tarjetas */
 .tarjeta {
-  background-color: #a6a4e7;
+  background-color: #5b8bd0;
   border-radius: 12px;
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.5rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Contenido de la tarjeta */
 .tarjeta-content {
   display: flex;
   justify-content: space-between;
@@ -82,61 +126,47 @@ h2 {
 }
 
 .tarjeta-info p {
-  margin: 4px 0;
-  font-size: 0.95rem;
-  color: #222;
+  margin: 6px 0;
+  font-size: 1.05rem;
+  color: #002244;
 }
 
 .tarjeta-info .etiqueta {
+  font-size: 1.07rem;
   font-weight: 600;
-  color: #003366;
+  color: #002244;
   margin-right: 4px;
 }
 
 .extension {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #333;
   white-space: nowrap;
   margin-left: 1rem;
 }
 
-.telefono-tucan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 220px;
-  width: 100%;
-  margin: auto;
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.telefono-tucan img {
-  width: 100%;
-  max-width: 120px;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
-  margin-bottom: 0.5rem;
-}
-
-.telefono-tucan strong {
-  font-size: 1.1rem;
-  color: #003366;
-  margin-bottom: 0.2rem;
-}
-
-.telefono-tucan p {
-  font-size: 0.95rem;
-  margin: 0.2rem 0;
-}
-
-/* 📱 Responsividad para móviles */
+/* Responsive */
 @media (max-width: 768px) {
   .directorio-layout {
-    flex-direction: column;
-    align-items: center;
     padding: 1rem;
+  }
+
+  .telefono-tucan {
+    position: static;
+    margin-bottom: 1rem;
   }
 
   .tarjeta-content {
@@ -147,5 +177,19 @@ h2 {
   .extension {
     margin-left: 0;
     margin-top: 0.5rem;
+  }
+
+  .seccion-titulo {
+    font-size: 0.95rem;
+  }
+
+  .contenido-acordeon {
+    font-size: 0.9rem;
+  }
+
+  .tarjeta-info p,
+  .tarjeta-info .etiqueta,
+  .extension {
+    font-size: 1rem;
   }
 }
