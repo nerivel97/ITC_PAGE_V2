@@ -1,6 +1,7 @@
 // TitulacionSection.tsx
 import React from 'react';
 import styles from './Titulaciones.module.css';
+
 import { 
   FaFileAlt, 
   FaMoneyBillWave, 
@@ -19,6 +20,7 @@ import {
   FaMicroscope,
   FaUserTie
 } from 'react-icons/fa';
+import { IoIosWarning } from "react-icons/io";
 
 const Titulacion = () => {
   return (
@@ -36,7 +38,7 @@ const Titulacion = () => {
               <li>CURP</li>
               <li>4 fotografías</li>
             </ul>
-            <a href="#" className={styles.cardBtn}>Descargar</a>
+            <a href="·" className={styles.cardBtn}>Descargar</a>
           </div>
           
           <div className={styles.card}>
@@ -65,12 +67,8 @@ const Titulacion = () => {
       {/* Sección de Trámites Personales */}
       <div className={styles.twoColumns}>
         <div className={`${styles.column} ${styles.tramitesTexto}`}>
-          <h4>Importante!</h4>
+          <h4>Importante!<IoIosWarning /></h4>
           <p>Los trámites son personales, necesariamente deberán presentar los documentos en original y copia legible para su integración en el orden que se presentan a continuación dentro de un fólder tamaño oficio color crema.</p>
-        </div>
-
-        <div className={styles.column}>
-          <img src="image2.png" alt="Icono de advertencia" className={styles.imgAdvertencia} />
         </div>
       </div>
       
@@ -118,7 +116,7 @@ const Titulacion = () => {
           </div>
           
           <div className={styles.imagenOpciones}>
-            <img src="image3.png" alt="Proceso de titulación" />
+            <img src="/Fotos/Carreras/ProcesoTitulacion.png" alt="Proceso de titulación" />
           </div>
         </div>
       </div>
@@ -135,43 +133,43 @@ const Titulacion = () => {
               numero={1}
               titulo="Informe Técnico de Reláfrica Periodontal"
               icono={<FaFileSignature />}
-              imagen="InformeT.png"
+              imagen="/Fotos/Carreras/InformeT.png"
             />
             <ProyectoCard 
               numero={2}
               titulo="Proyecto de Innovación Tecnológica"
               icono={<FaLightbulb />}
-              imagen="ProyectoT.png"
+              imagen="/Fotos/Carreras/ProyectoT.png"
             />
             <ProyectoCard 
               numero={3}
               titulo="Informe de Estancia"
               icono={<FaBusinessTime />}
-              imagen="InformeE.png"
+              imagen="/Fotos/Carreras/InformeE.png"
             />
             <ProyectoCard 
               numero={4}
               titulo="Tesis"
               icono={<FaBook />}
-              imagen="Tesis.png"
+              imagen="/Fotos/Carreras/Tesis.png"
             />
             <ProyectoCard 
               numero={5}
               titulo="Tesina"
               icono={<FaBook />}
-              imagen="Tesina.png"
+              imagen="/Fotos/Carreras/Tesina.png"
             />
             <ProyectoCard 
               numero={6}
               titulo="Examen General de Esperado en Licenciadura (EGEL del Carneval)"
               icono={<FaGraduationCap />}
-              imagen="Examen.png"
+              imagen="/Fotos/Carreras/Examen.png"
             />
             <ProyectoCard 
               numero={7}
               titulo="Proyecto de Investigación"
               icono={<FaMicroscope />}
-              imagen="ProyectoI.png"
+              imagen="/Fotos/Carreras/ProyectoI.png"
             />
           </div>
         </div>
@@ -184,61 +182,61 @@ const Titulacion = () => {
               numero={1}
               titulo="Residencia Profesional"
               icono={<FaUserTie />}
-              imagen="ResidenciaP.png"
+              imagen="/Fotos/Carreras/ResidenciaP.png"
             />
             <ProyectoCard 
               numero={2}
               titulo="Proyectos de Innovación y/o Desarrollo Tecnológico"
               icono={<FaLaptopCode />}
-              imagen="ProyectoIDT.png"
+              imagen="/Fotos/Carreras/ProyectoIDT.png"
             />
             <ProyectoCard 
               numero={3}
               titulo="Proyecto Integrador"
               icono={<FaTools />}
-              imagen="ProyectoInt.png"
+              imagen="/Fotos/Carreras/ProyectoInt.png"
             />
             <ProyectoCard 
               numero={4}
               titulo="Proyecto Productivo"
               icono={<FaBriefcase />}
-              imagen="ProyectoP.png"
+              imagen="/Fotos/Carreras/ProyectoP.png"
             />
             <ProyectoCard 
               numero={5}
               titulo="Proyecto de Investigación Tecnológica"
               icono={<FaFlask />}
-              imagen="ProyectoIT.png"
+              imagen="/Fotos/Carreras/ProyectoIT.png"
             />
             <ProyectoCard 
               numero={6}
               titulo="Proyecto de Emprendedurismo"
               icono={<FaLightbulb />}
-              imagen="ProyectoE.png"
+              imagen="/Fotos/Carreras/ProyectoE.png"
             />
             <ProyectoCard 
               numero={7}
               titulo="Proyecto Integral de Educación Dual"
               icono={<FaChalkboardTeacher />}
-              imagen="ProyectoIED.png"
+              imagen="/Fotos/Carreras/ProyectoIED.png"
             />
             <ProyectoCard 
               numero={8}
               titulo="Estancia"
               icono={<FaBusinessTime />}
-              imagen="Estancia.png"
+              imagen="/Fotos/Carreras/Estancia.png"
             />
             <ProyectoCard 
               numero={9}
               titulo="Tesis o Tesina"
               icono={<FaBook />}
-              imagen="Tesis.png"
+              imagen="/Fotos/Carreras/Tesis.png"
             />
             <ProyectoCard 
               numero={10}
               titulo="Examen General de Egreso de la Licenciatura (EGEL del Ceneval)"
               icono={<FaGraduationCap />}
-              imagen="Examen.png"
+              imagen="/Fotos/Carreras/Examen.png"
             />
           </div>
         </div>

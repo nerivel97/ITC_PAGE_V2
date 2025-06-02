@@ -118,14 +118,14 @@
 }
 
 .tramitesTexto {
-  background-color: #fff8e1;
+  background-color: #23257013;
   padding: 30px;
   border-radius: 8px;
-  border-left: 4px solid #ffc107;
+  border-left: 4px solid #151965;
 }
 
 .tramitesTexto h4 {
-  color: #d32f2f;
+  color: #151965;
   font-size: 1.5em;
   margin-bottom: 15px;
 }
