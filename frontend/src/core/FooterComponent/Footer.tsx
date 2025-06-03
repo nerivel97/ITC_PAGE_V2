@@ -14,11 +14,11 @@ const Footer: React.FC = () => {
           <ul>
             <li><a href="https://www.presidencia.gob.mx/" target="_blank" rel="noopener noreferrer">Presidencia de la Republica</a></li>
             <li><a href="https://www.gob.mx/sep" target="_blank" rel="noopener noreferrer">SEP</a></li>
-            <li><a href="https://www.dgesu.ses.sep.gob.mx/" target="_blank" rel="noopener noreferrer">Subsecretaria de Educacion Superior</a></li>
+            <li><a href="https://educacionsuperior.sep.gob.mx/" target="_blank" rel="noopener noreferrer">Subsecretaria de Educacion Superior</a></li>
             <li><a href="https://www.gob.mx/sep/acciones-y-programas/subsecretaria-de-educacion-basica" target="_blank" rel="noopener noreferrer">Subsecretaria de Educacion y Cultura</a></li>
             <li><a href="https://qroo.gob.mx/" target="_blank" rel="noopener noreferrer">Gobierno del Estado de Quintana Roo</a></li>
             <li><a href="https://www.gob.mx/curp/" target="_blank" rel="noopener noreferrer">Consulta tu CURP</a></li>
-            <li><a href="https://autoservicios.tecnm.mx/" target="_blank" rel="noopener noreferrer">TecNM Portal de Autoservicios</a></li>
+            <li><a href="https://portalautoservicios-tnm.sep.gob.mx/login.jsp;jsessionid=38cfde6f6562e09441d87a988079" target="_blank" rel="noopener noreferrer">TecNM Portal de Autoservicios</a></li>
           </ul>
         </div>
 
