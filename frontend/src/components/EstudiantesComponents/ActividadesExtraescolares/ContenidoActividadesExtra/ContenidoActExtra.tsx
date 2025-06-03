@@ -35,7 +35,7 @@ const ContenidoActExtra = () => (
   <div className="contenido">
 
     {/* Equipo de Atletismo */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Equipo de Atletismo</h2>
         <p>Disciplina y esfuerzo dentro y fuera de la pista. Entrenamientos físicos: resistencia, velocidad y fuerza en sesiones guiadas por entrenadores especializados. Valores formativos: compromiso, superación personal y trabajo en equipo. Representación institucional: participación en competencias locales, regionales y nacionales.</p>
@@ -46,7 +46,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Equipo de Ajedrez */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Equipo de Ajedrez</h2>
         <p>En nuestro campus, el ajedrez es una actividad clave para quienes buscan desarrollar la mente, mejorar la concentración y tomar decisiones con estrategia. Si te apasiona el tablero, disfrutas pensar con calma y actuar con precisión, este es tu lugar. Únete al equipo de ajedrez y forma parte de una comunidad que valora el intelecto, el respeto y la competencia sana.</p>
@@ -57,7 +57,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Equipo de Básquetbol */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Equipo de Básquetbol</h2>
         <p>El básquetbol es un deporte que exige esfuerzo, trabajo en equipo y mucha pasión por superar cada desafío en la cancha. Si te gusta competir, moverte en conjunto y dar siempre tu mejor esfuerzo, este es tu lugar. En nuestro campus, el equipo de básquetbol te invita a ser parte de una comunidad que se apoya, se esfuerza y representa con orgullo sus colores.</p>
@@ -68,7 +68,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Equipo de Fútbol */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Equipo de Fútbol</h2>
         <p>Si tu pasión es el fútbol, el TecNM Campus Cancún te invita a formar parte de su equipo representativo. Únete a una comunidad que valora el trabajo en equipo, la disciplina y el espíritu deportivo. ¡Demuestra tu talento, compite con orgullo y sé parte de nuestra familia futbolística!</p>
@@ -79,7 +79,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Béisbol */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Equipo de Béisbol</h2>
         <p>Pasión por el diamante y trabajo en equipo. Vive la emoción de cada lanzamiento, la adrenalina al correr las bases y la fuerza en cada bateo. Únete a una familia que valora la disciplina y el compañerismo en cada partido.</p>
@@ -90,7 +90,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Karate */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Equipo de Karate</h2>
         <p>El karate es un camino que une cuerpo, mente y espíritu. Aprende a superar retos con perseverancia, respeto y autocontrol mientras fortaleces tu bienestar físico y mental.</p>
@@ -101,7 +101,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Danza Folclórica */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Danza Folclórica</h2>
         <p>Yaaxché te invita a revivir nuestras raíces con ritmo, color y tradición. Expresa la riqueza cultural que nos define y forma parte de un grupo apasionado por la identidad mexicana.</p>
@@ -112,7 +112,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Danza Moderna */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Danza Moderna</h2>
         <p>Fusiona creatividad, técnica y emoción. Desafía tus límites, explora nuevas formas de expresión corporal y conecta con otros a través del ritmo.</p>
@@ -123,7 +123,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Club de Música */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Club de Música</h2>
         <p>Explora nuevos estilos, mejora tu técnica y exprésate a través del sonido. Comparte tu talento musical en un entorno colaborativo y creativo.</p>
@@ -134,7 +134,7 @@ const ContenidoActExtra = () => (
     </div>
 
     {/* Escolta y Banda de Guerra */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Escolta y Banda de Guerra</h2>
         <p>Honor, compromiso y tradición. Participa en ceremonias oficiales, desfiles y competencias representando a tu institución con orgullo.</p>
