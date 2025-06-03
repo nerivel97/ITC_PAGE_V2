@@ -32,6 +32,7 @@ import Innovatec from './pages/innovatec';
 import Concursorobotica from './pages/Concursorobotica';
 import Concursos from './pages/Concursos';
 import Calendario from "./pages/Calendario";
+import ServicioSocial from './pages/ServicioSocial';
 
 import "./App.css";
 
@@ -61,6 +62,7 @@ const App: React.FC = () => {
           <Route path="/residencia-profesional" element={<Residencia />} />
 
           <Route path="/titulacion" element={<Titulacion />} />
+          <Route path="/servicio-social" element={<ServicioSocial />} />
 
           {/* Rutas de carreras */}
 

@@ -1,0 +1,244 @@
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+/* Contenedor principal */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background: #fff;
+}
+
+/* Título */
+.titulo {
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+.titulo h2 {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+/* Video */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Requisitos */
+.requisitos {
+  background: #f1f1f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.requisitos h3 {
+  font-weight: center;
+  margin-bottom: 0.8rem;
+}
+
+.requisitos ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.requisitos li {
+  margin-bottom: 0.5rem;
+}
+
+/* Proceso paso a paso */
+.proceso h3 {
+  font-size: 1.6rem;
+  color: #003366;
+  margin-top: 3rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.paso {
+  background: #fff;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.paso img {
+  width: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.paso p {
+  font-size: 0.95rem;
+}
+
+.pasos a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Documentación y formatos */
+.documentos h3 {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+  color: #003366;
+  text-align: center; 
+}
+
+/* Contacto */
+.contacto {
+  background-color: #f6f7ff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+}
+
+.contacto a {
+  color: #003366;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contacto a:hover {
+  text-decoration: underline;
+}
+
+/* NUEVO: Tarjetas de documentos con botón de descarga */
+.grid-documentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tarjeta-formato {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-top: 5px solid #0a0a5c;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-formato:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tarjeta-formato img {
+  height: 40px;
+  margin-bottom: 1rem;
+}
+
+.tarjeta-formato h4 {
+  color: #102b52;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.tarjeta-formato p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+}
+
+.tarjeta-formato ul {
+  padding: 0;
+  margin: 0 0 1rem 0;
+  list-style: disc;
+  text-align: left;
+}
+
+.tarjeta-formato li {
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.3rem;
+}
+
+.tarjeta-formato a.boton-descarga {
+  background-color: #0a0a5c;
+  color: #fff;
+  padding: 0.6rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.tarjeta-formato a.boton-descarga:hover {
+  background-color: #03033d;
+}
+
+.descargar-btn {
+  background-color: #001F7F;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.descargar-btn:hover {
+  background-color: #0033a0;
+}
+ 
+.documentos {
+  margin-top: 2rem;
+  margin-bottom: 4rem; /* 👈 Aumenta la separación con la sección de contacto */
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+}
