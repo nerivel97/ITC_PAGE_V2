@@ -26,7 +26,7 @@ const ContenidoInfra = () => (
   <div className="contenido">
 
     {/* Campus Moderno y Funcional */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Campus Moderno y Funcional</h2>
         <p>El Instituto Tecnológico de Cancún cuenta con un campus diseñado para brindar un entorno propicio para el aprendizaje y el desarrollo integral de sus estudiantes. 
@@ -46,7 +46,7 @@ const ContenidoInfra = () => (
     </div>
 
     {/* Laboratorios Especializados */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Laboratorios y Talleres Especializados</h2>
         <p>Para fortalecer la formación práctica de los estudiantes, el instituto dispone de diversos laboratorios y talleres equipados con tecnología adecuada para las distintas áreas de estudio. 
@@ -65,7 +65,7 @@ const ContenidoInfra = () => (
     </div>
 
     {/* Biblioteca Digital */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Biblioteca y Centro de Información</h2>
         <p>El Centro de Información del Instituto Tecnológico de Cancún proporciona servicios bibliotecarios y de información eficientes, 
@@ -84,7 +84,7 @@ const ContenidoInfra = () => (
     </div>
 
     {/* Instalaciones Deportivas */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Instalaciones Deportivas</h2>
         <p>CEl instituto promueve el desarrollo físico y el espíritu deportivo mediante instalaciones adecuadas para la práctica de diversas disciplinas. 
@@ -103,7 +103,7 @@ const ContenidoInfra = () => (
     </div>
 
     {/* Aulas Inteligentes */}
-    <div className="seccion fila" data-aos="fade-right">
+    <div className="seccioninfra fila" data-aos="fade-right">
       <div className="texto">
         <h2>Modernización de Aulas y Equipamiento</h2>
         <p>En su compromiso con la excelencia académica, el Instituto Tecnológico de Cancún ha implementado proyectos de modernización que incluyen la renovación de mobiliario y equipamiento en aulas y laboratorios. 
@@ -122,7 +122,7 @@ const ContenidoInfra = () => (
     </div>
 
     {/* Ubicación del Campus */}
-    <div className="seccion fila fila-reversa" data-aos="fade-left">
+    <div className="seccioninfra fila fila-reversa" data-aos="fade-left">
       <div className="texto">
         <h2>Ubicación del Campus</h2>
         <p>La infraestructura de la universidad está en constante renovación para estar a la altura de la excelencia académica de nuestras aulas y las necesidades de aprendizaje de nuestros alumnos.</p>
