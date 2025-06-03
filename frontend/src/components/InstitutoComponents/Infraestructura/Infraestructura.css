@@ -43,8 +43,8 @@
 .btn-infraestructura {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #c9def0;
-    color: #000000;
+    background-color: #123766;
+    color: white;
     text-decoration: none;
     border: none;
     border-radius: 8px;
@@ -55,6 +55,6 @@
 }
 
 .btn-infraestructura:hover {
-    background-color: #93bee4;
+    background-color: #15407a;
     /* Azul más oscuro al pasar el mouse */
 }
